@@ -1,0 +1,18 @@
+[DERBY-5989] Stop producing byte code for non-existent qualifiers <p>For all result set nodes that have predicate lists, Derby s compiler lays out byte code for fields to hold qualifiers, and also code to reinitialize the values in those fields on every execution. It does this even if there are no qualifiers. See PredicateList.generateQualifiers(). That method does actually check whether there are qualifiers, and it skips some of the code generation if there are none. It should be changed so that it skips all the code generation if there are no qualifiers.</p>
+
+<p>For an example, see the decompiled generated class for a natural join attached to <a href= https://issues.apache.org/jira/browse/DERBY-5947  title= Factor out common code from generated classes  class= issue-link  data-issue-key= DERBY-5947 ><del>DERBY-5947</del></a>: <a href= https://issues.apache.org/jira/secure/attachment/12549514/natural-join-after-3a.txt  class= external-link  rel= nofollow >https://issues.apache.org/jira/secure/attachment/12549514/natural-join-after-3a.txt</a></p>
+
+<p>That class contains three Qualifier[][] fields:</p>
+
+<p>    private Qualifier[][] e1;<br/>
+    private Qualifier[][] e3;<br/>
+    private Qualifier[][] e4;</p>
+
+<p>Only one of them (e4) is ever set to a non-null value. Still, the reinit() method, which is called on every execution, has code for each of the fields:</p>
+
+<p>    protected void reinit() throws StandardException </p>
+{
+	BaseActivation.reinitializeQualifiers(e1);
+	BaseActivation.reinitializeQualifiers(e3);
+	BaseActivation.reinitializeQualifiers(e4);
+    }

@@ -1,0 +1,9 @@
+[DERBY-962] Upgrade default security mechanism in client to use encrypted userid password if client can support it. <p>Currently in the client, if userid and password are set in the connection url, the default security mechanism is upgraded to USRIDPWD (which is clear text userid and password).  This seems to be a security hole here. </p>
+
+<p>Current client  driver supports encrypted userid/password (EUSRIDPWD) via the use of DH key-agreement protocol - however current Open Group DRDA specifications imposes small prime and base generator values (256 bits) that prevents other JCE s  (apt from ibm jce) to be used as java cryptography providers.  </p>
+
+<p>Some thoughts:<br/>
+&#8211; client can make a check to see if it the jvm it is running in supports the encryption necessary for EUSRIDPWD. If it supports, then the client can upgrade to EUSRIDPWD. <br/>
+&#8211; if the jvm the client is running is , doesnt support encryption requirements for EUSRIDPWD, then the security mechanism will be set to USRIDPWD.</p>
+
+<p>&#8211; <a href= https://issues.apache.org/jira/browse/DERBY-528  title= Support for DRDA Strong User ID and Password Substitute Authentication (USRSSBPWD) scheme  class= issue-link  data-issue-key= DERBY-528 ><del>DERBY-528</del></a> will add support for strong userid and password which is another option to send encrypted passwords across the wire. When this gets added, maybe this can be considered as one of the upgrade options after EUSRIDPWD. </p>

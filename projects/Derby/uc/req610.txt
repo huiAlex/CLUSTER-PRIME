@@ -1,0 +1,1 @@
+[DERBY-6725] Add a system function which returns the name of the database. <p>Got this request in private conversation with a user. Other databases provide this functionality. Seems straightforward to add.</p>

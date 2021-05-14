@@ -1,0 +1,13 @@
+[DERBY-6521] Improve error handling when restricting file permissions <p>In <a href= https://issues.apache.org/jira/browse/DERBY-6503  title= Starting network server on a network drive fails with JDK 7 on Windows  class= issue-link  data-issue-key= DERBY-6503 ><del>DERBY-6503</del></a> there was some discussion about changing how errors are handled when Derby fails to restrict the file permissions.</p>
+
+<p>There seemed to be consensus that Derby should raise an exception if the user had explicitly requested (by setting derby.storage.useDefaultFilePermissions=false) that it should try to restrict file permissions. Currently, it only raises an error on non-posix file systems that support access control lists.</p>
+
+<p>In the case were the user has not explicitly requested restriction of file permissions, two options have been suggested:</p>
+
+<p>1) Raise an exception</p>
+
+<p>2) Don t raise an exception, possibly print a warning in derby.log</p>
+
+<p>Option 1 is the more secure one, since it forces the user to make a decision on how to handle a possible security problem (either by addressing the underlying cause of the failure, so that permissions can be successfully restricted by Derby, or by disabling the file restriction functionality).</p>
+
+<p>Option 2 is the more backward compatible one, since it gracefully falls back to the pre-10.10/pre-Java 7 behaviour if it cannot restrict the file permissions.</p>

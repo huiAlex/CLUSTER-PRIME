@@ -1,0 +1,18 @@
+[DERBY-5896] Change java/drda source code to use  spaces instead of tabs and clean up tab creep in java/client <p>Change all the network server code under java/drda to use spaces instead of tabs.</p>
+
+<p>Having mixed tabs and spaces can be confusing, irritating  and time consuming for developers especially in the network code where client is all spaces and the server mostly tabs.</p>
+
+<p>With the  -x -b options on svn merge and svn diff, merges should be reasonable even if we change all the tabs to 4 spaces in the files under java/drda with a script something like (not yet tried):</p>
+
+<p>#!/bin/bash<br/>
+files=$@<br/>
+for file in $files</p>
+{
+   echo $file
+   mv  $file $file.orig
+   sed -e  s/\t/    /g  &lt; $file.orig &gt; $file
+   rm $file.orig
+}
+
+
+<p>Are there any objections to this change?  If not does anyone have any pending DRDA changes they would like to get in before I make the change?</p>

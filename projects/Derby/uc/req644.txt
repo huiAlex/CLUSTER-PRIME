@@ -1,0 +1,35 @@
+[DERBY-96] partial log record writes that occur because of out-of order writes need to be handled by recovery. <p>Incomplete log record write that occurs because of<br/>
+an out of order partial writes gets recognized as complete during<br/>
+recovery if the first sector and last sector happens to get written.<br/>
+ Current system recognizes incompletely written log records by checking<br/>
+the length of the record that is stored in the beginning and end.<br/>
+ Format the log records are written to disk is:</p>
+
+<p>  <ins>---------<del></ins></del>-----------<del><ins></del>-----------------</ins></p>
+
+<table class= confluenceTable ><tbody>
+<tr>
+<td class= confluenceTd > length     </td>
+<td class= confluenceTd >  LOG RECORD </td>
+<td class= confluenceTd >    length   </td>
+</tr>
+</tbody></table>
+
+
+<p>  <ins>---------<del></ins></del>-----------<del><ins></del>-----------------</ins></p>
+
+
+<p>This mechanism works fine if sectors are written in sequential manner or<br/>
+log record size is less than 2 sectors. I  believe on SCSI types disks<br/>
+order is not necessarily sequential, SCSI disk drives may sometimes do a<br/>
+reordering of the sectors to optimize the performance.  If a log record<br/>
+that spans multiple disk sectors is being written to SCISI type of<br/>
+devices,  it is possible that first and last sector written before the<br/>
+crash; If this occurs recovery system will incorrectly  interpret the<br/>
+log records was completely written and replay the record. This could<br/>
+lead to recovery errors or data corruption.<br/>
+-</p>
+
+
+<p>This problem also will not occur if a disk drive has write cache with a<br/>
+battery backup which will make sure I/O request will complete.</p>

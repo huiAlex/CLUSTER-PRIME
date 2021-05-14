@@ -1,0 +1,37 @@
+[DERBY-6022] Add a system procedure for (un)registering optional packages of Derby tools. <p>Now that vararg routines have been added to Derby (see <a href= https://issues.apache.org/jira/browse/DERBY-3069  title= Derby does not resolve functions bound to methods with varargs.  class= issue-link  data-issue-key= DERBY-3069 ><del>DERBY-3069</del></a>), I would like to add a new vararg system procedure for registering and unregistering optional packages of Derby tools. For starters, these would be tools which aren t checked into the Derby codeline but are just attached to various JIRAs. These tools are:</p>
+
+<p>o DBMDWrapper (<a href= https://issues.apache.org/jira/browse/DERBY-3973  title= Create function wrappers for DatabaseMetaData so that you can join metadata results in queries.  class= issue-link  data-issue-key= DERBY-3973 ><del>DERBY-3973</del></a> and <a href= https://issues.apache.org/jira/browse/DERBY-5967  title= Create some type mapping functions for use in turning JDBC type information into human-readable strings.  class= issue-link  data-issue-key= DERBY-5967 ><del>DERBY-5967</del></a>) - This tool creates functions and table functions for all of the DatabaseMetaData methods so that you can write complicated queries which join and filter JDBC metadata.</p>
+
+<p>o ForeignTableVTI (<a href= https://issues.apache.org/jira/browse/DERBY-4962  title= Create a table function which efficiently migrates data out of foreign databases and which can be used for ongoing data integration  class= issue-link  data-issue-key= DERBY-4962 ><del>DERBY-4962</del></a>) - This tool creates views against foreign databases so that you can bulk-import foreign data into Derby without indirecting through csv files.</p>
+
+<p>It also may be possible to use this approach to expose the log and data file reading tools attached to <a href= https://issues.apache.org/jira/browse/DERBY-5195  title= Create tools for browsing the files in the database log directory.  class= issue-link  data-issue-key= DERBY-5195 >DERBY-5195</a> and <a href= https://issues.apache.org/jira/browse/DERBY-5201  title= Create tools for reading the contents of the seg0 directory  class= issue-link  data-issue-key= DERBY-5201 >DERBY-5201</a>.</p>
+
+<p>The new system procedure would look like this:</p>
+
+<p>create procedure syscs_util.syscs_register_tool<br/>
+(<br/>
+    toolName varchar( 32672 ),<br/>
+    boolean register,<br/>
+    optionalArgs varchar( 32672 ) ...<br/>
+)<br/>
+language java parameter style derby modifies sql data<br/>
+external name  willFigureOutWhereToPutThis ;</p>
+
+<p>The arguments would have these meanings:</p>
+
+<p>o toolName - A name specific to the tool.</p>
+
+<p>o register - True means  register the tool  and false means  unregister the tool .</p>
+
+<p>o optionalArgs - Each tool could have its own variable set of additional configuration parameters.</p>
+
+<p>By default, only the DBO could run this procedure. The DBO could grant execute permission to other users.</p>
+
+<p>The known tool names and their optional parameters would be documented in the Derby Reference Manual in the section on syscs_util.syscs_register_tool.</p>
+
+<p>I am thinking that we should put the optional tools themselves in derbytools.jar. We might want to document all of the optional tools in the Tools Guide, although I can see arguments for documenting some tools in the Admin Guide.</p>
+
+<p>I would appreciate other people s thoughts about this proposal.</p>
+
+<p>Thanks,<br/>
+-Rick</p>

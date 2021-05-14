@@ -1,0 +1,18 @@
+[DERBY-6453] Remove dead code in InsertResultSet and flag skipCheckConstraints <p>I identified some unused code; a flag that is always false, and code for handling triggers in bulk insert which is unused (by inspection and corroborated by JaCoCo results for our regression tests): we disable bulk insert if there are triggers present, cf. </p>
+
+<ul>
+	<li>DMLModStatementNode#getAllRelevantTriggers -&gt;<br/>
+  adjustDeferredFlag(true)</li>
+</ul>
+
+
+<ul>
+	<li>InsertResultSet#bulkInsert:</li>
+</ul>
+
+
+<p>  bulkInsert = verifyBulkInsert()-&gt;<br/>
+      :<br/>
+      // bulk insert is disabled for deferred mode inserts<br/>
+      if (constants.deferred)<br/>
+      return false;</p>

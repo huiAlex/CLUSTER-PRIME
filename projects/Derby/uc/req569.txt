@@ -1,0 +1,6 @@
+[DERBY-6322] Remove erreoneous warning in NetBeans: superfluous use of super to access inherited member variable <p>This code in SortBufferScan makes NetBeans (7.4beta) issue a warning:</p>
+
+<p>return (super.current != null);</p>
+
+<p> Incompatible types: boolean is not a functional interface &lt;identifier expected&gt; <br/>
+; expected </p>

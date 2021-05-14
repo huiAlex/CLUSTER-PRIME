@@ -1,0 +1,2 @@
+[DERBY-6180] DatabaseMetaDataTest should not fail if there are extra columns but only check the expected ones <p>In new JDBC versions colums can be added  to DatabaseMetaData. Tests should just check expectedColumns and ignore extra columns to prevent failures with compatibility testing.<br/>
+This check occurs in assertColumnNames and assertColumnTypes.</p>

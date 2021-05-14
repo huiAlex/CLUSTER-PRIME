@@ -1,0 +1,17 @@
+[DERBY-6259] Collapse the level 2 optimizer into its parent module. <p>Right now there are 2 optimizer implementations, only one of which is ever loaded. The other implementation was disabled by the following comment in modules.properties:</p>
+
+<ol>
+	<li>use level1 optimizer for small configurations<br/>
+#</li>
+	<li>can t do this in the codeline because with 2 implementations, it is entirely</li>
+	<li>by chance which get picked.  So we may be running with different modules</li>
+	<li>depending on which jdk<br/>
+#</li>
+	<li>to be resolve by Siuling and Dan<br/>
+#<br/>
+#derby.module.optimizerSmall=org.apache.derby.impl.sql.compile.OptimizerFactoryImpl<br/>
+#cloudscape.config.optimizerSmall=cloud,cloudtarget</li>
+</ol>
+
+
+<p>Since we have deprecated support for the small CDC configuration, I don t think that we need further resolution by Siuling and Dan. Collapsing the two optimizers together should slightly reduce our static footprint.</p>

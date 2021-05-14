@@ -1,0 +1,22 @@
+[DERBY-733] Starvation in RAFContainer.readPage() <p>When Derby is completely disk bound, threads might be starved in<br/>
+RAFContainer.readPage(). This is a real problem when multiple clients<br/>
+are repeatedly accessing one or a small number of large tables. In<br/>
+cases like this, I have observed very high maximum response times<br/>
+(several minutes in the worst cases) on simple transactions. The<br/>
+average response time is not affected by this.</p>
+
+<p>The starvation is caused by a synchronized block in<br/>
+RAFContainer.readPage():</p>
+
+<p>  synchronized (this) </p>
+{
+      fileData.seek(pageOffset);
+      fileData.readFully(pageData, 0, pageSize);
+  }
+
+<p>If many threads want to read pages from the same file, there will be a<br/>
+long queue of threads waiting for this monitor. Since the Java<br/>
+specification does not guarantee that threads waiting for monitors are<br/>
+treated fairly, some threads might have to wait for a long time before<br/>
+they get the monitor. (Usually, a couple of threads get full throughput<br/>
+while the others have to wait.)</p>

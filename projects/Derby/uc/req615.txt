@@ -1,0 +1,12 @@
+[DERBY-6852] Allow identity columns to cycle (as defined in SQL:2003) <p>Currently when an IDENTITY column reaches its maximum value it will produce an error.</p>
+
+<p>For tables that are used as  transaction logs  or  event logs  it often makes sense to let the table automatically start over with the first identity value again when the max is reached. This would be similar to the CYCLE option on Oracle s SEQUENCE and as defined in SQL:2003. And Derby is probably used quite often for this purpose, I guess, perhaps even more than other RDBMSs.</p>
+
+<p>At the moment every developer have to program their own logic for this.</p>
+
+<p>I propose to introduce the CYCLE option.<br/>
+The idea of CYCLE is based on the assumption that there s been a prior cleanup in the table rows so that it will be possible to re-use ids that have been used previously. If that is not the case - and a rollover happens - then a duplicate value error will occur. In this sense it can be argued that the CYCLE option will trade a <em>certain</em> error for a <em>potential</em> error. Most Derby users would possibly gladly accept such a bargain. In other words: This option will greatly enhance the usability of IDENTITY columns.</p>
+
+<p>The current implementation of IDENTITY columns SQL grammar in Derby is a subset of the SQL:2003 standard which is the first of the SQL standards to define IDENTITY columns. Interestingly the standard also defines the CYCLE option but this was never implemented in Derby. Also see <a href= https://wiki.apache.org/db-derby/SQLvsDerbyFeatures  class= external-link  rel= nofollow >SQL-99 and SQL-2003 features mapped to Derby</a> (scroll to T174).</p>
+
+<p>In other words: The proposal is simply to implement CYCLE as defined in SQL:2003.</p>

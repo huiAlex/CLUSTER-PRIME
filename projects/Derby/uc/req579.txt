@@ -1,0 +1,1 @@
+[DERBY-6464] Improve the encapsulation of various compiler classes <p>These classes have a lot of package visible fields. This makes it hard to reason about how they are being used. This issue tracks some improvements to the encapsulation of these classes.</p>

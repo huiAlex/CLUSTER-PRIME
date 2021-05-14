@@ -1,0 +1,10 @@
+[DERBY-665] Remove backup(File ...) methods <p>The code contains backup methods both for specifying the backup directory both as a String and as a File parameter.  Only the String versions are currently used.  The File versions should be removed to avoid duplication of code etc.<br/>
+Examples of such methods are:</p>
+
+<p>BasicDatabase.backup<br/>
+BasicDatabase.backupAndEnableLogArchiveMode<br/>
+RAMAccessManager.backup<br/>
+RAMAccessManager.backupAndEnableLogArchiveMode<br/>
+RawStore.backupAndEnableLogArchiveMode</p>
+
+<p>plus corresponding interfaces.</p>

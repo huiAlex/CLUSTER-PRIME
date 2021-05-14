@@ -1,0 +1,9 @@
+[DERBY-64] Create a table with a query <p>I suggest to implement a SQL statement to create and fill a table with a query, without having to write the columns definition.</p>
+
+<p>e.g.:</p>
+
+<p> CREATE TABLE new_table AS SELECT ...;</p>
+
+<p>or:</p>
+
+<p> SELECT ... INTO new_table FROM ...;</p>

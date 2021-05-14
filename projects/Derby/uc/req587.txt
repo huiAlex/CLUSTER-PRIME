@@ -1,0 +1,1 @@
+[DERBY-6514] Convert lang/aggbuiltin.sql to JUnit AggBuiltinTest <p>Another script based test I converted into JUnit.</p>

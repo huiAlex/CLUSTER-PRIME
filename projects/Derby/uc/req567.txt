@@ -1,0 +1,1 @@
+[DERBY-6304] Remove unused methods in Predicate <p>Many of the methods in the Predicate class have no callers. Those methods should be removed.</p>

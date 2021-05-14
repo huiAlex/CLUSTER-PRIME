@@ -1,0 +1,47 @@
+[DERBY-6267] Add ability to compactly specify a complete query plan in an optimizer override. <p>It would be nice to be able to override the optimizer s choice and specify a complete query plan using the compact summary syntax output by XMLOptTrace. Given how the optimizer handles a statement, this would require binding a query plan at the query block level. Two obvious candidates for such a feature are:</p>
+
+<p>1) Extend the use of DERBY-PROPERTIES in the comments of a query.</p>
+
+<p>2) Add an extra clause to query blocks. The clause would have to be a clearly marked Derby extension.</p>
+
+<p>(1) might look like this (here we add a new  fullQueryPlan  property):</p>
+
+<p>select tablename from sys.systables t, sys.syscolumns c, sys.sysaliases a<br/>
+where t.tablename = c.columnname and c.columnname = a.alias<br/>
+&#8211; DERBY-PROPERTIES fullQueryPlan = (SYSCOLUMNS_HEAP # SYSALIASES_INDEX1) # SYSTABLES_INDEX1<br/>
+union all<br/>
+select tablename from sys.systables t, sys.syscolumns c, sys.sysaliases a, sys.syssequences s<br/>
+where t.tablename = c.columnname and c.columnname = a.alias and a.alias = s.sequencename<br/>
+&#8211; DERBY-PROPERTIES fullQueryPlan = ((SYSCOLUMNS_HEAP # SYSTABLES_INDEX1) # SYSALIASES_INDEX1) # SYSSEQUENCES_INDEX2<br/>
+;</p>
+
+<p>(2) might look like this (here we add a new  using derby join order  clause):</p>
+
+<p>select tablename from sys.systables t, sys.syscolumns c, sys.sysaliases a<br/>
+where t.tablename = c.columnname and c.columnname = a.alias<br/>
+using derby join order (SYSCOLUMNS_HEAP # SYSALIASES_INDEX1) # SYSTABLES_INDEX1<br/>
+union all<br/>
+select tablename from sys.systables t, sys.syscolumns c, sys.sysaliases a, sys.syssequences s<br/>
+where t.tablename = c.columnname and c.columnname = a.alias and a.alias = s.sequencename<br/>
+using derby join order  ((SYSCOLUMNS_HEAP # SYSTABLES_INDEX1) # SYSALIASES_INDEX1) # SYSSEQUENCES_INDEX2<br/>
+;</p>
+
+<p>Here s a comparison of these approaches:</p>
+
+<p>(1)<br/>
++ Portability: the same query text can be used against different RDBMSes.</p>
+<ul class= alternate  type= square >
+	<li>Parsing of DERBY-PROPERTIES happens outside the grammer.</li>
+</ul>
+
+
+<p>(2)<br/>
++ Parsing happens in the parser.</p>
+<ul class= alternate  type= square >
+	<li>Not portable.</li>
+</ul>
+
+
+<p>I slightly prefer approach (1). If I pursue that approach, I would like to see if I can move the parsing into the parser.</p>
+
+<p>I am interested in other opinions about how to address this feature. Thanks.</p>

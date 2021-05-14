@@ -1,0 +1,6 @@
+[DERBY-592] Expand table driven system function defintion added in DERBY-475 to allow definition of JDBC escaped functions. <p>Since the functions added in <a href= https://issues.apache.org/jira/browse/DERBY-475  title= Add a system function mechanism and table of  functions, including a set of initial functions.  class= issue-link  data-issue-key= DERBY-475 ><del>DERBY-475</del></a> overlap with the numeric scaler functions defined in section C.1 of JDBC 3.0 it would be benfiical to expand the table to indicate if the function can be used as a JDBC escaped scaler as well.</p>
+
+<p>Plus adding all the code to find them and call them etc. <img class= emoticon  src= https://issues.apache.org/jira/images/icons/emoticons/smile.gif  height= 16  width= 16  align= absmiddle  alt=   border= 0 /></p>
+
+<p>I ll add a comment later to show which JDBC escape functions this would add.</p>
+

@@ -1,0 +1,1 @@
+[DERBY-875] Use nested filesets to improve engine Javadoc generation <p>Instead of copying the entire source tree to generate the javadoc, use Ant s nested filesets in the javadoc target to specify the source files.</p>

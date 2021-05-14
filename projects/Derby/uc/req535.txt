@@ -1,0 +1,19 @@
+[DERBY-5971] Improve test coverage for SQLBoolean class <p>When looking at a test coverage report, I noticed that these methods in the SQLBoolean class are not tested:</p>
+
+<ul class= alternate  type= square >
+	<li>falseTruthValue</li>
+	<li>trueTruthValue</li>
+	<li>greaterOrEquals</li>
+	<li>greaterThan</li>
+	<li>lessOrEquals</li>
+	<li>lessThan</li>
+	<li>is</li>
+	<li>isNot</li>
+	<li>readExternal</li>
+	<li>hashCode</li>
+</ul>
+
+
+<p>falseTruthValue() and trueTruthValue() are never called anywhere in the code and could be removed.</p>
+
+<p>is() and isNot() also have no callers. However, they implement the boolean IS operator which is part of the SQL standard, so it might make more sense to file a JIRA to add the syntax to the grammar rather than removing the methods.</p>

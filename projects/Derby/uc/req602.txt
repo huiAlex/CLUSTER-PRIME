@@ -1,0 +1,19 @@
+[DERBY-6626] Check type of user-supplied modules before creating instances <p>Derby allows users to specify names of classes to use for various pluggable modules.</p>
+
+<p>In some cases, it verifies that the class implements the expected interface before it creates an instance of the class. For example in SpecificAuthenticactionServiceImpl:</p>
+
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >
+			<span class= code-object >Class</span> sasClass = <span class= code-object >Class</span>.forName(specificAuthenticationScheme);
+			<span class= code-keyword >if</span> (!UserAuthenticator.class.isAssignableFrom(sasClass)) {
+				<span class= code-keyword >throw</span> StandardException.newException(SQLState.AUTHENTICATION_NOT_IMPLEMENTED,
+					specificAuthenticationScheme, <span class= code-quote > org.apache.derby.authentication.UserAuthenticator </span>);
+			}
+
+			UserAuthenticator aScheme = (UserAuthenticator) sasClass.newInstance();
+</pre>
+</div></div>
+
+<p>In other cases, it creates an instance without checking, and instead fails with a ClassCastException or some other exception when trying to use the instance of the incorrect type. Examples: Java5SystemProcedures SYSCS_REGISTER_TOOL(), JCECipherFactory, SequenceUpdater.makePreallocator().</p>
+
+<p>I think it would be good to have similar checks in these other cases too. That ll give clearer error messages which explain what the problem is, and it will be safer because it limits which constructors the users can force the Derby engine to invoke.</p>

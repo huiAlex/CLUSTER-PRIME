@@ -1,0 +1,8 @@
+[DERBY-6447] Use StrictMath for more functions in SYSFUN <p>Most of the functions in the SYSFUN schema use methods in java.lang.StrictMath directly. A few of them use methods in SystemProcedures instead. Java 1.5 added more methods to StrictMath, so it is now possible to make more of the functions use StrictMath and drop the implementation in SystemProcedures:</p>
+
+<ul class= alternate  type= square >
+	<li>LOG10 could use StrictMath.log10()</li>
+	<li>COSH could use StrictMath.cosh()</li>
+	<li>SINH could use StrictMath.sinh()</li>
+	<li>TANH could use StrictMath.tanh()</li>
+</ul>

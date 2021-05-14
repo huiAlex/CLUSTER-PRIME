@@ -1,0 +1,5 @@
+[DERBY-6590] Make JUnit tests run the fixtures in a deterministic order. <p>Since JDK 7, when we use the standard decorator for JUnit tests, e.g.</p>
+
+<p>return TestConfiguration.defaultSuite(AggBuiltinTest.class);</p>
+
+<p>the order in which the test fixtures get run is indeterministic. This is undesirable because it doesn t add much coverage to the product and makes the tests more brittle than they need to be.</p>

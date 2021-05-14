@@ -1,0 +1,10 @@
+[DERBY-821] Client driver: Implicitly close exhausted result sets on the server <p>Forward-only result sets that are exhausted should be implicitly<br/>
+closed on the server. This way, ResultSet.close() does not have to<br/>
+send an explicit close message generating unnecessary network traffic.</p>
+
+<p>The DRDA protocol supports this. From the description of OPNQRY (open<br/>
+query):</p>
+
+<p>  The qryclsimp parameter controls whether the target server<br/>
+  implicitly closes a non-scrollable query upon end of data (SQLSTATE<br/>
+  02000) in association with the cursor type.</p>

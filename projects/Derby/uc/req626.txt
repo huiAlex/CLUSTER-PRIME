@@ -1,0 +1,24 @@
+[DERBY-801] Allow parallel access to data files. <p>Derby currently serializes accesses to a data file.  For example, the<br/>
+implementation of RAFContainer.readPage is as follows:</p>
+
+<p>    synchronized (this) </p>
+{  //  this  is a FileContainer, i.e. a file object
+        fileData.seek(pageOffset);  // fileData is a RandomAccessFile
+        fileData.readFully(pageData, 0, pageSize);
+    }
+
+<p>I have experiemented with a patch where I have introduced several file<br/>
+descriptors (RandomAccessFile objects) per RAFContainer.  These are<br/>
+used for reading.  The principle is that when all readers are busy, a<br/>
+readPage request will create a new reader.  (There is a maximum number<br/>
+of readers.)  With this patch, throughput was improved by 50% on<br/>
+linux.  For more discussion on this, see</p>
+
+<p><a href= http://www.nabble.com/Derby-I-O-issues-during-checkpointing-t473523.html  class= external-link  rel= nofollow >http://www.nabble.com/Derby-I-O-issues-during-checkpointing-t473523.html</a></p>
+
+<p>The challenge with the suggested approach is to make a mechanism to<br/>
+limit the number of open file descpriptors.  Mike Matrigali has<br/>
+suggested to use the existing CacheManager infrastructure for this<br/>
+purpose.  For a discussion on that, see:</p>
+
+<p><a href= http://www.nabble.com/new-uses-for-basic-services-cache---looking-for-advice-t756863.html  class= external-link  rel= nofollow >http://www.nabble.com/new-uses-for-basic-services-cache---looking-for-advice-t756863.html</a></p>

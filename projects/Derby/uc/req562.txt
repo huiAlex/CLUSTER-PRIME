@@ -1,0 +1,6 @@
+[DERBY-6262] Simplify message-generating methods using varargs <p>I ve found that many methods that generate messages could be collapsed into a single method using varargs. Right now, many of them exist in multiple variants, typically for zero up to three or four message arguments.</p>
+
+<p>Examples:<br/>
+  Monitor.logTextMessage()<br/>
+  MessageService.getTextMessage()<br/>
+  Constructors in SqlException and SqlWarning</p>

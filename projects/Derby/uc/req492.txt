@@ -1,0 +1,8 @@
+[DERBY-5641] Remove unused BaseDataFileFactory methods plus minor cleanups <p>BaseDataFileFactory has some unused methods, they can be removed: syncSideLog, pageToDirty and getTempDirectory<br/>
+In addition I suggest the following cleanups:<br/>
+ o remove unused imports<br/>
+ o remove unnecessary return statement<br/>
+ o make synchronization object freezeSemaphore final<br/>
+ o remove unused instance variable backupPath<br/>
+ o remove unused local variable (and exception instantiation) multipleJBMSWarning<br/>
+ o replace new Boolean with Boolean.valueOf</p>

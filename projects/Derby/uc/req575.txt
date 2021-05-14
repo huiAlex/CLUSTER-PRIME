@@ -1,0 +1,25 @@
+[DERBY-642] SELECT MAX doesn t use indices optimally <p>I tried running SELECT MAX on an indexed column in a big (8 GB)<br/>
+table. It took 12 minutes, which is about 12 minutes more than I<br/>
+expected.</p>
+
+<p>After a bit of investigation, I found out that a full index scan was<br/>
+performed because all the rows referenced from the rightmost B-tree<br/>
+node were actually deleted.</p>
+
+<p>Possible improvements:</p>
+
+<p>  1. Implement backwards scan in the B-trees (this is also suggested<br/>
+     in the comments in BTreeMaxScan).</p>
+
+<p>  2. Go up to the parent node and down to the next leaf node on the<br/>
+     left side, and continue until a valid max value is found. In<br/>
+     Derby, traversing up in a B-tree is not allowed, but would it be<br/>
+     ok to go up if the latches were kept on the higher-level nodes in<br/>
+     the tree? Of course, this would have negative impact on<br/>
+     concurrency.</p>
+
+<p>  3. Right-to-left traversal on the leaf level is possible (using<br/>
+     ControlRow.getLeftSibling()), but will throw an exception if the<br/>
+     page cannot be latched without waiting. It is therefore possible<br/>
+     to try a right-to-left search for the max value, and only fall<br/>
+     back to the left-to-right approach if a conflict arises.</p>

@@ -1,0 +1,6 @@
+[DERBY-883] Enhance GROUP BY clause to support expressions instead of just column references. <p>This select would return an error syntax on finding  (  after month if group by clause:</p>
+
+<p>select idissue, month(creation), year(creation), count(distinct idissue)<br/>
+where <br/>
+  ....<br/>
+group by idissue, month(creation), year(creation)</p>
