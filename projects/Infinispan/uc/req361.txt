@@ -1,0 +1,3 @@
+[ISPN-975] Make Hot Rod topology cache parameters configurable <p>Ups, my fault. Hot Rod topology cache state retrieval timeout is not configurable! Neither the lock timeout.</p>
+
+<p>These two need to be made configurable.</p>

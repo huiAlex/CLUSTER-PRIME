@@ -1,0 +1,12 @@
+[ISPN-948] Support XML marshaling of Configuration instances <p>Infinispan supports a very flexible way of configuring caches using multiple levels of inheritance. <br/>
+While this is really nice, it is sometimes not easy to understand how exactly a particular cache was configured. <br/>
+(E.g. JPA is just one example where a cache configuration can be adjusted in several ways).</p>
+
+<p>JMX or debuggers help but may not always be available.</p>
+
+<p>What about allowing to convert a configuration instance back to XML to give a quick overview of the really applied settings. <em>(Optionally it might also be a nice little feature to implement a  toXmlString();  method or override the default and also make this available through JMX)</em></p>
+
+<p>JAXB annotations are already present on all configurable options but a couple getters and a @XmlRootElement annotation is missing that would allow to convert an existing instance back to XML. The effort in doing this should be rather low.</p>
+
+<p>&#8212;<br/>
+This feature request may also fit with #<a href= https://issues.jboss.org/browse/ISPN-791  title= On node startup, ensure all peers have compatible configurations  class= issue-link  data-issue-key= ISPN-791 >ISPN-791</a> as it would allow to transfer cache configs using XML.</p>

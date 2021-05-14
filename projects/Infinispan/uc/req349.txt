@@ -1,0 +1,4 @@
+[ISPN-9] Eviction redesign <p>Eviction needs some redesigning:</p>
+
+<p>1.  Eviction based on timed out/unused entries (passivation).  This is not expiration, which removes entries.<br/>
+2.  Eviction event queue, eviction algorithm queues wasteful - can we not incorporate additional ordering into the data container and directly prune?</p>

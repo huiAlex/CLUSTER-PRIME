@@ -1,0 +1,5 @@
+[ISPN-86] InternalCacheValue/InternalCacheEntry optimization <p>From a IRC discussion with Manik:<br/>
+Right now an InternalCacheValue(ICV) is created from an InternalCacheEntry(ICE) by the CacheStore whenever we persist an entry: this is in order to avoid duplicate marshalling of the key.<br/>
+Same way, an InternalCacheEntry is created from an ICV whenever the value is unmarshalled.<br/>
+Avoid this unnecessary creation of objects by making ICE aggregate an ICV, and delegate all the state calls to it.<br/>
+Impl note: in order to allow delegation from ICE to ICV, make all the ICV s methods final.</p>

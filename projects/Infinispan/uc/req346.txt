@@ -1,0 +1,289 @@
+[ISPN-887] XAResource implementation improvements (TransactionalXAResource) <p>Reviewing the code with Jonathan Halliday has brought the following aspects (see TODOs below):</p>
+
+
+<p>package org.infinispan.transaction.xa;</p>
+
+<p>import org.infinispan.commands.CommandsFactory;<br/>
+import org.infinispan.commands.tx.CommitCommand;<br/>
+import org.infinispan.commands.tx.PrepareCommand;<br/>
+import org.infinispan.commands.tx.RollbackCommand;<br/>
+import org.infinispan.config.Configuration;<br/>
+import org.infinispan.context.InvocationContextContainer;<br/>
+import org.infinispan.context.impl.LocalTxInvocationContext;<br/>
+import org.infinispan.interceptors.InterceptorChain;<br/>
+import org.infinispan.util.logging.Log;<br/>
+import org.infinispan.util.logging.LogFactory;</p>
+
+<p>import javax.transaction.xa.XAException;<br/>
+import javax.transaction.xa.XAResource;<br/>
+import javax.transaction.xa.Xid;</p>
+
+<p>/**</p>
+<ul>
+	<li>This acts both as an local 
+{@link org.infinispan.transaction.xa.CacheTransaction}
+<p> and implementor of an </p>
+{@link
+ * javax.transaction.xa.XAResource}
+<p> that will be called by tx manager on various tx stages.<br/>
+ *</p></li>
+	<li>@author Mircea.Markus@jboss.com</li>
+	<li>@since 4.0<br/>
+ */<br/>
+public class TransactionXaAdapter implements XAResource {</li>
+</ul>
+
+
+<p>   private static final Log log = LogFactory.getLog(TransactionXaAdapter.class);<br/>
+   private static boolean trace = log.isTraceEnabled();</p>
+
+<p>   //todo - comment why timeout is not used<br/>
+   //     - it is useful only if TM and client are in separate processes and TM might fail. this is because a client might tm.begin and then the TM  (running separate process) crashes<br/>
+   //     - in this scenario the TM won t ever call XAResource.rollback, so these resources would be held there forever<br/>
+   //     - not affecting us as in all scenarios TM&amp;XAResource are collocated</p>
+
+<p>   private int txTimeout;</p>
+
+<p>   private final InvocationContextContainer icc;<br/>
+   private final InterceptorChain invoker;</p>
+
+<p>   private final CommandsFactory commandsFactory;<br/>
+   private final Configuration configuration;</p>
+
+<p>   private final TransactionTable txTable;</p>
+
+<p>   /**</p>
+<ul>
+	<li>XAResource is associated with a transaction between enlistment (XAResource.start()) XAResource.end(). It s only the</li>
+	<li>boundary methods (prepare, commit, rollback) that need to be  stateless .</li>
+	<li>Reefer to section 3.4.4 from JTA spec v.1.1<br/>
+    */<br/>
+   private final LocalTransaction localTransaction;</li>
+</ul>
+
+
+
+<p>   public TransactionXaAdapter(LocalTransaction localTransaction, TransactionTable txTable, CommandsFactory commandsFactory,<br/>
+                               Configuration configuration, InterceptorChain invoker, InvocationContextContainer icc) </p>
+{
+      this.localTransaction = localTransaction;
+      this.txTable = txTable;
+      this.commandsFactory = commandsFactory;
+      this.configuration = configuration;
+      this.invoker = invoker;
+      this.icc = icc;
+   }
+
+<p>   /**</p>
+<ul>
+	<li>This can be call for any transaction object. See Section 3.4.6 (Resource Sharing) from JTA spec v1.1.<br/>
+    */<br/>
+   public int prepare(Xid xid) throws XAException {<br/>
+      //todo if I throw an exception here then I should also cleanup resources as .rollback might never be called!!<br/>
+      LocalTransaction localTransaction = getLocalTransactionAndValidate(xid);</li>
+</ul>
+
+
+<p>      //todo - same as last comment<br/>
+      validateNotMarkedForRollback(localTransaction);</p>
+
+<p>      if (configuration.isOnePhaseCommit()) {<br/>
+         if (trace) log.trace( Received prepare for tx: </p>
+{0}. Skipping call as 1PC will be used. , xid);<br/>
+         return XA_OK;<br/>
+      }<br/>
+<br/>
+      PrepareCommand prepareCommand = commandsFactory.buildPrepareCommand(localTransaction.getGlobalTransaction(), localTransaction.getModifications(), configuration.isOnePhaseCommit());<br/>
+      if (trace) log.trace( Sending prepare command through the chain:   + prepareCommand);<br/>
+<br/>
+      LocalTxInvocationContext ctx = icc.createTxInvocationContext();<br/>
+      ctx.setLocalTransaction(localTransaction);<br/>
+      try {<br/>
+         invoker.invoke(ctx, prepareCommand);<br/>
+         if (localTransaction.isReadOnly()) {
+            if (trace) log.trace( Readonly transaction:   + localTransaction.getGlobalTransaction());
+            // force a cleanup to release any objects held.  Some TMs don t call commit if it is a READ ONLY tx.  See ISPN-845
+            commit(xid, false);
+            return XA_RDONLY;
+         } else {
+            return XA_OK;
+         }<br/>
+      } catch (Throwable e) {
+         // todo if I throw this exception make sure that all locks are 100% cleaned up, as TM won t do any rollback call on it.
+         // todo - handle this! -&gt; if only a node fails to ack tx prepare, and that node is still part of the cluster, it needs to be sync with tx state.
+         // one way of doing this is by pushing the tx state to that node until one of two happens: a) node ack or b) node is shunned from the cluster
+         log.error( Error while processing PrepareCommand , e);
+         throw new XAException(XAException.XAER_RMERR);
+      }<br/>
+   }<br/>
+<br/>
+   /**<br/>
+    * Same comment as for {@link #prepare(javax.transaction.xa.Xid)} applies for commit.<br/>
+    */<br/>
+   public void commit(Xid xid, boolean isOnePhase) throws XAException {<br/>
+      LocalTransaction localTransaction = getLocalTransactionAndValidate(xid);<br/>
+<br/>
+      if (trace) log.trace( committing transaction {0}
+<p> , localTransaction.getGlobalTransaction());<br/>
+      try {<br/>
+         LocalTxInvocationContext ctx = icc.createTxInvocationContext();<br/>
+         ctx.setLocalTransaction(localTransaction);<br/>
+         // todo this needs to be split in two:<br/>
+         //  - configuration.isOnePhaseCommit() this is not  as important , as the user ack that it doesn t  really  need consistency<br/>
+         //  - on the other case ( isOnePhase ==true) make sure that this method either commits successfully or it fails and cleans up logs eventually<br/>
+         if (configuration.isOnePhaseCommit() || isOnePhase) {<br/>
+            validateNotMarkedForRollback(localTransaction);</p>
+
+<p>            if (trace) log.trace( Doing an 1PC prepare call on the interceptor chain );<br/>
+            PrepareCommand command = commandsFactory.buildPrepareCommand(localTransaction.getGlobalTransaction(), localTransaction.getModifications(), true);<br/>
+            try </p>
+{
+               invoker.invoke(ctx, command);
+            }
+<p> catch (Throwable e) </p>
+{
+               log.error( Error while processing 1PC PrepareCommand , e);
+               throw new XAException(XAException.XAER_RMERR);
+            }<br/>
+         } else {<br/>
+            CommitCommand commitCommand = commandsFactory.buildCommitCommand(localTransaction.getGlobalTransaction());<br/>
+            try {
+               invoker.invoke(ctx, commitCommand);
+            } catch (Throwable e) {
+               log.error( Error while processing 1PC PrepareCommand , e);
+               throw new XAException(XAException.XAER_RMERR);
+            }
+<p>         }<br/>
+      } finally </p>
+{
+         cleanup(localTransaction);
+      }
+<p>   }</p>
+
+<p>   /**</p>
+<ul>
+	<li>Same comment as for 
+{@link #prepare(javax.transaction.xa.Xid)}
+<p> applies for commit.<br/>
+    */   <br/>
+   public void rollback(Xid xid) throws XAException </p>
+{
+      rollbackImpl(xid, commandsFactory, icc, invoker, txTable);
+   }</li>
+</ul>
+
+
+<p>   public static void rollbackImpl(Xid xid, CommandsFactory commandsFactory, InvocationContextContainer icc, InterceptorChain invoker, TransactionTable txTable) throws XAException {<br/>
+      LocalTransaction localTransaction = txTable.getLocalTransaction(xid);<br/>
+      if  (localTransaction == null) {<br/>
+         if (trace) log.trace( no tx found for </p>
+{0} , xid);<br/>
+         throw new XAException(XAException.XAER_NOTA);<br/>
+      }<br/>
+      if (trace) log.trace( rollback transaction {0}
+<p>  , localTransaction.getGlobalTransaction());<br/>
+      RollbackCommand rollbackCommand = commandsFactory.buildRollbackCommand(localTransaction.getGlobalTransaction());<br/>
+      LocalTxInvocationContext ctx = icc.createTxInvocationContext();<br/>
+      ctx.setLocalTransaction(localTransaction);<br/>
+      try </p>
+{
+         invoker.invoke(ctx, rollbackCommand);
+      }
+<p> catch (Throwable e) </p>
+{
+         log.error( Exception while rollback , e);
+         throw new XAException(XAException.XA_HEURHAZ);
+      }
+<p> finally </p>
+{
+         cleanupImpl(localTransaction, txTable, icc);
+      }
+<p>   }</p>
+
+<p>   private LocalTransaction getLocalTransactionAndValidate(Xid xid) throws XAException {<br/>
+      LocalTransaction localTransaction1 = txTable.getLocalTransaction(xid);<br/>
+      if  (localTransaction1 == null) {<br/>
+         log.error( This should not happen when XAResource and TM are in the same process! No tx found for </p>
+{0} , xid);<br/>
+         throw new XAException(XAException.XAER_NOTA);<br/>
+      }<br/>
+      return localTransaction1;<br/>
+   }<br/>
+<br/>
+   public void start(Xid xid, int i) throws XAException {
+      localTransaction.setXid(xid);
+      txTable.addLocalTransactionMapping(localTransaction);
+      if (trace) log.trace( start called on tx   + this.localTransaction.getGlobalTransaction());
+   }<br/>
+<br/>
+   public void end(Xid xid, int i) throws XAException {
+      if (trace) log.trace( end called on tx   + this.localTransaction.getGlobalTransaction());
+   }<br/>
+<br/>
+   public void forget(Xid xid) throws XAException {
+      if (trace) log.trace( forget called );
+   }<br/>
+<br/>
+   public int getTransactionTimeout() throws XAException {
+      if (trace) log.trace( start called );
+      return txTimeout;
+   }<br/>
+<br/>
+   public boolean isSameRM(XAResource xaResource) throws XAException {<br/>
+      if (!(xaResource instanceof TransactionXaAdapter)) {
+         return false;
+      }<br/>
+      TransactionXaAdapter other = (TransactionXaAdapter) xaResource;<br/>
+      return other.equals(this);<br/>
+   }<br/>
+<br/>
+   public Xid[] recover(int i) throws XAException {
+      if (trace) log.trace( recover called:   + i);
+      return null;
+   }<br/>
+<br/>
+   public boolean setTransactionTimeout(int i) throws XAException {
+      this.txTimeout = i;
+      return true;
+   }<br/>
+<br/>
+   @Override<br/>
+   public boolean equals(Object o) {
+      if (this == o) return true;
+      if (!(o instanceof TransactionXaAdapter)) return false;
+      TransactionXaAdapter that = (TransactionXaAdapter) o;
+      return this.localTransaction.equals(that.localTransaction);
+   }<br/>
+<br/>
+   @Override<br/>
+   public int hashCode() {
+      return localTransaction.getGlobalTransaction().hashCode();
+   }<br/>
+<br/>
+   @Override<br/>
+   public String toString() {<br/>
+      return  TransactionXaAdapter{  +
+             localTransaction=  + localTransaction +
+             } ;<br/>
+   }<br/>
+<br/>
+   private void validateNotMarkedForRollback(LocalTransaction localTransaction) throws XAException {<br/>
+      if (localTransaction.isMarkedForRollback()) {<br/>
+         if (trace) log.trace( Transaction already marked for rollback: {0}
+<p> , localTransaction);<br/>
+         throw new XAException(XAException.XA_RBROLLBACK);<br/>
+      }<br/>
+   }</p>
+
+<p>   private void cleanup(LocalTransaction localTransaction) </p>
+{
+      TransactionXaAdapter.cleanupImpl(localTransaction, txTable, icc);
+   }
+
+<p>   private static void cleanupImpl(LocalTransaction localTransaction, TransactionTable txTable, InvocationContextContainer icc) </p>
+{
+      txTable.removeLocalTransaction(localTransaction);
+      icc.suspend();
+   }
+<p>   <br/>
+}</p>

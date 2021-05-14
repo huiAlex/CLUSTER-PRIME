@@ -1,0 +1,1 @@
+[ISPN-790] Refactor the way release versions are generated <p>Makes it easier for release scripts to update.</p>

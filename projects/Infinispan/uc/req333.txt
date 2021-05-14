@@ -1,0 +1,1 @@
+[ISPN-749] Infinispan servers should expose some stats over JMX <p>Infinispan servers should expose some stats of their own, such as: amount of data read, amount of data written back to clients...etc.</p>

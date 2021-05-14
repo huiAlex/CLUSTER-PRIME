@@ -1,0 +1,1 @@
+[ISPN-964] ConsistentHash interface should deal with Sets and not Lists of Addresses <p>This will prevent adding an address to the hash wheel more than once.</p>

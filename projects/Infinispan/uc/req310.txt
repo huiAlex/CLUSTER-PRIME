@@ -1,0 +1,11 @@
+[ISPN-612] Allow substitution of Infinispan server properties <p>From Brian S:</p>
+
+<p> Can whatever reads these properties (HotRodServer and MemcachedServer or some delegate) do system property substitution? Then the file has<br/>
+infinispan.server.port = $</p>
+{jboss.infinispan.server.port:11311}<br/>
+<br/>
+or, if the substitution logic is simpler, even just<br/>
+<br/>
+infinispan.server.port = ${jboss.infinispan.server.port}
+
+<p>and we tweak the config in datagrid/conf/bindingservice/beans to set jboss.infinispan.server.port </p>

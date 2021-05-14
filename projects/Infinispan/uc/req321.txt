@@ -1,0 +1,71 @@
+[ISPN-661] Make the timeout values for statetransfer flush configurable <p>it seems I m in need to configure the flush timeout defined in org.infinispan.statetransfer.StateTransferManagerImpl.generateTransactionLog(ObjectOutput)<br/>
+this is currently hardcoded to 60 seconds.<br/>
+This might actually cover another problem, but these are the stacktraces:</p>
+
+<p>Node1:</p>
+
+<p>2010-09-21 17:09:24,329 STREAMING_STATE_TRANSFER-sender-5,scarlet-cluster,ip-10-196-114-15-45100 ERROR      <span class= error >&#91;remoting.transport.jgroups.JGroupsTransport&#93;</span> Caught while responding to state transfer request<br/>
+org.infinispan.statetransfer.StateTransferException: java.util.concurrent.TimeoutException: Timed out waiting for a cluster-wide sync to be acquired. (timeout = 60 seconds)<br/>
+	at org.infinispan.statetransfer.StateTransferManagerImpl.generateState(StateTransferManagerImpl.java:171)<br/>
+	at org.infinispan.remoting.InboundInvocationHandlerImpl.generateState(InboundInvocationHandlerImpl.java:118)<br/>
+	at org.infinispan.remoting.transport.jgroups.JGroupsTransport.getState(JGroupsTransport.java:569)<br/>
+	at org.jgroups.blocks.MessageDispatcher$ProtocolAdapter.handleUpEvent(MessageDispatcher.java:691)<br/>
+	at org.jgroups.blocks.MessageDispatcher$ProtocolAdapter.up(MessageDispatcher.java:772)<br/>
+	at org.jgroups.JChannel.up(JChannel.java:1453)<br/>
+	at org.jgroups.stack.ProtocolStack.up(ProtocolStack.java:887)<br/>
+	at org.jgroups.protocols.pbcast.FLUSH.up(FLUSH.java:483)<br/>
+	at org.jgroups.protocols.pbcast.STREAMING_STATE_TRANSFER$StateProviderHandler.process(STREAMING_STATE_TRANSFER.java:653)<br/>
+	at org.jgroups.protocols.pbcast.STREAMING_STATE_TRANSFER$StateProviderThreadSpawner$1.run(STREAMING_STATE_TRANSFER.java:582)<br/>
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:886)<br/>
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:908)<br/>
+	at java.lang.Thread.run(Thread.java:619)<br/>
+Caused by: java.util.concurrent.TimeoutException: Timed out waiting for a cluster-wide sync to be acquired. (timeout = 60 seconds)<br/>
+	at org.infinispan.remoting.transport.jgroups.JGroupsDistSync.blockUntilAcquired(JGroupsDistSync.java:42)<br/>
+	at org.infinispan.statetransfer.StateTransferManagerImpl.generateTransactionLog(StateTransferManagerImpl.java:209)<br/>
+	at org.infinispan.statetransfer.StateTransferManagerImpl.generateState(StateTransferManagerImpl.java:161)<br/>
+	... 12 more</p>
+
+<p>Node2:</p>
+
+<p>org.infinispan.statetransfer.StateTransferException: java.io.EOFException: Read past end of file<br/>
+	at org.infinispan.statetransfer.StateTransferManagerImpl.applyState(StateTransferManagerImpl.java:331)<br/>
+	at org.infinispan.remoting.InboundInvocationHandlerImpl.applyState(InboundInvocationHandlerImpl.java:101)<br/>
+	at org.infinispan.remoting.transport.jgroups.JGroupsTransport.setState(JGroupsTransport.java:586)<br/>
+	at org.jgroups.blocks.MessageDispatcher$ProtocolAdapter.handleUpEvent(MessageDispatcher.java:712)<br/>
+	at org.jgroups.blocks.MessageDispatcher$ProtocolAdapter.up(MessageDispatcher.java:772)<br/>
+	at org.jgroups.JChannel.up(JChannel.java:1410)<br/>
+	at org.jgroups.stack.ProtocolStack.up(ProtocolStack.java:887)<br/>
+	at org.jgroups.protocols.pbcast.FLUSH.up(FLUSH.java:483)<br/>
+	at org.jgroups.protocols.pbcast.STREAMING_STATE_TRANSFER.connectToStateProvider(STREAMING_STATE_TRANSFER.java:525)<br/>
+	at org.jgroups.protocols.pbcast.STREAMING_STATE_TRANSFER.handleStateRsp(STREAMING_STATE_TRANSFER.java:464)<br/>
+	at org.jgroups.protocols.pbcast.STREAMING_STATE_TRANSFER.up(STREAMING_STATE_TRANSFER.java:225)<br/>
+	at org.jgroups.protocols.FRAG2.up(FRAG2.java:188)<br/>
+	at org.jgroups.protocols.FC.up(FC.java:474)<br/>
+	at org.jgroups.protocols.pbcast.GMS.up(GMS.java:888)<br/>
+	at org.jgroups.protocols.pbcast.STABLE.up(STABLE.java:234)<br/>
+	at org.jgroups.protocols.UNICAST2.handleDataReceived(UNICAST2.java:637)<br/>
+	at org.jgroups.protocols.UNICAST2.up(UNICAST2.java:262)<br/>
+	at org.jgroups.protocols.pbcast.NAKACK.up(NAKACK.java:707)<br/>
+	at org.jgroups.protocols.VERIFY_SUSPECT.up(VERIFY_SUSPECT.java:132)<br/>
+	at org.jgroups.protocols.FD_SOCK.up(FD_SOCK.java:270)<br/>
+	at org.jgroups.protocols.MERGE2.up(MERGE2.java:210)<br/>
+	at org.jgroups.protocols.Discovery.up(Discovery.java:281)<br/>
+	at org.jgroups.protocols.TP.passMessageUp(TP.java:1009)<br/>
+	at org.jgroups.protocols.TP.access$100(TP.java:56)<br/>
+	at org.jgroups.protocols.TP$IncomingPacket.handleMyMessage(TP.java:1549)<br/>
+	at org.jgroups.protocols.TP$IncomingPacket.run(TP.java:1526)<br/>
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:886)<br/>
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:908)<br/>
+	at java.lang.Thread.run(Thread.java:619)<br/>
+Caused by: java.io.EOFException: Read past end of file<br/>
+	at org.jboss.marshalling.AbstractUnmarshaller.eofOnRead(AbstractUnmarshaller.java:184)<br/>
+	at org.jboss.marshalling.AbstractUnmarshaller.readUnsignedByteDirect(AbstractUnmarshaller.java:319)<br/>
+	at org.jboss.marshalling.AbstractUnmarshaller.readUnsignedByte(AbstractUnmarshaller.java:280)<br/>
+	at org.jboss.marshalling.river.RiverUnmarshaller.doReadObject(RiverUnmarshaller.java:207)<br/>
+	at org.jboss.marshalling.AbstractUnmarshaller.readObject(AbstractUnmarshaller.java:85)<br/>
+	at org.infinispan.marshall.jboss.GenericJBossMarshaller.objectFromObjectStream(GenericJBossMarshaller.java:162)<br/>
+	at org.infinispan.marshall.VersionAwareMarshaller.objectFromObjectStream(VersionAwareMarshaller.java:180)<br/>
+	at org.infinispan.statetransfer.StateTransferManagerImpl.processCommitLog(StateTransferManagerImpl.java:228)<br/>
+	at org.infinispan.statetransfer.StateTransferManagerImpl.applyTransactionLog(StateTransferManagerImpl.java:258)<br/>
+	at org.infinispan.statetransfer.StateTransferManagerImpl.applyState(StateTransferManagerImpl.java:320)<br/>
+	... 28 more</p>

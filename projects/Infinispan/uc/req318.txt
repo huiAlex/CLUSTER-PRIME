@@ -1,0 +1,11 @@
+[ISPN-6501] Create a ProbeHandler for JGroups <p>Expose the remote thread pool status to JGroups  probe. It returns the following:</p>
+
+<ul>
+	<li>current-pool-size =&gt; the current pool size</li>
+	<li>keep-alive=60000 =&gt; the configure keep alive time in milliseconds</li>
+	<li>min-thread =&gt; the minimum thread pool size configured</li>
+	<li>active-thread =&gt; the current active number of threads</li>
+	<li>queue-size =&gt; the current queue size</li>
+	<li>max-thread =&gt; the maximum thread pool size configured</li>
+	<li>largest-pool-size =&gt; the largest thread pool</li>
+</ul>

@@ -1,0 +1,5 @@
+[ISPN-994] Create tooling (JMX) to handle heuristic transactions <p>now that <a href= https://issues.jboss.org/browse/ISPN-272  title= Implement XA recovery in TransactionXaAdapter  class= issue-link  data-issue-key= ISPN-272 ><del>ISPN-272</del></a> is implemented the TM is aware about the heuristic transactions. <br/>
+After TM determines such a transaction it informs the System Administrator. It s SA s job to force the rollback/commit of those pending transactions.<br/>
+In order to do that he needs tooling in order to access the cluster. A solution would be JMX as described here: <a href= http://lists.jboss.org/pipermail/infinispan-dev/2011-March/007651.html  class= external-link  rel= nofollow >http://lists.jboss.org/pipermail/infinispan-dev/2011-March/007651.html</a></p>
+
+<p>This is complementary to <a href= https://issues.jboss.org/browse/ISPN-272  title= Implement XA recovery in TransactionXaAdapter  class= issue-link  data-issue-key= ISPN-272 ><del>ISPN-272</del></a> and very important as without it transaction failure cannot be fixed.</p>

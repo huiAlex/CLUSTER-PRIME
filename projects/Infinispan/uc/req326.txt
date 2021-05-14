@@ -1,0 +1,3 @@
+[ISPN-70] Transparent eager locking for transactions <p>Allow a configuration attribute on &lt;transaction /&gt; to be able to specify whether cluster-wide locks are acquired eagerly or lazily.  The current scheme (lazy) should be the default.</p>
+
+<p>This could be implemented by broadcasting LockControlCommands alongside acquiring local locks for necessary keys.</p>

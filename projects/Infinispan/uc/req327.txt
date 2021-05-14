@@ -1,0 +1,3 @@
+[ISPN-704] Make cache events generic where possible <p>It would be nice if the Cache events were generic, and save the user from needless casting.  e.g. CacheEntryActivatedEvent&lt;K, V&gt;<br/>
+This would also further discourage users from fetching values from their own generic Cache&lt;K, V&gt; rather than having to cast the values from the event or DataContainer (a potential gotcha, see <a href= https://issues.jboss.org/browse/ISPN-703  title= Add cache value to event objects  class= issue-link  data-issue-key= ISPN-703 ><del>ISPN-703</del></a>).<br/>
+Type erasure should ensure that any current unparameterized usage is fully compatible.</p>

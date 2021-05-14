@@ -1,0 +1,7 @@
+[ISPN-958] Java HotRod: Add client timeout option <p>There does not seem to be an option to specify a client time-out. This is pretty common and IMHO a valid feature with any client out there. </p>
+
+<p><a href= http://docs.jboss.org/infinispan/4.2/apidocs/org/infinispan/client/hotrod/exceptions/package-summary.html  class= external-link  rel= nofollow >http://docs.jboss.org/infinispan/4.2/apidocs/org/infinispan/client/hotrod/exceptions/package-summary.html</a></p>
+
+<p>The only option is to be catching a HotRodTimeoutException which is rethrowed on replication timeout on the Infinispan side, which is not it.</p>
+
+<p><a href= http://docs.jboss.org/infinispan/4.2/apidocs/org/infinispan/client/hotrod/exceptions/HotRodTimeoutException.html  class= external-link  rel= nofollow >http://docs.jboss.org/infinispan/4.2/apidocs/org/infinispan/client/hotrod/exceptions/HotRodTimeoutException.html</a></p>

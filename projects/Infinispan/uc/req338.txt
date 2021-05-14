@@ -1,0 +1,10 @@
+[ISPN-807] Generalize Externalizer interface <p>Make Externalizer interface generalized in order to make it more typesafe, i.e.:</p>
+
+<p>interface Externalizer&lt;T&gt; </p>
+{
+
+  void writeObject(ObjectOutput output, T object) throws IOException;
+
+  T readObject(ObjectInput input) throws IOException, ClassNotFoundException;
+
+}

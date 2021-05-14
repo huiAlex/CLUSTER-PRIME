@@ -1,0 +1,7 @@
+[ISPN-822] Allow retrieving coordinator address from EmbeddedCacheManager <p>In order to get the coordinator s address I go through the following hoops:</p>
+
+<p>cache.getAdvancedCache().getRpcManager().getTransport().getCoordinator().getJGroupsAddress().</p>
+
+<p>which requires obtaining a clustered cache first.</p>
+
+<p>the EmbeddedCacheManager interface exposes several methods to access the local address, the address of all members and whether the local address is also coordinator, but there is no method to get the cluster s coordinator address.</p>

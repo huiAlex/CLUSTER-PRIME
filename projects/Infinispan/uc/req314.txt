@@ -1,0 +1,5 @@
+[ISPN-6348] Full-text features for query dsl <ul>
+	<li>we need to extend the query language by adding full-text operators</li>
+	<li>we need a way to configure analysers for fields in the protobuf schema, similar to the ones from hibernate-search</li>
+	<li>keyword and fuzzy querying wanted</li>
+</ul>

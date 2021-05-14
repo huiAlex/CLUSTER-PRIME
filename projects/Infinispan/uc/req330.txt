@@ -1,0 +1,51 @@
+[ISPN-72] Asynchronous Cache API <p>Unscheduled for now.</p>
+
+<p>From Tim Fox:</p>
+
+<p>E.g. imagine I set a value in the cache, by the time I get the response that the value has been set in the cache, I also need to know that it s been replicated to another node so I can have the redundancy guarantees for high availability.</p>
+
+<p>One way to do that is just to block the thread that calls set() until the replication has been performed synchronously to the other node and returns, however that will involve a network round trip per set.</p>
+
+<p>What would be nice would to be able to get the acknowledgements of replication back asynchronously in a different stream, e.g.</p>
+
+<p>S = Set in cache, A = acknowledgement of replication of Set() in cache</p>
+
+<p>With a blocking approach you d have</p>
+
+<p>S1<br/>
+A1<br/>
+S2<br/>
+A2<br/>
+S3<br/>
+A3</p>
+
+<p>I.e. you wait for the ack of the set before calling the next set, which involves a network RTT per set.</p>
+
+<p>With a non blocking (pipelined) approach, you call your sets in quick succession without waiting for a response, then some time later you d get your ack back.</p>
+
+<p>E.g. chronologically something like:</p>
+
+<p>S1<br/>
+S2<br/>
+S3<br/>
+S4<br/>
+S5<br/>
+S6<br/>
+S7<br/>
+A1<br/>
+A2<br/>
+S8<br/>
+A3<br/>
+S9<br/>
+A4<br/>
+S10<br/>
+S11<br/>
+A5</p>
+
+<p>Since you re not blocking, you can use the throughput of the network without being limited by its latency.</p>
+
+<p>This is the kind of thing we in messaging replication, i.e. when someone sends a load of message one by one we can t individually do a network RTT per message (it would be too slow) to replicate them, but they still need the guarantee the message has reached the backup before they get the acknolwedgement of send back.</p>
+
+<p>Manik:</p>
+
+<p>Returning a Future would probably be the way to do this, but I would need to think about what the API would look like though, since the API should look and behave the same regardless of cache mode/cluster config used.  </p>

@@ -1,0 +1,1 @@
+[ISPN-805] Use custom externalizers to improve performance of Lucene Directory <p>Use <a href= https://issues.jboss.org/browse/ISPN-244  title= Enable external user/framework defined Externalizers  class= issue-link  data-issue-key= ISPN-244 ><del>ISPN-244</del></a> to improve the Lucene Directory</p>

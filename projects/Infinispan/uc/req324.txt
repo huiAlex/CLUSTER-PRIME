@@ -1,0 +1,24 @@
+[ISPN-675] Make Infinispan JOPR plugin friendly with AS environments <p>Within the descriptor:</p>
+<ul class= alternate  type= square >
+	<li>Change top level from server to service</li>
+	<li>Within the service add:<br/>
+&lt;parent-resource-type name= JMX Server  plugin= JMX /&gt;<br/>
+&lt;parent-resource-type name= JBossAS Server  plugin= JBossAS /&gt;<br/>
+&lt;parent-resource-type name= JBossAS Server  plugin= JBossAS5 /&gt;</li>
+</ul>
+
+
+<p>Within source:</p>
+<ul class= alternate  type= square >
+	<li>From  implements ResourceComponent  should convert into  extend MBeanResourceComponent  (like StatisticsComponent)</li>
+	<li>You might be able to reduce the code with the above change</li>
+</ul>
+
+
+<p>Base your work on what has been done in: <a href= https://svn.jboss.org/repos/jopr/trunk/modules/plugins/hibernate  class= external-link  rel= nofollow >https://svn.jboss.org/repos/jopr/trunk/modules/plugins/hibernate</a> </p>
+
+<p>Test:</p>
+<ul class= alternate  type= square >
+	<li>Test with AS6 admin console (drop the plugin jar into the plugins subdirectory in the admin console)</li>
+	<li>Test with RHQ</li>
+</ul>

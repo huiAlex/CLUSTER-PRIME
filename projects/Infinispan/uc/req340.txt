@@ -1,0 +1,6 @@
+[ISPN-859] Upgrade consistent hash function to use MurmurHash3 for better performance and more even spread <p>MurmurHash3 has been released.  Details of the improvements here are on:</p>
+
+<p><a href= http://sites.google.com/site/murmurhash/  class= external-link  rel= nofollow >http://sites.google.com/site/murmurhash/</a><br/>
+<a href= http://code.google.com/p/smhasher/wiki/MurmurHash3  class= external-link  rel= nofollow >http://code.google.com/p/smhasher/wiki/MurmurHash3</a></p>
+
+<p>Would need to update the hash version in Hot Rod as well.</p>

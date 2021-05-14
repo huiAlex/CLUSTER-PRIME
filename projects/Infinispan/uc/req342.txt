@@ -1,0 +1,1 @@
+[ISPN-864] Passivate in-memory entries to cache store upon shutdown <p>When cache store configured, passivate in-memory entries when cache is shutdown. </p>

@@ -1,0 +1,1 @@
+[ISPN-6553] Configuration to XML serializer <p>Provide a configuration serializer which can convert a Configuration object to XML </p>
