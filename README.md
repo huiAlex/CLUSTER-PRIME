@@ -3,7 +3,7 @@ This is the dataset of our journal paper
 The overview of the dataset:
 ├─ projects 
 │  └─ project // project name
-<pre> │  	├─ class  </pre>
+│  	├─ class  
 <pre> │  	│  └─ XXX.java // class files </pre>
 <pre> │  	├─ uc  </pre>
 <pre> │  	│  └─ XXX.txt // uc files  </pre>
