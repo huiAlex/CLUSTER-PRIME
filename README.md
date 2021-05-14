@@ -1,5 +1,18 @@
-# exp
-exp 存放原始数据集
+This is the dataset of our journal paper 
+**Propagating Frugal User Feedback Through Closeness of Code Dependencies to Improve IR-Based Traceability Recovery**.
+The overview of the dataset:
+<pre> ├─ projects  </pre>
+<pre> │  └─ project // project name </pre>
+<pre> │  	├─ class  </pre>
+<pre> │  	│  └─ XXX.java // class files </pre>
+<pre> │  	├─ uc  </pre>
+<pre> │  	│  └─ XXX.txt // uc files  </pre>
+<pre> │  	└─ RTM_CLASS.txt // requirements-to-code trace matrices  </pre>
+<pre> └─ resource  </pre>
+<pre>    ├─ sql </pre>
+<pre>    │	└─  buildRTMForXXX.sql // extract rtm data from database </pre>
+<pre>    └─ stopwords </pre>
+<pre>   	└─  stop-words-en.sql // stop words for English </pre>
 
-# exp_emse
-存放抽取所有类型优先级别的数据集信息
+ 
+
