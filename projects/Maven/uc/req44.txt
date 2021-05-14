@@ -1,0 +1,1 @@
+[MNG-5740] Add module maven-builder-support <p>There are some (almost) duplicate classes used by the <tt>ModelBuilder</tt> and <tt>SettingsBuilder</tt>. With the enhancements of ToolChains there s another need for these classes. So let s extract these classes to a separate module: maven-builder-support</p>

@@ -1,0 +1,43 @@
+[MNG-2293] maven-plugin-descriptor: Not possible to define a default implementation for a field defined by its interface <p>MOJO-393 is about letting the user define an alternate configuration element, thus changing the way the webstart plugin works.</p>
+
+<p>For that the idea was to make the mojo field an interface, provide a default implementation in the plugin and let the user use plexus to instanciate a new implemenation.</p>
+
+<p>so for most users we would have:</p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-xml ><span class= code-tag >&lt;configuration&gt;</span>
+  <span class= code-tag >&lt;bla&gt;</span>
+  <span class= code-tag >&lt;/bla&gt;</span>
+<span class= code-tag >&lt;/configuration&gt;</span></pre>
+</div></div>
+
+<p>and for some:</p>
+
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-xml ><span class= code-tag >&lt;configuration&gt;</span>
+  <span class= code-tag >&lt;bla implementation=<span class= code-quote > com....bla </span>&gt;</span>
+  <span class= code-tag >&lt;/bla&gt;</span>
+<span class= code-tag >&lt;/configuration&gt;</span></pre>
+</div></div>
+
+<p>Unfortunately, today I am forced to specify the implementation in both cases. There s no way to inform the plugin to use the default implementation.</p>
+
+<p>The plugin.xml contains:</p>
+
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-xml >        <span class= code-tag >&lt;parameter&gt;</span>
+          <span class= code-tag >&lt;name&gt;</span>bla<span class= code-tag >&lt;/name&gt;</span>
+          <span class= code-tag >&lt;type&gt;</span>...BlaInterface<span class= code-tag >&lt;/type&gt;</span> <span class= code-tag ><span class= code-comment >&lt;!-- that will fail --&gt;</span></span>
+           ...
+        <span class= code-tag >&lt;/parameter&gt;</span></pre>
+</div></div>
+
+<p>I tried to use </p>
+
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java > /**@parameter implementation=<span class= code-quote > ...BlaImplementation </span>*/
+ BlaInterface bla;</pre>
+</div></div>
+
+<p>but that fails as well.</p>
+
+<p>Marking critical because it doesn t allow me add new features to the plugin without breaking the config.xml.</p>

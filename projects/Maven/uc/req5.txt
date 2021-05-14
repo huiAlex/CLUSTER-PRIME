@@ -1,0 +1,23 @@
+[MNG-5878] add support for module name != artifactId in every calculated URLs (project, SCM, site): special project.directory property  <p>Say you have this project structure:</p>
+
+<div class= preformatted panel  style= border-width: 1px; ><div class= preformattedContent panelContent >
+<pre>/
+  |-- module1
+  |-- module2
+</pre>
+</div></div>
+
+<p>and artifactIds are named:</p>
+
+<div class= preformatted panel  style= border-width: 1px; ><div class= preformattedContent panelContent >
+<pre>my-parent
+  |-- my-module1
+  |-- my-module2
+</pre>
+</div></div>
+
+<p>Prefix <tt>my-</tt> is omitted for brevity in module names. For instance, Jersey does that.</p>
+
+<p>When the SCM report is built, the artifactId is always used for path composition which leads to incorrect URLs. You can of course set the parameter <tt>checkoutDirectoryName</tt> but this would be extremely tedious for all modules down the tree.</p>
+
+<p>The code should obtain the module name and use it for URL composition.</p> 

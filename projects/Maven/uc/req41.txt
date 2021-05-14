@@ -1,0 +1,7 @@
+[MNG-5306] for IDE embedding have ways of collecting model problems without failing the process <p>Currently the IDE integrations need to perform 2 steps:<br/>
+1. load the POM with no validation in place. Having a MavenProject instance in the most cases possible is important.<br/>
+2. to display the warnings in pom editor and elsewhere one has to run at least the projectbuilder/modelbuilder with proper validation level and collect the results from either the result object or the exception thrown.</p>
+
+<p>The proposed patch in <a href= https://github.com/mkleint/maven-3/commits/trunk  class= external-link  rel= nofollow >https://github.com/mkleint/maven-3/commits/trunk</a> makes it possible to have both a MAvenproject instance under minimal validation constraints and collect the validation problems for any higher validation levels.</p>
+
+<p>Additional benefit of the patch is that it logs  since what version of Maven is the problem valid . Which can be further used in both cmd line and IDE error reporting.</p>

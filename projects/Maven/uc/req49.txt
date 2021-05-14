@@ -1,0 +1,18 @@
+[MNG-821] file existence profile activation patch <p>&lt;profile&gt;<br/>
+         &lt;id&gt;classnames&lt;/id&gt;<br/>
+         &lt;activation&gt;<br/>
+            &lt;file&gt;<br/>
+               &lt;missing&gt;target/generated-sources/classname-generator/com/stuff/util/GClassnameProvider.java&lt;/missing&gt;<br/>
+            &lt;/file&gt;<br/>
+         &lt;/activation&gt;<br/>
+         &lt;build&gt;</p>
+
+<p>&lt;exists&gt; also is a valid tag inside that &lt;file&gt; as well.</p>
+
+<p>The problem with this patch atm is that it ceases to work outside of the context of the subproject it exists in..</p>
+
+<p>this is because in the FileExistenceProfileActivator we have no mechanism of getting the absolute path for that file string.</p>
+
+<p>I looked into BuildBase object that you can get from the Profile passed in but it is empty (null) and the string doesn t resolve expressions either...</p>
+
+<p>so...if I can get pointed in the right direction for adding that expression resolution in there I ll put that in...talked to kenney about this a bit on irc this morning as well and he seemed to think that was probably the way to go.</p>

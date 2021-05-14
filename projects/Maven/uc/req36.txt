@@ -1,0 +1,1 @@
+[MNG-4398] Provide an extension point to track artifact additions to the local repository <p>Integrators like M2Eclipe would like to get notified of updates to the local repository in order to update auxiliary data structures like indexes.</p>

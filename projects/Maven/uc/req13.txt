@@ -1,0 +1,3 @@
+[MNG-421] process profiles before repositories are used  <p>When building projects that inherit a parent pom installed on remote repo that define the remote repo, the parent pom cannot be downloaded.</p>
+
+<p>To resolve this we need to be able to configure a bootstrap repo definition in settings.xml.</p> 

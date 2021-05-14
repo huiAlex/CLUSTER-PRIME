@@ -1,0 +1,67 @@
+[MNG-2576] Make Like Reactor Mode  <p>Add a commandline option to enable maven to expand the reactor scope to find projects that are dependencies<br/>
+of the projects currently in the reactor, and add them.</p>
+
+<p>Currently only the current project and child projects are included in the reactor search. I m proposing<br/>
+to add a commandline switch that lets maven check parent directories to find the root of the project tree,<br/>
+and then do a normal reactor scan, only adding projects that would normally not be added if they re needed<br/>
+as dependencies of the projects that would normally be built.</p>
+
+<p>Here s a sample project tree:</p>
+
+<ul>
+	<li>root
+	<ul>
+		<li>p1
+		<ul>
+			<li>c1 (depends on p2)</li>
+		</ul>
+		</li>
+		<li>p2 (depends on c2)</li>
+		<li>p3
+		<ul>
+			<li>c2</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+
+<p>And a sample algorithm:</p>
+
+<ul class= alternate  type= square >
+	<li>When building c1, the reactor would contain <span class= error >&#91;c1&#93;</span>.</li>
+</ul>
+
+
+<ul class= alternate  type= square >
+	<li>Maven would check p1, then root, etc, using the &lt;parent&gt; tags (without the versions!)<br/>
+  to see if the project is still in the current reactor.</li>
+</ul>
+
+
+<ul class= alternate  type= square >
+	<li>It would then create a second list of projects (reactor2) containing ALL projects, using the newly discovered root: <span class= error >&#91;root, p1, c2, p2&#93;</span>.</li>
+</ul>
+
+
+<ul class= alternate  type= square >
+	<li>remove all projects from reactor2 contained in reactor: reactor2 = <span class= error >&#91;root, p1, p2&#93;</span></li>
+</ul>
+
+
+<ul class= alternate  type= square >
+	<li>resolve all direct dependencies for all projects in reactor in reactor2 and add them to reactor, taking versions into account: reactor = <span class= error >&#91;p2, c1&#93;</span></li>
+</ul>
+
+
+<ul class= alternate  type= square >
+	<li>repeat previous step until all projects have their dependencies resolved from reactor 2. first iteration would yield reactor = <span class= error >&#91;c2, p2, c1&#93;</span>,<br/>
+  next iteration would stop since c1 doesn t have any dependencies present in reactor2.</li>
+</ul>
+
+
+<p>This would ensure that when some local project s sources have changed, they ll be incorporated<br/>
+in the build, regardless of where you build. So you don t have to do a reactor build each time you change more<br/>
+than 1 project, and you don t have to remember which projects you changed and build them in the correct order<br/>
+yourself, manually.</p> 

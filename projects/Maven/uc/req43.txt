@@ -1,0 +1,3 @@
+[MNG-5683] Expand session scope so that @SessionScoped components can be injected into lifecycle participants <p>This small change allows for @SessionScoped components to be injected into lifecycle participants. Change is here if anyone wants to take a look:</p>
+
+<p><a href= https://github.com/jvanzyl/maven/commit/d0ec7515dc66756682c52dc0f7598119d5da595d  class= external-link  rel= nofollow >https://github.com/jvanzyl/maven/commit/d0ec7515dc66756682c52dc0f7598119d5da595d</a></p>

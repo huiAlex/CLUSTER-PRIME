@@ -1,0 +1,7 @@
+[MNG-870] Make plugin discovery reactor aware [MNG-4331] Add new mojo annotation @requiresDependencyCollection to grab dependency tree without files  <p>If plugin discovery is reactor aware, plugins that are part of a reactor build and are used to aid the build<br/>
+can be used in one go. Else first the plugin should be installed, and then the rest of the project can<br/>
+be built.</p>
+
+<p>But mainly this aids in integration testing for plugins: the maven-it-plugin in sandbox can t add the current plugin<br/>
++ artifact to the lifecycle without making some methods public. If the plugin were to be discovered using the reactor,<br/>
+those methods can remain private.</p> <p>See thread <a href= http://markmail.org/message/ui2eywpqux4zi74f  class= external-link  rel= nofollow >Add new mojo annotation @requiresDependencyCollection</a> for details.</p> 

@@ -1,0 +1,3 @@
+[MNG-768] finish offline mode  <p> discussion in maven-components/maven-core/src/site/apt/offline-mode.apt.</p>
+
+<p>Need to find a good way to propagate the offline flag into the artifact resolver, or else provide a more centralized way of managing artifact resolution.</p> 

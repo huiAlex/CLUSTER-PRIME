@@ -1,0 +1,18 @@
+[MNG-3832] Allow wildcards in dependency exclusions  <p>I would like to be able to exclude all transitive dependencies from a certain dependencies.  This is especially useful when depending on an artifact with a classifier that may not have the same dependencies as the main artifact.  Currently the only way to do this is by excluding each dependency individually which requires significant effort and is prone to becoming out of date.  The following syntax is one possibility.</p>
+
+<p>Exclude all transitive dependencies</p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >&lt;exclusion&gt;
+  &lt;groupId&gt;*&lt;/groupId&gt;
+&lt;/exclusion&gt;
+</pre>
+</div></div>
+
+<p>Exclude transitive dependencies with the groupId  org.company </p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >&lt;exclusion&gt;
+  &lt;groupId&gt;org.company&lt;/groupId&gt;
+  &lt;artifactId&gt;*&lt;/artifactId&gt;
+&lt;/exclusion&gt;
+</pre>
+</div></div> 

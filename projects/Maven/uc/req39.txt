@@ -1,0 +1,1 @@
+[MNG-471] implement remaining lifecycle features <p><a href= http://docs.codehaus.org/display/MAVEN/Lifecycle  class= external-link  rel= nofollow >http://docs.codehaus.org/display/MAVEN/Lifecycle</a></p>

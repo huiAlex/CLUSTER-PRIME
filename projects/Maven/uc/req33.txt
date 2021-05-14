@@ -1,0 +1,9 @@
+[MNG-338] provide some hand holding for dependencies on non-distributable jars <p>We can create POMs for things like jdbc, jdo, etc, and just not house the JARs at ibiblio.</p>
+
+<p>An attempt to use them, when not present locally, should provide a sensible error message.</p>
+
+<p>We should provide a plugin that will install a file in the local repository, ie:</p>
+
+<p>m2 install:install -Dartifact=/path/to/jdbc-2.0.jar -DgroupId=jdbc -DartifactId=jdbc -Dversion=2.0</p>
+
+<p>(modify the install:install mojo to allow taking these parameters instead of a #project)</p>

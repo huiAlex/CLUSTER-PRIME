@@ -1,0 +1,20 @@
+[MNG-5230] Command line option to exclude modules from reactor  <p>Every now and then I want to exclude one or more modules from a rather large reactor build.<br/>
+One reason for this can be: The respective module has tests that take long time to execute and I know that I don t need to execute them.</p>
+
+<p>Introducing yet another profile for this is not desirable for various reasons.</p>
+
+<p>So, something like an opposite to -pl would come in handy. Let s say  -el  for  exclude list .</p>
+
+<p>Example:</p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >root
+  + module a
+    + module a1
+    + module a2
+  + module b
+    + module b1
+  + module c
+</pre>
+</div></div>
+
+<p>Calling <em>mvn -el a1,c</em> would build all modules execpt a1 and c.</p> 

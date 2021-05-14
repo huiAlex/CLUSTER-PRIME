@@ -1,0 +1,1 @@
+[MNG-505] implement version range support in the artifact collector  <p><a href= http://docs.codehaus.org/display/MAVEN/Dependency+Mediation+and+Conflict+Resolution  class= external-link  rel= nofollow >http://docs.codehaus.org/display/MAVEN/Dependency+Mediation+and+Conflict+Resolution</a></p> 

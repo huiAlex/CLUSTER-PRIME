@@ -1,0 +1,1 @@
+[MNG-163] It should be possible to add new resource to the resources list <p>For mojos generating resources (like the modello:jpox-jdo-mapping goal does) it would be useful to be able to add the generated output to the list of resources like the code generating mojos can.</p>

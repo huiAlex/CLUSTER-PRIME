@@ -1,0 +1,4 @@
+[MNG-4936] Allow to better monitor and adjust a Maven build during CI <p>For improved integration into CI, Maven should<br/>
+a) have a means to load an extension (let s call it spy) via CLI<br/>
+b) enable this spy extension to adjust major parameters of the build like the settings<br/>
+c) provide this spy extension with detailed events about the execution</p>

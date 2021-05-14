@@ -1,0 +1,1 @@
+[MNG-404] add a required-maven-version to the POM  <p>add the ability to fail if not &gt;= a specified version of Maven (plugin requirement as well?).</p> 
