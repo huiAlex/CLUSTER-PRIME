@@ -1,0 +1,19 @@
+[ISPN-3950] Deploy user-code to Infinispan server [ISPN-5131] Deploy custom cache store to Infinispan Server  <p>Infinispan Server should allow deploying JARs which follow the standard Java service provider API.<br/>
+Support: groupers, listeners, map/reduce jobs, distexec jobs, interceptors, JPA entities, etc</p> <h2><a name= Overview ></a>Overview</h2>
+<p>Support the deployment and configuration of a custom cache store.</p>
+
+<h2><a name= ClientPerspective ></a>Client Perspective</h2>
+<p>The client will be able to deploy a custom Cache Store jar into Hotrod server (put it into $HOTROD_SERVER/standalone/deployments). The jar will need to contain one of the following service entries:</p>
+<ul>
+	<li>/META-INF/services/org.infinispan.persistence.spi.AdvancedCacheWriter</li>
+	<li>/META-INF/services/org.infinispan.persistence.spi.AdvancedCacheLoader</li>
+	<li>/META-INF/services/org.infinispan.persistence.spi.CacheLoader</li>
+	<li>/META-INF/services/org.infinispan.persistence.spi.CacheWriter</li>
+	<li>/META-INF/services/org.infinispan.persistence.spi.ExternalStore</li>
+	<li>/META-INF/services/org.infinispan.persistence.spi.AdvancedLoadWriteStore<br/>
+Those services might used later used in the configuration.</li>
+</ul>
+
+
+<h2><a name= Implementationoverview ></a>Implementation overview</h2>
+<p>Refer to the <a href= https://github.com/infinispan/infinispan/wiki/Custom-Cache-stores-(deployable)  class= external-link  rel= nofollow >Implementation details on Wiki page</a></p> 

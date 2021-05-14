@@ -1,0 +1,6 @@
+[ISPN-1430] AdvancedCache.addInterceptor() methods don t provide success/failure feedback <p>Problem:<br/>
+cache.getAdvancedCache().addInterceptorAfter(new ErrorInducingInterceptor(), NonTransactionalLockingInterceptor.class);<br/>
+if NonTransactionalLockingInterceptor doesn t exist in the chain then the method return silently without informing the user that it didn t succeed. This is not API friendly.</p>
+
+
+<p>Suggested solution: throw an exception to inform the user that his attempt is not correct. </p>

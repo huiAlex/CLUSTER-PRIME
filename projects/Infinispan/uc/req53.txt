@@ -1,0 +1,5 @@
+[ISPN-2420] Increment the topology id when a node leaves the cache  <p>We currently increment the topology id only when we  rebalance  the consistent hash (i.e. we add new owners). This allows us to to do some optimizations after a leave, like not forwarding commands (because there are no new owners).</p>
+
+<p>Unfortunately, it is not very intuitive, because it doesn t match how JGroups works, so it can cause bugs like <a href= https://issues.jboss.org/browse/ISPN-2417  title= Topology check in LocalTransaction.getCommitNodes() is wrong  class= issue-link  data-issue-key= ISPN-2417 ><del>ISPN-2417</del></a>.</p>
+
+<p>Additionally, it turns out there are many places where we care that a node left, so the code is more complex to handle this (e.g. TransactionTable.useStrictTopologyIdComparison()), or it is more slow for the common case when there is no leaver (e.g. LocalTransaction.getCommitNodes()).</p> 

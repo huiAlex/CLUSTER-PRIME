@@ -1,0 +1,6 @@
+[ISPN-4956] Task Management  <p>Task Management:</p>
+<ul class= alternate  type= square >
+	<li>running jobs metadata (type, start, subject, caches involved, status)</li>
+	<li>see running jobs and allow cancelling them</li>
+</ul>
+ 

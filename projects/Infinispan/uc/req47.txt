@@ -1,0 +1,6 @@
+[ISPN-3926] The Internal Cache Registry needs to be persistent  <p>Several improvements suggested by Sanne:</p>
+<ul class= alternate  type= square >
+	<li>protobuf schemas should be persisted, hotrod topology info and security cache should not</li>
+	<li>also for security I want to set lifetime properties</li>
+</ul>
+ 

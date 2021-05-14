@@ -1,0 +1,9 @@
+[ISPN-152] CacheManager to allow retrieving Configuration instances and defining configurations based on any existing config <p>Enhance CacheManager API so that we can define configurations based on named caches other than the default one and also a way to retrieve Configuration instances from CacheManager without starting the cache:</p>
+
+<p>So, redefine defineCache methods as:</p>
+
+<p>Configuration defineConfiguration(String configurationName, Configuration overrides) <br/>
+// registers and names a NEW configuration, based on the default cfg and the overrides passed in</p>
+
+<p>Configuration defineConfiguration(String configurationName, String templateName, Configuration overrides) <br/>
+// registers and names a NEW configuration, based on an existing, predefined configuration and the overrides passed in</p>

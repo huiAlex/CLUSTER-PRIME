@@ -1,0 +1,5 @@
+[ISPN-312] Ability to group data entries  <p>This is a spin-off from <a href= http://lists.jboss.org/pipermail/infinispan-dev/2009-December/001968.html  class= external-link  rel= nofollow >http://lists.jboss.org/pipermail/infinispan-dev/2009-December/001968.html</a>.</p>
+
+<p>The requested feature would allow distinct entries to be assigned to custom arbitrary groups. Later in time those groups could be flushed on demand without any knowledge of entry keys.</p>
+
+<p>This feature exists in other open source cache library, see: <a href= http://www.opensymphony.com/oscache/api/com/opensymphony/oscache/base/Cache.html  class= external-link  rel= nofollow >http://www.opensymphony.com/oscache/api/com/opensymphony/oscache/base/Cache.html</a></p> 

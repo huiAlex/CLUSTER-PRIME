@@ -1,0 +1,1 @@
+[ISPN-384] Implement topology headers in Hot Rod  <p>Implement Topology-Aware Client Topology Change headers as per: <a href= http://community.jboss.org/docs/DOC-14421  class= external-link  rel= nofollow >http://community.jboss.org/docs/DOC-14421</a></p> 

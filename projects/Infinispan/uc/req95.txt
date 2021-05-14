@@ -1,0 +1,67 @@
+[ISPN-1276] warn when using indexing but query module isn t present on classpath <p>It is possible to use indexing in the config xml:</p>
+
+<p/>
+<div id= syntaxplugin  class= syntaxplugin  style= border: 1px dashed #bbb; border-radius: 5px !important; overflow: auto; max-height: 30em; >
+<table cellspacing= 0  cellpadding= 0  border= 0  width= 100%  style= font-size: 1em; line-height: 1.4em !important; font-weight: normal; font-style: normal; color: black; >
+		<tbody >
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;  margin-top: 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >&lt;infinispan&gt;</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >    &lt;default&gt;</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >        &lt;invocationBatching enabled= true  /&gt;</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >        &lt;indexing enabled= true  indexLocalOnly= true &gt;</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >            &lt;properties&gt;</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >                &lt;property name= hibernate.search.default.directory_provider  value= ram  /&gt;</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >            &lt;/properties&gt;</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >        &lt;/indexing&gt;</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >    &lt;/default&gt;</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   margin-bottom: 10px;  width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >&lt;/infinispan&gt;
+</span></pre>
+			</td>
+		</tr>
+			</tbody>
+</table>
+</div>
+<p/>
+
+<p>but without query module + it s dependencies on the classpath.</p>
+
+<p>I d expect to be warned in such case...</p>
+
+<p>what happens is that LocalQueryInterceptor isn t added to the interceptor chain and indexing is not used, nothing is reported ...</p>

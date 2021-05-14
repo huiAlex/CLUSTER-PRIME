@@ -1,0 +1,3 @@
+[ISPN-1367] Make JBoss Marshalling class resolver configurable  <p>JBoss Marshalling s class resolver should be configurable in order to enable the following use case and to help with classloading in a modular environment:</p>
+
+<p>In an environment such as JBoss AS, where there is some sort of consistent identification of deployments across nodes (i.e. a deployment id) this SPI can be used to attach the deployment id to the serialized data, and then on deserialization used to locate the correct classloader to use</p> 

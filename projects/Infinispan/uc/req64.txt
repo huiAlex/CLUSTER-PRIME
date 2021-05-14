@@ -1,0 +1,9 @@
+[ISPN-5816] Implement an event logger for server  <p>Create an event logger so that the management interface can show events:</p>
+<ul class= alternate  type= square >
+	<li>7 day retention</li>
+	<li>Task execution</li>
+	<li>Cluster events (node join/leave, split/merge, rebalance start/stop, mass-indexer start/stop, server shutdown/start, remote site up/down)</li>
+	<li>Cache events (start, stop)</li>
+	<li>Security audit</li>
+</ul>
+ 

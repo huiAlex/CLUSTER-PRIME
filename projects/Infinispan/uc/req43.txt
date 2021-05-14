@@ -1,0 +1,1 @@
+[ISPN-1759] Throw an exception when using <hash > or <l1 > while configured in replicated, invalidated or local mode.  <p>Makes for more sane configurations.</p> 

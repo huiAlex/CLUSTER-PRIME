@@ -1,0 +1,1 @@
+[ISPN-2797] Support Query on Caches configured with INVALIDATION mode  <p>This is currently not supported as other nodes won t get a copy of the value, and are consequentially unable to scan annotations or recognize new services which need to be started.</p> 

@@ -1,0 +1,7 @@
+[ISPN-118] expose CacheManager to be accessible as an MBean <p><span class= error >&#91;Galder&#93;</span><br/>
+&gt;&gt;&gt; Couple methods, discussed in more detail at <a href= http://tinyurl.com/lq688t  class= external-link  rel= nofollow >http://tinyurl.com/lq688t</a> section 11.2<br/>
+&gt;&gt;&gt;<br/>
+&gt;&gt;&gt; 1) Use the CacheManager to create your cache; the CacheManager is available in JNDI at java:/CacheManager. See Section 11.2.1.<br/>
+&gt;&gt;&gt;<br/>
+&gt;&gt;&gt; 2) Use CacheJmxWrapperMBean and it s  cache  mbean attribute. Simplest way is to deploy it via a -service.xml. Section 5.4.2 of JBC 3.1 docs at <a href= http://tinyurl.com/m49qen  class= external-link  rel= nofollow >http://tinyurl.com/m49qen</a> has other methods.<br/>
+&gt;</p>

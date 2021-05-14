@@ -1,0 +1,18 @@
+[ISPN-1518] Log the Infinispan version information once <p>When running unit tests for a system that uses Infinispan, the log is filled with the following messages:</p>
+
+<p/>
+<div id= syntaxplugin  class= syntaxplugin  style= border: 1px dashed #bbb; border-radius: 5px !important; overflow: auto; max-height: 30em; >
+<table cellspacing= 0  cellpadding= 0  border= 0  width= 100%  style= font-size: 1em; line-height: 1.4em !important; font-weight: normal; font-style: normal; color: black; >
+		<tbody >
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;  margin-top: 10px;   margin-bottom: 10px;  width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >INFO ISPN000128: Infinispan version: Infinispan  Brahma  5.1.0.BETA4
+</span></pre>
+			</td>
+		</tr>
+			</tbody>
+</table>
+</div>
+<p/>
+
+<p>It looks like this may be logged each time an Infinispan cache manager is instantiated, but it would be really nice if this were done only once, perhaps in a static initializer for one of the classes. This would likely mean little change for production systems.</p>

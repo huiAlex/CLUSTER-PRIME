@@ -1,0 +1,119 @@
+[ISPN-4983] Public API for tracking completion of Infinispan work for a given user transaction  <p>When using Infinispan with user transactions, Infinispan will persist the changes to the cache store using a synchronization on the user transaction. This means the persistence operation begins when the user transaction has committed. However, components using Infinispan will likely want to know when Infinispan s work has completed for a given transaction.</p>
+
+<p>In Infinispan 6, it was possible to do this by registering a transaction listener:</p>
+
+<p/>
+<div id= syntaxplugin  class= syntaxplugin  style= border: 1px dashed #bbb; border-radius: 5px !important; overflow: auto; max-height: 30em; >
+<table cellspacing= 0  cellpadding= 0  border= 0  width= 100%  style= font-size: 1em; line-height: 1.4em !important; font-weight: normal; font-style: normal; color: black; >
+		<tbody >
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;  margin-top: 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >org.infinispan.Cache cache = ...</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >javax.transaction.Transaction activeTransaction = ...</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >org.infinispan.transaction.TransactionTable txnTable = cache.getAdvancedCache().getComponentRegistry().getComponent(TransactionTable.class);</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   margin-bottom: 10px;  width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >org.infinispan.transaction.xa.GlobalTransaction ispnTxID = txnTable.getLocalTransaction(activeTransaction).getGlobalTransaction();
+</span></pre>
+			</td>
+		</tr>
+			</tbody>
+</table>
+</div>
+<p/>
+
+<p>We d then use the <tt>GlobalTransaction</tt> in our <tt>@Listener</tt>:</p>
+
+<p/>
+<div id= syntaxplugin  class= syntaxplugin  style= border: 1px dashed #bbb; border-radius: 5px !important; overflow: auto; max-height: 30em; >
+<table cellspacing= 0  cellpadding= 0  border= 0  width= 100%  style= font-size: 1em; line-height: 1.4em !important; font-weight: normal; font-style: normal; color: black; >
+		<tbody >
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;  margin-top: 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >@Listener</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >class TxnListener {</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >    @TransactionCompleted</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >    public void transactionCompleted( TransactionCompletedEvent event ) {</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >        if ( !event.isOriginLocal() ) return;</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >        GlobalTransaction eventIspnTransaction = event.getGlobalTransaction();</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >        if (eventIspnTransaction == null || </span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >           ispnTxID.getId() != eventIspnTransaction.getId()) return;</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >        if ( !event.isSuccessful() ) {</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >            // do stuff</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >        } else {</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >            // do other stuff</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >        }</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   margin-bottom: 10px;  width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >}
+</span></pre>
+			</td>
+		</tr>
+			</tbody>
+</table>
+</div>
+<p/>
+
+<p>However, this is no longer possible in Infinispan 7 since these classes were moved to an  impl  package.</p>
+
+<p>Can we please have a public API to be notified when Infinispan has complete its work for a specific user transaction? It doesn t have to be like it was in 6, but ModeShape needs something (see <a href= https://issues.jboss.org/browse/MODE-2353  title= Concurrently creating child nodes for the same parent results in node loss when using Wildfly  class= issue-link  data-issue-key= MODE-2353 ><del>MODE-2353</del></a> for details).</p> 

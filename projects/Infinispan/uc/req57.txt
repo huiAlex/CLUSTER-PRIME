@@ -1,0 +1,14 @@
+[ISPN-1967] Expose CacheView string via JMX  <p>The JGroups view and CacheView differs and this causes trouble finding out what state the CacheView is in during elasticity/reslience tests.</p>
+
+<p>My test controller is driven by JGroups view, there was this particular case where this lead to test failure, or better said wrongly controlled test.</p>
+
+<p>After node0002 was killed in view 7:<br/>
+<a href= http://www.qa.jboss.com/~mlinhard/hyperion/run53-elas-dist-basic/table.html  class= external-link  rel= nofollow >http://www.qa.jboss.com/~mlinhard/hyperion/run53-elas-dist-basic/table.html</a></p>
+
+<p>the controller saw JGroups view: <span class= error >&#91;node0003/default|5&#93;</span> <span class= error >&#91;node0003/default, node0004/default&#93;</span><br/>
+which maybe existed in JGroups layer but never in Infinispan - in infinispan there was partition </p>
+{node0003}
+<p> + </p>
+{node0004}
+
+<p>and therefore it went on with the test which lead to errors, among others <a href= https://issues.jboss.org/browse/ISPN-1965  title= Some entries not available during view change  class= issue-link  data-issue-key= ISPN-1965 ><del>ISPN-1965</del></a>, might be caused by this.</p> 

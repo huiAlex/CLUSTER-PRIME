@@ -1,0 +1,16 @@
+[ISPN-1453] Infinispan CLI  <p>Infinispan needs an official CLI tool with the following features:</p>
+
+<ul class= alternate  type= square >
+	<li>simple CRUD operations (get, put, delete)</li>
+	<li>queries (if the cache is indexed)</li>
+	<li>administrative tasks (eg. invoking JMX commands)</li>
+</ul>
+
+
+<p>Optional cool things:</p>
+
+<ul class= alternate  type= square >
+	<li>run map/reduce scripts ???</li>
+	<li>import/export to/from XML/CSV ???</li>
+</ul>
+ 

@@ -1,0 +1,10 @@
+[ISPN-2808] Make Infinispan use its own thread pool for sending messages in order to avoid thread deadlocks [ISPN-2849] Don t keep threads blocked when waiting for locks to be released  <ul class= alternate  type= square >
+	<li>when an OOB thread sends a sync request it blocks waiting on a sync in jgroups RequestCorrelator</li>
+	<li>it gets released by an another OOB thread when the remote node responds</li>
+</ul>
+
+
+<p>Now if all the OOB threads are blocked in sending, then there s no available OOB thread to unblock them even if responses from remote nodes have arrived - deadlock. In order to avoid this deadlock we can use a different thread pool for sending OOB messages.</p>
+
+<p>For a discussion around this please refer to: <a href= http://infinispan.markmail.org/search/#query:%20list%3Aorg.jboss.lists.infinispan-dev+page:1+mid:7buuwljp7i7fvnpe+state:results  class= external-link  rel= nofollow >http://infinispan.markmail.org/search/#query:%20list%3Aorg.jboss.lists.infinispan-dev+page:1+mid:7buuwljp7i7fvnpe+state:results</a> </p> <p>ATM if a tx2 waits on a lock to be released by tx1, the (incoming) tx2 thread is BLOCKED and taken out from the pool. A better way to implement this is by using a structure that would hold and order the depending transactions on the receiver correlated with the async execution API from JGroups 3.3.0, result being that tx2 would not BLOCK but return to the pool this (not maxing out the thread pool that executes commands).<br/>
+More about it in the  Async invocation section  of <a href= https://docspace.corp.redhat.com/docs/DOC-134411  class= external-link  rel= nofollow >https://docspace.corp.redhat.com/docs/DOC-134411</a> </p> 

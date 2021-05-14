@@ -1,0 +1,60 @@
+[ISPN-1198] Cache entrySet,keySet and values operations ignoring expired entries <p>Cache s entrySet/keySet/values implementations do not take into account that entries might have expired, so the collections returned might contain key/value pairs that should be removed.</p>
+
+<p>This has the side effect of getBulk remote cache operation returning entries even after their lifespan ends. From Martin:</p>
+
+<blockquote><p>This is related to a getBulk operation on an Infinispan HotRod client.</p>
+
+<p>Simple test snippet that fails ATM:</p>
+
+<p/>
+<div id= syntaxplugin  class= syntaxplugin  style= border: 1px dashed #bbb; border-radius: 5px !important; overflow: auto; max-height: 30em; >
+<table cellspacing= 0  cellpadding= 0  border= 0  width= 100%  style= font-size: 1em; line-height: 1.4em !important; font-weight: normal; font-style: normal; color: black; >
+		<tbody >
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;  margin-top: 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >Map&lt;String,String&gt; mapIn = new HashMap&lt;String,String&gt;() ;</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >Map&lt;String,String&gt; mapOut = new HashMap&lt;String,String&gt;() ;</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >mapOut.put( aKey ,  aValue );</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >mapOut.put( bKey ,  bValue );</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >remoteCache.putAll(mapOut, lifespanInSecs, TimeUnit.SECONDS);</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >sleepForSecs(lifespanInSecs) ;</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >mapIn = remoteCache.getBulk();</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   margin-bottom: 10px;  width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >assertTrue(mapIn.size() == 0);  //fails, entries are still there</span></pre>
+			</td>
+		</tr>
+			</tbody>
+</table>
+</div>
+<p/>
+
+<p>However, when I call remoteCache.get(&lt;key&gt;); for all the keys and then getBulk, the getBulk return empty map.</p>
+
+<p>So it seems the get operations cause the entries to be removed from the cache. Please implement this also for getBulk operation or reject it with an explanation.</p></blockquote>

@@ -1,0 +1,19 @@
+[ISPN-1239] Graceful shutdown should be supported [ISPN-3140] JMX operation to suppress state transfer [ISPN-3351] Controlled cluster shutdown with data restore from persistent storage  <p>Currently, killing any node will result in a rehash.  A mechanism for clean shutdown should also be supported, so that a rehash is <b>not</b> triggered.  Useful when the entire cluster is being intentionally brought down.</p>
+
+<p>Need to think about how we do this; perhaps a LEAVE message that will prevent nodes triggering a rehash when a subsequent view change is detected.  This could be done programmatically via a <tt>clean</tt> parameter to <tt>stop()</tt>, but we should explore alternatives here.</p> <p>This feature request is to expose a JMX operation on each node, to suppress state transfer for a period of time.  This flag would be <tt>false</tt> by default.</p>
+
+<p>The use case of this flag would be to ease bringing down (and up) a cluster for maintenance work.  A typical workflow would be:</p>
+
+<p>1) Shut down application requests to the data grid<br/>
+2) Suppress state transfer on all nodes via JMX<br/>
+3) Bring down all nodes<br/>
+4) Perform maintenance work<br/>
+5) Bring up nodes, one at a time.  As each node comes up, disable state transfer for the node via JMX.<br/>
+6) Once all nodes are up, enable state transfer for each node again via JMX<br/>
+7) Allow application requests to reach the grid again.</p>
+
+<p>The purpose of this is to allow smooth and fast shutdown and startup, remove the risk of OOM errors (when bringing a grid down).</p>
+
+<p>This is a small but useful subset of full manual state transfer as defined in <a href= https://issues.jboss.org/browse/ISPN-1394  title= Investigate possibility of doing manual rehashing  class= issue-link  data-issue-key= ISPN-1394 ><del>ISPN-1394</del></a>.</p> <p><a href= https://github.com/infinispan/infinispan/wiki/Graceful-shutdown-&amp;-restore  class= external-link  rel= nofollow >https://github.com/infinispan/infinispan/wiki/Graceful-shutdown-&amp;-restore</a></p>
+
+<p><a href= https://community.jboss.org/wiki/ControlledClusterShutdownWithDataRestoreFromPersistentStorage  class= external-link  rel= nofollow >https://community.jboss.org/wiki/ControlledClusterShutdownWithDataRestoreFromPersistentStorage</a></p> 

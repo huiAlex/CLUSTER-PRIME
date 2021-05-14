@@ -1,0 +1,5 @@
+[ISPN-1636] Have remoted tasks inject services via CDI before execution  <p>Second step if what was discussed on:<br/>
+<a href= http://infinispan.markmail.org/search/#query:+page:1+mid:3dqf7hvuabttkqli+state:results  class= external-link  rel= nofollow >http://infinispan.markmail.org/search/#query:+page:1+mid:3dqf7hvuabttkqli+state:results</a><br/>
+<a href= http://community.jboss.org/message/642300#642300  class= external-link  rel= nofollow >http://community.jboss.org/message/642300#642300</a></p>
+
+<p><a href= https://issues.jboss.org/browse/ISPN-1634  title= Provide references to Cache to distributed executor tasks and MapReduce tasks  class= issue-link  data-issue-key= ISPN-1634 ><del>ISPN-1634</del></a> should provide Cache references only, this one should provide anything the CDI container knows about as defined by injection points in the remoted tasks; injection should happen again on each node, avoiding serialization of the injected components.</p> 

@@ -1,0 +1,1 @@
+[ISPN-134] Update ManagedAttribute annotations to expose more information for use by JOPR <p>Details are in the mail list thread.</p>

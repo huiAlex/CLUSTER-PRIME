@@ -1,0 +1,8 @@
+[ISPN-3051] Allow configuring the number of segments per node  <p>This should allow for the following use cases:</p>
+<ul class= alternate  type= square >
+	<li>a node to take more load</li>
+	<li>a node to take no load</li>
+</ul>
+
+
+<p>A simple way for specifying this would be to configure a load factor per node, e.g. more powerful machine would be 2*x and that would mean that it would take twice the load of an  ordinary  machine in the cluster.</p> 

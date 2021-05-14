@@ -1,0 +1,1 @@
+[ISPN-1565] Allow configuration of Hot Rod client connection timeout <p>Currently it s only possible to specify socket timeout that applies for reading from the socket.</p>

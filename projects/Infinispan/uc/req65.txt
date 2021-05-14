@@ -1,0 +1,6 @@
+[ISPN-694] Create expiration notification for in-memory cache entries  <p>Create a CacheEntryExpired notification and make EvictionManager send this notification when a cache entry is evicted because it is expired.<br/>
+Also mage sure the cache entry value is sent over in the event.</p>
+
+<p>CacheEntryEvicted notification should also send the entry value in the event.</p>
+
+ 

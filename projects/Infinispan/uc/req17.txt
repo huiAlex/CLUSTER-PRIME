@@ -1,0 +1,6 @@
+[ISPN-3981] Enhance grouping API to support group manipulation methods  <p>The following methods:</p>
+<ul class= alternate  type= square >
+	<li>getGroup(goup): Map&lt;K,V&gt;</li>
+	<li>removeGroup(groupId);</li>
+</ul>
+ 

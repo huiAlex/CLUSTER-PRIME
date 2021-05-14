@@ -1,0 +1,1 @@
+[ISPN-1005] Update SerializableXid.toString to clone JBossTM s Xid.toString  <p>This is in order to support better integration between Infinispan s recovery support and JBossTM by making log-reading easier: XID is logged by both JBossTM and Infinispan s recovery.</p>

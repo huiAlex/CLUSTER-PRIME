@@ -1,0 +1,4 @@
+[ISPN-1075] Configuration.getName does not work for programmatically defined caches <p>String aName =  aName ;<br/>
+Configuration configuration = cacheManager.defineConfiguration(aName, configurationOverride);<br/>
+Cache c = cacheManager.getCache(aName);<br/>
+assertEquals(c.getConfiguration().getName(), aName); // this fails!!</p>

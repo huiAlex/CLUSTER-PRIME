@@ -1,0 +1,15 @@
+[ISPN-353] Add a single shell script to handle cache server startup  <p>Rather than having separate startup scripts for memcached and hotrod, a single script should be used, which would take in a  protocol  parameter to determine which server module to start.</p>
+
+<p>From my email to infinispan-dev:</p>
+
+<p> I notice you have a memcached.sh script to start the memcached server.  I believe this should be something like startServer.sh, given that we are not actually starting memcached?  <img class= emoticon  src= https://issues.jboss.org/images/icons/emoticons/wink.png  height= 16  width= 16  align= absmiddle  alt=   border= 0 /></p>
+
+<p>And perhaps the script could be reused for HotRod as well ... passing in a flag to specify which protocol to speak, perhaps something like:</p>
+
+<p>  $ startServer.sh -p memcached</p>
+
+<p>or </p>
+
+<p> $ startServer.sh -p hotrod</p>
+
+<p>Perhaps org.infinispan.server.memcached.Main could be in the server/core module instead, and based on the protocol flag passed in, kick start the appropriate server?  WDYT? </p> 

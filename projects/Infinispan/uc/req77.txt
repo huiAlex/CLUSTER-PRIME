@@ -1,0 +1,27 @@
+[ISPN-5465] Replace the Hash function with a segment mapper  <p>Currently, we allow the user to customize the mapping of keys to CH segments with a custom <tt>Hash</tt> function. But the Hash function doesn t give the user direct control over where a key is mapped, the ultimate location depends on the CH implementation. The CH implementation is also customizable, but it s much harder for the user to get right.</p>
+
+<p>We should replace the Hash with something like this:</p>
+
+<p/>
+<div id= syntaxplugin  class= syntaxplugin  style= border: 1px dashed #bbb; border-radius: 5px !important; overflow: auto; max-height: 30em; >
+<table cellspacing= 0  cellpadding= 0  border= 0  width= 100%  style= font-size: 1em; line-height: 1.4em !important; font-weight: normal; font-style: normal; color: black; >
+		<tbody >
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;  margin-top: 10px;   width: auto; padding: 0; ><span style= color: #006699; font-weight: bold; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >public</span><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; > </span><span style= color: #006699; font-weight: bold; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >interface</span><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; > SegmentMapper {</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   margin-bottom: 10px;  width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >   </span><span style= color: #006699; font-weight: bold; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >public</span><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; > </span><span style= color: #006699; font-weight: bold; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >int</span><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; > getSegment(Object key, </span><span style= color: #006699; font-weight: bold; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >int</span><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; > numSegments);
+</span></pre>
+			</td>
+		</tr>
+			</tbody>
+</table>
+</div>
+<p/>
+
+<p>This should also be easier to implement than the <tt>Grouper</tt> interface we have now, when the user only needs co-location and doesn t need additional grouping features like <tt>cache.getGroup(name)</tt>.</p>
+
+<p>I think this should also help internally, e.g. to replace the <tt>GroupingConsistentHash</tt> that needs to be re-created on every topology update with a constant <tt>SegmentMapper</tt> wrapper. It might also help to compute the segment of a key only once and save it in the context, instead of computing it every time we need to know the location of a key.</p> 

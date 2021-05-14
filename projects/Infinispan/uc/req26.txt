@@ -1,0 +1,13 @@
+[ISPN-6866] OffHeap Data Container  <p>We want to be able to allocate data off-heap.<br/>
+Requirements / ideas:</p>
+<ul>
+	<li>data should be stored in Direct ByteBuffers, or easily accessible as such so that integration with other types of I/O (clustering, persistence, server) can be done efficiently</li>
+	<li>consider both raw  byte[] storage (such as that performed by servers) and store as binary</li>
+	<li>allocator should be pluggable</li>
+	<li>out-of-the-box implementation should use Netty Buffers</li>
+	<li>type of allocation (heap or off-heap) should be per-cache</li>
+	<li>off-heap allocation configuration should be global (per-container) or possibly shared among multiple containers</li>
+	<li>optional off-heap allocation for keys</li>
+	<li>ability to monitor both global and per-cache memory usage</li>
+</ul>
+ 

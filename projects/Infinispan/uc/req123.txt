@@ -1,0 +1,1 @@
+[ISPN-1729] Add javadoc and xsd doc for custom interceptors <p>This was missing from the old config so is missing from the new.</p>

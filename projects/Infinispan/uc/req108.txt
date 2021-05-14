@@ -1,0 +1,7 @@
+[ISPN-1540] Refactor distribution interceptor <p>DistributionInterceptor, as it looks now is unnecessary complex. Before adding more functionality on top of it (i.e. <a href= https://issues.jboss.org/browse/ISPN-1539  title= Optimisation: reduce the number of RPCs when L1 is enabled (default)  class= issue-link  data-issue-key= ISPN-1539 ><del>ISPN-1539</del></a>) it should be refactored:</p>
+<ul class= alternate  type= square >
+	<li>extract L1 logic into a different interceptor</li>
+	<li>this would require moving the StateTransferLock logic into another interceptor as well</li>
+	<li>now that we have separation between tx and non-tx caches, we can extract the remaining logic into TransactionalDistributionInterceptor and NonTransactional...</li>
+</ul>
+

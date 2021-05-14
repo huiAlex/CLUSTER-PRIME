@@ -1,0 +1,5 @@
+[ISPN-1000] PUSH based rehashing  <p>Current rehash schemes are based on a PULL of state.  Joiners (and new owners after a leave) pull state from their neighbours.  This JIRA is to reimplement this as a PUSH based scheme, where all nodes detect new joiners (or leavers) and analyse their internal state and determine what needs to be pushed where.</p>
+
+<p>The scheme should be more robust, involving far fewer RPCs and coordination, and would work better for merge views detected when partitions heal.</p>
+
+<p>Based on Bela s prototype on <a href= https://github.com/belaban/infinispan/tree/rebalance-changes  class= external-link  rel= nofollow >https://github.com/belaban/infinispan/tree/rebalance-changes</a></p> 

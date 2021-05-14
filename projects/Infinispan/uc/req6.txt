@@ -1,0 +1,1 @@
+[ISPN-986] Dynamic Externalizer discovery  <p>Look into how JBMAR sends Externalizers can be sent via the wire so that receiving side does not need to know about Externalizers in advance.</p> 

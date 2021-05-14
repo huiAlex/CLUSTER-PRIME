@@ -1,0 +1,17 @@
+[ISPN-106] JdbcXXXCacheStore should honor cacheName <p>Creating multiple caches from a CacheManager configured with a JdbcXXXCacheStore results in unpredicted behaviour:<br/>
+After creating a CacheManger that persists its entries with a JdbcXXXCacheStore one will see strange behaviour like this:</p>
+
+<p>Cache fooCache = cacheManager.getCache( foo );<br/>
+Cache barCache = cacheManager.getCache( bar );</p>
+
+<p>// single put:<br/>
+fooCache.put(42,  Hello World );</p>
+
+<p>After restart :</p>
+
+<p>fooCache.contains(42); // true<br/>
+barCache.contains(42); // true !!!!</p>
+
+<p>To circumvent this behaviour the only solution is to create one CacheStore per Cache. So one migth end up using a lot of different CacheManagers.</p>
+
+<p>The best solution IMHO would be to add sopport for a  cacheName  column to  TableManipulation . So different caches could share the same table.</p>

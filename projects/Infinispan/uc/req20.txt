@@ -1,0 +1,1 @@
+[ISPN-4911] Add MassIndexer operation to server  <p>We should expose the MassIndexer through the DMR</p> 

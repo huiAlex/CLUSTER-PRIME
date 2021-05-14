@@ -1,0 +1,18 @@
+[ISPN-1642] Cache loading on remote nodes can be optimised away in certain conditions [ISPN-244] Enable external user/framework defined Externalizers  <p>See this discussion thread for more details: <a href= http://lists.jboss.org/pipermail/infinispan-dev/2011-December/009737.html  class= external-link  rel= nofollow >http://lists.jboss.org/pipermail/infinispan-dev/2011-December/009737.html</a></p> <p>Create an internal magic number (i.e. -1 or 255) for user defined externalizers. This is done to avoid users using our number space.</p>
+
+<p>So, internally: &lt;magic_number&gt; &lt;stream&gt;<br/>
+Users: &lt;magic_number&gt;&lt;user defined magic number (int)&gt; &lt;stream&gt;</p>
+
+<p>Mandate unsigned ints so that we can optimise by sending them as variable lenght<br/>
+Internal frameworks could use high enough numbers for example up to 2 bytes: 5000, 7000, 20000<br/>
+1 byte: 128<br/>
+2 bytes: 32767<br/>
+3 bytes: ...</p>
+
+<p>GlobalConfiguration.registerMarshallable(Class type, Externalizer ext, int id);</p>
+
+<p>Maybe CacheManager better?</p>
+
+<p>CacheManager.registerMarshallable(Class type, Externalizer ext, int id);</p>
+
+<p>Future improvement, maybe generate ids automatically for user defined classes?</p> 

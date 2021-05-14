@@ -1,0 +1,7 @@
+[ISPN-1342] Support for Near-Cache Pattern <p>Please create some support for near-cache pattern for distributed cache. Some detailed description could be found in Oracle Coherence documentation <a href= http://download.oracle.com/docs/cd/E13924_01/coh.340/e13819/nearcache.htm  class= external-link  rel= nofollow >http://download.oracle.com/docs/cd/E13924_01/coh.340/e13819/nearcache.htm</a>  or in Cameron Purdy presentation <a href= http://frech.info/themen/CameronPurdy-DistributedCachingEssentialLessons.pdf  class= external-link  rel= nofollow >http://frech.info/themen/CameronPurdy-DistributedCachingEssentialLessons.pdf</a></p>
+
+<p>It is based on combination of L1 caching in local JVM of application with combination of L2 cache based on distributed cache cluster on other servers. I tried to implement this myself, but HotRod does not support Client-side listeners (The UnsupportedOperationException is thrown).  It could be cool, if I could register some kind of eviction listener on client side and use it for invalidation of records in local cache based on event from remote distributed cache (L2). </p>
+
+<p>Some kind of workaround was described in <a href= http://community.jboss.org/thread/166993  class= external-link  rel= nofollow >http://community.jboss.org/thread/166993</a> :  We don t have L1s yet, but you could implement Cache Listeners on the server side and use JMS to notify your clients and build an L1 that way. </p>
+
+<p>Thanks for so great cache like infinispan is. </p>

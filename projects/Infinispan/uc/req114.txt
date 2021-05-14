@@ -1,0 +1,4 @@
+[ISPN-160] Add set/get ops for TransactionManagerLookup <p>Add the following two methods to Configuration in order to enable injection of transaction manager lookup instances to which parameters must be passed and hence, instantiation via reflection won t work:</p>
+
+<p>public void setTransactionManagerLookup(TransactionManagerLookup transactionManagerLookup)<br/>
+public TransactionManagerLookup getTransactionManagerLookup()</p>

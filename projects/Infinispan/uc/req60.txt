@@ -1,0 +1,1 @@
+[ISPN-730] A DefaultSharedExecutorFactory is needed  <p>... which uses a common executor for all caches in a cache manager.  This should be the default executor factory used, to prevent multiple eviction threads, etc., one for each cache in a cache manager.</p> 

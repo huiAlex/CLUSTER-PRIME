@@ -1,0 +1,1 @@
+[ISPN-1733] UnsafeConfiguration.unreliableReturnValues missing javadoc and xsddoc <p>This is missing on both the UnsafeConfiguration, UnsafeConfigurationBuilder and the xml xsd attribute.</p>

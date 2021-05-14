@@ -1,0 +1,3 @@
+[ISPN-5013] Server-side scripting using JSR-223 (javax.script)  <p>Implement a scripting manager which stores custom scripts in a dedicated cache. These scripts will be invoked with a user-specified binding (i.e. a set of named parameters).<br/>
+This component should support all known  code  extension points: simple, tasks, distexec, map/reduce, listeners, etc.<br/>
+The script type should be supported by the available JSR-223 scripting engines</p> 

@@ -1,0 +1,1 @@
+[ISPN-712] GET and HEAD requests on non-existent caches or keys should return a 404 error rather than a 500 error  <p>To be closer in line with REST standards</p> 

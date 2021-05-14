@@ -1,0 +1,14 @@
+[ISPN-166]  Immutables should be optimised for more set implementations <p>Unknown set types go through a lot of scanning - often involving reflection - before a simple copy constructor is used. These include the commonly used:</p>
+
+<p>ConcurrentHashMap$KeySet<br/>
+ConcurrentHashMap$EntrySet<br/>
+FastCopyHashMap$KeySet<br/>
+FastCopyHashMap$EntrySet<br/>
+Collections$EmptySet<br/>
+Collections$SingletonSet<br/>
+Collections$EmptyList<br/>
+Collections$SingletonList<br/>
+Collections$EmptyMap<br/>
+Collections$SingletonMap</p>
+
+<p>these should be treated accordingly to avoid reflection calls.</p>

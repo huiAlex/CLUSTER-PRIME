@@ -1,0 +1,5 @@
+[ISPN-1080] Investigate and document XA recovery integration with JBossTS <p>Reading the JBossTS recovery documentation<span class= error >&#91;1&#93;</span>, the recovery process should be able to pull recovery info from ISPN s XAResource implementation by calling .recover(). The issue is that this method needs to be called in the same process where ISPN node leaves and ATM its not possible to invoke it from a different process.</p>
+
+<p>This documentation would also be useful for users that want to set up/play with transaction recovery in general.</p>
+
+<p><span class= error >&#91;1&#93;</span> <a href= http://docs.redhat.com/docs/en-US/JBoss_Enterprise_Application_Platform/4.3/html-single/JBoss_Transactions_Failure_Recovery_Guide/index.html  class= external-link  rel= nofollow >http://docs.redhat.com/docs/en-US/JBoss_Enterprise_Application_Platform/4.3/html-single/JBoss_Transactions_Failure_Recovery_Guide/index.html</a></p>

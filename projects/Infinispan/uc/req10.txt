@@ -1,0 +1,12 @@
+[ISPN-1189] config schema - clustering mode should validate format of the string  <p>currently the schema for the clustering mode says it s a string and<br/>
+the mode is decided by first letter of the string. this means that any garbage starting with the correct letter may lead to use of a specific mode e.g.:</p>
+
+<p>lasjadgadfg -&gt; local<br/>
+rhdbhgh -&gt; replication<br/>
+dfghbmjfgh -&gt; distribution<br/>
+IlkHhdf -&gt; invalidation</p>
+
+<p>what about forcing only the documented values<br/>
+ For distribution, set mode to either  d ,  dist  or  distribution . For replication, use either  r ,  repl  or  replication . Finally, for invalidation,  i ,  inv  or  invalidation . <br/>
++ LOCAL</p>
+ 

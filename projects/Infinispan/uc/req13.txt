@@ -1,0 +1,12 @@
+[ISPN-6919] Improve non-tx writes (triangle)  <p>The current algorithm has 4 messages in the network (worst case) happended sequentially:<br/>
+1: originator =&gt; primary owner<br/>
+2: primary owner =&gt; backups<br/>
+3: backups =&gt; primary owner (ack)<br/>
+4: primary owner =&gt; originator (reply)</p>
+
+<p>The algorithm can be improved to the following:<br/>
+1: originator =&gt; primary owner<br/>
+2: primary owner =&gt; backups &amp; primary owner =&gt; originator (parallel)<br/>
+3: backups =&gt; originator &amp; backups =&gt; primary owners (acks)</p>
+
+<p>The main flow would be: originator =&gt; primary =&gt; backups =&gt; originator (&lt;= there is the triangle <img class= emoticon  src= https://issues.jboss.org/images/icons/emoticons/smile.png  height= 16  width= 16  align= absmiddle  alt=   border= 0 /> )</p> 

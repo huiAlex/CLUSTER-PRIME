@@ -1,0 +1,6 @@
+[ISPN-1331] Log something about auto discovered modules and extensions <p>It seems that when looking in the classpath for instances of <em>infinispan-module.properties</em> files, nothing is logged. No idea why it s not loading an extension.</p>
+
+<p>Also specific modules should log their registration happening:<br/>
+<em>org.infinispan.tree.LifecycleCallbacks</em> should mention that it s being enabled.</p>
+
+<p>(when registration of such a module doesn t happen, people experience misleading errors)</p>

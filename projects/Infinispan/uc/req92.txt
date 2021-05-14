@@ -1,0 +1,3 @@
+[ISPN-1158] Passivation without Eviction is an invalid configuration and should log a warning <p>It needs to be verified whether Passivation without eviction does make sense.<br/>
+We should display warning that this is not a good configuration if not.<br/>
+cache store probably won t get used at all in that case.</p>

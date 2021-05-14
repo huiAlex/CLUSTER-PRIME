@@ -1,0 +1,9 @@
+[ISPN-2357] New coordinator installs old CH containing crashed members  <p>After merging the round of pull requests today (including <a href= https://issues.jboss.org/browse/ISPN-2349  title= If the coordinator leaves while rebalancing is in progress, the new coordinator doesn&#39;t finish rebalancing  class= issue-link  data-issue-key= ISPN-2349 ><del>ISPN-2349</del></a>), there still is an issue where a killed node can appear in the CH even after JGroups passes up the new view.  This appears to happen when the old coordinator was killed.</p>
+
+<p>Obviously, if the CH contains the old member, writes that map to the segments previously owned by the dead node will fail.</p>
+
+<p>Here are ISPN trace logs.  You are looking for erm-cluster.</p>
+
+<p><a href= http://dl.dropbox.com/u/50401510/5.2.0.ALPHA4/relay2/10.30.12.83/server.log.gz  class= external-link  rel= nofollow >http://dl.dropbox.com/u/50401510/5.2.0.ALPHA4/relay2/10.30.12.83/server.log.gz</a> (phl-dg1)<br/>
+<a href= http://dl.dropbox.com/u/50401510/5.2.0.ALPHA4/relay2/10.30.12.84/server.log.gz  class= external-link  rel= nofollow >http://dl.dropbox.com/u/50401510/5.2.0.ALPHA4/relay2/10.30.12.84/server.log.gz</a> (phl-dg2)<br/>
+<a href= http://dl.dropbox.com/u/50401510/5.2.0.ALPHA4/relay2/10.30.12.83/server.log.gz  class= external-link  rel= nofollow >http://dl.dropbox.com/u/50401510/5.2.0.ALPHA4/relay2/10.30.12.83/server.log.gz</a> (phl-dg3, the node that was killed)</p> 

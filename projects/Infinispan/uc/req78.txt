@@ -1,0 +1,3 @@
+[ISPN-3477] Make storeAsBinary not keep both the object and the byte[]   <p>more about it on this email thread: <a href= http://infinispan.markmail.org/thread/nrua3ssqprj34ang  class= external-link  rel= nofollow >http://infinispan.markmail.org/thread/nrua3ssqprj34ang</a></p>
+
+<p>This also means that the Cache.compact will be dropped</p> 
