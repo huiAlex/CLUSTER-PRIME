@@ -1,0 +1,9 @@
+[GROOVY-3072] Annotation for making  new  statements cleaner <p>This jira is to document the fact that an annotation has been written. Further discussion:</p>
+
+<p><a href= http://markmail.org/message/emmaxk3sccbi6krr  class= external-link  rel= nofollow >http://markmail.org/message/emmaxk3sccbi6krr</a></p>
+
+<p>There is still debate over whether this should move to a contrib area. </p>
+
+<p>This issue should be updated if such a change is made.</p>
+
+<p>Cheers, Paul.</p>

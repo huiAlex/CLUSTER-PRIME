@@ -1,0 +1,14 @@
+[GROOVY-1828] GDK: Add eachDirMatch and eachDirRecurse on File <p>on File the GDK has following methods</p>
+
+<p>void eachDir(closure)<br/>
+void eachFile(closure)<br/>
+void eachFileMatch(filter, closure)<br/>
+void eachFileRecurse(closure)</p>
+
+<p>for coherence it would be good to have:</p>
+
+<p>void eachDirMatch(filter, closure)<br/>
+void eachDirRecurse(closure) </p>
+
+<p>See discussion in dev mailing list:<br/>
+<a href= http://www.nabble.com/Adding-eachDirMatch-and-eachDirRecurse--tf3473673.html#a9694265  class= external-link  rel= nofollow >http://www.nabble.com/Adding-eachDirMatch-and-eachDirRecurse--tf3473673.html#a9694265</a></p>

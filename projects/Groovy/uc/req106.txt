@@ -1,0 +1,10 @@
+[GROOVY-5682] Add clone or copy constructor to XML Node <p>When retrieving an node from an XML there is no easy way to clone this node for further processing without changing the original XML.</p>
+
+<p>Currently I used a workaround:</p>
+
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >def clonedNode = <span class= code-keyword >new</span> XmlParser().parseText( XmlUtil.serialize( xmlNode ) )
+</pre>
+</div></div>
+
+<p>It would be a lot easier if the Node object have a copy constructor or clone would be supported.</p>

@@ -1,0 +1,5 @@
+[GROOVY-4205] Groovy should have a DGM#capitalize(String) method <p>It would be useful to support this:</p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java ><span class= code-keyword >assert</span>  hello .capitalize() ==  Hello 
+</pre>
+</div></div>

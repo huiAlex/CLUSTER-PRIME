@@ -1,0 +1,3 @@
+[GROOVY-4644] JSON support: provide a parser and a builder for JSON content <p>Provide a built-in slurper and builder for parsing and creating JSON payloads.<br/>
+This issue was initially triggered by the discussions around GEP-7, for adding JSON support to Groovy:<br/>
+<a href= http://docs.codehaus.org/display/GroovyJSR/GEP+7+-+JSON+Support  class= external-link  rel= nofollow >http://docs.codehaus.org/display/GroovyJSR/GEP+7+-+JSON+Support</a></p>

@@ -1,0 +1,14 @@
+[GROOVY-2131] Map implementation that fires PropertyChangeEvents <p>ObservableMap will fire PropertyChangeEvents when put() and putAll() are called on it.<br/>
+It will work as a decorator for other Maps but if none is passed as an argument it will wrap a HashMap.<br/>
+Jochen suggested that a closure may optionally be used to discriminate which property may fire and event when its value changes, this is useful for constructing observable Expandos with the following code</p>
+
+<p>// will filter out all methods added to the Expando<br/>
+def bean = new Expando( new ObservableMap( $!(it instanceof Closure)} ) ) <br/>
+bean.lang =  Java  // will not trigger because previous value was null<br/>
+bean.lang =  Groovy  // will trigger because previousValue != newValue<br/>
+bean.callMe = {  hello $</p>
+{it}
+<p>  }  // will not trigger because value is a Closure<br/>
+bean.callMe = </p>
+{  again $it  }
+<p>  // idem, even if value did changed</p>

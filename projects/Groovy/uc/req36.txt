@@ -1,0 +1,13 @@
+[GROOVY-2120] Groovy should have a transpose() method <p>Groovy should have a transpose method like:</p>
+
+<p>Ruby s transpose() method on arrays<br/>
+Python s zip() method</p>
+
+<p>expected behaviour:</p>
+
+<p>        assert [<span class= error >&#91;&#39;a&#39;, &#39;b&#39;&#93;</span>, <span class= error >&#91;1, 2, 3&#93;</span>].transpose() == [<span class= error >&#91;&#39;a&#39;, 1&#93;</span>, <span class= error >&#91;&#39;b&#39;, 2&#93;</span>]<br/>
+        assert transpose(<span class= error >&#91;&#39;a&#39;, &#39;b&#39;&#93;</span>, <span class= error >&#91;1, 2, 3&#93;</span>) == [<span class= error >&#91;&#39;a&#39;, 1&#93;</span>, <span class= error >&#91;&#39;b&#39;, 2&#93;</span>]<br/>
+        assert transpose(<span class= error >&#91;1, 2, 3&#93;</span>, <span class= error >&#91;4, 5, 6&#93;</span>) == [<span class= error >&#91;1, 4&#93;</span>, <span class= error >&#91;2, 5&#93;</span>, <span class= error >&#91;3, 6&#93;</span>]<br/>
+        assert transpose(<span class= error >&#91;1, 2, 3&#93;</span>, <span class= error >&#91;4, 5&#93;</span>, <span class= error >&#91;9&#93;</span>, <span class= error >&#91;6, 7, 8&#93;</span>) == [<span class= error >&#91;1, 4, 9, 6&#93;</span>]<br/>
+        assert transpose(<span class= error >&#91;1, 2, 3&#93;</span>) == [<span class= error >&#91;1&#93;</span>, <span class= error >&#91;2&#93;</span>, <span class= error >&#91;3&#93;</span>]<br/>
+        assert transpose([]) == []</p>

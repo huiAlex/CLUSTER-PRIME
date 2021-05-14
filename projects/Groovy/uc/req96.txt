@@ -1,0 +1,28 @@
+[GROOVY-4885] groupBy with a list or an array of closures as it s parameter for nested grouping <p>As described in a thread in the groovy user list here:</p>
+
+<p><a href= http://groovy.329449.n5.nabble.com/a-possibly-useful-collection-method-tp4428105p4428105.html  class= external-link  rel= nofollow >http://groovy.329449.n5.nabble.com/a-possibly-useful-collection-method-tp4428105p4428105.html</a></p>
+
+<p>An implementation of <tt>groupBy</tt> that receives a list or an array of closures as criteria for grouping would be useful for making nested groupings.</p>
+
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >def grouped = [
+    [aa: 11, bb: 22, cc: 33],
+    [aa: 22, bb: 22, cc: 44],
+    [aa: 11, bb: 22, cc: 55],
+    [aa: 22, bb: 33, cc: 66],
+    [aa: 33, bb: 44, cc: 77]
+].groupBy({ it.aa }, { it.bb })
+
+def expected = [
+    11:[22:[[aa:11, bb:22, cc:33], [aa:11, bb:22, cc:55]]],
+    22:[22:[[aa:22, bb:22, cc:44]], 33:[[aa:22, bb:33, cc:66]]],
+    33:[44:[[aa:33, bb:44, cc:77]]]
+]
+
+<span class= code-keyword >assert</span> grouped[11][22] == [[aa:11, bb:22, cc:33], [aa:11, bb:22, cc:55]]
+<span class= code-keyword >assert</span> grouped[22][33] == [[aa:22, bb:33, cc:66]]
+<span class= code-keyword >assert</span> grouped[11][99] == <span class= code-keyword >null</span>
+</pre>
+</div></div>
+
+<p><tt>groupBy</tt> with one closure criterion would behave like the current implementation of <tt>groupBy</tt>.</p>

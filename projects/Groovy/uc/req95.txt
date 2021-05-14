@@ -1,0 +1,7 @@
+[GROOVY-486] add new URL.eachLine() method for working with URLs like File objects <p>similarly we may want a URL.asWritable() like File too as well as</p>
+
+<p>URL.getText()<br/>
+URL.eachByte()<br/>
+URL.withReader()</p>
+
+<p>etc</p>

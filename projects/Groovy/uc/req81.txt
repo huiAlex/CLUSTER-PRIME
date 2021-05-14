@@ -1,0 +1,19 @@
+[GROOVY-4322] Support for Closure composition <p>It would be useful to support something like F# s compose  &gt;&gt;  operator for Closures, e.g.:</p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >def twice = { a -&gt; a * 2 }
+def inc = { b -&gt; b + 1 }
+def f = inc &gt;&gt; twice
+def g = { x -&gt; twice(inc(x)) } <span class= code-comment >// longhand equivalent
+</span><span class= code-keyword >assert</span> f(10) == 22
+<span class= code-keyword >assert</span> g(10) == 22
+
+def string2char = { it.chars[0] }
+def p = <span class= code-object >Integer</span>.&amp;toHexString &gt;&gt; string2char &gt;&gt; <span class= code-object >Character</span>.&amp;toUpperCase
+<span class= code-keyword >assert</span> p(15) ==  F 
+
+def multiply = { a, b -&gt; a * b }
+def identity = { a -&gt; [a, a] }
+def sq = identity &gt;&gt; multiply
+<span class= code-keyword >assert</span> (1..5).collect{ sq(it) } == [1, 4, 9, 16, 25]
+</pre>
+</div></div>

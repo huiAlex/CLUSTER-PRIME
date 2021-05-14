@@ -1,0 +1,1 @@
+[GROOVY-4092] DGM methods to filter a collection in place without creating a new collection <p>See: <a href= http://old.nabble.com/No-way-to-filter-a-list--ts27776860.html  class= external-link  rel= nofollow >http://old.nabble.com/No-way-to-filter-a-list--ts27776860.html</a></p>

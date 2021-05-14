@@ -1,0 +1,5 @@
+[GROOVY-832] Support for eachObject, eachDir and runAfter (patch provided) <p>Please see the attached patchfile.txt for some new suggested features for the GroovyJDK.</p>
+
+<p>The provided test cases should demonstrate its features.  Please feel free to provide feedback.</p>
+
+<p>Hein</p>

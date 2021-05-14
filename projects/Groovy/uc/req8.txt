@@ -1,0 +1,18 @@
+[GROOVY-4865] Add a take method to Collections, Iterators, Arrays  <p>With regards to a thread in the groovy user list here:</p>
+
+<p><a href= http://groovy.329449.n5.nabble.com/How-to-access-first-10-characters-even-if-string-only-have-5-td4456146.html  class= external-link  rel= nofollow >http://groovy.329449.n5.nabble.com/How-to-access-first-10-characters-even-if-string-only-have-5-td4456146.html</a></p>
+
+<p>A <tt>take( n )</tt> method would be a really useful addition to the Groovy codebase</p>
+
+<p>It is assumed it will work similar to other languages, in that:</p>
+
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >def a = [ 1, 2, 3 ]
+
+<span class= code-keyword >assert</span> a.take( 0 ) == []
+<span class= code-keyword >assert</span> a.take( 1 ) == [ 1 ]
+<span class= code-keyword >assert</span> a.take( 4 ) == [ 1, 2, 3 ]
+</pre>
+</div></div>
+
+<p>The method should work for <tt>Collection</tt>, <tt>String</tt>, <tt>Map</tt> and lazily for <tt>Iterator</tt>, <tt>Reader</tt> and <tt>InputStream</tt></p> 

@@ -1,0 +1,28 @@
+[GROOVY-840] Provide a replaceAll() method on String to transform captured text through a closure 
+<p>Transform each captured group into something else:</p>
+
+<p>assert  2 4 6 8  ==  1 2 3 4 .replaceAll( <br class= atl-forced-newline  />p</p>
+{Digit}
+<p> ) </p>
+{ it * 2 }
+
+<p>With a new Groovy method on String:</p>
+
+<p>public static String replaceAll(String self, String regex, Closure<br/>
+closure) {<br/>
+    Matcher matcher = Pattern.compile(regex).matcher(self);<br/>
+    if (matcher.find()) {<br/>
+        matcher.reset();<br/>
+        StringBuffer sb = new StringBuffer();<br/>
+        while (matcher.find()) </p>
+{
+            String foundText = self.substring(matcher.start(0), matcher.end(0));
+            matcher.appendReplacement(sb, String.valueOf(closure.call( foundText )));
+        }
+<p>        matcher.appendTail(sb);<br/>
+        return sb.toString();<br/>
+    } else </p>
+{
+        return self;
+    }
+<p>}</p>

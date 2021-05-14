@@ -1,0 +1,8 @@
+[GROOVY-1007] List#indexOf(groovy.lang.Closure closure) and friends to groovy jdk <p>find(groovy.lang.Closure closure) and findAll(groovy.lang.Closure closure) methods are really useful. It would be also good to have</p>
+
+<p>List#indexOf(groovy.lang.Closure closure)<br/>
+List#indexOf(int startIndex, groovy.lang.Closure closure) // startIndex tells from which index to start looking<br/>
+int[] List#indicesOfAll(groovy.lang.Closure closure) // return type may also be a List&lt;Integer&gt; or whatever<br/>
+List#lastIndexOf(groovy.lang.Closure closure)</p>
+
+<p>  in the groovy jdk as it is sometimes important to know where the elements fullfilling the given condition are in the list.</p>

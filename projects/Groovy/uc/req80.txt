@@ -1,0 +1,6 @@
+[GROOVY-428] Socket and ServerSocket groovy methods <p>Mister Jamie McCrindle suggested we had some new groovy for sockets and server sockets.</p>
+
+<p>Socket.withStreams(Closure)<br/>
+ServerSocket.accept(Closure)</p>
+
+<p>Jamie, some more ideas of methods ?</p>

@@ -1,0 +1,2 @@
+[GROOVY-811] empty Map should evaluate to false in asBool() <p>&gt; - analogous to Collections, an empty Map should<br/>
+&gt;  evaluate to false.</p>

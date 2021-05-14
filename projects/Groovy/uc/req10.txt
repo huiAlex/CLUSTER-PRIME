@@ -1,0 +1,3 @@
+[GROOVY-4594] Project Coin binary literals  <p>The project coin proposal for binary literals can be found here <a href= http://mail.openjdk.java.net/pipermail/coin-dev/2009-April/001627.html  class= external-link  rel= nofollow >http://mail.openjdk.java.net/pipermail/coin-dev/2009-April/001627.html</a> </p>
+
+<p>attached a patch that allows for those literals and some internal changes to allow the compiler create the correct ints for it</p> 

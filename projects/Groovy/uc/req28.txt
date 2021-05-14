@@ -1,0 +1,55 @@
+[GROOVY-1746] Add default to Map <p>When working with Maps, there are two scenarios:</p>
+
+<ul class= alternate  type= square >
+	<li>You want a special default value if a key doesn t exist (ie. not  null )</li>
+	<li>You want to create a new object if a key doesn t exist</li>
+</ul>
+
+
+<p>Proposed syntax:</p>
+
+<p>def map = new HashMap (defaultValue: xxx )<br/>
+map.put ( x ,  a )<br/>
+assert map.x ==  a <br/>
+assert map.y ==  xxx </p>
+
+<p>map = <span class= error >&#91;:&#93;</span><br/>
+x = map.get ( y ) {<br/>
+     New $</p>
+{it} <br/>
+}<br/>
+assert x ==  New y <br/>
+assert map.size() == 1<br/>
+assert map.keys() = [  y  ]<br/>
+<br/>
+map = <span class= error >&#91;:&#93;</span> {<br/>
+     New ${it}
+<p> <br/>
+}<br/>
+x = map.y<br/>
+assert x ==  New y <br/>
+assert map.size() == 1<br/>
+assert map.keys() = [  y  ]</p>
+
+<p>Abstract: You can specify a constant value or a closure when creating a map and when getting values from it.</p>
+
+<p>If a key doesn t exist, the constant will be returned or the result of running the closure. The missing key is the parameter for the closure.</p>
+
+<p>Note: For checking if a key doesn t exist, it s not sufficient to check whether map.get() returns null because Maps can contain null values.</p>
+
+<p>Implementation note: I suggest to implement this using a wrapper DefaultValueMap which handles the default case. All methods but get() are simply forwarded to the wrapped Map. get() looks like this:</p>
+
+<p>	public Object get(Object key)</p>
+	{
+		if (!containsKey(key))
+			return defaultValue;
+		
+		return super.get(key);
+	}
+
+
+<p>Open questions:</p>
+
+<ul class= alternate  type= square >
+	<li>What happens when the closure returns null? Maybe the new key/value pair shouldn t be added in this case. Or do we want to add a new exception for this?</li>
+</ul>

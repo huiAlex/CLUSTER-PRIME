@@ -1,0 +1,3 @@
+[GROOVY-4522] Closure Trampoline <p>Add  trampoline  capabilities to closures, to avoid StackOverflowException when using closures with lots of recursive calls.</p>
+
+<p>Patch contributed by Václav.</p>

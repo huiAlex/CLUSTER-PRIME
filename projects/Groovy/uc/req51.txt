@@ -1,0 +1,5 @@
+[GROOVY-3066] Implement Date format GDK methods <p>GDK convenience methods to wrap SimpleDateFormat such as {{ new Date().format(  yyyy-MM-dd  )}}.  </p>
+
+<p>These should probably added for <tt>Calendar</tt> too.</p>
+
+<p>Would a complimentary  parse  method be appropriate?  </p>

@@ -1,0 +1,30 @@
+[GROOVY-3692] specify encoding for File s combinient methods (eachLine,..) <p>In File s some convenient methods like File#eachLine(), File#splitEachLine() and others, there is no way to specify the encoding for reading.</p>
+
+<p>For example, there is no  File#eachLine(String charSet, Closure c)  method.</p>
+
+<p>Of cource, we can write:</p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java ><span class= code-keyword >new</span> InputStreamReader(<span class= code-keyword >new</span> FileInputStream(<span class= code-keyword >new</span> File(<span class= code-quote > file_to_read.txt </span>)), charSet).eachLine {
+  ..
+}
+</pre>
+</div></div>
+<p>but this is not so groovy.</p>
+
+<p>My proposal is, to add encoding() method to java.io.File as a GDK enhancement method, which can be used like:</p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java ><span class= code-keyword >new</span> File(args[0]).encoding(<span class= code-quote > utf-8 </span>).eachLine {
+  println it
+}
+</pre>
+</div></div>
+
+<p>As reference, if write it by EMC, the definition of method encoding is like:</p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >File.metaClass.encoding = { cs -&gt;
+  <span class= code-keyword >new</span> InputStreamReader(<span class= code-keyword >new</span> FileInputStream(delegate), cs)
+}
+</pre>
+</div></div>
+
+<p>GDK of java.io.InputStreamReader has equivalents each* methods, this is enough.</p>

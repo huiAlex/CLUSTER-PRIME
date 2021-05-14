@@ -1,0 +1,13 @@
+[GROOVY-2098] Add support for propertyMissing to Groovy <p>We need to add support for propertyMissing as well as methodMissing. Example:</p>
+
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java ><span class= code-comment >// <span class= code-keyword >for</span> getters
+</span>Foo.metaClass.propertyMissing = { <span class= code-object >String</span>  name -&gt;
+
+}
+<span class= code-comment >// <span class= code-keyword >for</span> setters
+</span>Foo.metaClass.propertyMissing = { <span class= code-object >String</span> name, <span class= code-object >Object</span> value -&gt;
+
+}
+</pre>
+</div></div>

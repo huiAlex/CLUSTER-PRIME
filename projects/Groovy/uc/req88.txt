@@ -1,0 +1,1 @@
+[GROOVY-4536] There are DGM#sort methods for Map but no min or max methods <p><tt>DGM#min(Map map, Closure closure)</tt> will be a shorthand for <tt>map.entrySet().min(closure)</tt>. Likewise for <tt>max</tt>.</p>

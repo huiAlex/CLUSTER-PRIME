@@ -1,0 +1,3 @@
+[GROOVY-1507] When using command-line scripts the line number in the current file is not available <p>When using other scripting languages a command-line script (defined using option -e) has no access to the current line number. The attached patch defines a new variable  count  that holds the line number for the current file to be parsed.</p>
+
+<p>The patched file is GroovyMain.java</p>

@@ -1,0 +1,4 @@
+[GROOVY-572] more groovy methods on InputStream. getText() to be like File / URL <p>process =  ls -al .execute()<br/>
+println process.in.text</p>
+
+<p>doesn t work as process.in = a BufferedInputStream and we haven t added getText() to InputStream which would be nice.</p>

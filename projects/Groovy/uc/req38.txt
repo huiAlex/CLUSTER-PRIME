@@ -1,0 +1,12 @@
+[GROOVY-2317] Subscript Support For Groovy BitSets <p>It would be nice to support subscript access on BitSet objects.</p>
+
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >def bitSet = <span class= code-keyword >new</span> BitSet()
+bitSet[3] = <span class= code-keyword >true</span>
+bitSet[5] = <span class= code-keyword >true</span>
+
+def value = bitSet[4]
+
+def subSet = bitSet[2..4]
+</pre>
+</div></div>

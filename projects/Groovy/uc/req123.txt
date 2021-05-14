@@ -1,0 +1,18 @@
+[GROOVY-7171] List.getIndices() <p>Can I send a pull request of List.getIndices() to GitHub?</p>
+
+<p>The method name is from Haskell, Scala and Kotlin.<br/>
+They all use  indices  not  indexes .</p>
+
+<p>The implementation is this.</p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java ><span class= code-keyword >public</span> <span class= code-keyword >static</span> IntRange getIndices(List self) {
+    <span class= code-keyword >return</span> <span class= code-keyword >new</span> IntRange(<span class= code-keyword >false</span>, 0, self.size());
+}
+</pre>
+</div></div>
+
+<p>Usage:</p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java ><span class= code-keyword >for</span> (i in [1, 2].indices) {}
+</pre>
+</div></div>

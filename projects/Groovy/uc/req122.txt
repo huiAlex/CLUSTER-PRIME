@@ -1,0 +1,19 @@
+[GROOVY-692] minv/maxv where closure computes value <p>It would be great to have an alternate form of min()/max() where closure returns a value to be compared, rather than a comparison.  I m often trying to choose the  most desirable  element of a list, and I have some expression that computes the desirability.  Right now I have to do:</p>
+
+<p>mylist.max</p>
+{x,y | my_desirability_expression(x) &lt;=&gt; my_desirability_expression(y) }
+
+<p>That s wordy because I need to write the desirability expression twice, and I also need to have explicit arguments for the closure.  It would be great if there were a  maxv  where I could write:</p>
+
+<p>mylist.maxv </p>
+{ my_desirability_expression(it) }
+<p> </p>
+
+<p>maxv for  maximum of value.   Similarly with minv.</p>
+
+<p>This is trivial to implement; here s what I use (a global function):</p>
+
+<p>def minv (l, Closure f) {<br/>
+   return l.min </p>
+{ x, y | f(x) &lt;=&gt; f(y) }
+<p>}</p>

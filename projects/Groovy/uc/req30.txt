@@ -1,0 +1,7 @@
+[GROOVY-1886] leftShift operator for ObjectOutputStream <p>It would be good to have:</p>
+
+<p>oos &lt;&lt; object</p>
+
+<p>as a shorthand for:</p>
+
+<p>oos.writeObject(object) </p>

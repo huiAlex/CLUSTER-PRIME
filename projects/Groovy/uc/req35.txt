@@ -1,0 +1,14 @@
+[GROOVY-2115] text() method on NodeChild with XmlSlurper returns composite.  Need just local text. <p>I am trying to use XmlSlurper to process and xml with nested elements with text in them.  I need to get the text from just one level at a time but the text() method returns all text for all childrend and I can t see anything that would bring back just the local.</p>
+
+<p>Here is a sample from the console:</p>
+
+<p>groovy&gt; def model = new XmlSlurper().parseText( &lt;aModel&gt;&lt;aParent name= bubba &gt;text&lt;aChild&gt;child text&lt;/aChild&gt;&lt;/aParent&gt;&lt;/aModel&gt; )</p>
+
+<p>groovy&gt; model.aParent<span class= error >&#91;0&#93;</span>.text()</p>
+
+<p>groovy&gt; </p>
+
+<p>groovy&gt; </p>
+
+
+<p>Result:  textchild text </p>

@@ -1,0 +1,7 @@
+[GROOVY-4740] Allow  groovy  to accept URL to run the script <p>Please, see <a href= http://groovy.329449.n5.nabble.com/Running-quot-groovy-http-github-com-script-groovy-quot-td4235639.html  class= external-link  rel= nofollow >http://groovy.329449.n5.nabble.com/Running-quot-groovy-http-github-com-script-groovy-quot-td4235639.html</a>.</p>
+
+<p>It would be nice to have</p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >groovy http:<span class= code-comment >//server/script.groovy</span>
+</pre>
+</div></div>

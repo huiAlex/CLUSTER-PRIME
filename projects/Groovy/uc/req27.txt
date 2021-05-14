@@ -1,0 +1,19 @@
+[GROOVY-1676] Implement literal Map addition/concatenation like  [a:1, b:2] + [c:3]  <p>Provide a way to get the result of the  addition  of 2 Maps, eg:</p>
+
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java ><span class= code-keyword >assert</span> [a:1, b:2] + [c:3] == [a:1, b:2, c:3]
+</pre>
+</div></div>
+
+<p>In terms of Map semantics, which would take priority for duplicate keys, left or right?</p>
+
+<p>Considering Java s Map.putAll(), which blindly adds all elements in the given map, perhaps the right side, should take precedence, so:</p>
+
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java ><span class= code-keyword >assert</span> [a:1, b:1] + [b:2] == [a:1, b:2]
+</pre>
+</div></div>
+
+<p>What do others think?</p>
+
+<p>Original email thread: <a href= http://www.nabble.com/Map-addition-concatenation--tf3122652.html  class= external-link  rel= nofollow >http://www.nabble.com/Map-addition-concatenation--tf3122652.html</a></p>

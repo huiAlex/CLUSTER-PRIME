@@ -1,0 +1,6 @@
+[GROOVY-6867] init(), dropRight() and takeRight() <p>Iterable, List and Object[] have tail(), drop() and take() but init(), dropRight() and takeRight() are missing.<br/>
+I added them. The patch is here.<br/>
+<a href= https://github.com/groovy/groovy-core/pull/447  class= external-link  rel= nofollow >https://github.com/groovy/groovy-core/pull/447</a></p>
+
+<p>Method names are from Scala.<br/>
+<a href= http://www.scala-lang.org/api/2.10.4/index.html#scala.collection.immutable.List  class= external-link  rel= nofollow >http://www.scala-lang.org/api/2.10.4/index.html#scala.collection.immutable.List</a></p>

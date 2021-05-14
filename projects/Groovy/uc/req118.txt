@@ -1,0 +1,2 @@
+[GROOVY-6649] Support a Sortable annotation and transform <p>Basically, an out-of-the-Groovy-box implementation of this equivalent transform in Griffon:<br/>
+<a href= https://github.com/griffon/griffon-domain-plugin/blob/master/src/cli/org/codehaus/griffon/ast/SortableASTTransformation.java  class= external-link  rel= nofollow >https://github.com/griffon/griffon-domain-plugin/blob/master/src/cli/org/codehaus/griffon/ast/SortableASTTransformation.java</a></p>

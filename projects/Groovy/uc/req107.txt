@@ -1,0 +1,15 @@
+[GROOVY-5714] @DelegatesTo annotation for IDEs/TypeChecker <p>Add an annotation for closure parameters, which allows to document how methods are resolved in the closure.</p>
+
+<p>For example:</p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >exec {
+    executable = <span class= code-quote > foo </span>
+    args <span class= code-quote > bar </span>, <span class= code-quote > baz </span>
+}
+
+class Project {
+    ExecResult exec(@DelegatesTo(ExecSpec) Closure closure) { ... }
+}
+
+</pre>
+</div></div>

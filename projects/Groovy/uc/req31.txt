@@ -1,0 +1,11 @@
+[GROOVY-1887] It would be useful to have a DGM Socket.withObjectStreams to complement Socket.withStreams <p>Wii currently have:</p>
+
+<p>socket.withStreams </p>
+{ input, output -&gt; ... }
+
+<p>I have a similar suggestion to mirror this for Object variants:</p>
+
+<p>socket.withObjectStreams </p>
+{ ois, oos -&gt; ... }
+
+<p>This would make setting up proxy type objects over sockets very streamlined.</p>

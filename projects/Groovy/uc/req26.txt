@@ -1,0 +1,20 @@
+[GROOVY-1605] Have a delete() method in File that deletes all subdirectories and contained files <p>Deleting a directory including all subdirectories is a very tedious task. A method in File like  deleteRecursively()  would really help. </p>
+
+<p>I am currently using already qutie nice code like this:</p>
+
+<p>				def dataDir = new File( ... path ...)</p>
+
+<p>				def dirs = []</p>
+
+<p>		        dataDir.eachFileRecurse { <br/>
+		        	if (!it.isDirectory()) log.info( Deleting $</p>
+{it.name}: ${it.delete()} ) <br/>
+		        	else dirs &lt;&lt; it	<br/>
+		        }<br/>
+<br/>
+		        dirs.reverse().each { log.info( Deleting directory: ${it.name}
+<p>: $</p>
+{it.delete()}
+<p> ) }</p>
+
+<p>But why could it not be new File ( ... dir ...).deleteDir() or similar?</p>

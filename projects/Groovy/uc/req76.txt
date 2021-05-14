@@ -1,0 +1,1 @@
+[GROOVY-4186] Possible syntactic sugar for JSR-223 <p>The kind of code you write when setting up and using the JSR-223 engine is often fairly similar. Some syntactic sugar might improve the look of such code in polyglot scenarios.</p>

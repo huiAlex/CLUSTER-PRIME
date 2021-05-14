@@ -1,0 +1,2 @@
+[GROOVY-3804] Ability to customize Groovy Truth  <p>Add the ability to customize Groovy truth, ie. the way the boolean coercion is happening, by letting users be able to define an asBoolean() method on their types.<br/>
+That way, when you use if ( myObject ), myObject will be evaluated to a boolean through this added method.</p> 

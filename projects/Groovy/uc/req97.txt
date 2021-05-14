@@ -1,0 +1,33 @@
+[GROOVY-4993] @Memoized AST Transformation for Methods <p>The whole idea is similar to existing great @Lazy annotation, but it differs in concept: instead of being applied to fields it is applied to methods, thus providing a wider field of use. When applied to getters it serves as an alternative to @Lazy, but applied to other methods it provides what @Lazy can t. Thus it eliminates the need for heavy refactoring in certain situations, by simply letting the user add the annotation to the method.</p>
+
+<p>Here is a suggestion of how it could work:</p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >@Cached
+T createX() {
+  <span class= code-keyword >new</span> T(1, 2, 3)
+}   
+</pre>
+</div></div>
+<p>gets transformed into:</p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java ><span class= code-keyword >private</span> T $createX$result
+T $createX() {
+  <span class= code-keyword >new</span> T(1, 2, 3)
+}
+T createX() {
+  T $result_local = $createX$result
+  <span class= code-keyword >if</span> ($result_local != <span class= code-keyword >null</span>)
+    <span class= code-keyword >return</span> $result_local
+  <span class= code-keyword >else</span> {
+    <span class= code-keyword >synchronized</span> (<span class= code-keyword >this</span>) {
+      <span class= code-keyword >if</span> ($createX$result == <span class= code-keyword >null</span>) {
+        $createX$result = $createX()
+      }
+      <span class= code-keyword >return</span> $createX$result
+    }
+  }
+}
+</pre>
+</div></div>
+
+<p>This whole thing could be extended to cache different results of a method depending on its arguments, but it s a topic for a discussion.</p>

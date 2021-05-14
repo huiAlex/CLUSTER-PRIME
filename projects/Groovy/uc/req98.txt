@@ -1,0 +1,17 @@
+[GROOVY-5096] @Immutable should have an extensible way to be informed of classes that are  deemed  Immutable <p>The @Immutable annotation has a list of known  effectively immutable  classes. There should be some way to provide an extensible list of class names or  vouch  for a particular field s immutability.</p>
+
+<p>Possible ways to implement might look like the examples below:</p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >@Immutable class Person {
+  <span class= code-object >String</span> name
+  @KnownImmutable MyUuid id
+}
+
+@KnownImmutables([MyDate, MyUuid])
+@Immutable class Person {
+  <span class= code-object >String</span> name
+  MyDate dob
+  MuUuid id
+}
+</pre>
+</div></div>

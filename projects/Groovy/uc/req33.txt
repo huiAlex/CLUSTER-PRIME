@@ -1,0 +1,4 @@
+[GROOVY-2073] add DGM combinations methods <p>def lists = [<span class= error >&#91;&#39;a&#39;, &#39;b&#39;&#93;</span>, <span class= error >&#91;1, 2, 3&#93;</span>]<br/>
+assert lists.combinations() as Set ==<br/>
+                    [<span class= error >&#91;&#39;a&#39;, 1&#93;</span>, <span class= error >&#91;&#39;a&#39;, 2&#93;</span>, <span class= error >&#91;&#39;a&#39;, 3&#93;</span>,<br/>
+                     <span class= error >&#91;&#39;b&#39;, 1&#93;</span>, <span class= error >&#91;&#39;b&#39;, 2&#93;</span>, <span class= error >&#91;&#39;b&#39;, 3&#93;</span>] as Set</p>

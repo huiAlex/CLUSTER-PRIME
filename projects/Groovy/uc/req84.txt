@@ -1,0 +1,1 @@
+[GROOVY-4479] Closure Memoization <p>Implement closure memoization, like in GPars.</p>

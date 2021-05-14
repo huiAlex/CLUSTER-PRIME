@@ -1,0 +1,7 @@
+[GROOVY-3307] Add byte[].encodeHex <p>Groovy provides a very convenient encodeBase64 method in byte[]. It would be even more convenient if there were also an encodeHex method in byte[]. See</p>
+
+<p>[http://groovy.codehaus.org/groovy-jdk/java/lang/Byte[].html#encodeBase64()]</p>
+
+<p>The Apache Commons Codec project provides an implementation of a hex encoder but it would also be trivial to implement from scratch. This feature would be immensely convenient when working with checksums.</p>
+
+<p>[http://commons.apache.org/codec/apidocs/org/apache/commons/codec/binary/Hex.html#encodeHex(byte[])]</p>

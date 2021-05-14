@@ -1,0 +1,24 @@
+[GROOVY-3391] New AST transformation @InheritConstructors <p>I suggest to introduce a new AST transformation @InheritConstructors which can be placed on a class and the class with this annotation will inherit all the constructors of its super class.</p>
+
+<p>For example:</p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >class A {
+    A() {}
+    A(<span class= code-object >int</span> arg) {}
+    A(<span class= code-object >String</span> arg) {}
+}
+
+@InheritConstructors
+class B <span class= code-keyword >extends</span> A {}
+</pre>
+</div></div>
+<p>Then class B will be equal to:</p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >class B <span class= code-keyword >extends</span> A {
+    B() { <span class= code-keyword >super</span>() }
+    B(<span class= code-object >int</span> arg) { <span class= code-keyword >super</span>(arg) }
+    B(<span class= code-object >String</span> arg) { <span class= code-keyword >super</span>(arg) }
+}
+</pre>
+</div></div>
+<p>I think it is useful, especially for defining exceptions.</p>

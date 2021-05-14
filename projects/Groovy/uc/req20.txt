@@ -1,0 +1,13 @@
+[GROOVY-149] Add new Groovy methods <p>Let s code some more new groovy methods, extending the core JDK classes. Among them:</p>
+
+<ul class= alternate  type= square >
+	<li>List.grep()</li>
+	<li>File.grep()</li>
+	<li>List.pop()</li>
+	<li>List.reverseEach()</li>
+	<li>Collection.removeIf()</li>
+	<li>Collection.count(foo)</li>
+	<li>Collection.toList()</li>
+	<li>File.withInputStream()</li>
+	<li>String[].join()</li>
+</ul>

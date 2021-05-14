@@ -1,0 +1,21 @@
+[GROOVY-1512] When executing command-line scripts it should be possible to execute a BEGIN and an END method (akin to AWK or Perl) <p>When executing a command-line script e.g., via -pe it would sometimes be very useful to define a method BEGIN and a method END which are executed exactly once, BEGIN before the loop starts, and END after the loop has ended for all files to be processed. An example:</p>
+
+<p>groovy -a -ne  def BEGIN()</p>
+{c=0}
+<p>;def END()</p>
+{println c}
+<p>;c += split<span class= error >&#91;0&#93;</span>.toInteger()+split<span class= error >&#91;-2&#93;</span>.toInteger()  test.txt</p>
+
+<p>results in:<br/>
+ 39 </p>
+
+<p>for the following test.txt:<br/>
+1 2 3 4<br/>
+1 2 3 4 5<br/>
+1 2 3 4 5 6<br/>
+1 2 3 4 5 6 7<br/>
+1 2 3 4 5 6 7 8<br/>
+1 2 3 4 5 6 7 8 9</p>
+
+
+<p>The patch provides this functionality and additionally that of <a href= https://issues.apache.org/jira/browse/GROOVY-1507  title= When using command-line scripts the line number in the current file is not available  class= issue-link  data-issue-key= GROOVY-1507 ><del>GROOVY-1507</del></a> and <a href= https://issues.apache.org/jira/browse/GROOVY-1508  title= Add option -a &lt;splitpattern&gt; to allow auto split of lines read when using command-line scripts (via -e)  class= issue-link  data-issue-key= GROOVY-1508 ><del>GROOVY-1508</del></a>. If a singular patch is necessary, I ll be happy to provide it.</p>

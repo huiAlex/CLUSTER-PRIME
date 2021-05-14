@@ -1,0 +1,6 @@
+[GROOVY-1246] All-Groovy Mock support  <p>Provide Mock support with pure Groovy means, i.e. ProxyMetaClass and Interceptors.<br/>
+No external mock library needed any longer.</p>
+
+<p>Make use of Ranges and Closures for demanding behaviour.</p>
+
+<p>Allow strict and loose expectations in terms of sequence dependency between demand specifications and effected method calls.</p> 

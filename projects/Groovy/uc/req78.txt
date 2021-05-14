@@ -1,0 +1,8 @@
+[GROOVY-4207] Groovy should have DGM#expand and DGM#unexpand methods for tab manipulation <p>When using Groovy as a *nix shell replacement, it would be useful to support the following:</p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java ><span class= code-keyword >assert</span>  \t\tabc\tdef\n12345\t67\t  .expand().unexpand() ==  \t\tabc\tdef\n12345\t67\t  
+<span class= code-keyword >assert</span>  1234567\t8\t  .expand() ==  1234567 8         
+<span class= code-keyword >assert</span>      x     .unexpand() ==      x\t  
+<span class= code-keyword >assert</span>      x    \n .unexpand() ==      x\t \n 
+</pre>
+</div></div>

@@ -1,0 +1,29 @@
+[GROOVY-3452] Spellchecking <p>Ages ago i wrote a spell checker for groovy, that gives more helpful information in case a MissingMethodExeption or Missing Property Exception is thrown. <br/>
+I recently picked it up and finished the patch. <br/>
+It uses reflection to find missing methods with a low edit distance relative to the requested method. It also use the edit distance<br/>
+as a method to rank the method so that the most probable solution is displayed first.<br/>
+The performance impact is isolated to exception.getMessage for properties and Methods, but not for constructors.<br/>
+I don t know of a case where this should impact a working program but it should be taken into consideration.</p>
+
+<p>The unit tests are only partial(they era complete for the string/array metrics) but the other coverage is currently weak.<br/>
+Missing method     ================================================================<br/>
+groovy:000&gt; Integer.vallueOf( 10 )<br/>
+ERROR groovy.lang.MissingMethodException: No signature of method: static java.lang.Integer.vallueOf() is applicable for argument types: (java.lang.String) values: <span class= error >&#91;10&#93;</span><br/>
+Possible solutions: valueOf(java.lang.String), valueOf(java.lang.String, int), valueOf(int)<br/>
+        at groovysh_evaluate.run (groovysh_evaluate:2)<br/>
+        ...<br/>
+groovy:000&gt;</p>
+
+<p>Missing Constructor     ================================================================<br/>
+new Integer(new Object())<br/>
+ERROR groovy.lang.GroovyRuntimeException: Could not find matching constructor for: java.lang.Integer(java.lang.Object)<br/>
+Possible solutions: java.lang.Integer(int), java.lang.Integer(java.lang.String)<br/>
+        at groovysh_evaluate.run (groovysh_evaluate:2)<br/>
+        ...</p>
+
+<p>Missing Constructor     ================================================================<br/>
+new java.awt.Point().xy<br/>
+ERROR groovy.lang.MissingPropertyException: No such property: xy for class: java.awt.Point<br/>
+Possible solutions: x, y<br/>
+        at groovysh_evaluate.run (groovysh_evaluate:2)<br/>
+        ...</p>

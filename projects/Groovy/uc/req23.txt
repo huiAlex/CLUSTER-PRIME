@@ -1,0 +1,13 @@
+[GROOVY-1510] Add groupBy() method to filter lists according to a critieria <p>Regroup elements according to a closure criteria inside a map index by the value of the criteria.</p>
+
+<p>        def expected = [Integer: <span class= error >&#91;1, 2&#93;</span>, String: <span class= error >&#91;&quot;a&quot;, &quot;b&quot;&#93;</span>, BigDecimal: <span class= error >&#91;3.5, 4.6&#93;</span>]</p>
+
+<p>        def list = <span class= error >&#91;1, &quot;a&quot;, 2, &quot;b&quot;, 3.5, 4.6&#93;</span></p>
+
+<p>        def result = list.groupBy</p>
+{ it.class }
+
+<p>        assert <span class= error >&#91;1, 2&#93;</span> == result<span class= error >&#91;Integer&#93;</span><br/>
+        assert <span class= error >&#91;&quot;a&quot;, &quot;b&quot;&#93;</span> == result<span class= error >&#91;String&#93;</span><br/>
+        assert <span class= error >&#91;3.5, 4.6&#93;</span> == result<span class= error >&#91;BigDecimal&#93;</span><br/>
+        assert 3 == result.size()</p>

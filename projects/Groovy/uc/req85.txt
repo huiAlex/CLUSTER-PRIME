@@ -1,0 +1,105 @@
+[GROOVY-4518] add support for @WithReadLock and @WithWriteLock declarative synchronization <p>add support for <tt>@WithReadLock</tt> and <tt>@WithWriteLock</tt> declarative synchronization</p>
+
+<p>As per the discussion here: <a href= http://groovy.329449.n5.nabble.com/new-transform-declarative-synchronization-td3271562.html  class= external-link  rel= nofollow >http://groovy.329449.n5.nabble.com/new-transform-declarative-synchronization-td3271562.html</a></p>
+
+<p>I ll commit this myself, but am looking for feedback. </p>
+
+<p>This code: </p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java ><span class= code-keyword >import</span> groovy.transform.*;
+
+<span class= code-keyword >public</span> class ResourceProvider {
+
+    <span class= code-keyword >private</span> <span class= code-keyword >final</span> Map&lt;<span class= code-object >String</span>, <span class= code-object >String</span>&gt; data = <span class= code-keyword >new</span> HashMap&lt;<span class= code-object >String</span>, <span class= code-object >String</span>&gt;();
+
+    @WithReadLock
+    <span class= code-keyword >public</span> <span class= code-object >String</span> getResource(<span class= code-object >String</span> key) <span class= code-keyword >throws</span> Exception {
+            <span class= code-keyword >return</span> data.get(key);
+    }
+
+    @WithWriteLock
+    <span class= code-keyword >public</span> void refresh() <span class= code-keyword >throws</span> Exception {
+            <span class= code-comment >//reload the resources into memory
+</span>    }
+}
+</pre>
+</div></div>
+<p>Becomes this Code: </p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java ><span class= code-keyword >import</span> java.util.concurrent.locks.ReentrantReadWriteLock;
+<span class= code-keyword >import</span> java.util.concurrent.locks.ReadWriteLock;
+
+<span class= code-keyword >public</span> class ResourceProvider {
+
+    <span class= code-keyword >private</span> <span class= code-keyword >final</span> ReadWriteLock $reentrantlock = <span class= code-keyword >new</span> ReentrantReadWriteLock();
+    <span class= code-keyword >private</span> <span class= code-keyword >final</span> Map&lt;<span class= code-object >String</span>, <span class= code-object >String</span>&gt; data = <span class= code-keyword >new</span> HashMap&lt;<span class= code-object >String</span>, <span class= code-object >String</span>&gt;();
+
+    <span class= code-keyword >public</span> <span class= code-object >String</span> getResource(<span class= code-object >String</span> key) <span class= code-keyword >throws</span> Exception {
+        $reentrantlock.readLock().lock();
+        <span class= code-keyword >try</span> {
+            <span class= code-keyword >return</span> data.get(key);
+        } <span class= code-keyword >finally</span> {
+            $reentrantlock.readLock().unlock();
+        }
+    }
+
+    <span class= code-keyword >public</span> void refresh() <span class= code-keyword >throws</span> Exception {
+        $reentrantlock.writeLock().lock();
+        <span class= code-keyword >try</span> {
+            <span class= code-comment >//reload the resources into memory
+</span>        } <span class= code-keyword >finally</span> {
+            $reentrantlock.writeLock().unlock();
+        }
+    }
+}
+</pre>
+</div></div>
+<p>You can also specify your own lock, like so: </p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java ><span class= code-keyword >import</span> groovy.transforms.*;
+
+<span class= code-keyword >public</span> class ResourceProvider {
+
+    <span class= code-keyword >private</span> <span class= code-keyword >final</span> ReadWriteLock myLock = <span class= code-keyword >new</span> ReentrantReadWriteLock();
+    <span class= code-keyword >private</span> <span class= code-keyword >final</span> Map&lt;<span class= code-object >String</span>, <span class= code-object >String</span>&gt; data = <span class= code-keyword >new</span> HashMap&lt;<span class= code-object >String</span>, <span class= code-object >String</span>&gt;();
+
+    @WithReadLock( myLock )
+    <span class= code-keyword >public</span> <span class= code-object >String</span> getResource(<span class= code-object >String</span> key) <span class= code-keyword >throws</span> Exception {
+            <span class= code-keyword >return</span> data.get(key);
+    }
+
+    @WithWriteLock( myLock )
+    <span class= code-keyword >public</span> void refresh() <span class= code-keyword >throws</span> Exception {
+            <span class= code-comment >//reload the resources into memory
+</span>    }
+}
+</pre>
+</div></div>
+<p>In which case the code becomes: </p>
+
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java ><span class= code-keyword >public</span> class ResourceProvider {
+
+    <span class= code-keyword >private</span> <span class= code-keyword >final</span> ReadWriteLock myLock = <span class= code-keyword >new</span> ReentrantReadWriteLock();
+    <span class= code-keyword >private</span> <span class= code-keyword >final</span> Map&lt;<span class= code-object >String</span>, <span class= code-object >String</span>&gt; data = <span class= code-keyword >new</span> HashMap&lt;<span class= code-object >String</span>, <span class= code-object >String</span>&gt;();
+
+    <span class= code-keyword >public</span> <span class= code-object >String</span> getResource(<span class= code-object >String</span> key) <span class= code-keyword >throws</span> Exception {
+        myLock.readLock().lock();
+        <span class= code-keyword >try</span> {
+            <span class= code-keyword >return</span> data.get(key);
+        } <span class= code-keyword >finally</span> {
+            myLock.readLock().unlock();
+        }
+    }
+
+    <span class= code-keyword >public</span> void refresh() <span class= code-keyword >throws</span> Exception {
+        myLock.writeLock().lock();
+        <span class= code-keyword >try</span> {
+            <span class= code-comment >//reload the resources into memory
+</span>        } <span class= code-keyword >finally</span> {
+            myLock.writeLock().unlock();
+        }
+    }
+}
+</pre>
+</div></div>

@@ -1,0 +1,12 @@
+[GROOVY-260] Thread.start { } to execute a closure in a new thread <p>hi,</p>
+
+<p>I talked to james and he liked the idea of adding a simple Thread.start(Closure c) so that you can easily run things in new threads.</p>
+
+<p>example:</p>
+
+<p>thread = Thread.start {<br/>
+  process =  some long running process .execute();<br/>
+  process.waitFor();<br/>
+}</p>
+
+<p>.. do something else while this runs.</p>

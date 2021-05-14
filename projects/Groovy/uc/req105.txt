@@ -1,0 +1,13 @@
+[GROOVY-5549] add DGM variant for Map#subMap supporting an array of keys <p>This snipset of groovy:</p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >def options = [deep: <span class= code-keyword >true</span>, fields: <span class= code-keyword >true</span>, other: <span class= code-keyword >true</span>]
+def deep = <span class= code-quote > deep,fields </span>.split( , )
+options.subMap(deep)
+</pre>
+</div></div>
+<p>fails with error:</p>
+<div class= preformatted panel  style= border-width: 1px; ><div class= preformattedContent panelContent >
+<pre>No signature of method: java.util.LinkedHashMap.subMap() is applicable for argument types: ([Ljava.lang.String;) values: [[deep, fields]]
+Possible solutions: subMap(java.util.Collection), dump(), spread(), sleep(long)
+</pre>
+</div></div>

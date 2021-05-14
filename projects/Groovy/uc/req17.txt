@@ -1,0 +1,6 @@
+[GROOVY-1154] Implement output << input with streams <p>new File( MetaClassTest.class ).withInputStream{ input -&gt; <br/>
+        new File( output.class ).withOutputStream</p>
+{ out -&gt; 
+                out &lt;&lt; input
+        }
+<p>}</p>

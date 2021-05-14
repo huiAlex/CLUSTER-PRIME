@@ -1,0 +1,9 @@
+[GROOVY-2597] Map or Property Sort  <p>It would be handy to have a sort method on a Map or Property that would sort by the name/key since this is something that is commonly done. A possible implementation for a Property class might look like this:</p>
+
+<p>Properties.metaClass.sort = {<br/>
+   new TreeMap(delegate)<br/>
+}</p>
+
+<p>Example usage would be:</p>
+
+<p>System.properties.sort()</p> 

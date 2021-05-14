@@ -1,0 +1,20 @@
+[GROOVY-5263] New GDK method: Object[].contains() [GROOVY-5273] Provide contains as a DGM method for primitive arrays  <p>We treat arrays as Lists in may respects. There are methods from List that have been grafted unto arrays however there is no <tt>contains()</tt> method which would come in handy in scenarios like the following one</p>
+
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java ><span class= code-keyword >if</span>(!arrayOfObjects.contains(element)) {
+    arrayOfObjects &lt;&lt; elements
+}
+</pre>
+</div></div>
+
+<p>One way to do it currently is this</p>
+
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java ><span class= code-keyword >if</span>( !(element in arrayOfObjects) ) {
+    arrayOfObjects &lt;&lt; elements
+}
+</pre>
+</div></div>
+
+<p>Notice the additional () around the expression</p> <p>There is already count(...), size() and other methods for primitive arrays but no contains.<br/>
+There is an isCase() method but Java programmers are more familiar with contains so we should provide for that approach too.</p> 

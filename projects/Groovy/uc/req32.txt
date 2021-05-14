@@ -1,0 +1,15 @@
+[GROOVY-1984] Shorther syntax for catching multiple exceptions at once <p>John Wilson suggested this improved syntax for catching several exceptions at once:</p>
+
+<p>This has been suggested for Java<br/>
+<a href= http://members.capmac.org/~orb/blog.cgi/tech/java/Better_exception_sy.html  class= external-link  rel= nofollow >http://members.capmac.org/~orb/blog.cgi/tech/java/Better_exception_sy.html</a></p>
+
+<p>I would have thought it s trivial to do in Groovy</p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java ><span class= code-keyword >try</span> { 
+    Field field = someClass.getDeclaredField(someField); 
+    someValue = field.getInt(Barcode.class); 
+} <span class= code-keyword >catch</span> (SecurityException, NoSuchFieldException e) { 
+    <span class= code-comment >// <span class= code-keyword >do</span> something <span class= code-keyword >else</span> with the exception 
+</span>}
+</pre>
+</div></div>

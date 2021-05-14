@@ -1,0 +1,48 @@
+[GROOVY-4164] A groovier way of iterate over dates/calendars: upTo() and downTo() <p>Iterating over date intervals is currently possible using the following code:</p>
+
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >def start = <span class= code-keyword >new</span> GregorianCalendar(2010, Calendar.JANUARY, 1).time
+def end = <span class= code-keyword >new</span> GregorianCalendar(2010, Calendar.DECEMBER, 31).time
+
+def current = start
+<span class= code-keyword >while</span> (current &lt;= end) {
+	println current
+	current++
+}
+</pre>
+</div></div>
+
+<p>But following the style in which numbers are iterated, we can have a groovier code:</p>
+
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >start.upTo(end) {
+	println it
+}
+
+end.downTo(start) {
+	println it
+}
+</pre>
+</div></div>
+
+<p>Proposed implementation:</p>
+
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >	Date.metaClass {
+		upTo &lt;&lt; { Date end, Closure c -&gt;
+			def next = delegate
+			<span class= code-keyword >while</span> (next &lt;= end) {
+				c.call(next)
+				next++
+			}
+		}
+		downTo &lt;&lt; { Date start, Closure c -&gt;
+			def next = delegate
+			<span class= code-keyword >while</span> (next &gt;= start) {
+				c.call(next)
+				next--
+			}
+		}
+	}
+</pre>
+</div></div>

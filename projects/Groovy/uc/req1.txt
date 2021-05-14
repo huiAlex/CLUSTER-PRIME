@@ -1,0 +1,8 @@
+[GROOVY-1040] support namespaced (QName) based navigations in the Node XML model.  <p>e.g. to do namespaced navigation like...</p>
+
+<p>Node root = ... // some namespaced doc</p>
+
+<p>            Namespace xsd = new Namespace( http://www.w3.org/2001/XMLSchema ,  xsd )</p>
+
+<p>            def a = root<span class= error >&#91;xsd.annotation&#93;</span><br/>
+            def e = root<span class= error >&#91;xsd.annotation&#93;</span><span class= error >&#91;xsd.documentation&#93;</span></p> 

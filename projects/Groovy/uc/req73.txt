@@ -1,0 +1,18 @@
+[GROOVY-4144] Closures should have rcurry and ncurry as well as curry <p>Sometimes you don t want to curry from the left hand side. You can always fake it by rewriting a reversed method or Closure manually but most functional languages support currying from the right or an arbitrary index.</p>
+
+<p>An <tt>rcurry</tt> method allows examples like this:</p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >def divide = { a, b -&gt; a / b }
+def halver = divide.rcurry(2)
+<span class= code-keyword >assert</span> halver(8) == 4
+</pre>
+</div></div>
+
+<p>An <tt>ncurry</tt> method would allow, as an example, to curry the middle parameter of a three argument method, e.g.:</p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java ><span class= code-comment >// curry middle param of <span class= code-keyword >this</span> utility method:
+</span><span class= code-comment >// Collections#binarySearch(List list, <span class= code-object >Object</span> key, Comparator c)
+</span>def catSearcher = Collections.&amp;binarySearch.ncurry(1, <span class= code-quote > cat </span>)
+def result = catSearcher(myList, myComparator)
+</pre>
+</div></div>

@@ -1,0 +1,21 @@
+[GROOVY-3481] Groovy Support for annotations on local variable declarations  <p>Groovy should support annotations on local variable declarations. It is syntactically legal to annotate a local variable, but the AST produced does not carry that annotation. </p>
+
+<p>My use case with the AST builder. Either we d like to annotate a local variable, like this: </p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >@AstSource(CompilePhase.CONVERSION)
+def source = { println <span class= code-quote > compiled on: ${<span class= code-keyword >new</span> Date()} </span> }
+</pre>
+</div></div>
+
+<p>Or annotate a property within a closure (which is a <tt>DeclarationExpression</tt>), like this: </p>
+
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >def result = <span class= code-keyword >new</span> AstBuilder().build {
+           phase = CompilePhase.CONVERSION
+           @AstSource
+           source = { println <span class= code-quote > compiled on: ${<span class= code-keyword >new</span> Date()} </span> }
+ }
+</pre>
+</div></div>
+
+<p>A <tt>getAnnotations()</tt> method should probably be added to <tt>DeclarationExpression</tt> to support this. </p> 

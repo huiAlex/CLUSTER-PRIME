@@ -1,0 +1,9 @@
+[GROOVY-4124] Groovy equality for Sets and Maps <p>Currently, Groovy equality extends to arrays and lists, but not to sets and maps. Example:</p>
+
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java ><span class= code-keyword >assert</span> [1] == [1L] <span class= code-comment >// passes
+</span><span class= code-keyword >assert</span> [1] as Set == [1L] as Set <span class= code-comment >// fails</span>
+</pre>
+</div></div>
+
+<p>This is surprising and ungroovy. It would be nice to have Groovy equality for sets and maps too. The drawback is that it would make set/map equality inconsistent with lookup results (i.e. two sets are equal but Set.contains() yields different results). On the other hand, the same problem already exists for Groovy list equality. For maps, one could avoid the (lookup) inconsistency by only using Groovy equality for values. It would be good to have a discussion about this proposal.</p>

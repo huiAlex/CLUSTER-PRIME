@@ -1,0 +1,17 @@
+[GROOVY-6259] Allow to define the logger category name for the @Log annotations <p>The Groovy logging annotations ( <a href= http://groovy.codehaus.org/Logging  class= external-link  rel= nofollow >http://groovy.codehaus.org/Logging</a> ) currently only allow to change the name of the logger instance in the class, but they don t support to change the logging category.</p>
+
+<p>The logging category seems to be hardcoded to be the fully qualified name of the annotated class, e.g.  foo.bar.MyClass . It would be nice have the possibility to change this category. Example:</p>
+
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java ><span class= code-keyword >package</span> foo.bar
+
+@Commons(category = <span class= code-quote > some.custom.category.MyClass </span>)
+class MyClass {
+    ...
+}
+</pre>
+</div></div>
+
+<p>This would allow to specify custom categories which can then be used in the logging configuration to specify the level.</p>
+
+<p>Especially in the Grails framework there are special components (services, controller) that use a custom logging category by default that prefixes the component, e.g.  grails.services.foo.bar.MyClass . Using the Groovy logging annotations breaks with convention and the logging configuration for these components effectively changes. </p>

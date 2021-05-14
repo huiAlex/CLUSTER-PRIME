@@ -1,0 +1,25 @@
+[GROOVY-6354] Allow addCopyWith for @Immutable annotation <p>As discussed here</p>
+
+<p><a href= http://groovy.329449.n5.nabble.com/Add-Withers-to-Immutable-td5716924.html  class= external-link  rel= nofollow >http://groovy.329449.n5.nabble.com/Add-Withers-to-Immutable-td5716924.html</a></p>
+
+<p>It would be nice to have the @Immutable transform add a copyWith method (taking a map) that returns a new instance of the immutable class.</p>
+
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >@groovy.transform.Immutable( addCopyWith=<span class= code-keyword >true</span> )
+class Person {
+    <span class= code-object >String</span> first, last
+}
+
+def p = <span class= code-keyword >new</span> Person(  tim ,  yates  )
+
+<span class= code-comment >// Returns same instance
+</span>def q = p.copyWith( first: tim  ) 
+<span class= code-keyword >assert</span> q.is( p )
+
+<span class= code-comment >// Returns <span class= code-keyword >new</span> instance
+</span>def r = p.copyWith( first: alice  )
+<span class= code-keyword >assert</span> !r.is( p )
+<span class= code-keyword >assert</span> r.first ==  alice 
+<span class= code-keyword >assert</span> r.last  ==  yates 
+</pre>
+</div></div>

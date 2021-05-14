@@ -1,0 +1,5 @@
+[GROOVY-3938] Stamp groovy classes with the version of groovy used to generate them. <p>Sometimes in troubleshooting the groovy issues, it is helpful to know if a groovy class was compiled with one groovy version and is being run with an incompatible groovy version.</p>
+
+<p>Currently, in the pre-compiled classes, groovy compiler leaves no signs of its version behind.</p>
+
+<p>A run-time annotation can be introduced to store the groovy version, which can subsequently be retrieved to know the origin of that groovy class.</p>

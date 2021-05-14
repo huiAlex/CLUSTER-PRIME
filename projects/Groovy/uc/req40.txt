@@ -1,0 +1,10 @@
+[GROOVY-2419] Provide a collectAll() method for lists (WAS: Provide a  SpreadAllDot  operator) <p>Currently we have list*.method() that invokes the method on all items in the list.<br/>
+It would be useful to also support list**.method() that invokes the method on all items in the list and recursively for any lists within the list.</p>
+
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >def animalLists= [[<span class= code-quote > ant </span>, <span class= code-quote > mouse </span>, <span class= code-quote > elephant </span>], [<span class= code-quote > deer </span>, <span class= code-quote > monkey </span>]]
+<span class= code-keyword >assert</span> animalLists.size() == 2
+<span class= code-keyword >assert</span> animalLists*.size() == [3, 2]
+<span class= code-keyword >assert</span> animalLists**.size() == [[3, 5, 8], [4, 6]]
+</pre>
+</div></div>

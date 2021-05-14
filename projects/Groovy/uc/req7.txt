@@ -1,0 +1,7 @@
+[GROOVY-4062] Add getBytes to InputStream, URL and File  <p>InputStream, URL and File have a getText method, but they don t have the same for byte[]. This patch  add the method getBytes.</p>
+
+<p>ex:<br/>
+content=new File( README.txt ).bytes<br/>
+content=new URL( http://www.google.fr ).bytes<br/>
+content=new ByteArrayInputStream(<span class= error >&#91;1,2,3,4,5,6,7,8,9,0&#93;</span> as byte[]).bytes</p>
+ 

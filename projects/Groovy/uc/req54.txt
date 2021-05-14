@@ -1,0 +1,10 @@
+[GROOVY-315] Ability to create static groovy methods <p>Currently, it s only possible to create instance groovy methods.<br/>
+Such as <br/>
+file = new File( text.txt )<br/>
+file.eachLine</p>
+{ line | println it }
+<p>But we cannot currently add static methods, such as (<a href= https://issues.apache.org/jira/browse/GROOVY-260  title= Thread.start { } to execute a closure in a new thread  class= issue-link  data-issue-key= GROOVY-260 ><del>GROOVY-260</del></a>):<br/>
+thread = Thread.start { <br/>
+  process =  some long running process .execute(); <br/>
+  process.waitFor(); <br/>
+}</p>

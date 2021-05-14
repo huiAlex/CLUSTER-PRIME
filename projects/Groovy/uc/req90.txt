@@ -1,0 +1,1 @@
+[GROOVY-4560] @Immutable should allow public static final constants to be defined <p>currently these are flagged as errors as normal public fields are disallowed</p>
