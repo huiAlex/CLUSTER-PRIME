@@ -1,0 +1,3 @@
+[ISPN-33] Add an abstract delegating Cache implementation <p>This should be for people extending or simply mocking Infinispan for tests, etc.  Perhaps this should implement AdvancedCache.  In any case, this abstract delegate should take in an AdvancedCache in its constructor and delegate all calls to the AdvancedCache.</p>
+
+<p>Perhaps called AbstractDelegatingCache ?  <img class= emoticon  src= https://issues.jboss.org/images/icons/emoticons/smile.png  height= 16  width= 16  align= absmiddle  alt=   border= 0 /></p>

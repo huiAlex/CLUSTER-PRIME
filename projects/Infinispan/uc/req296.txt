@@ -1,0 +1,1 @@
+[ISPN-5536] Upgrade Infinispan Server to WildFly 9.0.0.CR2 <p>Upgrade to WildFly 9.0.0.CR1 using the feature-pack build machinery</p>

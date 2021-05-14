@@ -1,0 +1,3 @@
+[ISPN-263] Handle cluster partitions <p>JGroups already detects split brains and issues a callback.  The cache layer needs to decide what to do.  The idea is to implement a few canned policies (restart, wipe, etc) and allow custom handlers to be attached as well.</p>
+
+<p>Analogous to <a href= https://issues.jboss.org/browse/JBCACHE-471  title= Handle JGroups MERGE  class= issue-link  data-issue-key= JBCACHE-471 ><del>JBCACHE-471</del></a></p>

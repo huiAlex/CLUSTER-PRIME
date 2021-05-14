@@ -1,0 +1,5 @@
+[ISPN-3792] Optional Cache.putForExternalRead expiration arguments <p>BasicCache has optional lifespan and idle time arguments for its put methods, I was hoping to have that for putForExternalRead as well.</p>
+
+<p>Cheers,</p>
+
+<p>Vladimir</p>

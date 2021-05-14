@@ -1,0 +1,1 @@
+[ISPN-198] Ability to tune data container concurrency levels <p>See discussion in <a href= http://lists.jboss.org/pipermail/infinispan-dev/2009-September/001362.html  class= external-link  rel= nofollow >http://lists.jboss.org/pipermail/infinispan-dev/2009-September/001362.html</a></p>

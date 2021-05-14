@@ -1,0 +1,8 @@
+[ISPN-3355] Add support for clustered listeners <p>As opposed to the current listener approach in Infinispan ( a listener instance is invoked on the data owners ), this JIRA is about adding support for a cluster listener: the same listener instance that is notified disregarding of data ownership ( RPC calls involved). <br/>
+Due to the fact that the listener notification might involve an RPC, it is nice to be able to specify filters on these listeners.<br/>
+The clustered listener support opens the way for some interesting architectures:</p>
+<ul>
+	<li>persistent/continuous queries: the query is transformed in a filter. On each notification, the listener (stateful) updates the query state</li>
+	<li>simplistic CEP can be built on top of the persistent query described above</li>
+	<li>remote/hotrod notifications might be based on clustered listeners as well.</li>
+</ul>

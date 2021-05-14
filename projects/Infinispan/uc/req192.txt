@@ -1,0 +1,9 @@
+[ISPN-3069] TimeService implementation <p>Implementation of the TimeService as described in the mailling list <a href= http://lists.jboss.org/pipermail/infinispan-dev/2013-April/012667.html  class= external-link  rel= nofollow >http://lists.jboss.org/pipermail/infinispan-dev/2013-April/012667.html</a></p>
+
+<p>Interface can be found here: <a href= https://github.com/pruivo/infinispan/blob/ISPN-3069/core/src/main/java/org/infinispan/util/TimeService.java  class= external-link  rel= nofollow >https://github.com/pruivo/infinispan/blob/ISPN-3069/core/src/main/java/org/infinispan/util/TimeService.java</a></p>
+
+<p>Default implementation will wrap System.nanoTime() and System.currentTimeMillis().</p>
+
+<p>Provide also a no-op implementation?</p>
+
+<p>other suggestions are welcome.</p>

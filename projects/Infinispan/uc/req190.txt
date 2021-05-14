@@ -1,0 +1,3 @@
+[ISPN-299] Implement LIRS eviction policy <p>Need to investigate how this can be implemented in a thread-safe, and high-performing manner.  Would probably make LRU obsolete.</p>
+
+<p><a href= http://www.cse.ohio-state.edu/hpcs/WWW/HTML/publications/papers/TR-02-6.pdf  class= external-link  rel= nofollow >http://www.cse.ohio-state.edu/hpcs/WWW/HTML/publications/papers/TR-02-6.pdf</a></p>

@@ -1,0 +1,1 @@
+[ISPN-2200] Make ClusterCacheLoader configurable via new configuration API <p>ClusterCacheLoader should have a proper XML configuration element and a org.infinispan.configuration compatible API</p>

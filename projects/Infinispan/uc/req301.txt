@@ -1,0 +1,12 @@
+[ISPN-5832] Log relevant events through event logger <p>By using the event logger, make sure the different subsystems log the relevant events:</p>
+
+<ul>
+	<li>Task execution (as requested by users)</li>
+	<li>Node join/leave</li>
+	<li>Split/Merge</li>
+	<li>Rebalancing start / stop</li>
+	<li>Mass indexer</li>
+	<li>Server start/shutdown</li>
+	<li>Site up / down</li>
+	<li>Cache related events</li>
+</ul>

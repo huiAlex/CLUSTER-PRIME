@@ -1,0 +1,11 @@
+[ISPN-5219] Expose Distributed Iterators over HotRod <p>Integration with external distributed query engines requires the capacity to:</p>
+
+<ul>
+	<li>Partition the data</li>
+	<li>Iterate over each of the partitions</li>
+</ul>
+
+
+<p>The distributed iterators covers that and should be exposed over hotrod</p>
+
+<p>Wiki page: <a href= https://github.com/infinispan/infinispan/wiki/Remote-Iterator  class= external-link  rel= nofollow >https://github.com/infinispan/infinispan/wiki/Remote-Iterator</a></p>

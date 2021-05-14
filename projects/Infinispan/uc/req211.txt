@@ -1,0 +1,3 @@
+[ISPN-3526] Inject dependecies into the marshaller used for compatibility mode <p>Interoperability between remote query and embedded mode requires a special marshaller to be specified (CompatibilityProtoStreamMarshaller) which has a dependency on the CacheManager. It should not be the user s responsibility to inject this dependency because that could only work with programmatic configuration and would be impossible with xml config.</p>
+
+<p>Probably the best way to solve this is to automatically wire all user provided marshaller <em>instances</em> if they are annotated for injection.</p>

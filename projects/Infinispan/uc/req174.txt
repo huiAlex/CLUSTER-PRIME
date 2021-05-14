@@ -1,0 +1,2 @@
+[ISPN-2657] Support for LevelDB CacheStore <p>Support for LevelDB, a fast key-value persistence storage.<br/>
+There is a pure java implementation and a jni by fuse</p>

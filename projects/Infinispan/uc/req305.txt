@@ -1,0 +1,15 @@
+[ISPN-599] document CacheManager s default constructor <p>Current javadoc says:</p>
+
+<p>   /**</p>
+<ul>
+	<li>Constructs and starts a default instance of the CacheManager, using configuration defaults.<br/>
+    */<br/>
+   public DefaultCacheManager() 
+{
+      this(null, null, true);
+   }</li>
+</ul>
+
+
+
+<p>This does not make it to the user what  configuration defaults  are: e.g. load from a default file, what is the default cache mode etc. </p>

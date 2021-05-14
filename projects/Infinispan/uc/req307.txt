@@ -1,0 +1,33 @@
+[ISPN-608] Make replication queue implementation pluggable <p>We needed to make the ReplicationQueue listenable. We needed events for adding a command to and flushing the queue.</p>
+
+<p>org.infinispan.factories.EmptyConstructorNamedCacheFactory</p>
+
+<p>Just added ReplicationQueueNotifier.class to the @DefaultFactoryFor annotation.</p>
+
+<p>org.infinispan.notifications.replicationqueuelistener.ReplicationQueueNotifier</p>
+
+<p>Interface for the ReplicationQueue notifier.</p>
+
+<p>org.infinispan.notifications.replicationqueuelistener.ReplicationQueueNotifierImpl</p>
+
+<p>The ReplicationQueue notifier implementation. Supports events for adding and a command to and flushing the queue.</p>
+
+<p>org.infinispan.notifications.replicationqueuelistener.annotation.Flush<br/>
+org.infinispan.notifications.replicationqueuelistener.annotation.ReplicableCommandAdded</p>
+
+<p>The bare annotations to add to ReplicationQueue listeners.</p>
+
+<p>org.infinispan.notifications.replicationqueuelistener.event.Event</p>
+
+<p>The interface for the command added and flush event implementations.</p>
+
+<p>org.infinispan.notifications.replicationqueuelistener.event.FlushEvent<br/>
+org.infinispan.notifications.replicationqueuelistener.event.ReplicableCommandAddedEvent</p>
+
+<p>The event implementations.</p>
+
+<p>org.infinispan.remoting.ReplicationQueue</p>
+
+<p>Updated to implement listenable.<br/>
+  Throws the command added event AFTER it has been added to the queue. It includes the size of the queue AFTER the command has been added.<br/>
+  Throws the flush event AFTER the queue has been flushed. It includes the size of the queue to be flushed.</p>

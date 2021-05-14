@@ -1,0 +1,7 @@
+[ISPN-4276] Make JPA cache store work in Karaf <p>The JPA cache store does not currently work in Karaf. There are several thing to make it work in OSGi:</p>
+
+<ul>
+	<li>use hibernate-osgi dependency, and possibly change some other dependencies</li>
+	<li>JpaStoreConfigurationParser70 should be exposed as a service in Blueprint</li>
+	<li>EntityManagerFactory should be obtained from the service registry, similar to <a href= https://github.com/hibernate/hibernate-orm/tree/master/documentation/src/main/docbook/quickstart/tutorials/osgi/unmanaged-jpa  class= external-link  rel= nofollow >https://github.com/hibernate/hibernate-orm/tree/master/documentation/src/main/docbook/quickstart/tutorials/osgi/unmanaged-jpa</a></li>
+</ul>

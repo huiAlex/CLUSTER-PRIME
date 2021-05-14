@@ -1,0 +1,1 @@
+[ISPN-4129] Add Query, CDI, JCache, LevelDB and REST to the AS modules <p>Query, CDI, JCache, LevelDB and REST modules need to be added to the AS modules we ship</p>

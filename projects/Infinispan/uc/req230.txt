@@ -1,0 +1,5 @@
+[ISPN-40] optimize and cleanup ReplicateCommand <p>ReplicateCommand should be split into SingleRPCCommand, MultipleRPCCommand:</p>
+<ul class= alternate  type= square >
+	<li>name is more suggestive, ReplicateCommand  name is very simillr to ReplicableCommand which makes code hard to read</li>
+	<li>when only replicating a single command, the current impl is inefficient as it internally builds an array to store the single entry. This is not needed.</li>
+</ul>

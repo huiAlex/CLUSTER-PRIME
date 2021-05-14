@@ -1,0 +1,1 @@
+[ISPN-2985] HotRod endpoint SSL support <p>The server endpoints should be able to use a security-domain for SSL configuration</p>

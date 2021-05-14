@@ -1,0 +1,1 @@
+[ISPN-2351] Operate the Query MassIndexer via JMX <p>The MassIndexer is not exposed on JMX, we should expose it.</p>

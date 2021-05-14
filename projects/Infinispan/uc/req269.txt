@@ -1,0 +1,1 @@
+[ISPN-4944] Improve HR client security test coverage <p>Extends security test for HR client so that the tests cover all HR operations (available on <a href= https://docs.jboss.org/infinispan/7.0/apidocs/org/infinispan/client/hotrod/RemoteCache.html  class= external-link  rel= nofollow >Remote cache</a>)</p>

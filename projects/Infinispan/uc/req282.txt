@@ -1,0 +1,2 @@
+[ISPN-5298] HotRod millisecond precision for lifespan/maxidle <p>Currently lifespan/maxidle precision is SECONDS.<br/>
+JSR-107 requires MILLISECONDS precision.</p>

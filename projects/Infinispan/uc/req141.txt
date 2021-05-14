@@ -1,0 +1,3 @@
+[ISPN-2087] Listen for state transfer events to keep indexes in sync with datacontainers <p>When the index is not shared across nodes but is supposed to contain only the data being owned by the node, we need to keep this data in sync when the view changes.</p>
+
+<p>See also <a href= https://community.jboss.org/docs/DOC-18370  class= external-link  rel= nofollow >https://community.jboss.org/docs/DOC-18370</a></p>

@@ -1,0 +1,1 @@
+[ISPN-5416] Grouping and aggregations with DSL based queries <p>Implement the  group by  statement and the aggregate functions: count, sum, average, min, max.</p>

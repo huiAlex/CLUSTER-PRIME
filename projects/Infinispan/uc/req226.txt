@@ -1,0 +1,3 @@
+[ISPN-39] Distributed executors <p>A new API to allow users to provide a Runnable/Callable and a set of keys to run this on, and the ability to move the code to where the data is and execute it there, returning results (if any) across a network.</p>
+
+<p>Scope and objectives of this task are described in <a href= https://community.jboss.org/wiki/InfinispanDistributedExecutionFramework  class= external-link  rel= nofollow >https://community.jboss.org/wiki/InfinispanDistributedExecutionFramework</a></p>

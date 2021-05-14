@@ -1,0 +1,1 @@
+[ISPN-3917] Filter objects using the query DSL (without using an index) <p>The cluster listeners will want to use the Query DSL for filtering and projection views.  We don t want to have to tie ourselves to Lucene to do this.  It was discussed to implement this using reflection.</p>

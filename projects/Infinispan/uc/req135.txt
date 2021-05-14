@@ -1,0 +1,6 @@
+[ISPN-1976] Expose cluster partition name <p><span class= error >&#91;11:07:36&#93;</span> &lt;pilhuhn&gt; how can I  get the cluster partition name in as7 Similar to what was in as4/5 ? Is that now on subsystem=infinispan/cache=*:aliases ?<br/>
+<span class= error >&#91;11:32:15&#93;</span> &lt;+galderz&gt; pilhuhn, i don t think we re exposing it: <a href= http://docs.jboss.org/infinispan/5.1/apidocs/jmxComponents.html  class= external-link  rel= nofollow >http://docs.jboss.org/infinispan/5.1/apidocs/jmxComponents.html</a><br/>
+<span class= error >&#91;11:32:30&#93;</span> &lt;+galderz&gt; we could expose it via the cache manager<br/>
+<span class= error >&#91;11:33:12&#93;</span> &lt;+galderz&gt; pilhuhn, can u add a jira for that?</p>
+
+<p>For as7, this needs to be exposed within the as7 management tree.</p>

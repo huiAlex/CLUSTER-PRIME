@@ -1,0 +1,7 @@
+[ISPN-297] Transport API change to that collection of physical addresses are returned <p>In org.infinispan.remoting.transport.Transport modify:</p>
+
+<p>Address getPhysicalAddress();</p>
+
+<p>So that it can potentially return a List of physical addresses. This might be the case in the future:</p>
+
+<p>List&lt;Address&gt; getPhysicalAddresses();</p>

@@ -1,0 +1,3 @@
+[ISPN-444] Release lock when thread is interrupted <p>When a lock is acquired and the acquiring thread is interrupted, the lock is not released.<br/>
+A couple of try / finally should do the trick.<br/>
+The impact is quite important since the lock is never released and the entry unavailable.</p>

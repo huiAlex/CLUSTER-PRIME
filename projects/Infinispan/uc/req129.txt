@@ -1,0 +1,39 @@
+[ISPN-1801] Virtual nodes should be enabled by default <p>ATM the default value for virtualNodes is 1. This means that the wheel-share each node has can be very uneven for small(up to 15 nodes) clusters.<br/>
+Increasing this value even to a small number(10-30) would significantly improve each node s share of wheel and the chance for a well balanced data distribution over the cluster. </p>
+
+<p>Here are some suggestions from an email from Dan:<br/>
+&lt;snip&gt;</p>
+
+<p>I ve been working on a test to search for an optimal default value here:<br/>
+<a href= https://github.com/danberindei/infinispan/commit/983c0328dc40be9609fcabb767dd46f9b98af464  class= external-link  rel= nofollow >https://github.com/danberindei/infinispan/commit/983c0328dc40be9609fcabb767dd46f9b98af464</a></p>
+
+<p>I m measuring both the number of keys for which a node is primary<br/>
+owner and the number of keys for which it is one of the owners<br/>
+compared to the ideal distribution (K/N keys on each node). The former<br/>
+tells us how much more work the node could be expected to do, the<br/>
+latter how much memory the node is likely to need.</p>
+
+<p>I m only running 10000 loops, so the max figure is not the absolute<br/>
+maximum. But it s certainly bigger than the 0.9999 percentile.</p>
+
+<p>The full results are here:<br/>
+<a href= https://github.com/infinispan/infinispan/blob/master/core/src/test/java/org/infinispan/distribution/virtualnodes/vnodes_key_dist.txt  class= external-link  rel= nofollow >https://github.com/infinispan/infinispan/blob/master/core/src/test/java/org/infinispan/distribution/virtualnodes/vnodes_key_dist.txt</a></p>
+
+<p>The uniformity of the distribution goes up with the number of virtual<br/>
+nodes but down with the number of physical nodes. I think we should go<br/>
+with a default of 48 nodes (or 50 if you prefer decimal). With 32<br/>
+nodes, there s only a 0.1% chance that a node will hold more than 1.35</p>
+<ul>
+	<li>K/N keys, and a 0.1% chance that the node will be primary owner for<br/>
+more than 1.5 * K/N keys.</li>
+</ul>
+
+
+<p>We could go higher, but we run against the risk of node addresses<br/>
+colliding on the hash wheel. According to the formula on the Birthday<br/>
+Paradox page (<a href= http://en.wikipedia.org/wiki/Birthday_problem  class= external-link  rel= nofollow >http://en.wikipedia.org/wiki/Birthday_problem</a>), we only<br/>
+need 2072 addresses on our 2^31 hash wheel to get a 0.1% chance of<br/>
+collision. That means 21 nodes * 96 virtual nodes, 32 nodes * 64<br/>
+virtual nodes or 43 nodes * 48 virtual nodes.</p>
+
+<p>&lt;/snip&gt;</p>

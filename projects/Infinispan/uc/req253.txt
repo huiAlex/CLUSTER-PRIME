@@ -1,0 +1,1 @@
+[ISPN-4420] Allow configuring keepalive for hotrod connections <p>Also consider making the Tcp connections pluggable.</p>

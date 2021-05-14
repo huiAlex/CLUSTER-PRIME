@@ -1,0 +1,1 @@
+[ISPN-31] JPA based cache store <p>Store that uses JPA for persistence</p>

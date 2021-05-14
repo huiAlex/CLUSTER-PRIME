@@ -1,0 +1,33 @@
+[ISPN-609] Report Merge events via the listener API <p>We needed to make the JGroupsTransport listenable. We needed events for detecting that a merge has taken place</p>
+
+<p>org.infinispan.factories.EmptyConstructorFactory</p>
+
+<p>Just added JGroupsTransportNotifier.class to the @DefaultFactoryFor annotation.</p>
+
+<p>org.infinispan.notifications.jgroupstransport.JGroupsTransportNotifier</p>
+
+<p>Interface for the JGroupsTransportNotifier notifier.</p>
+
+<p>org.infinispan.notifications.jgroupstransport.JGroupsTransportNotifierImpl</p>
+
+<p>The JGroupsTransportNotifier notifier implementation. Supports events for a merge.</p>
+
+<p>org.infinispan.notifications.jgroupstransport.annotation.MergeViewAccepted</p>
+
+<p>The bare annotations to add to JGroupsTransport listeners.</p>
+
+<p>org.infinispan.notifications.jgroupstransport.event.Event</p>
+
+<p>The interface for the merge view accepted event implementations.</p>
+
+<p>org.infinispan.notifications.replicationqueuelistener.event.MergeViewAcceptedEvent</p>
+
+<p>The event implementations.</p>
+
+<p>org.infinispan.transport.Transport</p>
+
+<p>Updated to implement listenable.</p>
+
+<p>org.infinispan.transport.jgroups.JGroupsTransport</p>
+
+<p>Updated to throw an event when a merge view is accepted.</p>

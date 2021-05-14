@@ -1,0 +1,23 @@
+[ISPN-5528] Expose segment ownership in the Hot Rod client <p><a href= https://issues.jboss.org/browse/ISPN-5219  title= Expose Distributed Iterators over HotRod  class= issue-link  data-issue-key= ISPN-5219 ><del>ISPN-5219</del></a> exposes entry iteration via Hot Rod and allows to filter based on segments. <br/>
+In order to be able to eventually calculate the segments to be filtered on, ownership information for a cache needs to be exposed as well. <br/>
+API suggestion by @wburns:</p>
+
+<p/>
+<div id= syntaxplugin  class= syntaxplugin  style= border: 1px dashed #bbb; border-radius: 5px !important; overflow: auto; max-height: 30em; >
+<table cellspacing= 0  cellpadding= 0  border= 0  width= 100%  style= font-size: 1em; line-height: 1.4em !important; font-weight: normal; font-style: normal; color: black; >
+		<tbody >
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;  margin-top: 10px;   width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >Set&lt;Integer&gt; getSegments()</span></pre>
+			</td>
+		</tr>
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;   margin-bottom: 10px;  width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >Map&lt;Address, Set&lt;Integer&gt;&gt; getSegmentsByServer()
+</span></pre>
+			</td>
+		</tr>
+			</tbody>
+</table>
+</div>
+<p/>

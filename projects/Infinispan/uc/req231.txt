@@ -1,0 +1,1 @@
+[ISPN-400] Add property to display full byte arrays in logs <p>This is useful for marshalled caches and memcached/hotrod servers.</p>

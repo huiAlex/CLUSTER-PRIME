@@ -1,0 +1,3 @@
+[ISPN-4648] Log rebalancing messages to specific category <p>For ease of management, logging of major rebalancing events should be sent to an appropriate category.</p>
+
+<p>Use org.infinispan.CLUSTER and level INFO</p>

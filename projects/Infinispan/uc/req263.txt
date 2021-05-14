@@ -1,0 +1,26 @@
+[ISPN-48] Introduce lock() and unlock() API methods <p>This would be the fabled distributed locking.  </p>
+
+<p>These APIs should be on AdvancedCache, with the following sigs:</p>
+
+<p>void lock(K key, boolean eager);<br/>
+void lock(Collection&lt;? extends K&gt; keys, boolean eager);<br/>
+void unlock(K key);<br/>
+void unlock(Collection&lt;? extends K&gt; keys);</p>
+
+<p>The implementation should use a new Command, a LockControlCommand, which contains:</p>
+
+<ul>
+	<li>a boolean to indicate whether this is a lock or unlock</li>
+	<li>a boolean to indicate whether this is an eager lock</li>
+	<li>an array of keys to be locked/unlocked</li>
+</ul>
+
+
+<p>The command is handled by the LockingInterceptor which will acquire/release locks as needed.</p>
+
+<p>If eager, the ReplicationInterceptor will replicate this command <b>synchronously</b> (even if repl mode is async) to ensure all remote nodes have locked/unlocked as well.  (should this sync force only be on lock() and not unlock()?)  If using DIST, this would only be replicated among peers where the relevant keys are mapped.</p>
+
+<p>On a transaction prepare, lock()s that are NOT eager should also be respected and applied.  </p>
+
+<p>On transaction rollback, locks should be unlocked as usual, so unlock() commands need not be a part of the prepare.</p>
+

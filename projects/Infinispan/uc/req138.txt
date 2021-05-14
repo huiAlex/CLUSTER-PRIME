@@ -1,0 +1,1 @@
+[ISPN-2021] Make ReplicationQueueImpl#configuration usable by subclasses <p>... to allow subclasses to access this variable.</p>

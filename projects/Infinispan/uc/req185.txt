@@ -1,0 +1,8 @@
+[ISPN-292] Implement a stale lock cleanup mechanism <p>Similar to braking stale locks in JBoss Cache.  This is to prevent situations such as:</p>
+
+<p>N1 starts a tx, acquires locks<br/>
+N1 prepares<br/>
+N2 now acquires necessary locks<br/>
+N1 now crashes</p>
+
+<p>locks on N2 should not be held indefinitely, and resources should be released properly.</p>

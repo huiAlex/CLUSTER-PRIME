@@ -1,0 +1,2 @@
+[ISPN-476] Enable tcp no delay by default and make it configurable in servers <p>For increased performance of Hot Rod client and server, enable tcp no delay by default.<br/>
+Also, add configuration options to both client and server so that tcp no delay is configurable.</p>

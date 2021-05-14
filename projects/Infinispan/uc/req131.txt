@@ -1,0 +1,1 @@
+[ISPN-1817] Lazily initialize executors and scheduled executors <p>Unused JDK executors can be expensive even when idle.  A lazy initializing facade on first use is a better approach.</p>

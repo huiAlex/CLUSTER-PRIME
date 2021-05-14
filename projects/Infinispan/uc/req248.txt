@@ -1,0 +1,1 @@
+[ISPN-4289] Provide a user friendly error for not being able to parse 6.0 configuration files <p>When failing to parse a configuration file in XML format from Infinispan 6.0 (apparently now unsupported) the error message should be improved.</p>

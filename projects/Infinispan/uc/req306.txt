@@ -1,0 +1,1 @@
+[ISPN-6035] Caches created via InternalCacheRegistry should be optionally searchable <p>Add a SEARCHABLE flag to InternalCacheRegistry.Flag enum and use it when filtering caches that need the search components created.</p>

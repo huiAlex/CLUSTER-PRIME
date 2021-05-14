@@ -1,0 +1,35 @@
+[ISPN-4000] Delta view logging <p>Currently on view change the only log we have is  INFO ISPN000094: Received new cluster view .</p>
+
+<p/>
+<div id= syntaxplugin  class= syntaxplugin  style= border: 1px dashed #bbb; border-radius: 5px !important; overflow: auto; max-height: 30em; >
+<table cellspacing= 0  cellpadding= 0  border= 0  width= 100%  style= font-size: 1em; line-height: 1.4em !important; font-weight: normal; font-style: normal; color: black; >
+		<tbody >
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;  margin-top: 10px;   margin-bottom: 10px;  width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >11:36:27,355 INFO  [org.infinispan.remoting.transport.jgroups.JGroupsTransport] (Incoming-1,localhost-13545) ISPN000094: Received new cluster view: [localhost-7255|23] (24) [localhost-7255, localhost-51221, localhost-12479, localhost-1550, localhost-10300, localhost-11620, localhost-35337, localhost-40886, localhost-3020, localhost-51201, localhost-32626, localhost-17205, localhost-2984, localhost-45021, localhost-23189, localhost-9189, localhost-12902, localhost-38468, localhost-36454, localhost-63088 ...]
+</span></pre>
+			</td>
+		</tr>
+			</tbody>
+</table>
+</div>
+<p/>
+
+<p>In a large cluster environment the view list is truncated at max.list.print_size sys prop value, 20 by default. We can increase it but it s still hard to see who is joined/left.</p>
+
+<p>It would be nice to see the delta on view change, like the following:</p>
+
+<p/>
+<div id= syntaxplugin  class= syntaxplugin  style= border: 1px dashed #bbb; border-radius: 5px !important; overflow: auto; max-height: 30em; >
+<table cellspacing= 0  cellpadding= 0  border= 0  width= 100%  style= font-size: 1em; line-height: 1.4em !important; font-weight: normal; font-style: normal; color: black; >
+		<tbody >
+				<tr id= syntaxplugin_code_and_gutter >
+						<td  style=  line-height: 1.4em !important; padding: 0em; vertical-align: top; >
+					<pre style= font-size: 1em; margin: 0 10px;  margin-top: 10px;   margin-bottom: 10px;  width: auto; padding: 0; ><span style= color: black; font-family:  Consolas ,  Bitstream Vera Sans Mono ,  Courier New , Courier, monospace !important; >11:36:27,355 DEBUG [org.infinispan.remoting.transport.jgroups.JGroupsTransport] (Incoming-1,localhost-13545) Joined: [localhost-8582], Left: []
+</span></pre>
+			</td>
+		</tr>
+			</tbody>
+</table>
+</div>
+<p/>

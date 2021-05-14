@@ -1,0 +1,1 @@
+[ISPN-38] Early distributed deadlock detection <p>Based on Jason s old designs.  Will dig up docs and put this up somewhere.</p>

@@ -1,0 +1,3 @@
+[ISPN-2333] StateTransferInterceptor.handleTopologyAffectedCommand should be invoked for all TopologyAffectedCommands <p>Now it is invoked from handleDefault() only for FlagAffectedCommands.</p>
+
+<p>This was mistakenly introduced while fixing <a href= https://issues.jboss.org/browse/ISPN-1669  title= Flag checks should be done on commands and not context  class= issue-link  data-issue-key= ISPN-1669 ><del>ISPN-1669</del></a>.</p>
