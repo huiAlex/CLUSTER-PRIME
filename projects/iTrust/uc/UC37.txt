@@ -1,0 +1,22 @@
+UC37 Safe Drug Prescription Use Case
+
+37.1 Preconditions:
+
+The iTrust user (HCP) or administrator has been authenticated in the iTrust Medical Records system (UC3).
+
+37.2 Main Flow:
+
+While documenting an office visit, the HCP selects to prescribe a patient a drug by selecting its NDC and name [S1, S2]. Upon notice of allergies and/or interactions the HCP must either choose to proceed with the prescription [S3] or cancel the prescription and remain on the office visit page. The administrator maintains the override reasons that an HCP can select from [S4].
+
+37.3 Sub-flows:
+
+[S1] The drug desired to be prescribed is checked against the patient's drug allergies. The HCP is notified of drug allergy.
+[S2] The drug desired to be prescribed is checked for interactions between other drugs currently taken by the patient. The HCP is notified of possible interactions.
+[S3] The HCP selects one or more of the override reasons available for selection [E1]. The patient is sent a “fake email” that the HCP has prescribed a medication that he/she is allergic to or that has a known interaction with a drug he/she is taking.
+[S4] The system shall enable the administrator to add a new entry for a reason or modify the reason name in an existing entry [S5]. Note that the administrator is not allowed through the system interface to delete an existing entry or modify the reason ID number in an existing entry.
+[S5] The system shall store (1) reason id number for the reason [E2]; and (2) up to 80 alphanumeric characters giving the name of the reason [E3].
+37.4 Alternative Flows:
+
+[E1] When the HCP selects the “Other” reason, the HCP shall enter free-style text to provide the details for “Other” reasons.
+[E2] The administrator types an invalid ID and is prompted to try again.
+[E3] The administrator types an invalid name and is prompted to try again.

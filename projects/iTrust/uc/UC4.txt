@@ -1,0 +1,20 @@
+UC4 Enter/edit Demographics Use Case
+
+4.1 Preconditions:
+
+UC1 has completed and a patient has been created. The iTrust user has authenticated himself or herself in the iTrust Medical Records system (UC3).
+
+4.2 Main Flow:
+
+Demographic information is entered and/or edited [S1, S2, S3, S4]. The user is presented with a success or failure message and the form is updated so that the user may correct the form or add more information.
+
+43.3 Sub-flows:
+
+[S1] A patient or personal health representative may enter or edit their own demographic information including their security question/answer according to data format 6.1. When answer to the security question is typed in, the answer should not appear on the screen (similar to how a password normally appears) and the answer should be confirmed (by the patient or personal health representative) before it is saved. [E1].
+[S2] HCP must enter the MID of a patient and then enter or edit demographic information with the exception of the patient's security question/password according to data format 6.1 [E1].
+[S3] An HCP may enter or edit their own demographic information according to data format 6.2 [E1].
+[S4] An HCP may upload a photo of the patient as part of the patient's demographic records [E2].
+4.4 Alternative Flows:
+
+[E1] The system prompts the patient or HCP to correct the format of a required data field because the input of that data field does not match that specified in data format 6.1 or data format 6.2, as appropriate.
+[E2] The system shall display a default placeholder image for patients who do not have a photograph on file.

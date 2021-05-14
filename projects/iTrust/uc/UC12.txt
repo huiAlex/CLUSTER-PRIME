@@ -1,0 +1,18 @@
+UC12 Determine operational profile Use Case
+
+12.1 Preconditions:
+
+A software tester has a login and password. Similar to an administrator, a software tester is added by directly entering the software tester into the database by an administrator that has access to the database.
+
+12.2 Main Flow:
+
+The software tester authenticates himself or herself in the iTrust Medical Records system (UC2). He or she is then presented with the actual operational profile of the operations of the iTrust Medical Records where the use percentage is the % of total transactions for each particular transaction logging type, broken-down by each of the user types [patient, LHCP, UHCP, admin, tester]
+
+12.3 Sub-flows:
+
+None
+
+12.4 Alternative Flows:
+
+None
+

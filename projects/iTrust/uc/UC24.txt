@@ -1,0 +1,24 @@
+UC24 Take Satisfaction Survey Use Case
+
+24.1 Preconditions:
+
+The iTrust user (patient) has authenticated himself or herself in the iTrust Medical Records system (UC3).
+
+24.2 Main Flow:
+
+A patient or personal health representative can answer any of the following questions relative to a previous (in UC9, S1) office visit according to Data Format 6.13.
+
+How many minutes did you wait in the waiting room?
+How many minutes did you wait in the examination room before seeing your physician?
+How satisfied were you with your office visit?
+How satisfied were you with the treatment or information you received?
+The answers to the survey are stored.
+
+24.3 Sub-flows:
+
+None
+
+24.4 Alternative Flows:
+
+None
+

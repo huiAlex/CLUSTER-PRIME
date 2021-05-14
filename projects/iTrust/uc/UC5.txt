@@ -1,0 +1,19 @@
+UC5 Log Transaction Use Case
+
+5.1 Preconditions:
+
+None
+
+5.2 Main Flow:
+
+Any event which creates, views, edits, or deletes information is logged [S2]. Login failures, valid authentication, and log outs are also logged [S1]. Individual audit codes related to specific use cases are presented within each Use Case description.
+
+Note: The subflow and transaction values are based on Use Case. For example, any in the range of 100-199 are for use case one, any in the range of 200-299 are in use case two. The values from range 1-99 are logging events which do not exist in any use case. Miscellaneous transaction codes 1-99 are presented in 5.5 below.
+
+5.3 Sub-flows:
+
+[S1] For Login Failures, the IP Address of the machine, transaction type = 1, and timestamp are recorded.
+[S2] For creating, viewing, modifying, or deleting information, the following information is recorded: the MID of the logged in user, any appropriate secondary MID of the user whose information is being accessed, a transaction type corresponding to the given action, and the current timestamp.
+5.4 Alternative Flows:
+
+None

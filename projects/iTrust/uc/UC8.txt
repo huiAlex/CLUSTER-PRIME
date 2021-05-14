@@ -1,0 +1,22 @@
+UC8 View Access Log Use Case
+
+8.1 Preconditions:
+
+A patient is a registered user of the iTrust Medical Records system (UC1). The patient has authenticated himself or herself in the iTrust Medical Records system (UC3).
+
+8.2 Main Flow:
+
+The patient chooses to view his or her access log or that for a person for whom they are a personal health representative. The patient then chooses the beginning and end date for the period of time they would like to view their access log for [S1, S2]. The resulting list should include the following for each access:
+
+Name of non-DLHCP accessor (with a link to contact information if the viewer is an LHCP)
+Role of non-DLHCP accessor relative to the patient
+Date and time of access
+Transaction Type (See Data Format 6.3)
+8.3 Sub-flows:
+
+[S1] By default, the patient is presented with a list sorted by dates, most recent access first.
+[S2] The patient may choose to view the list sorted by the role of the accessor relative to the patient (personal health representative, LHCP, UAP, Emergency Responder; any order is fine as long as the list is sorted by role) as well as by date for each role type, most recent access first.
+8.4 Alternative Flows:
+
+None
+

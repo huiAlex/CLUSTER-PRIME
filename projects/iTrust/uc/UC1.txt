@@ -1,0 +1,20 @@
+UC1 Create and Deactivate Patients Use Case
+
+1.1 Preconditions:
+
+The iTrust HCP has authenticated himself or herself in the iTrust Medical Records system (UC3).
+
+1.2 Main Flow:
+
+An HCP is able to create a patient [S1] or disable a selected patient [S2]. The create/disable patients and HCP transaction is logged (UC5).
+
+1.3 Sub-flows:
+
+[S1] The HCP enters a patient as a new user of iTrust Medical Records system. Only the name and email are provided. The patient's assigned MID and a secret key (the initial password) are personally provided to the user, with which the user can reset his/her password. The HCP can edit the patient according to data format 6.4 [E1] with all initial values (except patient MID) defaulting to null and/or 0 as appropriate. Patient MID should be the number assigned when the patient is added to the system and cannot be edited. The HCP does not have the ability to enter/edit/view the patient's security question/password.
+[S2] The HCP selects a patient to deactivate. The HCP is presented with a confirmation containing the name of the patient and determines if it is the patient they intend to deactivate [E2]. A deactivated patient can not be modified or log into the system, and can only be reactivated by the administrator.
+[S3] The HCP uploads a comma-seperated value file containing one patient per row. The fields of the CSV file must include at least the first name, last name, and e-mail address, with additional columns available for the other demographic values. The patients are created, the tables are populated, and the MIDS and temporary passwords are displayed to the HCP in a table. The event is logged.
+1.4 Alternative Flows:
+
+[E1] The system prompts the enterer/editor to correct the format of a required data field because the input of that data field does not match that specified in data format 6.4 for patients.
+[E2] If the confirmation screen does not show the name of the intended patient, the HCP is then prompted to input the correct patient identification information again.
+[E3] If the file is malformed, then no data is added, and an error message explaining the correct file structure is presented.

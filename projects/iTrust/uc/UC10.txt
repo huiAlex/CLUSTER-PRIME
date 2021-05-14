@@ -1,0 +1,19 @@
+UC10 Enter/edit personal health records Use Case
+
+10.1 Preconditions:
+
+An HCP is a registered user of the iTrust Medical Records system (UC2). The HCP has authenticated himself or herself in the iTrust Medical Records system (UC3).
+
+10.2 Main Flow:
+
+An HCP chooses to enter/edit personal health information for a patient [S1]. The information is viewed/edited by the HCP [S2].
+
+10.3 Sub-flows:
+
+[S1] The health care personnel enters a MID [E1] of a patient and confirms their selection [E2].
+[S2] The health care personnel may enter/edit personal health information including Patient Information (Data Format 6.4.1), Insurance Information (6.4.2), Emergency Contact Information (6.4.3), and Patient’s Health Information ([[requirements:df4|6.4.4]). The HCP can indicate drug allergies [S3]. The HCP can indicate the patient has passed away, providing an appropriate diagnosis code.
+[S3] The HCP can select a medication from a pull down list and add it to the list of medications the patient is allergic to. The medication is checked against the patient's current and future prescriptions. The HCP is notified of any current or future prescriptions to which the patient has a drug allergy.
+10.4 Alternative Flows:
+
+[E1] The health care professional types an invalid medical identification number and is prompted to try again.
+[E2] The patient chosen is not the desired patient. The health care professional does not confirm the selection and is prompted to try again.

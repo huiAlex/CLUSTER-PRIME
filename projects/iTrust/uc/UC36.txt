@@ -1,0 +1,18 @@
+UC36 Monitor Adverse Event Use Case
+
+36.1 Preconditions:
+
+The iTrust user (patient or PHA) has been authenticated in the iTrust Medical Records system (UC3).
+
+36.2 Main Flow:
+
+A public health agent (PHA) selects a specific time period for which he/she would like to see a detailed listing of all adverse events related to prescription drugs [S1] or immunizations [S2] or to see trends in adverse events related to prescription drugs [S4] or immunizations [S5].
+
+36.3 Sub-flows:
+
+[S1] A public health agent is presented with a listing of prescription drug-related adverse events for the time period that do not have a status of “removed”, sorted by NDC. The public health agent can select to see the detail of a specific report. Upon reading the report, the public health agent can choose to send a “fake email” message to the adverse event reporter to gain more information about the report. The public health agent may also choose to remove an adverse event report (such as based upon communication with the reporter or because the report appears to be bogus) [S3].
+[S2] A public health agent is presented with a listing of immunization-related adverse events for the time period that do not have a status of “removed”, sorted by CPT code . The public health agent can select to see the detail of a specific report. Upon reading the report, the public health agent can choose to send a “fake email” message to the adverse event reporter to gain more information about the report. The public health agent may also choose to remove an adverse event report (such as based upon communication with the reporter or because the report appears to be bogus) [S3].
+[S3] The adverse event report changes to a status of “removed.” A message of the removal is sent to the adverse event reporter and to the LHCP involved in the report (because the LHCP prescribed the drug or administered the immunization).
+36.4 Alternative Flows:
+
+None

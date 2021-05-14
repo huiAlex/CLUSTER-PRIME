@@ -1,0 +1,17 @@
+UC27 Alert Users by Email Use Case
+
+27.1 Preconditions:
+
+An event requiring an email alert has occurred.
+
+27.2 Main Flow:
+
+An email alert is sent out to the iTrust user in the event of a changed password [S1], status change in laboratory procedure [S2], comprehensive report requested and generated. Note to students: the iTrust system does NOT currently support actual email sending, only a “fake” email sending facility. All email notifications should be executed through the fake email utility.
+
+27.3 Sub-flows:
+
+[S1] The user has successfully changed his/her password (UC3, S2). An email informing the user of the password change is sent to the user including the MID but not the password.
+[S2] The status of a laboratory procedure has been updated (UC26, S3). The patient is notified with the following information: the LOINC number and the updated status.
+27.4 Alternative Flows:
+
+None

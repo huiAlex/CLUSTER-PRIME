@@ -1,0 +1,17 @@
+UC16 Identify risk of chronic disease Use Case
+
+16.1 Preconditions:
+
+The LHCP has authenticated himself or herself in the iTrust Medical Records system (UC3).
+
+16.2 Main Flow:
+
+Through the Personal Health Records page, an LHCP chooses a chronic disease and a patient. The data in the database is analyzed according to the risk factors for the disease to determine if the patient exhibits one or more risk factors. Currently available risk factors for chronic diseases are defined for Diabetes (Type 1 and Type2) and Heart Disease. When the chosen patient satisfies the preconditions of the chosen chronic disease [E1], the LHCP is provided with a warning message if that patient exhibits three or more risk factors. The message will display the risk factors that the patients exhibit.
+
+16.3 Sub-flows:
+
+None
+
+16.4 Alternative Flows:
+
+[E1] The LHCP chooses to examine a patient for which the preconditions do not apply (e.g., an adult shouldn't be tested for child diabetes) and the LHCP is prompted that no analysis can occur.

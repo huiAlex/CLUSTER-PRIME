@@ -1,0 +1,26 @@
+UC21 View emergency electronic health record Use Case
+
+21.1 Preconditions:
+
+The iTrust user (LHCP or ER) has authenticated himself or herself in the iTrust Medical Records system (UC3).
+
+21.2 Main Flow:
+
+A LHCP or ER chooses to view an emergency report and provides an MID [E1]. The LHCP/ER is presented with a patient confirmation [E2]. The LHCP obtains a printable report [meaning you should minimize the space taken up to provide the information] containing vital information for the patient:
+
+Name
+Age
+Gender
+Emergency contact (name and phone number)
+Allergies
+Blood type
+A list of all diagnosis codes chronic/long-term diagnoses for the patient and well as all short term diagnoses made within the last 30 days. Display the ICD-9CM code and the name of the diagnoses. Sort by most recent first.
+A list of all prescriptions the patient is likely to be currently taking as determined by the end date of the prescription has passed by 91 days or less. Display the National Drug Code and the name of the prescription. Sort by most recent first.
+A list of all immunizations the patient has had. Display the CPT Code and the name of the immunization. Sort by most recent first.
+21.3 Sub-flows:
+
+[S1] The LHCP or ER enters a MID [E1] and confirms the input [E2].
+21.4 Alternative Flows:
+
+[E1] The LHCP/ER types an invalid medical identification number and is prompted to try again.
+[E2] The patient chosen is not the desired patient. The LHCP or ER does not confirm the selection and is prompted to try again.

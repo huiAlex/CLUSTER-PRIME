@@ -1,0 +1,18 @@
+UC31 Find LHCPs for prescription renewal Use Case
+
+31.1 Preconditions:
+
+The iTrust user (patient) has been authenticated in the iTrust Medical Records system (UC3).
+
+31.2 Main Flow:
+
+A patient wants to renew the patient's expired prescriptions (i.e., prescriptions' end dates are earlier than the current date) and therefore wants to find the LHCPs who earlier wrote the patient's expired prescriptions (it is assumed that the doctors who wrote prescriptions are all LHCPs so no LHCP checks on the prescription-writing doctors are needed). The patient chooses “My Expired Prescription Reports” and is presented with a list of the patient's expired prescriptions [S1], sorted by start date (the later date is ranked earlier closer to the top). The patient can select to view contact information of a selected LHCP shown in the expired prescription list [S2].
+
+31.3 Sub-flows:
+
+[S1] The expired prescription report list is titled with the patient name. The expired prescription list includes medication, date prescribed (i.e., the day of the office visit), start date, end date for each prescription, and the name of the LHCP who prescribed the medication (where the name of the LHCP is linked to contact information for that LHCP). If there are no expired prescriptions, an empty expired prescription list is presented.
+[S2] The patient clicks on the name of the LHCP for an expired prescription, and is presented with the contact information for that LHCP (including First Name Last Name, LHCP Type, Street Address 1, Street Address 2, City, State, Zip Code, Phone, and Contact Email); if any type of contact information is missing or the whole contact information for the LHCP is not available in the database, the corresponding missing types of information are simply shown as blank.
+31.4 Alternative Flows:
+
+None
+

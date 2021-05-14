@@ -1,0 +1,17 @@
+UC13 Declare/undeclare Personal Representative Use Case
+
+13.1 Preconditions:
+
+An HCP is a registered user of the iTrust Medical Records system (UC2). The iTrust user has authenticated himself or herself in the iTrust Medical Records system (UC3).
+
+13.2 Main Flow:
+
+The HCP selects a patient by typing in the MID of the patient [E1]. The HCP can choose to add or remove another registered user as a personal health representative to that patient.
+
+13.3 Sub-flows:
+
+None
+
+13.4 Alternative Flows:
+
+[E1] The health care personnel types an invalid medical identification number and is prompted to try again.

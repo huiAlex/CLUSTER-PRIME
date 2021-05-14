@@ -1,0 +1,19 @@
+UC6 View HCP; Designate/Undesignate Designated Licensed Health Care Professional Use Case
+
+6.1 Preconditions:
+
+The patient has authenticated himself or herself in the iTrust Medical Records system (UC3).
+
+6.2 Main Flow:
+
+The patient chooses to view all LHCPs the patient has ever had an office visit with and those whom he/she had designated [S1, S2]. The patient can also add a LHCP to their provider list by searching for the name and/or specialty of a LHCP [S3] and then selecting to add the HCP to their list of providers.
+
+6.3 Sub-flows:
+
+[S1] The LHCP's name, specialty, address, date of office visit, and whether or not the LHCP is a DLHCP for this patient is indicated. The list is sorted by the date of the last office visit (most recent first).
+[S2] The patient can choose to toggle between designating/undesignating any LHCP as being a DLHCP for them.
+[S3] The patient types a last name or partial last name, and/or providing the specialty. The patient may optionally enter a zip code (match on first three numbers of zip code), in addition to the name and/or specialty. The LHCP's name, specialty, and address are provided.
+6.4 Alternative Flows:
+
+None
+
