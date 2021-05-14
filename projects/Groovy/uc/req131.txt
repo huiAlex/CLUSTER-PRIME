@@ -1,0 +1,1 @@
+[GROOVY-975] Provide size() on StringBuilder <p><a href= https://issues.apache.org/jira/browse/GROOVY-920  title= provide size() on StringBuffer  class= issue-link  data-issue-key= GROOVY-920 ><del>GROOVY-920</del></a> resulted in size() being implemented for StringBuffer.  size() should also be implemented for StringBuilder on JDK1.5+ platforms.</p>

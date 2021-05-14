@@ -1,0 +1,10 @@
+[GROOVY-879] Provide a replacement for the dropped === operator, e.g. Object.is(Object) <p>using<br/>
+System.identityHashcode(object1) ==System.identityHashcode(object2)<br/>
+is very inconvenient.</p>
+
+<p>suggestions:</p>
+
+<p>object1.is(object2)<br/>
+object1.isSame(object2)<br/>
+object1.isIdentical(object2)<br/>
+object1.equalsId(object2)</p>

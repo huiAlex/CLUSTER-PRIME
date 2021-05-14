@@ -1,0 +1,35 @@
+[GROOVY-878] Allow Closures to be a switch case by implementing the isCase() method <p>implement isCase() on Closures like <br/>
+    public boolean isCase(Object candidate)</p>
+{
+        return InvokerHelper.asBool(call(candidate));
+    }
+
+<p>to let Closures play  as switch cases like in SwitchTest</p>
+
+<p>    void testSwitchWithClosure(){<br/>
+        switch(0){<br/>
+            case </p>
+{true}
+<p>: break<br/>
+            default: assert false<br/>
+        }<br/>
+        switch(0){<br/>
+            case </p>
+{false}
+<p>: assert false<br/>
+        }<br/>
+        switch(0){<br/>
+            case </p>
+{it == 0}
+<p>: break<br/>
+            default: assert false<br/>
+        }<br/>
+        switch(0){<br/>
+            case </p>
+{ candidate -&gt; candidate == 0}
+<p>: break<br/>
+            default: assert false<br/>
+        }<br/>
+    }</p>
+
+<p>That way, we can switch on logic.</p>
