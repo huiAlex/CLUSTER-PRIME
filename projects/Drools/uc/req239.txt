@@ -1,0 +1,25 @@
+[JBRULES-3268] Support for varargs needed <p>I have a method such as:</p>
+
+<p>  /*</p>
+<ul>
+	<li>determines if any of the events passed as parameter has occurred<br/>
+   */<br/>
+  public boolean hasAnyEventOccurred(String... events) {</li>
+</ul>
+
+
+<p>    for (String s : events) {<br/>
+      if (hasEventOccurred(s)) </p>
+{
+        return true;
+      }
+<p>    }</p>
+
+<p>    return false;<br/>
+  }</p>
+
+<p>However in rules I can t call it like that:</p>
+
+<p>hasAnyEventOccurred( event1 ,  event2 ,  event3 ), I have to workaround as so: hasAnyEventOccurred(new String[] </p>
+{ event1 ,  event2 ,  event3 }
+<p>)</p>

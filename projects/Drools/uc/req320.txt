@@ -1,0 +1,1 @@
+[JBRULES-900] allow parameterised queries <p>querries should allow parameters to be passed.</p>

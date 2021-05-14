@@ -1,0 +1,1 @@
+[JBRULES-3194] Generate invoker classes with ASM <p>Generate invoker classes with ASM</p>

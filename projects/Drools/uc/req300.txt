@@ -1,0 +1,1 @@
+[JBRULES-708] Full MVEL integration <p>MVEL needs full integration for all code expressions and blocks.</p>

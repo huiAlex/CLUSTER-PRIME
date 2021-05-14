@@ -1,0 +1,1 @@
+[JBRULES-936] Implement incremental accumulation/collection for accumulate and collect CE <p>Implement incremental accumulation/collection for accumulate and collect CE</p>

@@ -1,0 +1,8 @@
+[JBRULES-3402] Support variable expressions in interval-based timer rules <p>It should be possible to use expressions, and bound variables in particular, with the  timer  attribute:</p>
+
+<p>rule  Parametric timer <br/>
+timer( expr : $x, $y; ... )<br/>
+when<br/>
+  Bean( $x : delay, $y : period )<br/>
+then<br/>
+end</p>

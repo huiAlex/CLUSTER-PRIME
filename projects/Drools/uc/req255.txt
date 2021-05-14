@@ -1,0 +1,62 @@
+[JBRULES-3628] Exception jitting a constaint invoking a constructor <p>If the constraint invokes a constructor with a primitive type as argument but passing the corresponding class type to it as in the following example:</p>
+
+<p>class Person {<br/>
+    public Integer getAgeAsInteger() </p>
+{ return age; }
+<p>}</p>
+
+<p>rule R1 when<br/>
+   Person( new Integer( ageAsInteger ) &lt; 40 )<br/>
+then<br/>
+end</p>
+
+<p>when the constraint is jitted the following Exception is thrown:</p>
+
+<p>java.lang.RuntimeException: Exception jitting: new Integer( ageAsInteger ) &lt; 40<br/>
+	at org.drools.rule.constraint.MvelConstraint.executeJitting(MvelConstraint.java:274)<br/>
+	at org.drools.rule.constraint.MvelConstraint.jitEvaluator(MvelConstraint.java:229)<br/>
+	at org.drools.rule.constraint.MvelConstraint.forceJitEvaluator(MvelConstraint.java:222)<br/>
+	at org.drools.rule.constraint.MvelConstraint.evaluate(MvelConstraint.java:191)<br/>
+	at org.drools.rule.constraint.MvelConstraint.isAllowed(MvelConstraint.java:156)<br/>
+	at org.drools.reteoo.AlphaNode.assertObject(AlphaNode.java:137)<br/>
+	at org.drools.reteoo.SingleObjectSinkAdapter.propagateAssertObject(SingleObjectSinkAdapter.java:59)<br/>
+	at org.drools.reteoo.ObjectTypeNode.assertObject(ObjectTypeNode.java:235)<br/>
+	at org.drools.reteoo.EntryPointNode.assertObject(EntryPointNode.java:240)<br/>
+	at org.drools.common.NamedEntryPoint.insert(NamedEntryPoint.java:350)<br/>
+	at org.drools.common.NamedEntryPoint.insert(NamedEntryPoint.java:311)<br/>
+	at org.drools.common.AbstractWorkingMemory.insert(AbstractWorkingMemory.java:903)<br/>
+	at org.drools.common.AbstractWorkingMemory.insert(AbstractWorkingMemory.java:847)<br/>
+	at org.drools.impl.StatefulKnowledgeSessionImpl.insert(StatefulKnowledgeSessionImpl.java:269)<br/>
+	at org.drools.integrationtests.MiscTest.testJit(MiscTest.java:11520)<br/>
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br/>
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)<br/>
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)<br/>
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)<br/>
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)<br/>
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)<br/>
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)<br/>
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:263)<br/>
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:68)<br/>
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)<br/>
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)<br/>
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)<br/>
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)<br/>
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)<br/>
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)<br/>
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)<br/>
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:157)<br/>
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:76)<br/>
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:195)<br/>
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:63)<br/>
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br/>
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)<br/>
+	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:120)<br/>
+Caused by: java.lang.VerifyError: (class: ConditionEvaluatord12c0fbaca644b0eaff422a71b8812cc, method: evaluate signature: (Ljava/lang/Object;Lorg/drools/common/InternalWorkingMemory;Lorg/drools/reteoo/LeftTuple;)Z) Expecting to find integer on stack<br/>
+	at java.lang.Class.getDeclaredConstructors0(Native Method)<br/>
+	at java.lang.Class.privateGetDeclaredConstructors(Class.java:2389)<br/>
+	at java.lang.Class.getConstructor0(Class.java:2699)<br/>
+	at java.lang.Class.getConstructor(Class.java:1657)<br/>
+	at org.drools.rule.builder.dialect.asm.ClassGenerator.newInstance(ClassGenerator.java:198)<br/>
+	at org.drools.rule.constraint.ASMConditionEvaluatorJitter.jitEvaluator(ASMConditionEvaluatorJitter.java:53)<br/>
+	at org.drools.rule.constraint.MvelConstraint.executeJitting(MvelConstraint.java:272)<br/>
+	... 40 more</p>

@@ -1,0 +1,1 @@
+[JBRULES-9] Logic Transformer Implementation for Ors and Duplicates <p>We need to  make sure that our LogicTransformer is implementation correct.</p>

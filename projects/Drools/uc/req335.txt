@@ -1,0 +1,126 @@
+[JBRULES-941] Add support to pluggable accumulate functions <p>   All,</p>
+
+<p>   Today I used a few hours to develop something I think it is quite useful: the ability to have externally coded functions for accumulate. Basically, the idea is that common functions should have a predefined template and not be coded in every accumulate of every rule in your rule base.<br/>
+   Example:  average </p>
+
+<p>   The idea is that instead of writing something like bellow in every rule:</p>
+
+<p>$avg : Number() from accumulate( Cheese( $price : price ),<br/>
+                                                   init( double total = 0; int count = 0 ),<br/>
+                                                   action( total <ins>= $price; count</ins>+; ),<br/>
+                                                   reverse( total <del>= $price; count</del>-; ),<br/>
+                                                   result( new Double( total / count ) ) )</p>
+
+<p>     The user could simply use a predefined function like:</p>
+
+<p>$avg : Number() from accumulate( Cheese( $price : price ),<br/>
+                                                   average( $price ) );</p>
+
+<p>      Or if he wants to know how much will cost him to give 10% raise to all employees of a given department:</p>
+
+<p>$sum : Number() from accumulate( Employee( dept ==  X , $salary : salary )<br/>
+                                                    sum( $salary * 0.1 ) )</p>
+
+<p>     And whatever the user wants to do.<br/>
+     So, instead of hardcoding a few functions, I thought it was better to let it pluggable. So I defined a simple interface (AccumulateFunction) and anyone willing to create an external function simply implement this interface and wires it using either the PackageBuilderConfiguration API or the configuration files mark created. Example:</p>
+
+<p>drools.accumulate.function.average = org.drools.base.accumulators.AverageAccumulator</p>
+
+<p>     Where  drools.accumulate.function.  is a constant prefix and  average  is the function identifier the user will use in the rule file (DRL, XML, etc).</p>
+
+<p>     Also, we will provide common functions like  average ,  sum ,  count ,  min ,  max , etc, out of the box, since it is really easy to implement any function. Example: to implement the average function, all one needs to do is:</p>
+
+<p>package org.drools.base.accumulators;</p>
+
+
+<p>/**</p>
+<ul>
+	<li>An implementation of an accumulator capable of calculating average values<br/>
+ *</li>
+	<li>@author etirelli<br/>
+ *<br/>
+ */<br/>
+public class AverageAccumulator implements AccumulateFunction {</li>
+</ul>
+
+
+<p>    protected static class AverageData </p>
+{
+        public int    count = 0;
+        public double total = 0;
+    }
+
+<p>    /* (non-Javadoc)</p>
+<ul>
+	<li>@see org.drools.base.accumulators.AccumulateFunction#createContext ()<br/>
+     */<br/>
+    public Object createContext() 
+{
+        return new AverageData();
+    }</li>
+</ul>
+
+
+<p>    /* (non-Javadoc)</p>
+<ul>
+	<li>@see org.drools.base.accumulators.AccumulateFunction#init(java.lang.Object)<br/>
+     */<br/>
+    public void init(Object context) throws Exception 
+{
+        AverageData data = (AverageData) context;
+        data.count = 0;
+        data.total = 0;
+    }</li>
+</ul>
+
+
+<p>    /* (non-Javadoc)</p>
+<ul>
+	<li>@see org.drools.base.accumulators.AccumulateFunction#accumulate (java.lang.Object, java.lang.Object)<br/>
+     */<br/>
+    public void accumulate(Object context,<br/>
+                           Object value) 
+{
+        AverageData data = (AverageData) context;
+        data.count++;
+        data.total += ((Number) value).doubleValue();
+    }</li>
+</ul>
+
+
+<p>    /* (non-Javadoc)</p>
+<ul>
+	<li>@see org.drools.base.accumulators.AccumulateFunction#reverse(java.lang.Object, java.lang.Object)<br/>
+     */<br/>
+    public void reverse(Object context,<br/>
+                        Object value) throws Exception 
+{
+        AverageData data = (AverageData) context;
+        data.count--;
+        data.total -= ((Number) value).doubleValue();
+    }</li>
+</ul>
+
+
+<p>    /* (non-Javadoc)</p>
+<ul>
+	<li>@see org.drools.base.accumulators.AccumulateFunction#getResult(java.lang.Object)<br/>
+     */<br/>
+    public Object getResult(Object context) throws Exception 
+{
+        AverageData data = (AverageData) context;
+        return new Double( data.count == 0 ? 0 : data.total / data.count );
+    }</li>
+</ul>
+
+
+<p>    /* (non-Javadoc)</p>
+<ul>
+	<li>@see org.drools.base.accumulators.AccumulateFunction#supportsReverse()<br/>
+     */<br/>
+    public boolean supportsReverse() 
+{
+        return true;
+    }
+<p>}</p></li>
+</ul>

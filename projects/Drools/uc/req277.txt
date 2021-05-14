@@ -1,0 +1,1 @@
+[JBRULES-526] Implement  a CompositeIndex  for Facts <p>Manners works  faster with  a composite index, so create a lightweight  indexing  solution.</p>

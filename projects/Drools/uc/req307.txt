@@ -1,0 +1,1 @@
+[JBRULES-814] Seperate the interfaces into Stateless and Stateful <p>RuleBase now returns two sessions, StatelessSession and StatefulSession.</p>

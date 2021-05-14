@@ -1,0 +1,5 @@
+[JBRULES-392] BigDecimal and BigInteger support for literals in evaluators <p>Need to have BigDecimal support in the evaluators:</p>
+
+<p>Foo(bigDecField &gt; 2)</p>
+
+<p>so the literal is converted into a BigDec etc.. (also BigInteger). Should not be too hard.</p>

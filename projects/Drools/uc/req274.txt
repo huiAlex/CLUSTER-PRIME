@@ -1,0 +1,1 @@
+[JBRULES-498] Optimised HashMap implementations <p>Create a HashMap implementation that is optimised for holding ReteTuples  and also for indexing FactHandles by field index  and value,</p>

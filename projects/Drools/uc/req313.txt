@@ -1,0 +1,3 @@
+[JBRULES-866] Allow the pattern binding variable to be used field constraints <p>p : Person( p.name ==  bob  )</p>
+
+<p>Some users may write rules this way and it can help with code generation, so that you can use the same statements in the field constraints as you can in the eval (when using something like MVEL).</p>

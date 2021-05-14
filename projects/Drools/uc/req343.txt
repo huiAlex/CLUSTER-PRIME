@@ -1,0 +1,1 @@
+[JBRULES-99] integration tests for agenda groups <p>add integration tests for agenda groups</p>

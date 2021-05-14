@@ -1,0 +1,97 @@
+[JBRULES-256] NullPointerException DynamicRuleRemoval with unused working memory, rev. 4100; (+ testcase not leaps-compatible) <p>rewriten integration test testDynamicRuleRemovals yields NullPointerException. Testcode after trace.<br/>
+(+ original Testcase not leaps compatible, does always create reteoo.RuleBaseImpl:</p>
+
+<p>public void testDynamicRuleRemovals() throws Exception {<br/>
+...<br/>
+        Package pkg = builder.getPackage();</p>
+
+<p>        org.drools.reteoo.RuleBaseImpl ruleBase = new org.drools.reteoo.RuleBaseImpl();<br/>
+        ruleBase.addPackage( pkg );<br/>
+...<br/>
+)</p>
+
+<p>java.lang.NullPointerException<br/>
+	at org.drools.reteoo.TerminalNode.remove(TerminalNode.java:233)<br/>
+	at org.drools.reteoo.ReteooBuilder.removeRule(ReteooBuilder.java:567)<br/>
+	at org.drools.reteoo.RuleBaseImpl.removeRule(RuleBaseImpl.java:451)<br/>
+	at org.drools.reteoo.RuleBaseImpl.removeRule(RuleBaseImpl.java:440)<br/>
+	at org.drools.integrationtests.IntegrationCases.testDynamicRuleRemovalsUnusedWorkingMemory(IntegrationCases.java:1400)<br/>
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br/>
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)<br/>
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)<br/>
+	at java.lang.reflect.Method.invoke(Method.java:324)<br/>
+	at junit.framework.TestCase.runTest(TestCase.java:154)<br/>
+	at junit.framework.TestCase.runBare(TestCase.java:127)<br/>
+	at junit.framework.TestResult$1.protect(TestResult.java:106)<br/>
+	at junit.framework.TestResult.runProtected(TestResult.java:124)<br/>
+	at junit.framework.TestResult.run(TestResult.java:109)<br/>
+	at junit.framework.TestCase.run(TestCase.java:118)<br/>
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)<br/>
+	at junit.framework.TestSuite.run(TestSuite.java:203)<br/>
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:436)<br/>
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:311)<br/>
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)</p>
+
+<p>---------------<br/>
+Test code: modified org.drools.integrationtests.IntegrationCases.testDynamicRuleRemovals</p>
+
+<p>    public void testDynamicRuleRemovalsUnusedWorkingMemory() throws Exception {</p>
+
+<p>        PackageBuilder builder = new PackageBuilder();<br/>
+        builder.addPackageFromDrl( new InputStreamReader( getClass().getResourceAsStream(  test_Dynamic1.drl  ) ) );<br/>
+        builder.addPackageFromDrl( new InputStreamReader( getClass().getResourceAsStream(  test_Dynamic2.drl  ) ) );<br/>
+        builder.addPackageFromDrl( new InputStreamReader( getClass().getResourceAsStream(  test_Dynamic3.drl  ) ) );<br/>
+        builder.addPackageFromDrl( new InputStreamReader( getClass().getResourceAsStream(  test_Dynamic4.drl  ) ) );<br/>
+        Package pkg = builder.getPackage();</p>
+
+<p>        org.drools.reteoo.RuleBaseImpl reteooRuleBase = null;<br/>
+        org.drools.leaps.RuleBaseImpl leapsRuleBase = null;<br/>
+        RuleBase ruleBase = getRuleBase();<br/>
+        //org.drools.reteoo.RuleBaseImpl ruleBase = new org.drools.reteoo.RuleBaseImpl();<br/>
+        if (ruleBase instanceof org.drools.reteoo.RuleBaseImpl)</p>
+        {
+            reteooRuleBase = (org.drools.reteoo.RuleBaseImpl)ruleBase;
+        }
+<p>        else<br/>
+        if (ruleBase instanceof org.drools.leaps.RuleBaseImpl)</p>
+        {
+            leapsRuleBase = (org.drools.leaps.RuleBaseImpl)ruleBase;
+        }
+<p>        ruleBase.addPackage( pkg );</p>
+
+<p>        WorkingMemory workingMemory = ruleBase.newWorkingMemory();</p>
+
+<p>        if (reteooRuleBase != null)</p>
+        {
+            assertEquals(1, reteooRuleBase.getPackages().length);
+            assertEquals(4, reteooRuleBase.getPackages()[0].getRules().length);
+
+            reteooRuleBase.removeRule(  org.drools.test ,
+             Who likes Stilton  );
+            assertEquals(3, reteooRuleBase.getPackages()[0].getRules().length);
+
+            reteooRuleBase.removeRule(  org.drools.test ,
+			             like cheese  );
+            assertEquals(2, reteooRuleBase.getPackages()[0].getRules().length);
+            
+            reteooRuleBase.removePackage(  org.drools.test  );
+            assertEquals(0, reteooRuleBase.getPackages().length);
+        }
+<p>        else<br/>
+        if (leapsRuleBase != null)</p>
+        {
+            assertEquals(1, leapsRuleBase.getPackages().length);
+            assertEquals(4, leapsRuleBase.getPackages()[0].getRules().length);
+
+            leapsRuleBase.removeRule(  org.drools.test ,
+             Who likes Stilton  );
+            assertEquals(3, leapsRuleBase.getPackages()[0].getRules().length);
+
+            leapsRuleBase.removeRule(  org.drools.test ,
+			             like cheese  );
+            assertEquals(2, leapsRuleBase.getPackages()[0].getRules().length);
+            
+            leapsRuleBase.removePackage(  org.drools.test  );
+            assertEquals(0, leapsRuleBase.getPackages().length);
+        }
+<p>    }</p>

@@ -1,0 +1,1 @@
+[JBRULES-707] Move function implementation to use static imports <p>Eclipse JDT and Janino now support static imports, while still targteting jdk1.4 byetcode.</p>

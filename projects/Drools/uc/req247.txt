@@ -1,0 +1,10 @@
+[JBRULES-3556] Support mappings between trait and core class fields <p>Trait - Core field mapping requires the fields to have the same name and compatible types. Whenever the names cannot be the same, e.g. due to interface naming requirements, it could be desirable to define a custom mapping:</p>
+
+<p>declare trait X<br/>
+  tfield : String @Alias( cField )<br/>
+end<br/>
+declare Y<br/>
+  cField : String<br/>
+end</p>
+
+<p>Here, tField should be mapped onto the hard field cField, even if the names are different</p>

@@ -1,0 +1,7 @@
+[JBRULES-2792] Provide accessability of types and metadata for declare-d types <ul>
+	<li>All types created or enhanced by a DRL declare construct must be retrievable from the KnowledgeBase using<br/>
+   Declare getDeclare( String pkg, String name )</li>
+	<li>A Declare object must provide getters String getPackageName(), getName(), Map&lt;String,Object&gt; getMetaData() (same as Rule)</li>
+	<li>A Declare object must provide Class&lt;?&gt; getFactClass() returning the created or enhanced java-lang.Class.</li>
+	<li>A Declare object must provide long getInferredExpires() returning (for @role(event)) the inferred expiration offset or -1 if none.</li>
+</ul>

@@ -1,0 +1,1 @@
+[JBRULES-893] Realtime audit view <p>A debug view which shows a realtime audit log of the selected working memory (logger).</p>

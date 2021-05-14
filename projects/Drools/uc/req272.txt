@@ -1,0 +1,1 @@
+[JBRULES-49] WorkingMemory Query <p>Rule Engine should allow the WM to be querried.</p>

@@ -1,0 +1,5 @@
+[JBRULES-3049] Improve @typesafe <p>@typesafe wasn t workign too well. So decided to simplify things.</p>
+
+<p>Now it ll only apply to the pattern that matches the object type from the type declaration.</p>
+
+<p>Also need to refactor things so that the MVELClassReader can take imports, for things like enums on Map keys - without having to fall back to Predicate.</p>

@@ -1,0 +1,2 @@
+[JBRULES-3205] Add  name  and  description  attributes to <Resource> element in change-sets <p>It would be good the possibility to add (a optional)  name  and  description  to each Resource in change-set. <del>These attribute should be exposed by org.drools.io.Resource</del> The attributes are not going to be exposed through knowledge-api yet. They are going to be implemented in org.drools.io.internal.InternalResource<br/>
+Even if these attributes don t have any effect in Resource s behavior and functionality, they will server as documentation of the change-set.     </p>

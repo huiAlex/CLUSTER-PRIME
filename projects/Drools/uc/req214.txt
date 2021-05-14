@@ -1,0 +1,1 @@
+[JBRULES-2808] Remove TimeMachine so we have a unified clock structure <p>Effective rule dates uses TimeMachine instead of the TimerService, so things are not unified</p>

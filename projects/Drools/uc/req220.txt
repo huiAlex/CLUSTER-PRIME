@@ -1,0 +1,1 @@
+[JBRULES-2985] Pluggable ActivationListener for TerminalNodes <p>RuleTerminalNode and QueryTerminalNode are currently hard coded, please allow for a pluggable factory for these, so that end developers can easily experiment with different activation handlers.</p>

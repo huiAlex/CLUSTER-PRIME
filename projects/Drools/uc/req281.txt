@@ -1,0 +1,4 @@
+[JBRULES-54] Implement spreadsheet based decision table tool <p>This is essentially a port from 2.x codebase.</p>
+
+<p>It will have a new  front end  class that makes the semantics of invoking it clearer.<br/>
+Initially it will output DRL, after this point it can call the parser directly for LHS, RHS etc... </p>

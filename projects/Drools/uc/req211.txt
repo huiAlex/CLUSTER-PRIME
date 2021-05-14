@@ -1,0 +1,1 @@
+[JBRULES-2753] Add the StrEvaluator to the list of core evaluators <p>Add the StrEvaluator to the list of core evaluators. Description can be found here: <a href= http://blog.athico.com/2010/06/creating-pluggable-oprators.html  class= external-link  rel= nofollow >http://blog.athico.com/2010/06/creating-pluggable-oprators.html</a></p>

@@ -1,0 +1,1 @@
+[JBRULES-875] dynamic salience <p>Allow an expression to express a salience value dynamically.</p>

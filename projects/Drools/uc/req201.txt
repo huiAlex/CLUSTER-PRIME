@@ -1,0 +1,1 @@
+[JBRULES-2618] Drools Grid Services - Improve and clean tests <p>Improve the quality of the tests, add more test cases and clean the tests code.</p>

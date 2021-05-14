@@ -1,0 +1,8 @@
+[JBRULES-253] Allow rules with no columns <p>we should allow rules like<br/>
+when<br/>
+then</p>
+
+<p>and<br/>
+when<br/>
+    eval(true)<br/>
+then</p>

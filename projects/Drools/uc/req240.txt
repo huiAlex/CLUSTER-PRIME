@@ -1,0 +1,17 @@
+[JBRULES-3363] Add support to inline constraints on multi-function accumulate <p>FROM MARK:<br/>
+===========<br/>
+Edson,</p>
+
+<p>While I don t want to change to acc/for keyword quite yet, until we are sure what drastic changes we want to make to syntax. I think we can evolve accumulate()<br/>
+1) make the first  ,   optionall <span class= error >&#91;,;&#93;</span>. Where the documented new separate is  ; <br/>
+2) functions are still  ,  separated<br/>
+3) allow an optional second  ;  after this boolean expression, an eval without the eval wrapper.</p>
+
+<p>3. can be done now with a separate eval(....) after the accumulate. But I think good to encapsulate the intent of the guard within the accumulate itself, it s also another opportunity to remove the  eval  keyword for a common use case. For now we ll just rewrite the accumulate to place an eval() CE after the acc. It s a small win, which I think will make the DRL look nicer, especially for CEP use cases.</p>
+
+<p>============<br/>
+FROM EDSON:<br/>
+============<br/>
+ Mark,</p>
+
+<p>   (1) and (2) are ok. Regarding (3), we can embed the expression in the accumulate node itself. No need for a separate node. And if we use ; as the separator, we don t need the eval() keyword.</p>

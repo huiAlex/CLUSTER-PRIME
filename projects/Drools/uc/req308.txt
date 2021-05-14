@@ -1,0 +1,1 @@
+[JBRULES-82] Invalid Rule/Package checks <p>It should not be possible to add invalid rules to a package.</p>

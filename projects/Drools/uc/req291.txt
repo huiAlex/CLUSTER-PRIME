@@ -1,0 +1,1 @@
+[JBRULES-604] integrate MVEL into JBRules intead of JFDI. <p>We are moving from JFDI to MVEL as its actively maintained and championed</p>

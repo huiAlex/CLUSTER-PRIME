@@ -1,0 +1,8 @@
+[JBRULES-3429] Allow to repeat equivalent type declarations in different DRLs <p>Two distinct sets of rules might share the need for a common declared type, usually an internal utility fact<br/>
+The building process, however, forbids multiple declarations of the same fact in different DRLs.</p>
+
+<p>The quickest solution, removing the declaration from one of the two, might not be feasible when the two files have to be deployed independently as well as together.<br/>
+Externalizing the declarations to a third file might not always be feasible, especially when there is no full control on the DRLs (e.g. generated automatically or<br/>
+acquired from external sources).</p>
+
+<p>The builder, then, should recognize equivalent declarations to an existing one and simply ignore them.</p>

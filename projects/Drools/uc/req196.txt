@@ -1,0 +1,10 @@
+[JBRULES-2578] Change @expires policy to override temporal requirements and behaviours <p>Up until now, the @expires policy was handled by the engine as a hint on the expiration offset for events, but that was causing several mistakes and misunderstanding by users. So, change the @expires policy to override and set a definitive expiration offset for events.</p>
+
+<p>Example:</p>
+
+<p>declare StockTick<br/>
+   @role( event )<br/>
+   @expires( 10m )<br/>
+end</p>
+
+<p>The above will cause StockTick events to be expired after 10m in memory, even if rules use temporal operators or sliding windows that would retain the event for more time, or would not require the event to be in memory for that amount of time.</p>

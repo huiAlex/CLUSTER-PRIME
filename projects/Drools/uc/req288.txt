@@ -1,0 +1,23 @@
+[JBRULES-577] Please add  memberOf  syntax for constraints <p>I d like to be able to write a constraint to determine if a field s value is a member of some collection.  This is the inverse of the  contains  keyword.  The proposed syntax is:</p>
+
+<p><span class= error >&#91;bindingVar :&#93;</span> &lt;fieldName&gt; in &lt;someCollection&gt;</p>
+
+<p>(I m not picky about the keyword, other possibilities are  containedBy  or  memberOf , but  in  is a single word)</p>
+
+<p>Use case:<br/>
+I have a container class with a field that exposes a collection of record<br/>
+numbers.  In the working memory, I have a bunch of record objects, and one<br/>
+container object.  I want to write a rule that fires when it encounters a<br/>
+container that has records matching some criteria:</p>
+
+<p>when<br/>
+  Container( $recordNums : records )<br/>
+  Record( number in $recordNums, otherField ==  somevalue  )<br/>
+then<br/>
+  doStuff();</p>
+
+<p>The current workaround is:</p>
+
+<p>  Record( num : number -&gt; ( $recordNums.contains(num) )  )</p>
+
+<p>Which is problematic, as the predicate may not be time-constant.</p>

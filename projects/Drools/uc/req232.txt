@@ -1,0 +1,1 @@
+[JBRULES-3148] Declarative Agenda <p>We should be able to use rules to declaratively control conflict resolution.</p>

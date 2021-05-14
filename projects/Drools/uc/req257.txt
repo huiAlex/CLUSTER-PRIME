@@ -1,0 +1,1 @@
+[JBRULES-3668] Allow to create KJars both programmatically and with a maven plugin <p>Add a mechanism for creating a Kjar, i.e. a jar containing all the information necessary to create already configured kbases and ksessions and refers to them using a unique name, both programmatically and with a maven plugin</p>

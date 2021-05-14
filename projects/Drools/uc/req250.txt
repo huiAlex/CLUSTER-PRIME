@@ -1,0 +1,2 @@
+[JBRULES-3595] Inline casts and coercion <p>Implement inline cast as described here:<br/>
+<a href= https://community.jboss.org/wiki/Drools60#Inline_Casts_and_Coercion  class= external-link  rel= nofollow >https://community.jboss.org/wiki/Drools60#Inline_Casts_and_Coercion</a></p>

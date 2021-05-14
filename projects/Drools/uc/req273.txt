@@ -1,0 +1,1 @@
+[JBRULES-494] Linked Tuple <p>Instead of cloning FactHandle<span class= error >&#91;&#39;&#93;</span> arrays, which is expensive, as its creating factorial too many objects, we shoudl instead looked to some sort of linked list; so that it doesn t need to copy the information of the parents.</p>

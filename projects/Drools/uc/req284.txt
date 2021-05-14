@@ -1,0 +1,11 @@
+[JBRULES-547] Create a specialized  exists  node in reteoo <p>Currently,  exists  conditional element is implemented as a sequence of 2  not  nodes. This is suboptimal for performance and adds complexity to the network with specialized constraints and the requirement for a specific RightInputAdapterNode.<br/>
+Also, the currently implementation causes unnecessary work to be performed. For instance, trace the work done in the terminal node in the following example:</p>
+
+<p>package org.drools</p>
+
+<p>query  2 persons with the same status <br/>
+		p : Person($status : status, $age : age)<br/>
+		exists Person(status == $status, age &gt; $age);<br/>
+end</p>
+
+<p>So, replace current implementation for a specialized  ExistsNode .</p>

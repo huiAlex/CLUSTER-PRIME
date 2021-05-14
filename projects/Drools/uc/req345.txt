@@ -1,0 +1,1 @@
+[JBRULES-994] set/get GlobalResolver <p>We added setGlobalResolver, getGlobalResolver is also needed. Also the working memory should no longer handle any form of chaining, should just check the provided, or default, resolver.</p>

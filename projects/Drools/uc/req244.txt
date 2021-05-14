@@ -1,0 +1,1 @@
+[JBRULES-3430] Implement a backward compatible binary serialization framework for KnowledgeSessions <p>Implement a backward compatible binary serialization framework for KnowledgeSessions, using Google s Protobuf framework.</p>

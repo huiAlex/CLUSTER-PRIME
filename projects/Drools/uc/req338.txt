@@ -1,0 +1,3 @@
+[JBRULES-963] Allows Stateless Sessions to be re-usable <p>Stateless Sessions are not currently re-usable.</p>
+
+<p>To make them useable you will have to allow those sessions to inject the globals and event support objects.</p>

@@ -1,0 +1,3 @@
+[JBRULES-922] API change for assert and modify <p>assert becomes insert<br/>
+modify becomes update<br/>
+asertObject,  modifyObject  becomes insert and update</p>

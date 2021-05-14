@@ -1,0 +1,26 @@
+[JBRULES-313] Add halt/run commands <p>I have made a small modification to WorkingMemory and AbstractWorkingMemory that allows me to pause and the restart rule firing.<br/>
+The change consists of adding a boolean isPaused flag (plus gettter and setter methods) which is then inspected in the  while loop of the fireAllRules method as follows</p>
+
+<p>    public synchronized void fireAllRules(final AgendaFilter agendaFilter) throws FactException {<br/>
+        if ( !this.firing ) {<br/>
+            try {<br/>
+                this.firing = true;<br/>
+                while ( !this.isPaused() &amp;&amp; this.agenda.fireNextItem( agendaFilter ) ) </p>
+{ 
+                    ;
+                }
+<p>            } finally </p>
+{
+                this.firing = false;
+            }
+<p>        }<br/>
+    }</p>
+
+<p>What is this good for? <br/>
+It lets me stop rule firing from within some rule, e.g. when I want to execute an external call.<br/>
+The rule sets up the call and then calls setPaused(true) on WorkingMemory.<br/>
+Once fireAllRules exits, an external process executes the call, possibly asserting some facts into WorkingMemory<br/>
+and then calls setPaused(false) and calls fireAllRules again.<br/>
+Why not execute the call directly from the rule?<br/>
+Because in my application the execution might take long time, and I want to have an option to move the WorkingMemory out of RAM,<br/>
+possibly moving it to another app server to continue firing after the externall call processing has completed.</p>

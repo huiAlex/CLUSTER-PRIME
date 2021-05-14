@@ -1,0 +1,1 @@
+[JBRULES-527] Add primitive types support to the core engine <p>Add support for primitive times into the core engine. Allowing the core engine to work with primitive types will boost performance and hopefully reduce memory usage.</p>

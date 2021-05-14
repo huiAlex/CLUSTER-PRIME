@@ -1,0 +1,1 @@
+[JBRULES-2807] Refactor WorkingMemory  so all entry points use the same code <p>Refactor the default working memory out, so all entry points use the same code.</p>

@@ -1,0 +1,1 @@
+[JBRULES-788] lock-on-activate rule attribute <p>lock-on-attribute stops the active ruleflow/agendagroup for the currently evaluating rule from reveiving any activations</p>

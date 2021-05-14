@@ -1,0 +1,1 @@
+[JBRULES-371] Refactor any class that implements  Externalizable to have empty default constructors <p>Externalizable always calls t he default constructor, so make sure all impl do nothing for the default constructor. will need to refactor code to also stop using them for convenience methods.</p>

@@ -1,0 +1,3 @@
+[JBRULES-3645] Add a null-safe dereferencing operator to LHS pattern matching <p>Provide a null-safe dereferencing operator working as described in this post</p>
+
+<p><a href= https://plus.google.com/u/0/b/101003552532172845268/101003552532172845268/posts/E5Q1geu8p6P  class= external-link  rel= nofollow >https://plus.google.com/u/0/b/101003552532172845268/101003552532172845268/posts/E5Q1geu8p6P</a></p>

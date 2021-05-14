@@ -1,0 +1,1 @@
+[JBRULES-919] Pluggeable Conflict Resolvers <p>ConflictResolution should be configurable and set by the RuleBaseConfiguration.</p>

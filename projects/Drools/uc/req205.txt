@@ -1,0 +1,17 @@
+[JBRULES-2671] Allow relational operators for String <p>Currently you cannot use relational operators for String fields. e.g. MyFact(name &gt;  bbb )</p>
+
+<p>org.drools.base.evaluators.ComparableEvaluatorsDefinition.evaluators has entries for ValueType.OBJECT_TYPE, but not for ValueType.STRING_TYPE. So it results in DescrBuildError:</p>
+
+<p>=========<br/>
+Evaluator  &gt;  does not support type  ValueType =  String  : <span class= error >&#91;Rule name=&#39;Your First Rule&#39;&#93;</span></p>
+
+<p>Unable to create restriction  <span class= error >&#91;LiteralRestriction: &gt; bbb&#93;</span>  for field  name  in the rule  Your First Rule  : <span class= error >&#91;Rule name=&#39;Your First Rule&#39;&#93;</span> <br/>
+=========</p>
+
+<p>According to docs:<br/>
+4.8.3.1.1.3.1. Operators<br/>
+ Other relational operatory may be used whenever the type values are ordered; </p>
+
+<p><a href= http://downloads.jboss.com/drools/docs/5.1.0.34406.FINAL/drools-expert/html_single/index.html#RuleLanguage-ConditionalElements  class= external-link  rel= nofollow >http://downloads.jboss.com/drools/docs/5.1.0.34406.FINAL/drools-expert/html_single/index.html#RuleLanguage-ConditionalElements</a></p>
+
+<p>It is desirable to allow relational operators for String fields as String is Comparable.</p>

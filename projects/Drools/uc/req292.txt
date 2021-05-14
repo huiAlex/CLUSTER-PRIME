@@ -1,0 +1,2 @@
+[JBRULES-606] Effective dating rule attributes <p>effective-date<br/>
+expires-date attributes.</p>

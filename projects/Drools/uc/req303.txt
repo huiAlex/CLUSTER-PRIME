@@ -1,0 +1,1 @@
+[JBRULES-771] Expose agenda group events <p>pushed and popped agneda groups should be exposed in the event model..</p>

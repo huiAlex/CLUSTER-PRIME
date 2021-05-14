@@ -1,0 +1,1 @@
+[JBRULES-3104] Use annotations on declared beans <p>When declaring beans (i.e. using the  declare  feature), if metadata attached to a class or a field corresponds to an actual @Annotation, that @Annotation should be present in the generated class. </p>

@@ -1,0 +1,3 @@
+[JBRULES-326] Cache results of ClassTypeResolver <p>In RuleBuilder, it repeatedly hits the class type resolver to lookup classes over and over, even though a large ruleset typically only looks at a few classes.</p>
+
+<p>We can keep a cache at the PackageBuilder level and inject it into the RuleBuilder instances as they are needed.</p>
