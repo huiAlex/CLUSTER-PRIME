@@ -15,5 +15,3 @@ The overview of the dataset:
 <pre> │  └─ stopwords </pre>
 <pre> │  	 └─  stop-words-en.sql // stop words for English </pre>
 <pre> └─ README.md 
- 
-
