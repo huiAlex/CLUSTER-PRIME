@@ -13,5 +13,5 @@ The overview of the dataset:
 <pre> │  ├─ sql </pre>
 <pre> │  │	└─  buildRTMForXXX.sql // extract rtm data from database </pre>
 <pre> │  └─ stopwords </pre>
-<pre> │  	 └─  stop-words-en.sql // stop words for English </pre>
+<pre> │  	 └─  stop-words-en.txt // stop words for English </pre>
 <pre> └─ README.md 
