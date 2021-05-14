@@ -1,0 +1,10 @@
+[DERBY-4293] Mutable public static variables <p>There are quite a few instances of public static fields which appear to be intended to be constant, but which are not final.</p>
+
+<p>The code would be safer if all the constant fields were made final.</p>
+
+<p>Patch to follow for some of the problem fields.</p>
+
+<p>The following also ought to be fixed:</p>
+
+<p>org.apache.derby.iapi.services.property.PropertyUtil.servicePropertyList (e.g. use an accessor to lookup the values)<br/>
+org.apache.derby.iapi.types.JSQLType.primitiveNames (ditto)</p>

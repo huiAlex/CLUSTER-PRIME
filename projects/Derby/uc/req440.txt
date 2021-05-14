@@ -1,0 +1,28 @@
+[DERBY-4880] Unchecked warnings in JMXManagementService and VTI demos <p>These warnings I only see if java15compile.classpath points to Java 6 class libraries (either set explicitly in ant.properties, or implicitly by the property setter):</p>
+
+<p>    <span class= error >&#91;javac&#93;</span> /code/derby/trunk2/java/engine/org/apache/derby/impl/services/jmx/JMXManagementService.java:215: warning: <span class= error >&#91;unchecked&#93;</span> unchecked conversion<br/>
+    <span class= error >&#91;javac&#93;</span> found   : java.lang.Class<br/>
+    <span class= error >&#91;javac&#93;</span> required: java.lang.Class&lt;java.lang.Object&gt;<br/>
+    <span class= error >&#91;javac&#93;</span>                 new StandardMBean(bean, beanInterface) {<br/>
+    <span class= error >&#91;javac&#93;</span>                                         ^<br/>
+    <span class= error >&#91;javac&#93;</span> /code/derby/trunk2/java/engine/org/apache/derby/impl/services/jmx/JMXManagementService.java:215: warning: <span class= error >&#91;unchecked&#93;</span> unchecked method invocation: &lt;T&gt;StandardMBean(T,java.lang.Class&lt;T&gt;) in javax.management.StandardMBean is applied to (java.lang.Object,java.lang.Class)<br/>
+    <span class= error >&#91;javac&#93;</span>                 new StandardMBean(bean, beanInterface) {<br/>
+    <span class= error >&#91;javac&#93;</span>                 ^<br/>
+    <span class= error >&#91;javac&#93;</span> 2 warnings<br/>
+    <span class= error >&#91;javac&#93;</span> /code/derby/trunk2/java/demo/vtis/java/org/apache/derbyDemo/vtis/core/QueryVTIHelper.java:185: warning: <span class= error >&#91;unchecked&#93;</span> unchecked call to getMethod(java.lang.String,java.lang.Class&lt;?&gt;...) as a member of the raw type java.lang.Class<br/>
+    <span class= error >&#91;javac&#93;</span>                 ( methodName, new Class[] </p>
+{ String.class } );<br/>
+    <span class= error >&#91;javac&#93;</span>                 ^<br/>
+    <span class= error >&#91;javac&#93;</span> /code/derby/trunk2/java/demo/vtis/java/org/apache/derbyDemo/vtis/core/XmlVTI.java:253: warning: <span class= error >&#91;unchecked&#93;</span> unchecked call to getMethod(java.lang.String,java.lang.Class&lt;?&gt;...) as a member of the raw type java.lang.Class<br/>
+    <span class= error >&#91;javac&#93;</span>                 ( methodName, new Class[] { String.class }
+<p> );<br/>
+    <span class= error >&#91;javac&#93;</span>                 ^<br/>
+    <span class= error >&#91;javac&#93;</span> /code/derby/trunk2/java/demo/vtis/java/org/apache/derbyDemo/vtis/core/XmlVTI.java:260: warning: <span class= error >&#91;unchecked&#93;</span> unchecked call to getConstructor(java.lang.Class&lt;?&gt;...) as a member of the raw type java.lang.Class<br/>
+    <span class= error >&#91;javac&#93;</span>                 ( new Class[] </p>
+{ String.class, String.class, String[].class }
+<p> );<br/>
+    <span class= error >&#91;javac&#93;</span>                 ^<br/>
+    <span class= error >&#91;javac&#93;</span> /code/derby/trunk2/java/demo/vtis/java/org/apache/derbyDemo/vtis/snapshot/Subscription.java:278: warning: <span class= error >&#91;unchecked&#93;</span> unchecked call to getMethod(java.lang.String,java.lang.Class&lt;?&gt;...) as a member of the raw type java.lang.Class<br/>
+    <span class= error >&#91;javac&#93;</span>                 ( methodName, new Class[] {} );<br/>
+    <span class= error >&#91;javac&#93;</span>                 ^<br/>
+    <span class= error >&#91;javac&#93;</span> 4 warnings</p>

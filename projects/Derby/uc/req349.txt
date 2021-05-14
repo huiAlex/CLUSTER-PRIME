@@ -1,0 +1,16 @@
+[DERBY-3770] Create a utility class for skipping data in an InputStream <p>The contract of InputStream.skip is somewhat difficult, some would even say broken.<br/>
+See <a href= http://java.sun.com/javase/6/docs/api/java/io/InputStream.html#skip(long  class= external-link  rel= nofollow >http://java.sun.com/javase/6/docs/api/java/io/InputStream.html#skip(long</a>))</p>
+
+<p>A utility class should be created to ensure that we use the same skip procedure throughout the Derby code base.<br/>
+Suggested functionality:</p>
+<ul class= alternate  type= square >
+	<li>long skipFully(InputStream) : skips until EOF, returns number of bytes skipped</li>
+	<li>void skipFully(InputStream,long) : skips requested number of bytes, throws EOFException if there is too few bytes in the stream</li>
+</ul>
+
+
+<p>I know of two different approaches, both skipping in a loop:<br/>
+ a) Verify EOF with a read call when skip returns zero.<br/>
+ b) Throw EOFException if skip returns zero before requested number of bytes have been skipped.</p>
+
+<p>There s related code in iapi.util.UTF8Util. Maybe this class, say StreamUtil, could be put in the same package?</p>

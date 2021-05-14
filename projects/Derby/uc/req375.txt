@@ -1,0 +1,29 @@
+[DERBY-4079] Add support for SQL:2008 <result offset clause> and <fetch first clause> to limit result set cardinality <p>SQL 2008 has added new syntax to support a direct way to limit the<br/>
+returned set of rows in a result set.  This allows an application to<br/>
+retrieve only some rows of an otherwise larger result set, similar to<br/>
+the popular LIMIT clauses use in some databases.</p>
+
+<p>Up till now, in Derby (and SQL) we have had to use the ROW_NUMBER()<br/>
+function in a nested subquery to achieve the effect of the &lt;fetch<br/>
+first clause&gt;, cf. <a href= https://issues.apache.org/jira/browse/DERBY-2998  title= Add support for ROW_NUMBER() window function  class= issue-link  data-issue-key= DERBY-2998 ><del>DERBY-2998</del></a>, a method which is rather more indirect<br/>
+and still not efficient (<a href= https://issues.apache.org/jira/browse/DERBY-3505  title= Current implementation of ROW_NUMBER() window function does not stop execution once criteria is met  class= issue-link  data-issue-key= DERBY-3505 >DERBY-3505</a>), and primarily intended for OLAP<br/>
+functionality, perhaps.</p>
+
+<p>There has been no direct way to achieve the effect of the &lt;result<br/>
+offset clause&gt; via SQL.</p>
+
+<p>Syntax (cf. SQL 2008, section 7.13):<br/>
+       &lt;result offset clause&gt; ::= OFFSET &lt;n&gt; </p>
+{ROW | ROWS}<br/>
+       &lt;fetch first clause&gt; ::=      FETCH {FIRST | NEXT} <span class= error >&#91;&lt;n&gt;&#93;</span> {ROW | ROWS}
+<p> ONLY</p>
+
+<p>where &lt;n&gt; is an integer. The two clauses syntactically follow the ORDER BY<br/>
+clause in the grammar.</p>
+
+<p>Note that both ORDER BY and the new clauses above are allowed also in<br/>
+subqueries in the new version of the SQL standard (section 7.13). I<br/>
+only propose to include this at the top level in DERBY for now. (ORDER<br/>
+BY is presently also not allowed in subqueries in Derby since SQL<br/>
+didn t allow for this until SQL 2008 either).</p>
+

@@ -1,0 +1,6 @@
+[DERBY-3578] DrdaStreamOutBufferSize attribute of NetworkServerMBean should be of type int instead of String <p>The DrdaStreamOutBufferSize attribute of org.apache.derby.mbeans.drda.NetworkServerMBean is currently of type String. The value of this attribute describes the size of the buffer for streaming blob/clob from server to client (derby.drda.streamOutBufferSize property), and is handled as an integer (int) in the DDMWriter class of the Network Server.</p>
+
+<p>The type was changed to int in the functional specification of <a href= https://issues.apache.org/jira/browse/DERBY-1387  title= Add JMX extensions to Derby  class= issue-link  data-issue-key= DERBY-1387 ><del>DERBY-1387</del></a> <span class= error >&#91;1&#93;</span>, since no reason was found for this to be a String. Similar attributes, such as DrdaMaxThreads, have return type int. It may useful for a JMX client to know that the value should be an int instead of just any arbitrary string; hence this change.</p>
+
+
+<p><span class= error >&#91;1&#93;</span>: <a href= https://issues.apache.org/jira/browse/DERBY-1387?focusedCommentId=12571899#action_12571899  class= external-link  rel= nofollow >https://issues.apache.org/jira/browse/DERBY-1387?focusedCommentId=12571899#action_12571899</a></p>

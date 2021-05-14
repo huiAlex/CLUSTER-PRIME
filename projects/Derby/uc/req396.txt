@@ -1,0 +1,22 @@
+[DERBY-4380] Subqueries not allowed in ON clause <p>SOME is not allowed in ON-clause:</p>
+
+<p>ij&gt; create table t1 (i integer);<br/>
+0 rows inserted/updated/deleted<br/>
+ij&gt; create table t2 (i integer);<br/>
+0 rows inserted/updated/deleted<br/>
+ij&gt; create table t3 (i integer);<br/>
+0 rows inserted/updated/deleted<br/>
+ij&gt; insert into t1 values (1);<br/>
+1 row inserted/updated/deleted<br/>
+ij&gt; insert into t2 values (2);<br/>
+1 row inserted/updated/deleted<br/>
+ij&gt; insert into t3 values 2,3,4;<br/>
+3 rows inserted/updated/deleted<br/>
+ij&gt; select * from t1 where t1.i = some (select i from t3);<br/>
+I          <br/>
+-----------</p>
+
+<p>0 rows selected<br/>
+ij&gt; select * from t1 inner join t2 on  t1.i = some (select i from t3);<br/>
+ERROR 42972: An ON clause associated with a JOIN operator is not valid.<br/>
+ij&gt; </p>

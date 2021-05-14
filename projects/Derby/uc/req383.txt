@@ -1,0 +1,5 @@
+[DERBY-4223] Provide the ability to use properties with ij.runScript() <p>Currently, the system properties aren t being used by the runScript() method on the org.apache.derby.tools.ij</p>
+
+<p>This raises an issue with allowing the port used for the JUnit tests to be customized, therefore blocking <a href= https://issues.apache.org/jira/browse/DERBY-4217  title= Make the default port for the suites.All run configurable with a system property.  class= issue-link  data-issue-key= DERBY-4217 ><del>DERBY-4217</del></a>. The idea, was to allow properties such as ij.protocol to be set either as system properties, or in a Properties object, then passed to the runScript() method.</p>
+
+<p>Please share any thoughts and ideas as to which may be the best approach.</p>

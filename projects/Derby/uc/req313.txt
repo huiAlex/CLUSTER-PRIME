@@ -1,0 +1,12 @@
+[DERBY-3491] Change SystemPermission to be a two arguement permission with a name (object the permission is on) and an action. <p>With the additional system permissions proposed in <a href= https://issues.apache.org/jira/browse/DERBY-3462  title= Require new permissions in o.a.d.security.SystemPermission to allow control to Derby&#39;s JMX management and to ensure information is not leaked through JMX  class= issue-link  data-issue-key= DERBY-3462 ><del>DERBY-3462</del></a> I wonder if it makes sense to change the style of names &amp; actions in SystemPermission.</p>
+
+<p>Today a  shutdown  name is proposed and potential for future  shutdownEngine  and  shutdownServer  with no actions.</p>
+
+<p><a href= https://issues.apache.org/jira/browse/DERBY-3462  title= Require new permissions in o.a.d.security.SystemPermission to allow control to Derby&#39;s JMX management and to ensure information is not leaked through JMX  class= issue-link  data-issue-key= DERBY-3462 ><del>DERBY-3462</del></a> is proposing names of jmxControl, serverControl, engineControl etc also with no actions.</p>
+
+<p>Looking at the standard Permission class it seems the name is meant to represent an object that the permission applies to and action represent actions on that object.<br/>
+Thus it would seem to make more sense and be consistent with other Permissions to have:</p>
+
+<p> name=server action=control | monitor | shutdown<br/>
+ name=engine action=control | monitor | shutdown<br/>
+ name=jmx action=control</p>

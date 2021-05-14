@@ -1,0 +1,10 @@
+[DERBY-412] Connection toString should show type information and  the meaning of the identifier that it prints <p>After the change for <a href= https://issues.apache.org/jira/browse/DERBY-243  title= connection toString should uniquely identify the connection  class= issue-link  data-issue-key= DERBY-243 ><del>DERBY-243</del></a> the  connection toString() output is  an integer which correspond to SESSIONID.  The output should identify the type and also the meaning of the identifier that it prints.  Perhaps a format that appends the default toString output with the sessionid information as it prints in the derby.log would be more informative.</p>
+
+<p>org.apache.derby.impl.jdbc.EmbedConnection@efd552 (SESSONID = 2)</p>
+
+
+<p>Ultimately this could be expanded to included other diagnostic information e.g</p>
+
+<p>org.apache.derby.impl.jdbc.EmbedConnection@efd552 (XID = 132), (SESSIONID = 5), (DATABASE = wombat), (DRDAID = NF000001.H324-940125304405039114</p>
+{7}
+<p>)</p>

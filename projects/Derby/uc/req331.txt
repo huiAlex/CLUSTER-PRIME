@@ -1,0 +1,92 @@
+[DERBY-3725] add more information to the XSDB1:ERROR XSDB1: Unknown page format at page  error <p>A likely cause of this error is some sort of page level corruption which has corrupted the format id field of the page itself.  Some more information<br/>
+about the data on the page may help diagnose what is going on - for instance a page dump may give some insight.</p>
+
+<p>ERROR XSDB1: Unknown page format at page Page(122,Container(0, 1248))<br/>
+    at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)<br/>
+    at org.apache.derby.impl.store.raw.data.CachedPage.changeInstanceTo(Unknown Source)<br/>
+    at org.apache.derby.impl.store.raw.data.CachedPage.setIdentity(Unknown Source)<br/>
+    at org.apache.derby.impl.services.cache.ConcurrentCache.find(Unknown Source)<br/>
+    at org.apache.derby.impl.store.raw.data.FileContainer.getUserPage(Unknown Source)<br/>
+    at org.apache.derby.impl.store.raw.data.FileContainer.getNextHeadPage(Unknown Source)<br/>
+    at org.apache.derby.impl.store.raw.data.BaseContainer.getNextPage(Unknown Source)<br/>
+    at org.apache.derby.impl.store.raw.data.BaseContainerHandle.getNextPage(Unknown Source)<br/>
+    at org.apache.derby.impl.store.access.conglomerate.GenericScanController.positionAtNextPage(Unknown Source)<br/>
+    at org.apache.derby.impl.store.access.conglomerate.GenericScanController.fetchRows(Unknown Source)<br/>
+    at org.apache.derby.impl.store.access.heap.HeapScan.fetchNextGroup(Unknown Source)<br/>
+    at org.apache.derby.impl.sql.execute.BulkTableScanResultSet.reloadArray(Unknown Source)<br/>
+    at org.apache.derby.impl.sql.execute.BulkTableScanResultSet.getNextRowCore(Unknown Source)<br/>
+    at org.apache.derby.impl.sql.execute.SortResultSet.getRowFromResultSet(Unknown Source)<br/>
+    at org.apache.derby.impl.sql.execute.SortResultSet.getNextRowFromRS(Unknown Source)<br/>
+    at org.apache.derby.impl.sql.execute.SortResultSet.loadSorter(Unknown Source)<br/>
+    at org.apache.derby.impl.sql.execute.SortResultSet.openCore(Unknown Source)<br/>
+    at org.apache.derby.impl.sql.execute.BasicNoPutResultSetImpl.open(Unknown Source)<br/>
+    at org.apache.derby.impl.sql.GenericPreparedStatement.execute(Unknown Source)<br/>
+    at org.apache.derby.impl.jdbc.EmbedStatement.executeStatement(Unknown Source)<br/>
+    at org.apache.derby.impl.jdbc.EmbedPreparedStatement.executeStatement(Unknown Source)<br/>
+    at org.apache.derby.impl.jdbc.EmbedPreparedStatement.executeQuery(Unknown Source)<br/>
+    at org.hibernate.jdbc.AbstractBatcher.getResultSet(AbstractBatcher.java:139)<br/>
+    at org.hibernate.loader.Loader.getResultSet(Loader.java:1676)<br/>
+    at org.hibernate.loader.Loader.doQuery(Loader.java:662)<br/>
+    at org.hibernate.loader.Loader.doQueryAndInitializeNonLazyCollections(Loader.java:223)<br/>
+    at org.hibernate.loader.Loader.doList(Loader.java:2147)<br/>
+    at org.hibernate.loader.Loader.listIgnoreQueryCache(Loader.java:2026)<br/>
+    at org.hibernate.loader.Loader.list(Loader.java:2021)<br/>
+    at org.hibernate.loader.hql.QueryLoader.list(QueryLoader.java:369)<br/>
+    at org.hibernate.hql.ast.QueryTranslatorImpl.list(QueryTranslatorImpl.java:298)<br/>
+    at org.hibernate.engine.query.HQLQueryPlan.performList(HQLQueryPlan.java:137)<br/>
+    at org.hibernate.impl.SessionImpl.list(SessionImpl.java:1014)<br/>
+    at org.hibernate.impl.QueryImpl.list(QueryImpl.java:79)<br/>
+    at ae.sphere.arena.networkManager.db.dao.SyslogDAO.getAllSyslogSortedByDate(SyslogDAO.java:40)<br/>
+    at ae.sphere.arena.networkManager.server.syslog.dataPurging.SyslogHistoryPurgerManager.purge(SyslogHistoryPurgerManager.java:35)<br/>
+    at ae.sphere.arena.networkManager.db.DbPurger$DataPurgerJob.run(DbPurger.java:41)<br/>
+    at org.eclipse.core.internal.jobs.Worker.run(Worker.java:58)<br/>
+Caused by: ERROR XBM0U: No class was registered for identifier 23364.<br/>
+    at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)<br/>
+    at org.apache.derby.impl.services.monitor.BaseMonitor.classFromIdentifier(Unknown Source)<br/>
+    at org.apache.derby.impl.services.monitor.BaseMonitor.newInstanceFromIdentifier(Unknown Source)<br/>
+    at org.apache.derby.iapi.services.monitor.Monitor.newInstanceFromIdentifier(Unknown Source)<br/>
+    ... 37 more<br/>
+============= begin nested exception, level (1) ===========<br/>
+ERROR XBM0U: No class was registered for identifier 23364.<br/>
+    at org.apache.derby.iapi.error.StandardException.newException(Unknown Source)<br/>
+    at org.apache.derby.impl.services.monitor.BaseMonitor.classFromIdentifier(Unknown Source)<br/>
+    at org.apache.derby.impl.services.monitor.BaseMonitor.newInstanceFromIdentifier(Unknown Source)<br/>
+    at org.apache.derby.iapi.services.monitor.Monitor.newInstanceFromIdentifier(Unknown Source)<br/>
+    at org.apache.derby.impl.store.raw.data.CachedPage.changeInstanceTo(Unknown Source)<br/>
+    at org.apache.derby.impl.store.raw.data.CachedPage.setIdentity(Unknown Source)<br/>
+    at org.apache.derby.impl.services.cache.ConcurrentCache.find(Unknown Source)<br/>
+    at org.apache.derby.impl.store.raw.data.FileContainer.getUserPage(Unknown Source)<br/>
+    at org.apache.derby.impl.store.raw.data.FileContainer.getNextHeadPage(Unknown Source)<br/>
+    at org.apache.derby.impl.store.raw.data.BaseContainer.getNextPage(Unknown Source)<br/>
+    at org.apache.derby.impl.store.raw.data.BaseContainerHandle.getNextPage(Unknown Source)<br/>
+    at org.apache.derby.impl.store.access.conglomerate.GenericScanController.positionAtNextPage(Unknown Source)<br/>
+    at org.apache.derby.impl.store.access.conglomerate.GenericScanController.fetchRows(Unknown Source)<br/>
+    at org.apache.derby.impl.store.access.heap.HeapScan.fetchNextGroup(Unknown Source)<br/>
+    at org.apache.derby.impl.sql.execute.BulkTableScanResultSet.reloadArray(Unknown Source)<br/>
+    at org.apache.derby.impl.sql.execute.BulkTableScanResultSet.getNextRowCore(Unknown Source)<br/>
+    at org.apache.derby.impl.sql.execute.SortResultSet.getRowFromResultSet(Unknown Source)<br/>
+    at org.apache.derby.impl.sql.execute.SortResultSet.getNextRowFromRS(Unknown Source)<br/>
+    at org.apache.derby.impl.sql.execute.SortResultSet.loadSorter(Unknown Source)<br/>
+    at org.apache.derby.impl.sql.execute.SortResultSet.openCore(Unknown Source)<br/>
+    at org.apache.derby.impl.sql.execute.BasicNoPutResultSetImpl.open(Unknown Source)<br/>
+    at org.apache.derby.impl.sql.GenericPreparedStatement.execute(Unknown Source)<br/>
+    at org.apache.derby.impl.jdbc.EmbedStatement.executeStatement(Unknown Source)<br/>
+    at org.apache.derby.impl.jdbc.EmbedPreparedStatement.executeStatement(Unknown Source)<br/>
+    at org.apache.derby.impl.jdbc.EmbedPreparedStatement.executeQuery(Unknown Source)<br/>
+    at org.hibernate.jdbc.AbstractBatcher.getResultSet(AbstractBatcher.java:139)<br/>
+    at org.hibernate.loader.Loader.getResultSet(Loader.java:1676)<br/>
+    at org.hibernate.loader.Loader.doQuery(Loader.java:662)<br/>
+    at org.hibernate.loader.Loader.doQueryAndInitializeNonLazyCollections(Loader.java:223)<br/>
+    at org.hibernate.loader.Loader.doList(Loader.java:2147)<br/>
+    at org.hibernate.loader.Loader.listIgnoreQueryCache(Loader.java:2026)<br/>
+    at org.hibernate.loader.Loader.list(Loader.java:2021)<br/>
+    at org.hibernate.loader.hql.QueryLoader.list(QueryLoader.java:369)<br/>
+    at org.hibernate.hql.ast.QueryTranslatorImpl.list(QueryTranslatorImpl.java:298)<br/>
+    at org.hibernate.engine.query.HQLQueryPlan.performList(HQLQueryPlan.java:137)<br/>
+    at org.hibernate.impl.SessionImpl.list(SessionImpl.java:1014)<br/>
+    at org.hibernate.impl.QueryImpl.list(QueryImpl.java:79)<br/>
+    at ae.sphere.arena.networkManager.db.dao.SyslogDAO.getAllSyslogSortedByDate(SyslogDAO.java:40)<br/>
+    at ae.sphere.arena.networkManager.server.syslog.dataPurging.SyslogHistoryPurgerManager.purge(SyslogHistoryPurgerManager.java:35)<br/>
+    at ae.sphere.arena.networkManager.db.DbPurger$DataPurgerJob.run(DbPurger.java:41)<br/>
+    at org.eclipse.core.internal.jobs.Worker.run(Worker.java:58)<br/>
+============= end nested exception, level (1) ===========</p>

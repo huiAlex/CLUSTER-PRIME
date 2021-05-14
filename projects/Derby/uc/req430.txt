@@ -1,0 +1,9 @@
+[DERBY-4805] Increase the length of the RDBNAM field in the DRDA implementation <p>Currently, whenever the client driver is used, there is a limit of 255 bytes for the database name. This is defined by the DRDA spec and there has been a discussion on the list <span class= error >&#91;1&#93;</span>/<span class= error >&#91;2&#93;</span> as to whether this limit should be raised due to the introduction of the new ACR that allows for UTF-8 characters.</p>
+
+<p>UTF-8 characters can take up to four bytes and this reduces the limit in characters dramatically.</p>
+
+<p>This should be an easy change as there is a codepoint that defines this limit.</p>
+
+<p><span class= error >&#91;1&#93;</span> did not work but <span class= error >&#91;2&#93;</span> did<br/>
+<span class= error >&#91;1&#93;</span> - <a href= http://old.nabble.com/Database-name-length-tt29691419.html  class= external-link  rel= nofollow >http://old.nabble.com/Database-name-length-tt29691419.html</a><br/>
+<span class= error >&#91;2&#93;</span>http://apache-database.10148.n7.nabble.com/Database-name-length-td33182.html</p>

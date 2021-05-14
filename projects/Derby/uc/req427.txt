@@ -1,0 +1,52 @@
+[DERBY-475] Add a system function mechanism and table of  functions, including a set of initial functions. <p>Add a mechanism for system functions to be easily added. Resolution of functions will check SYSFUN.&lt;name&gt; for a function call in SQL when the function is not qualified by a schema. If the current schema does not have a function matching the name, then an additional resolution is made using SYSFUN.&lt;name&gt;.</p>
+
+<p>Add a table driven mechanism for simple single argument functions (could be expanded in the future).</p>
+
+<p>Add these functions</p>
+
+<p>/*</p>
+<ul>
+	<li>
+	<ul>
+		<li>SYSFUN functions<br/>
+*<span class= error >&#91;0&#93;</span> = FUNCTION name<br/>
+*<span class= error >&#91;1&#93;</span> = RETURNS type<br/>
+*<span class= error >&#91;2&#93;</span> = Java class<br/>
+*<span class= error >&#91;3&#93;</span> = method name<br/>
+*<span class= error >&#91;4&#93;</span> = parameter type (single parameter)<br/>
+*<br/>
+*/<br/>
+private static final String[][] SYSFUN_FUNCTIONS = 
+{
+{ ACOS ,  DOUBLE ,  java.lang.Math ,  acos ,  DOUBLE }
+<p>,</p>
+{ ASIN ,  DOUBLE ,  java.lang.Math ,  asin ,  DOUBLE }
+<p>,</p>
+{ ATAN ,  DOUBLE ,  java.lang.Math ,  atan ,  DOUBLE }
+<p>,</p>
+{ COS ,  DOUBLE ,  java.lang.Math ,  cos ,  DOUBLE }
+<p>,</p>
+{ SIN ,  DOUBLE ,  java.lang.Math ,  sin ,  DOUBLE }
+<p>,</p>
+{ TAN ,  DOUBLE ,  java.lang.Math ,  tan ,  DOUBLE }
+<p>,</p>
+{ DEGREES ,  DOUBLE ,  java.lang.Math ,  toDegrees ,  DOUBLE }
+<p>,</p>
+{ RADIANS ,  DOUBLE ,  java.lang.Math ,  toRadians ,  DOUBLE }
+<p>,</p>
+{ LN ,  DOUBLE ,  java.lang.Math ,  log ,  DOUBLE }
+<p>,</p>
+{ EXP ,  DOUBLE ,  java.lang.Math ,  exp ,  DOUBLE }
+<p>,</p>
+{ CEIL ,  DOUBLE ,  java.lang.Math ,  ceil ,  DOUBLE }
+<p>,</p>
+{ CEILING ,  DOUBLE ,  java.lang.Math ,  ceil ,  DOUBLE }
+<p>,</p>
+{ FLOOR ,  DOUBLE ,  java.lang.Math ,  floor ,  DOUBLE }
+<p>,</p></li>
+	</ul>
+	</li>
+</ul>
+
+
+<p>};</p>

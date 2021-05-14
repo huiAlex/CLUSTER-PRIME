@@ -1,0 +1,6 @@
+[DERBY-3783] LOBStreamControl shouldn t throw SQLException <p>LOBStreamControl throws three types of exceptions: IOException, SQLException and StandardException.<br/>
+All the SQLException are generated/thrown from the code in LOBStreamControl.<br/>
+At this level of the code, SQLException should not be thrown, as it is more tedious to handle both SQLException and StandardException at higher levels.</p>
+
+
+<p>I propose to replace SQLException with StandardException in LOBStreamControl. The purpose of this change is consistency, and also results it slightly less code at higher levels.</p>

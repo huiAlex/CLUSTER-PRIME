@@ -1,0 +1,9 @@
+[DERBY-3743] Revoking EXECUTE privilege on a function if used in a CHECK constraint: implementation problem  <p>The docs say that REVOKE EXECUTE ... RESTRICT should <br/>
+fail if there is a dependent constraint:</p>
+
+<p> The RESTRICT clause specifies that the EXECUTE privilege cannot be<br/>
+ revoked if the specified routine is used in a view, trigger, or<br/>
+ constraint, and the privilege is being revoked from the owner of the<br/>
+ view, trigger, or constraint. </p>
+
+<p> Revoking the privilege will be correctly restricted, but possibly for the wrong reason.</p>

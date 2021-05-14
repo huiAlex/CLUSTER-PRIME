@@ -1,0 +1,5 @@
+[DERBY-3388] Improve message handling for replication messages to derby.log <p>The asynchronous replication functionality writes information to the derby log. It would be good to improve this in the following ways:</p>
+
+<p>1: startSlave and stopSlave stack traces are written twice to the log - one is obviously enough <img class= emoticon  src= https://issues.apache.org/jira/images/icons/emoticons/smile.gif  height= 16  width= 16  align= absmiddle  alt=   border= 0 /><br/>
+2: It should be possible to configure if replication messages written to the log should be followed by a stack trace of the cause.<br/>
+3: logged messages should have a timestamp </p>

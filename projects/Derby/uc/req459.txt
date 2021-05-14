@@ -1,0 +1,10 @@
+[DERBY-5240] Log Operating system information to derby.log on boot <p>Most critical information from sysinfo is now available in the Derby boot message in derby.log, except  for the operating system information.<br/>
+e.g.</p>
+
+<p>OS name: Windows XP<br/>
+OS architecture: x86<br/>
+OS version: 5.1 build 2600 Service Pack 3 </p>
+
+<p>It would be useful to log the operating system info as well in the derby.log on boot.</p>
+
+<p>I ll close out <a href= https://issues.apache.org/jira/browse/DERBY-1272  title= Change sysinfo to print to error log (derby.log) on boot of derby  if derby.stream.error.logSeverityLevel=0  class= issue-link  data-issue-key= DERBY-1272 ><del>DERBY-1272</del></a> after filing this issue as this is the last piece of info that needs to be added to the error  log.</p>

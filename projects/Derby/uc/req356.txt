@@ -1,0 +1,10 @@
+[DERBY-3850] Remove unneeded workarounds for DERBY-177 and DERBY-3693 <p>After the fix for <a href= https://issues.apache.org/jira/browse/DERBY-177  title= Unnecessary waiting within EmbedDatabaseMetaData.getIndexInfo()  class= issue-link  data-issue-key= DERBY-177 ><del>DERBY-177</del></a> and <a href= https://issues.apache.org/jira/browse/DERBY-3693  title= Deadlocks accessing DB metadata  class= issue-link  data-issue-key= DERBY-3693 ><del>DERBY-3693</del></a> was committed, these code clean-ups could be performed:</p>
+
+<ul class= alternate  type= square >
+	<li>remove workaround for <a href= https://issues.apache.org/jira/browse/DERBY-177  title= Unnecessary waiting within EmbedDatabaseMetaData.getIndexInfo()  class= issue-link  data-issue-key= DERBY-177 ><del>DERBY-177</del></a> in the tests (search for the string  <a href= https://issues.apache.org/jira/browse/DERBY-177  title= Unnecessary waiting within EmbedDatabaseMetaData.getIndexInfo()  class= issue-link  data-issue-key= DERBY-177 ><del>DERBY-177</del></a>  to find them)</li>
+</ul>
+
+
+<ul class= alternate  type= square >
+	<li>remove logic to prevent waiting for table locks in SPSDescriptor.updateSYSSTATEMENTS() since the new mechanism will prevent waiting for all types of locks</li>
+</ul>

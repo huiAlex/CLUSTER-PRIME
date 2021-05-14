@@ -1,0 +1,8 @@
+[DERBY-3886] SQL roles: ij show enabled and settable roles <p>Rick suggested it would be nice to have something to allow inspection of enabled roles, cf the <br/>
+ENABLED_ROLES view of the information schema, SQL 2003, vol 11, section 5.29.</p>
+
+<p>I enclose patch suggestion for doing this via a new VTI table and syntactic sugar in ij:<br/>
+SYSCS_DIAG.ENABLED_ROLES and and ij command  show enabled_roles .<br/>
+Not for commit at this point, we may want to handle to general question of information schemata<br/>
+in another way. What say thee?</p>
+

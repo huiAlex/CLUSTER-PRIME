@@ -1,0 +1,7 @@
+[DERBY-3461] EmbedSQLWarning should be renamed SQLWarningFactory and return java.sql.SQLWarning objects and not a Derby specific implementation. <p>One side effect is that the toString() of such a warning would change format from starting with  SQLWarning:   to  java.sql.SQLWarning:  , which should match any warnings created on the network client side.</p>
+
+<p>See comments in <a href= https://issues.apache.org/jira/browse/DERBY-3453  title= The PublicAPI class should belong to org.apache.derby.iapi.jdbc as it handles creation of SQLException  class= issue-link  data-issue-key= DERBY-3453 >DERBY-3453</a> as well for possible correct package of SQLWarningFactory.</p>
+
+<p>Note: generateCsSQLWarning() can be removed as it doesn t seem to be used.</p>
+
+<p>Note: Also SQLWarningFactory would not extend java.sql.SQLWarning.</p>

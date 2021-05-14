@@ -1,0 +1,26 @@
+[DERBY-5256] Improve error reporting in common.sanity.AssertFailure <p>The error reporting in AssertFailure is somewhat imprecise, and it may also fail with an NPE:<br/>
+testAssertFailureNoThreadDump(org.apache.derbyTesting.unitTests.junit.AssertFailureTest) ERROR:<br/>
+java.lang.NullPointerException<br/>
+        at org.apache.derby.shared.common.sanity.AssertFailure.dumpThreads(AssertFailure.java:190)<br/>
+        at org.apache.derby.shared.common.sanity.AssertFailure.&lt;init&gt;(AssertFailure.java:82)<br/>
+        at org.apache.derbyTesting.unitTests.junit.AssertFailureTest.testAssertFailureNoThreadDump(AssertFailureTest.java:114)<br/>
+        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br/>
+        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)<br/>
+        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br/>
+        at java.lang.reflect.Method.invoke(Method.java:616)<br/>
+        at junit.framework.TestCase.runTest(TestCase.java:164)<br/>
+        at junit.framework.TestCase.runBare(TestCase.java:130)<br/>
+        at org.apache.derbyTesting.junit.BaseTestCase.runBare(BaseTestCase.java:112)<br/>
+        at junit.framework.TestResult$1.protect(TestResult.java:106)<br/>
+        at junit.framework.TestResult.runProtected(TestResult.java:124)<br/>
+        at junit.framework.TestResult.run(TestResult.java:109)<br/>
+        at junit.framework.TestCase.run(TestCase.java:120)<br/>
+        at junit.extensions.TestDecorator.basicRun(TestDecorator.java:24)<br/>
+        at junit.extensions.TestSetup$1.protect(TestSetup.java:21)<br/>
+        at junit.framework.TestResult.runProtected(TestResult.java:124)<br/>
+        at junit.extensions.TestSetup.run(TestSetup.java:25)<br/>
+        at junit.framework.TestSuite.runTest(TestSuite.java:230)<br/>
+        at junit.framework.TestSuite.run(TestSuite.java:225)<br/>
+        at junit.framework.TestSuite.runTest(TestSuite.java:230)<br/>
+        at junit.framework.TestSuite.run(TestSuite.java:225)<br/>
+        at kah.TestRunner.main(TestRunner.java:77)</p>

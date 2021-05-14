@@ -1,0 +1,42 @@
+[DERBY-4421] Allow Visitors to process the nodes bottom-up <p>Currently, QueryTreeNode.accept() walks the tree top-down, always calling<br/>
+visit() on the parent before it calls visit() on the children. Although this<br/>
+is fine in most cases, there are use cases where visiting the nodes<br/>
+bottom-up would be better. One example is mentioned in <a href= https://issues.apache.org/jira/browse/DERBY-4416  title= Handle comparison of two constants as a boolean constant  class= issue-link  data-issue-key= DERBY-4416 ><del>DERBY-4416</del></a>. The<br/>
+visitor posted there looks for binary comparison operators and checks<br/>
+whether both operands are constants. If they are, the operator is replaced<br/>
+with a boolean constant.</p>
+
+<p>Take this expression as an example: (1&lt;2)=(2&gt;1)</p>
+
+<p>The query tree looks like this:</p>
+
+<p>       =<br/>
+     /   \<br/>
+    /     \<br/>
+   &lt;       &gt;<br/>
+  / \     / \<br/>
+ /   \   /   \<br/>
+1     2 2     1</p>
+
+<p>If we walk the tree top-down with the said visitor, the = node doesn t have<br/>
+constant operands when it s visited. The &lt; and &gt; operators do have constant<br/>
+operands, and they re both replaced with constant TRUE. This means the<br/>
+expression (1&lt;2)=(2&gt;1) is rewritten to TRUE=TRUE, and that s how far the<br/>
+transformation goes.</p>
+
+<p>If the tree had been processed bottom-up, we would start with the &lt; and &gt;<br/>
+operators, and again replace them with TRUE. The query tree would therefore<br/>
+have been transformed to this intermediate form when the = operator was<br/>
+visited:</p>
+
+<p>       =<br/>
+     /   \<br/>
+    /     \<br/>
+  TRUE   TRUE</p>
+
+<p>This is the same as the end result when visiting top-down, but now the =<br/>
+operator hasn t been visited yet. Since both the operands of the = operator<br/>
+are constants, the visitor will perform yet another transformation so the<br/>
+tree is simplified further and ends up as:</p>
+
+<p>    TRUE</p>

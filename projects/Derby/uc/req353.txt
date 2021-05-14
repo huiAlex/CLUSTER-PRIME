@@ -1,0 +1,3 @@
+[DERBY-3793] Remove unnecessary methods from InternalClob interface <p>The method InternalClob.getBytePosition is only used in one internal Clob implementation, and can be removed to reduce complexity and code volume.</p>
+
+<p>The method InternalClob.getByteLength can be removed.</p>

@@ -1,0 +1,11 @@
+[DERBY-3738] Add more tests for legal/illegal commands in the different replication states <p>Adding new replication state tests:<br/>
+  ...<br/>
+  testReplication_Local_3_p1_StateNegativeTests <br/>
+  testReplication_Local_3_p2_StateTests_bigInsert_immediateStopMaster <br/>
+  testReplication_Local_3_p2_StateTests_smallInsert_immediateStopMaster_DISABLED (Due to <a href= https://issues.apache.org/jira/browse/DERBY-3617  title= failover on slave hangs after stopmaster on master.  class= issue-link  data-issue-key= DERBY-3617 >DERBY-3617</a>)<br/>
+  testReplication_Local_3_p2_StateTests_bigInsert_sleepBeforeStopMaster<br/>
+  testReplication_Local_3_p2_StateTests_smallInsert_sleepBeforeStopMaster<br/>
+  testReplication_Local_3_p3_StateNegativeTests <br/>
+  testReplication_Local_3_p4_StateNegativeTests</p>
+
+<p>plus refactoring and cleanup.</p>

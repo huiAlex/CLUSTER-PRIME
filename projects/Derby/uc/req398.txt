@@ -1,0 +1,19 @@
+[DERBY-4398] Allow OFFSET/FETCH in subqueries <p>SQL 2008 specifies that OFFSET/FETCH (&lt;result offset clause&gt;, &lt;fetch<br/>
+first clause&gt;) may be used in subqueries.  Currently, Derby only<br/>
+allows this at the outer (cursor) level. Cf. also <a href= https://issues.apache.org/jira/browse/DERBY-4397  title= Allow ORDER BY in subqueries  class= issue-link  data-issue-key= DERBY-4397 ><del>DERBY-4397</del></a> on<br/>
+allowing ORDER BY in subqueries for this extension to be portable and<br/>
+useful.</p>
+
+<p>SQL features: </p>
+
+<p>F856 Nested &lt;fetch first clause&gt; in &lt;query expression&gt;<br/>
+F857 Top-level &lt;fetch first clause&gt; in &lt;query expression&gt; (already present in 10.5)<br/>
+F858 &lt;fetch first clause&gt; in subqueries<br/>
+F859 Top-level &lt;fetch first clause&gt; in views<br/>
+F860 dynamic &lt;fetch first row count&gt; in &lt;fetch first clause&gt; (already present in 10.5)</p>
+
+<p>F861 Top-level &lt;result offset clause&gt; in &lt;query expression&gt; (already present in 10.5)<br/>
+F862 &lt;result offset clause&gt; in subqueries<br/>
+F863 Nested &lt;result offset clause&gt; in &lt;query expression&gt;<br/>
+F864 Top-level &lt;result offset clause&gt; in views<br/>
+F865 dynamic &lt;offset row count&gt; in &lt;result offset clause&gt; (already present in 10.5)</p>

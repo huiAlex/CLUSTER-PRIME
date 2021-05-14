@@ -1,0 +1,36 @@
+[DERBY-3732] SQL Length function materializes BLOB  into memory <p>Currently the SQL length function materializes the entire lob into memory. In SQLBinary.getLength() we have <br/>
+public final int	getLength() throws StandardException<br/>
+	{<br/>
+		if (stream != null) </p>
+{
+
+			if (streamValueLength != -1)
+				return streamValueLength;
+		}
+
+<p>		return (getBytes() == null) ? 0 : getBytes().length;<br/>
+	}<br/>
+Which actually is doubly bad because we call getBytes twice and materialize it twice.<br/>
+It would be good to read the length from the stream if available and otherwise stream the value to get the length, rather than materializing it into memory.</p>
+
+<p>To reproduce, run the attached repro.<br/>
+java -Xmx16M  LengthLargeLob</p>
+
+<p>It gives an out of memory exception<br/>
+Caused by: java.lang.OutOfMemoryError: Java heap space<br/>
+        at org.apache.derby.iapi.types.SQLBinary.readFromStream(SQLBinary.java:415)<br/>
+        at org.apache.derby.iapi.types.SQLBinary.readExternal(SQLBinary.java:318)<br/>
+        at org.apache.derby.iapi.types.SQLBinary.getValue(SQLBinary.java:220)<br/>
+        at org.apache.derby.iapi.types.SQLBinary.getBytes(SQLBinary.java:210)<br/>
+        at org.apache.derby.iapi.types.SQLBinary.getLength(SQLBinary.java:250)<br/>
+        at org.apache.derby.impl.sql.execute.BaseActivation.getDB2Length(BaseActivation.java:1684)<br/>
+        at org.apache.derby.exe.acf81e0010x011axa317x5db8x0000003d9dc81.e1(Unknown Source)<br/>
+        at org.apache.derby.impl.services.reflect.DirectCall.invoke(ReflectGeneratedClass.java:141)<br/>
+        at org.apache.derby.impl.sql.execute.ProjectRestrictResultSet.doProjection(ProjectRestrictResultSet.java:497)<br/>
+        at org.apache.derby.impl.sql.execute.ProjectRestrictResultSet.getNextRowCore(ProjectRestrictResultSet.java:291)<br/>
+        at org.apache.derby.impl.sql.execute.BasicNoPutResultSetImpl.getNextRow(BasicNoPutResultSetImpl.java:460)<br/>
+        at org.apache.derby.impl.jdbc.EmbedResultSet.movePosition(EmbedResultSet.java:423)<br/>
+        ... 2 more<br/>
+[</p>
+
+

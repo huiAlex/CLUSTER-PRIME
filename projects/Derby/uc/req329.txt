@@ -1,0 +1,2 @@
+[DERBY-3706] NetworkServer console messages should print a time stamp <p>Network Server console messages should print a time stamp.  Methods that need to be changed are<br/>
+NetworkServerControlImpl., consoleMessage, onsolePropertyMessage and consoleExceptionPrintTrace</p>

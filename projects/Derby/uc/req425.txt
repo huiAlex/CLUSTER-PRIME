@@ -1,0 +1,181 @@
+[DERBY-4695] Internal assignment of tablenumer, columnnumber looks wrong in query tree, although no ill effects are seen. <p>While looking into derby-4679, I also looked at the query in<br/>
+derby-2526 to validate that my changes also worked for that variant of<br/>
+the problem.</p>
+
+<p>During inspection of the query trees after the bind phase, I found one<br/>
+instance in which the pair (tablenumber, columnnumber) of a column<br/>
+reference was wrong. Although it did not seem to impact the query<br/>
+result, I note it here as as something we should probably investiate<br/>
+as it may be a symptom an underlying problem, or a potential for<br/>
+future problems.</p>
+
+<p>The query looks like this:</p>
+
+<p>select b3.* from b3 join bvw on (b3.c8 = bvw.c5) join b4 on (bvw.c1 = b4.c7) where b4.c4 = 42 </p>
+
+<p>and the underlying DDL is this:</p>
+
+<p>create table b2 (c1 int, c2 int, c3 char(1), c4 int, c5 int, c6 int);<br/>
+create table b4 (c7 int, c4 int, c6 int);<br/>
+create table b3 (c8 int, c9 int, c5 int, c6 int);<br/>
+create table b (c1 int, c2 int, c3 char(1), c4 int, c5 int, c6 int);<br/>
+create view bvw (c5, c1 ,c2 ,c3 ,c4) as<br/>
+select c5, c1 ,c2 ,c3 ,c4 from b2 union<br/>
+select c5, c1 ,c2 ,c3 ,c4 from b;<br/>
+create view bvw2 (c1 ,c2 ,c3 ,c4 ,c5) as</p>
+
+<p>After the bind phase, the join clause  bvw.c1 = b4.c7  has the<br/>
+following entry for the column reference bvw.C1:</p>
+
+<p>          tableNumber: 1<br/>
+          columnNumber: 6</p>
+
+<p>The problem is that the node with tablenumber 1 is bvw, which is the<br/>
+view with the subquery for the union, which has only 5 resulting<br/>
+columns, so 6 must be wrong. Although both the view participant tables<br/>
+(b, b2) both have six column, the view does not. In any case, C1 is<br/>
+column 2 in the view and column 2 in the two union selects from both b<br/>
+and b2.</p>
+
+<p>C1 is however, column 6 of the join node resulting from  select b3.*<br/>
+from b3 join bvw on (b3.c8 = bvw.c5) , but the correct table number for<br/>
+that would be 5, not 1.</p>
+
+<p>So, it would seem the table number has been bound to the bvw view s<br/>
+result set, but the column number has been bound to the innermost join<br/>
+node s result set. This looks worrying to me.</p>
+
+<p>See derby.log attached for the full dump of the query tree after the<br/>
+bind phase.</p>
+
+<p>sourceResultSet:                                    <br/>
+    org.apache.derby.impl.sql.compile.FromSubquery@12789d2<br/>
+    correlation Name: BVW<br/>
+    null<br/>
+    tableNumber 1 &lt;------------------------------------------- Note!<br/>
+    level 0<br/>
+    resultSetNumber: 0<br/>
+    referencedTableMap: null<br/>
+    statementResultSet: false<br/>
+    resultColumns:                                      <br/>
+        org.apache.derby.impl.sql.compile.ResultColumnList@c943d1<br/>
+        indexRow: false<br/>
+        orderBySelect: 0<br/>
+        <span class= error >&#91;0&#93;</span>:                                        <br/>
+        org.apache.derby.impl.sql.compile.ResultColumn@d3c6a3<br/>
+        **<b>truncated</b>**<br/>
+        <span class= error >&#91;1&#93;</span>:                                        <br/>
+        org.apache.derby.impl.sql.compile.ResultColumn@18352d8<br/>
+        exposedName: C1<br/>
+        name: C1<br/>
+        tableName: null<br/>
+        isDefaultColumn: false<br/>
+        wasDefaultColumn: false<br/>
+        isNameGenerated: false<br/>
+        sourceTableName: B2<br/>
+        type: INTEGER<br/>
+        columnDescriptor: null<br/>
+        isGenerated: false<br/>
+        isGeneratedForUnmatchedColumnInInsert: false<br/>
+        isGroupingColumn: false<br/>
+        isReferenced: true<br/>
+        isRedundant: false<br/>
+        virtualColumnId: 2<br/>
+        resultSetNumber: -1<br/>
+        dataTypeServices: INTEGER<br/>
+        expression:                                         <br/>
+            org.apache.derby.impl.sql.compile.VirtualColumnNode@b40ec4<br/>
+            dataTypeServices: null<br/>
+            sourceColumn:                                               <br/>
+                org.apache.derby.impl.sql.compile.ResultColumn@1d95da8<br/>
+                **<b>truncated</b>**<br/>
+            sourceResultSet:                                                <br/>
+                org.apache.derby.impl.sql.compile.UnionNode@14d7745<br/>
+                **<b>truncated</b>**<br/>
+        <span class= error >&#91;2&#93;</span>:                                        <br/>
+        org.apache.derby.impl.sql.compile.ResultColumn@13576a2<br/>
+        exposedName: C2<br/>
+        name: C2<br/>
+        tableName: null<br/>
+        isDefaultColumn: false<br/>
+        wasDefaultColumn: false<br/>
+        isNameGenerated: false<br/>
+        sourceTableName: B2<br/>
+        type: INTEGER<br/>
+        columnDescriptor: null<br/>
+        isGenerated: false<br/>
+        isGeneratedForUnmatchedColumnInInsert: false<br/>
+        isGroupingColumn: false<br/>
+        isReferenced: true<br/>
+        isRedundant: false<br/>
+        virtualColumnId: 3<br/>
+        resultSetNumber: -1<br/>
+        dataTypeServices: INTEGER<br/>
+        expression:                                         <br/>
+            org.apache.derby.impl.sql.compile.VirtualColumnNode@ff8c74<br/>
+            dataTypeServices: null<br/>
+            sourceColumn:                                               <br/>
+                org.apache.derby.impl.sql.compile.ResultColumn@61736e<br/>
+                **<b>truncated</b>**<br/>
+            sourceResultSet:                                                <br/>
+                org.apache.derby.impl.sql.compile.UnionNode@14d7745<br/>
+                **<b>truncated</b>**<br/>
+        <span class= error >&#91;3&#93;</span>:                                        <br/>
+        org.apache.derby.impl.sql.compile.ResultColumn@15e2ccd<br/>
+        exposedName: C3<br/>
+        name: C3<br/>
+        tableName: null<br/>
+        isDefaultColumn: false<br/>
+        wasDefaultColumn: false<br/>
+        isNameGenerated: false<br/>
+        sourceTableName: B2<br/>
+        type: CHAR(1)<br/>
+        columnDescriptor: null<br/>
+        isGenerated: false<br/>
+        isGeneratedForUnmatchedColumnInInsert: false<br/>
+        isGroupingColumn: false<br/>
+        isReferenced: true<br/>
+        isRedundant: false<br/>
+        virtualColumnId: 4<br/>
+        resultSetNumber: -1<br/>
+        dataTypeServices: CHAR(1)<br/>
+        expression:                                         <br/>
+            org.apache.derby.impl.sql.compile.VirtualColumnNode@1cf7491<br/>
+            dataTypeServices: null<br/>
+            sourceColumn:                                               <br/>
+                org.apache.derby.impl.sql.compile.ResultColumn@11946c2<br/>
+                **<b>truncated</b>**<br/>
+            sourceResultSet:                                                <br/>
+                org.apache.derby.impl.sql.compile.UnionNode@14d7745<br/>
+                **<b>truncated</b>**<br/>
+        <span class= error >&#91;4&#93;</span>:    &lt;----------------------------------------- highest column number is 5 (index is zero-based)<br/>
+        org.apache.derby.impl.sql.compile.ResultColumn@edf730<br/>
+        exposedName: C4<br/>
+        name: C4<br/>
+        tableName: null<br/>
+        isDefaultColumn: false<br/>
+        wasDefaultColumn: false<br/>
+        isNameGenerated: false<br/>
+        sourceTableName: B2<br/>
+        type: INTEGER<br/>
+        columnDescriptor: null<br/>
+        isGenerated: false<br/>
+        isGeneratedForUnmatchedColumnInInsert: false<br/>
+        isGroupingColumn: false<br/>
+        isReferenced: true<br/>
+        isRedundant: false<br/>
+        virtualColumnId: 5<br/>
+        resultSetNumber: -1<br/>
+        dataTypeServices: INTEGER<br/>
+        expression:                                         <br/>
+            org.apache.derby.impl.sql.compile.VirtualColumnNode@ff94b1<br/>
+            dataTypeServices: null<br/>
+            sourceColumn:                                               <br/>
+                org.apache.derby.impl.sql.compile.ResultColumn@17a4989<br/>
+                **<b>truncated</b>**<br/>
+            sourceResultSet:                                                <br/>
+                org.apache.derby.impl.sql.compile.UnionNode@14d7745<br/>
+                **<b>truncated</b>**<br/>
+    subquery:                                       <br/>
+        org.apache.derby.impl.sql.compile.UnionNode@14d7745<br/>
+        **<b>truncated</b>**</p>

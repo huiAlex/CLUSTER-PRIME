@@ -1,0 +1,8 @@
+[DERBY-5622] Reduce the chance for hash collisions when checking bootPassword at boot time and when changing password. <p>There are two issues, already seen in <a href= https://issues.apache.org/jira/browse/DERBY-2687  title= store/encryptDatabase.sql fails intermittently with ClassNotFoundException, Log Corrupted  class= issue-link  data-issue-key= DERBY-2687 ><del>DERBY-2687</del></a>:</p>
+
+<p>    the boot issue : there is a 1/2**16 chance that a wrong bootPassword will allow boot to proceed (but since its decoded key is wrong the boot will fail).<br/>
+    the password change  issue: similarly, there is a chance that the wrong bootPassword will be accepted trying to change it via <br/>
+    SYSCS_UTIL.SYSCS_SET_DATABASE_PROPERTY( bootPassword , ...) at least for algorithms that do not check IV (initialization vector) in addition to the<br/>
+    digest, e.g.  DES/ECB/NoPadding </p>
+
+<p>The latter case may lead to data corruption, cf. <a href= https://issues.apache.org/jira/browse/DERBY-2687  title= store/encryptDatabase.sql fails intermittently with ClassNotFoundException, Log Corrupted  class= issue-link  data-issue-key= DERBY-2687 ><del>DERBY-2687</del></a> discussion. I think the risk is fairly low, though: One would need to have execution permission to change the property if SQL authorization is used, and in most scenarios the supplied existing password would be correct. But since the results can be bad, it would be good to reduce or eliminate the risk.</p>

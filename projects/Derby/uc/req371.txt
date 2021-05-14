@@ -1,0 +1,7 @@
+[DERBY-4023] Improve length caching in TemporaryClob <p>TemporaryClob doesn t save the known length of the Clob in all situations.<br/>
+The following places in the code should be improved (some easier than others):<br/>
+ a) TemporaryClob(String,ConChild)<br/>
+ b) copyClobContent(InternalClob,long) (non-static)<br/>
+ c) copyClobContent(InternalClob) (non-static)</p>
+
+<p>There might be additional places to fix too.</p>

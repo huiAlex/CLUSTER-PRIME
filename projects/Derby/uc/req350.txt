@@ -1,0 +1,12 @@
+[DERBY-378] support for  import/export  of  tables with clob/blob and the other binary data types   will be good addition to derby, <p>Currently if  I have  a table that contains clob/blob column,  import/export operations on that table<br/>
+throghs  unsupported feature exception. </p>
+
+<p>set schema iep;<br/>
+set schema iep;<br/>
+create table ntype(a int , ct CLOB(1024));<br/>
+create table ntype1(bt BLOB(1024) , a int);</p>
+
+<p>call SYSCS_UTIL.SYSCS_EXPORT_TABLE ( iep ,  ntype  ,  extinout/ntype.dat  ,<br/>
+                                 null, null, null) ;<br/>
+ERROR XIE0B: Column  CT  in the table is of type CLOB, it is not supported by th<br/>
+e import/export feature.</p>

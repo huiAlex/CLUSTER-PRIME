@@ -1,0 +1,28 @@
+[DERBY-5466] Add support for SQL Standard statistics functions, such as STDDEV_POP, STDDEV_SAMP, VAR_POP, VAR_SAMP <p>Any of these RDBMS support the SQL standard statistics functions STDDEV_POP, STDDEV_SAMP, VAR_POP, VAR_SAMP:</p>
+
+<ul class= alternate  type= square >
+	<li>DB2 (only STDDEV, VARIANE)</li>
+	<li>H2</li>
+	<li>HSQLDB</li>
+	<li>Ingres</li>
+	<li>MySQL</li>
+	<li>Oracle</li>
+	<li>Postgres</li>
+	<li>SQL Server (named STDEVP, STDEV, VARP, VAR)</li>
+	<li>Sybase ASE</li>
+	<li>Sybase SQL Anywhere</li>
+</ul>
+
+
+<p>These don t:</p>
+
+<ul class= alternate  type= square >
+	<li>Derby</li>
+	<li>SQLite</li>
+</ul>
+
+
+<p>This would be a useful addition for Derby, I think.</p>
+
+<p>An even larger example list of possible statistics aggregate functions is listed in the Postgres documentation:<br/>
+<a href= http://www.postgresql.org/docs/9.0/static/functions-aggregate.html#FUNCTIONS-AGGREGATE-STATISTICS-TABLE  class= external-link  rel= nofollow >http://www.postgresql.org/docs/9.0/static/functions-aggregate.html#FUNCTIONS-AGGREGATE-STATISTICS-TABLE</a></p>
