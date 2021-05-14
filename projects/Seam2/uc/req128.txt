@@ -1,0 +1,8 @@
+[JBSEAM-2076] let EL access qualified @Factory and @Out names <p>I can use  dot  qualified component names in EL.  (I.e, I can use #</p>
+{org.jboss.seam.security.identity.username}
+<p> in my page instead of #</p>
+{identity.username}
+<p>).</p>
+
+<p>However, I can t do the same for @Factory variables (and presumably other kinds of non-component context variables).<br/>
+I d like to. <img class= emoticon  src= https://issues.jboss.org/images/icons/emoticons/smile.png  height= 16  width= 16  align= absmiddle  alt=   border= 0 /></p>

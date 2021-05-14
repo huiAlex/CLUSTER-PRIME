@@ -1,0 +1,6 @@
+[JBSEAM-163]  Pop  the conversation stack. <p>Need to add:</p>
+
+<p>Conversation.getParentdId()<br/>
+Conversation.getRootId()<br/>
+Conversation.parent()<br/>
+Conversation.root();</p>

@@ -1,0 +1,4 @@
+[JBSEAM-1199] Support for Groovy in Seam runtime <p>Support compiled groovy entities<br/>
+Support compiled groovy actions<br/>
+Support for deployed .groovy actions into WEB-INF/dev if in debug mode<br/>
+Support for hot redeployment of .groovy actions in debug mode when the hot filter is used.</p>

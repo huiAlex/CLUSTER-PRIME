@@ -1,0 +1,3 @@
+[JBSEAM-842] s:hasRole() in jBPM EL.  <p>Currently, jBPM uses its own forked EL (which is a problem to begin with....). This means that it can t see the s: functions.</p>
+
+<p>We need to fix this problem ASAP.</p> 

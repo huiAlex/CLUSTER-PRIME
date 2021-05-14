@@ -1,0 +1,10 @@
+[JBSEAM-165] improvements to resourceBundle <p>We should allow:</p>
+
+<p>(1) switching of a user s locale using #</p>
+{local.language}
+<p>, #</p>
+{locale.switch}
+<p>(2) templated resource bundles #</p>
+{messages[ bundle.key ]}
+<p> where bundle.key=some text with an #</p>
+{expression}

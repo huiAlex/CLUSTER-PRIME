@@ -1,0 +1,32 @@
+[JBSEAM-2023] short-circuit page actions on first navigation event <p>Page actions currently have one severe quirk. If multiple page actions are configured for a view-id pattern, they all execute without checking whether or not a navigation has occurred (a navigation match was found). What is even more strange is that even when a navigation match is found and the JSF NavigationHandler has processed the navigation, the actions just keep on executing. I cannot imagine that invoking the navigation handler multiple times was anticipated behavior. Even if it is, the developer is still going to be massively confused which navigation event is going to actually stick.</p>
+
+<p>Here is the current logic:</p>
+
+<p>      for ( Action action: getActions() )<br/>
+      {<br/>
+         if ( action.isExecutable() )<br/>
+         {<br/>
+            String outcome = action.getOutcome();<br/>
+            String fromAction = outcome;</p>
+
+<p>            if (outcome==null)</p>
+            {
+               fromAction = action.getMethodExpression().getExpressionString();
+               result = true;
+               outcome = Pages.toString( action.getMethodExpression().invoke() );
+               Pages.handleOutcome(facesContext, outcome, fromAction);
+            }
+<p>            else</p>
+            {
+               Pages.handleOutcome(facesContext, outcome, fromAction);
+            }
+<p>         }<br/>
+      }</p>
+
+<p>I think that the short-circuit that needs to take place is that if the response is marked as complete (which indicates a redirect navigation) or if the UIViewRoot changed (which indicates a non-redirect navigation), then the actions should stop executing.</p>
+
+<p>We should definitely include a test case if we make this change. Its too important to screw up.</p>
+
+<p>If there is a desire to maintain the previous behavior, then I believe a flag should be added on the page element like so</p>
+
+<p>&lt;page short-circuit-actions= false &gt;</p>

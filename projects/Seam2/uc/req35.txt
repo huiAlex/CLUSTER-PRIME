@@ -1,0 +1,17 @@
+[JBSEAM-1943] Support for destroying the entire ConversationStack  <p>There are situations where I would like to be able to destroy the entire conversation stack if a particular action occurs (say a user cancels everything during a nested conversation, an exception occurs during a nested conversation, etc). I am currently accomplishing this through the following:</p>
+
+<p>private void endRootConversation() {<br/>
+	Conversation conversation = Conversation.instance();</p>
+
+<p>	while(conversation.isNested()) </p>
+{
+		conversation.root();
+	}
+
+<p>	conversation.endBeforeRedirect();<br/>
+}</p>
+
+<p>I would prefer to say something like @End(root=true) or specifying conversationPropogation= endRoot .  Similar discussions on the forum are:</p>
+
+<p><a href= http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=112414&amp;postdays=0&amp;postorder=asc&amp;start=10  class= external-link  rel= nofollow >http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=112414&amp;postdays=0&amp;postorder=asc&amp;start=10</a><br/>
+<a href= http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=118936&amp;postdays=0&amp;postorder=asc&amp;start=20  class= external-link  rel= nofollow >http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;t=118936&amp;postdays=0&amp;postorder=asc&amp;start=20</a></p> 

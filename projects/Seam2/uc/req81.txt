@@ -1,0 +1,7 @@
+[JBSEAM-1361] invalidate session after scheme change <p>I noticed that sessionId cookie sent to client before authentication remains the same even after login succedeed. This could lead to a man-in-the-middle attack because pre-login sessionId could be easily sniffed.</p>
+
+<p>So, it would be very nice if it should be possible to do a session switching on server side forcing a pre-login session invalidation and a new session creation (request.getSession(true)) as soon as client authenticates. Old session data should then be copied to new session.<br/>
+In this case a new sessionId cookie will be sent to client: client will use this ticket during next requests.</p>
+
+<p>This mechanism collides with the actual Seam implementations where Lifecycle.endSession is called after a session.invalidate<br/>
+I think that Seam should automatically execute this task during the authentication phase. </p>

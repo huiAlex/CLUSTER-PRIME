@@ -1,0 +1,3 @@
+[JBSEAM-2515] Abstraction of FacesMessages [JBSEAM-3116] use a transaction failed event rather than message [JBSEAM-2990] Implementation of StatusMessages for Wicket  <p>Needed for support other view layers</p> <p>A FacesMessage should not be added by the SeamPhaseListener when the transaction fails. Instead, it should raise an event that would be observed by a component named FacesTransactionEvents. That observer would then add the FacesMessage to the response. This allows developers to override the behavior or perhaps add a JSF or log message.</p>
+
+<p>@see FacesSecurityEvents</p> 

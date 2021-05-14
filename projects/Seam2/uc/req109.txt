@@ -1,0 +1,3 @@
+[JBSEAM-176] Dynamic Pageflow with Seam <p>We need a way to dynamically load pageflow at runtime.  This gives a lot of power in letting the users customize their navigation rules to fit their needs.</p>
+
+<p>Refer to : <a href= http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=3931701#3931701  class= external-link  rel= nofollow >http://www.jboss.com/index.html?module=bb&amp;op=viewtopic&amp;p=3931701#3931701</a> for details.</p>

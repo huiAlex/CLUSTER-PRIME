@@ -1,0 +1,2 @@
+[JBSEAM-3096] Allow interceptors to be disabled  <p>Request from the dev list to improve performance here.  One suggestion was to provide a way to enable/disable the interceptor.   I m still partial to using annotations to mark the entities that need to be processed, but disabling the interceptor would probably be the less disruptive approach.</p>
+ 

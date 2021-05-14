@@ -1,0 +1,27 @@
+[JBSEAM-3708] Only enable ManagedEntityInterceptor when needed [JBSEAM-3535] don t add parameter to Url if value is null  <p>The MEI is only needed for:</p>
+
+<ul>
+	<li>JavaBeans in a cluster that are conversation scoped</li>
+</ul>
+
+
+<p>or</p>
+
+<ul>
+	<li>EJBs that are conversation scoped</li>
+</ul>
+
+
+<p>Add some configuration to &lt;core:init /&gt; to allow the user to enable clustering mode (or autodetect) and upgrade the isInterceptorEnabled method to take account of this.</p> <p>When the value of a parameter declared inside of a Seam UI command control using &lt;f:param&gt; is null, then it should not be appended to the URL. Currently, it is appended with a blank value. The problem is that there is a difference between an empty string (blank value) and not being present. Additionally, by setting the value to null (or leaving off the value attribute), it provides a way to suppress a parameter from being added the URL.</p>
+
+<p>Assuming the link was defined as follows:</p>
+
+<p>&lt;s:link view= /UserEdit.xhtml &gt;<br/>
+  &lt;f:param name= userId /&gt;<br/>
+&lt;/s:link&gt;</p>
+
+<p>The URL should be:</p>
+
+<p>/UserEdit.seam</p>
+
+<p>This might override a page parameter for instance.</p> 

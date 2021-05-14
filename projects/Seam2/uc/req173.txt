@@ -1,0 +1,28 @@
+[JBSEAM-263] Constrain object graph that is returned from remoting requests <p>Introduce a method for constraining the object graph that is returned from a remote request.  Currently the remoting API recursively walks the object graph of the return value and packages up everything that is referenced either directly or indirectly by the result.  This is potentially a bad thing as it is quite possible to unintentionally return a mountain of unwanted data.</p>
+
+<p>This issue can be addressed by annotating the @WebRemote methods with an additional annotation, @Constrain and including a list of  trim-points , paths within the object graph that should be excluded from the result.</p>
+
+<p>For example, a remotable method returns a Customer entity, which contains references to a Rep/Staff entity:</p>
+
+<p>Customer<br/>
+  id<br/>
+  firstName<br/>
+  lastName<br/>
+  rep<br/>
+    -&gt; Staff<br/>
+           firstName<br/>
+           lastName<br/>
+           userName<br/>
+           password</p>
+
+<p>In this example it is undesirable to return the Staff instance, as it contains sensitive information (their password).  To prevent this, the method would be annotated like so:</p>
+
+<p>@WebMethod<br/>
+@Constrain( rep )<br/>
+public Customer getCustomer(int customerId) {<br/>
+  ...<br/>
+}</p>
+
+<p>The @Constrain annotation would accept a String array parameter, which allows multiple trim-points to be specified.  Dot notation would be used to exclude fields further down the object tree, e.g. @Constrain(</p>
+{ rep.username ,  rep.password }
+<p>) would include the Customer s rep field, but exclude the rep s username and password field from the result.</p>

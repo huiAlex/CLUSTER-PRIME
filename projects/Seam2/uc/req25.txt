@@ -1,0 +1,17 @@
+[JBSEAM-2469] add postback flag to page actions  <p>Page actions are incredibly useful, but sometimes they can get in the way during a postback. I would like to see a postback attribute added to the &lt;action&gt; tag that can be used to disable the action on postback. It s possible using a conditional, but it is ugly and a lot of typing.</p>
+
+<p>Here is the logic that would go into Pages.java</p>
+
+<p>    private boolean isPostBack(FacesContext facesContext)</p>
+    {
+        return facesContext.getExternalContext().getRequestParameterMap().
+              containsKey(ResponseStateManager.VIEW_STATE_PARAM);
+    }
+
+<p>The conditional alternative would be:</p>
+
+<p>&lt;action execute= #</p>
+{component.action}
+<p>  if= #</p>
+{empty param[ javax.faces.ViewState ]}
+<p> /&gt;</p> 

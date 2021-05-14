@@ -1,0 +1,1 @@
+[JBSEAM-124] configurable UserTransaction location <p>java:comp/UserTransaction is not always correct</p>

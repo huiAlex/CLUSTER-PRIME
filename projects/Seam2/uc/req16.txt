@@ -1,0 +1,15 @@
+[JBSEAM-180] navigation-rules.xml to allow redirection with parameters  <p>We need to enhance JSF s navigation rules facility to support the following:</p>
+
+<p>&lt;navigation-case&gt;<br/>
+   &lt;from-action&gt;#</p>
+{searchAction.search}
+<p>&lt;/from-action&gt;<br/>
+   &lt;to-view-id&gt;searchResults.jsp&lt;/to-view-id&gt;<br/>
+   &lt;redirect&gt;<br/>
+      &lt;param name= searchPattern &gt;#</p>
+{searchAction.searchPattern}
+<p>&lt;/param&gt;<br/>
+   &lt;/redirect&gt;<br/>
+&lt;/navigation-case&gt;</p>
+
+<p>What I propose to do is introduce a navigation-rules.xml file and reproduce the functionality of JSF navigation rules in Seam (yuck!).</p> 

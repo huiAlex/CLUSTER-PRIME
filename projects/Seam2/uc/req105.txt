@@ -1,0 +1,10 @@
+[JBSEAM-1693] Imports <p>Currently Seam does no special processing for qualified names. The only way to alias a name to a shorter name is via &lt;factory&gt;. </p>
+
+<p>We should provide:</p>
+
+<ul>
+	<li>global import of a qualifier in components.xml</li>
+	<li>import into a component or Java package via @Import</li>
+	<li>import into a page (ie. a view id) via pages.xml</li>
+</ul>
+

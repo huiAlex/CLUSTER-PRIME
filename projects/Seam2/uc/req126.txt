@@ -1,0 +1,1 @@
+[JBSEAM-2063] raise an event on logout <p>I d like a  org.jboss.seam.postLogout  or maybe  org.jboss.seam.postSessionInvalidate  to observe.  (I need to redirect the user to our single signin/out server).</p>

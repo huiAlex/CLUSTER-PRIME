@@ -1,0 +1,47 @@
+[JBSEAM-1290] EntityQuery.refresh() does not clear parsedEjbql variable <p>I m using the seam-gen generated class SubcategoriesList which is derived from EntityQuery and modified it to accept any query passed by a calling object as below:</p>
+
+<p>public class SubCategoriesList extends EntityQuery {</p>
+
+
+<p>   private SubCategories subCategories = new SubCategories();<br/>
+    private String query;<br/>
+    private Integer maxResults;</p>
+
+<p>    public SubCategoriesList()</p>
+    {
+        query =  select subCategories from SubCategories subCategories ;
+        this.maxResults = 25;
+    }
+
+<p>	@Override<br/>
+	public String getEjbql() </p>
+{
+		return query;
+	}
+
+<p>	@Override<br/>
+	public Integer getMaxResults() </p>
+{
+		return this.maxResults;
+	}
+
+<p>	public SubCategories getSubCategories() </p>
+{
+		return subCategories;
+	}
+
+<p>	@Override<br/>
+	public List&lt;String&gt; getRestrictions() </p>
+{
+		return Arrays.asList(RESTRICTIONS);
+	}
+
+<p>    public List&lt;SubCategories&gt; forCategory(String categoryId)</p>
+    {
+       query =  select subCategories from SubCategories subCategories where subCategories.categories.id =   + Integer.parseInt(categoryId);
+       return  getResultList();       
+    }
+
+<p>}</p>
+
+<p>In my calling object, I instantiate this class and use the method forCategory to get the list of subcategories for a given category id. If I reuse the object after calling refresh() and pass a different category id, it gives the same resultlist.  After looking in EntityQuery and Query classes, I see refresh() does not nullify parsedEjbql and therefore createQuery() uses the same query everytime to get the resultlist.</p>

@@ -1,0 +1,19 @@
+[JBSEAM-2386] pages.xml redirect should accept plain URLs <p>Instead of:</p>
+
+<p>            &lt;rule if-outcome= redirectToDocument &gt;<br/>
+                &lt;redirect view-id= /wiki.xhtml &gt;<br/>
+                    &lt;param name= nodeId  value= #</p>
+{documentHome.instance.id}
+<p> /&gt;<br/>
+                &lt;/redirect&gt;<br/>
+            &lt;/rule&gt;</p>
+
+<p>I d like to be able to do:</p>
+
+<p>            &lt;rule if-outcome= redirectToDocument &gt;<br/>
+                &lt;redirect url= #</p>
+{wiki:renderURL(documentHome.instance)}
+<p> /&gt;<br/>
+            &lt;/rule&gt;</p>
+
+<p>which would give me a nice URL without rewriting acrobatics.</p>

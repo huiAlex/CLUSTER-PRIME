@@ -1,0 +1,20 @@
+[JBSEAM-2008] Query should use parameterized type for results <p>I don t see any reason why Query cannot be defined as Query&lt;T, E&gt; rather than Query&lt;T&gt;. The general design of Query is that it operates on a static base query (only the conditions are dynamic). Therefore, the item type in the result list should be anticipated. In any case, if it is not, you can always define it using the generic type Object.</p>
+
+<p>To cite an example, we start with:</p>
+
+<p>public class EntityQuery&lt;E&gt; extends Query&lt;EntityManager, E&gt; {}</p>
+
+<p>We can use it as:</p>
+
+<p>public class CategoryQuery extends EntityQuery&lt;Category&gt; {<br/>
+}</p>
+
+<p>CategoryQuery q = new CategoryQuery();<br/>
+for ( Category c : q.getResultList() ) {<br/>
+  // didn t need to cast!<br/>
+}</p>
+
+<p>On the other hand, if the query component is defined without the type, it will still work. The type will be treated as java.lang.Object.</p>
+
+<p>public class CategoryQuery extends EntityQuery {<br/>
+}</p>

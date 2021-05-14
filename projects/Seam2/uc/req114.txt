@@ -1,0 +1,1 @@
+[JBSEAM-1833] Integration testing for Seam Mail <p>Currently you can t integration test Seam mail as we don t provide mocked out mail Session.</p>

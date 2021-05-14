@@ -1,0 +1,3 @@
+[JBSEAM-1606] Seam variable resolver for drools <p>Drools now supports  pulling  globals.</p>
+
+<p><a href= http://anonsvn.labs.jboss.com/labs/jbossrules/trunk/drools-core/src/test/java/org/drools/reteoo/ReteooWorkingMemoryTest.java  class= external-link  rel= nofollow >http://anonsvn.labs.jboss.com/labs/jbossrules/trunk/drools-core/src/test/java/org/drools/reteoo/ReteooWorkingMemoryTest.java</a></p>

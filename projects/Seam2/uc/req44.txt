@@ -1,0 +1,20 @@
+[JBSEAM-1350] Provide download component (e.g.<s:download value=#{FileManager.getFileById( 10 )  contentType= #{FileManager.contentType}  />)  <p>&lt;s:download value=#{FileManager.getFileById( 10 )  contentType= #</p>
+{FileManager.contentType}
+<p>  /&gt;</p>
+
+<p>We re going to create new (more general component) which allows the user to download a  file (any resource, Excel file, Document whatever). </p>
+
+<p>The plan is to create a new UI component named UIDownload which has attributes like value, contentType (some more?).</p>
+
+<p>1) UIDownload a backing bean (value) (is this still valid word in the seam world?) to generate the data ( allow byte[], OutputStreams ?). </p>
+
+<p>2) UIDownload creates DownloadResource which is stored in DownloadStore.</p>
+
+<p>3) UIDownload generates HTML which redirects the browser to ResourceServlet </p>
+
+<p>4) ResourceServlet then uses DownloadResource to get hold of the data and the pushes it to browser</p>
+
+<p>The reason for this is that we re building portlets with Seam and it s impossible to  download  files from a portal environment without additional servlet and we think it s good idea to reuse existing stuff. </p>
+
+<p>Patch coming soon (if we can make it work <img class= emoticon  src= https://issues.jboss.org/images/icons/emoticons/wink.png  height= 16  width= 16  align= absmiddle  alt=   border= 0 /></p>
+ 

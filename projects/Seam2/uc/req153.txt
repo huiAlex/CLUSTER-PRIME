@@ -1,0 +1,11 @@
+[JBSEAM-2432] Wildcard view-id descriptions for conversation switcher <p>I have recently run into a requirement where it would be nice to have descriptions applied to wildcard view-ids. For example, if I have the following:</p>
+
+<p>Code:<br/>
+...<br/>
+&lt;page view-id= /section/*  conversation-required= true &gt;<br/>
+  &lt;description&gt;Section 1&lt;/description&gt;<br/>
+  ...<br/>
+&lt;/page&gt;<br/>
+...</p>
+
+<p>Section 1 would be the description for all pages in /section/* unless specified otherwise in a higher precedence page definition.</p>

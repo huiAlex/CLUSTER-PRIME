@@ -1,0 +1,4 @@
+[JBSEAM-1635] Migrating to Drools 4.0.0 MR3 <p>Drools API has been changed since 4.0.0M3. Please see:<br/>
+<a href= http://wiki.jboss.org/wiki/Wiki.jsp?page=4.0.0.MR3ReleaseNotes  class= external-link  rel= nofollow >http://wiki.jboss.org/wiki/Wiki.jsp?page=4.0.0.MR3ReleaseNotes</a></p>
+
+<p>Corresponding changes in the Seam codebase and Seam reference should be made if Drools 4.0 GA is to be used in the future Seam. </p>

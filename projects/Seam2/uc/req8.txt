@@ -1,0 +1,1 @@
+[JBSEAM-2852] Scan for @WebRemote on extended Interfaces   <p>Class org.jboss.seam.remoting.InterfaceGenerator does not scan for WebRemote.class-Annotation in extended Business-Interfaces</p> 

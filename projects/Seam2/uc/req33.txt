@@ -1,0 +1,5 @@
+[JBSEAM-2071] Introduce log attribute to exception handlers  <p>As suggested by Gavin in the forum post, we should be able to suppress logging of specific exception types.  That way people can decide whether they want NotLoggedInException etc errors cluttering up their log file.</p>
+
+<p>&lt;exception class= MyException  log= false &gt;<br/>
+    ...<br/>
+&lt;/exception&gt;	</p> 

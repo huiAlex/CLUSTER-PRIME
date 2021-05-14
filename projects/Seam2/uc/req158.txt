@@ -1,0 +1,20 @@
+[JBSEAM-2494] Replace Tomcat url-pattern matching with real regex in Seam filter <p>In AbstractFilter.java, someone took this from Tomcat:</p>
+
+<p>   /**</p>
+<ul>
+	<li>Pattern matching code, adapted from Tomcat. This method checks to see if</li>
+	<li>the specified path matches the specified pattern.</li>
+	<li></li>
+	<li>@param request ServletRequest The request containing the path</li>
+	<li>@return boolean True if the path matches the pattern, false otherwise<br/>
+    */<br/>
+   public boolean isMappedToCurrentRequestPath(ServletRequest request)</li>
+</ul>
+
+
+<p>What we really need is url-pattern= </p>
+{regex} . Drop the Tomcat pattern nonsense with the wildcards and use a regex. Probably needs to be backwards compatible now with an additional url-pattern-regex= {regex}
+<p>  property. </p>
+
+<p>Usecase: Filter /servlets/* AND  /Feed/*.</p>
+

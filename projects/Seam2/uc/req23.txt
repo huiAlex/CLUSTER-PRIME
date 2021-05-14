@@ -1,0 +1,5 @@
+[JBSEAM-1282] Refactor Exception Handling definition parsing into Pages component  <p>Currently I am using the fix I proposed for <a href= https://issues.jboss.org/browse/JBSEAM-715  title= Allow multiple pages.xml files  class= issue-link  data-issue-key= JBSEAM-715 ><del>JBSEAM-715</del></a>. This allows me to manage and pass additional pages.xml files to the Pages component.</p>
+
+<p>The problem is that for the exception definition the Exceptions component only looks at the WEB-INF/pages.xml. I propose either refactoring the processing of the exception nodes into the Pages component so that any pages.xml that is processed can define exception handlers.</p>
+
+<p>An alternate implementation would be to have the Pages component to notify the Exceptions component of each pages.xml it processes. This way the specific can still be encapsulated in the Exceptions compoent, but it is fed the pages.xml files to use.</p> 

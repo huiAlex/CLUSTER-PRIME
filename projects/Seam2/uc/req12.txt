@@ -1,0 +1,1 @@
+[JBSEAM-3505] Support instrumentation of wicket classes at build time  <p>Currently instrumentation is done through a custom classloader. If it was done at build time, the classes could be deployed to WEB-INF/classes</p> 

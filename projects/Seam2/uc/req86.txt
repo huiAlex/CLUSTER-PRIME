@@ -1,0 +1,1 @@
+[JBSEAM-1437] Allow pageflow and fragment attributes of s:link, s:button to be valuebindings <p>Users ask for this</p>

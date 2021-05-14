@@ -1,0 +1,10 @@
+[JBSEAM-179] Redirect component  <p>We need to allow easy redirection to urls with parameters. The  redirect  component will have the following operations:</p>
+
+<p>Redirect.setParameter(String, Object)<br/>
+Redirect.setViewId(String)<br/>
+Redirect.captureCurrentRequest()<br/>
+Redirect.push()<br/>
+Redirect.pop()<br/>
+Redirect.redirect()</p>
+
+<p>Redirect is a conversation-scope component that has a stack of viewId+parameters, so you can, for example, easily redirect to a login page from a Seam page action, and then redirect back to the requested page.</p> 

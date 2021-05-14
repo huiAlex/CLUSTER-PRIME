@@ -1,0 +1,6 @@
+[JBSEAM-1281] Make a ajax4jsf filter a seam AbstractFilter  <p>Make ajax4jsf filter a seam component filter.  It should  @Startup only on the existence of ajax4jsf in the classpath.</p>
+
+<p>It should have some of the ajax4jsf filter params available to be set such as  forceparser .</p>
+
+<p>It must also execute before the RedirectFilter.</p>
+ 

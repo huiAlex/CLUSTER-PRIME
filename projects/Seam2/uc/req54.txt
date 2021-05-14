@@ -1,0 +1,6 @@
+[JBSEAM-1031] Transaction rollback rules for Seam JavaBean components <p>Currently, the only way to define exception rollback rules is @ApplicationException, which is a dependency to EJB3. For some reason I closed <a href= https://issues.jboss.org/browse/JBSEAM-467  title= Alternative @ApplicationException and @Interceptors for non-EE5 environments  class= issue-link  data-issue-key= JBSEAM-467 ><del>JBSEAM-467</del></a> without a better solution for this. There really needs to be two things:</p>
+
+<p>(1) An API to call to set the current tx to rollback only<br/>
+(2) some kind of @Exception annotation that allows control of rollback and, potentially, ending the conversation</p>
+
+<p>We should possibly even deprecate the end() member of @HttpError and @Redirect if we have this new thing.</p>

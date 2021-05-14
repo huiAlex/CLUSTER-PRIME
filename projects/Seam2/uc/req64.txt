@@ -1,0 +1,3 @@
+[JBSEAM-116] Pluggable conversationId handler <p>Currently, there is no way to plug in a user-defined strategy for decoding and encoding the conversationId in the request/response.</p>
+
+<p>We need this to really properly support AJAX/Soap invocations.</p>

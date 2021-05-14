@@ -1,0 +1,9 @@
+[JBSEAM-1746] let view-id attribute of <render> or <redirect> NavigationHandlers be a ValueExpression  <p>Let pages.xml navigation rules use redirect rules that are backed by value expressions.  For example, </p>
+
+<p>&lt;navigation from-action= #</p>
+{simpleComponent.doSomething}
+<p> &gt;<br/>
+   &lt;redirect view-id= #</p>
+{dynamicNavigationManager.nextPage}
+<p> /&gt;<br/>
+&lt;/navigation&gt;</p> 

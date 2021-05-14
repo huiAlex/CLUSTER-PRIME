@@ -1,0 +1,8 @@
+[JBSEAM-140] Injection should do basic conversion <p>I want to inject a request parameter to a bean like bellow using expression:</p>
+
+<p>@In(value= #</p>
+{param.id}
+<p> , required=false)<br/>
+private Long id;</p>
+
+<p>However, Seam gives error java.lang.IllegalArgumentException because the param value is of type String, which doesn t match the field s type Long. I think for injections, Seam should do some basic conversions from String to primitives and primitive wrappers.</p>

@@ -1,0 +1,18 @@
+[JBSEAM-274] More flexible mapping of URLs to view ids [JBSEAM-273] Specify HTTP headers in pages.xml  <p>For example, I want to be able to use a URL like this:</p>
+
+<p><a href= http://mydomain.com/myblog/archive/200306  class= external-link  rel= nofollow >http://mydomain.com/myblog/archive/200306</a></p>
+
+<p>To get me to archive.xhtml with a request parameter 200306 (not really a request parameter, but we could try to abstract that so that it can be used with @RequestParameter).</p>
+
+<p>Not sure if this is possible without changing the JSF implementation.</p> <p>Eg. it would be very useful to be able to do:</p>
+
+<p>&lt;page view-id= document.xhtml  expires= 20000 /&gt;</p>
+
+<p>Where expires gives a number in seconds, which is converted by Seam to an absolute time.</p>
+
+
+<p>But more generally, we want to be able to do stuff like:</p>
+
+<p>&lt;page view-id= document.xml &gt;<br/>
+    &lt;header name= Content-Type &gt;test/xml&lt;/header&gt;<br/>
+&lt;/page&gt;</p> 

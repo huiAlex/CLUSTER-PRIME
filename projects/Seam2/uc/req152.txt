@@ -1,0 +1,1 @@
+[JBSEAM-2427] Email rendering from async method/event fails to find web resources <p>MockServletContext should look in WEB-INF/classes for resources as well as in the root.</p>

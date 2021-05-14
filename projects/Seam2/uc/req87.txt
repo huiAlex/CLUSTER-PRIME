@@ -1,0 +1,1 @@
+[JBSEAM-1445] Selector should have configurable cookie path <p>So choices can be remembered for specific section of the site, or the whole site.</p>

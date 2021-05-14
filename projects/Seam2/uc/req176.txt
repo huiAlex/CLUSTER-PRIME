@@ -1,0 +1,4 @@
+[JBSEAM-269] BusinessProcessInterceptor.createProcess should be made public <p>In org.jboss.seam.interceptors.BusinessProcessInterceptor, private void createProcess(String processDefinitionName) should be made public. </p>
+
+
+

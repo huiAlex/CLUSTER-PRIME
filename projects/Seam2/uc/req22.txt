@@ -1,0 +1,16 @@
+[JBSEAM-3551] Seam can not convert java.util.Date, it ignores javax.faces.convert.DateTimeConverter  <p>Create a Seam project using  Jboss Tools 2.1.2.<br/>
+Create a new Seam Form with name  SeamDateForm <br/>
+Open the file SeamDateForm.java and change the value from Integer to java.util.Date.<br/>
+Right-click seamDateForm.xhtml and click Run As... -&gt; Run On Server.<br/>
+Write something in the form (like for example some random string  dfasdf )<br/>
+You will get the error: Conversion Error setting value  dfasdf  for  null Converter . <br/>
+Now create a Date Converter, as the one included in the attached test case project (BTW it inherits from javax.faces.convert.DateTimeConverter).<br/>
+Stop the application (just to be 100% sure everything gets loaded correctly)<br/>
+Again:<br/>
+Right-click seamDateForm.xhtml and click Run As... -&gt; Run On Server.<br/>
+Write something in the form (like for example some random string  dfasdf )<br/>
+Now you get the right error: value must be a date, eg. 10/13/2008.</p>
+
+<p>Of course it not only fails when you write a random string, even if you write a correct date, like 01/01/2001, you will get an error that says: Conversion Error setting value  01/01/2001  for  null Converter . But if you write your own converter (for example inheriting from javax.faces.convert.DateTimeConverter) everything works fine.</p>
+
+<p>I think Seam should use javax.faces.convert.DateTimeConverter by default, I shouldn t need to create my own converter.</p> 

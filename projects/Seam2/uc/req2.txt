@@ -1,0 +1,12 @@
+[JBSEAM-1061] Support EL expressions in remoting calls  <p>It would be really cool to tie in EL expressions directly with Seam remoting.  For example, take this method call:</p>
+
+<p>Seam.Component.getInstance( helloAction ).sayHello(nameValue, sayHelloCallback);</p>
+
+<p>instead, this could be rewritten (and tied into the page context) like this:</p>
+
+<p>Seam.Remoting.pageContext.set( name , nameValue);<br/>
+Seam.Remoting.evaluate( #</p>
+{helloAction.sayHello(name)}
+<p> , sayHelloCallback);</p>
+
+<p>This is not a perfect example, however it demonstrates the potential of this feature.  Plus it makes remoting more consistent with the rest of Seam.</p> 

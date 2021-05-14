@@ -1,0 +1,15 @@
+[JBSEAM-2154] Ability to raise multiple events in pages.xml <p>&lt;page ...&gt;        <br/>
+        &lt;navigation ...&gt;<br/>
+            &lt;rule ...&gt;<br/>
+               &lt;raise-event type= event1  /&gt;<br/>
+               &lt;raise-event type= event2  /&gt;<br/>
+            &lt;/rule&gt;<br/>
+        &lt;/navigation&gt;<br/>
+&lt;/page&gt;</p>
+
+<p>or even </p>
+
+<p>&lt;page ...&gt;        <br/>
+            &lt;raise-event type= event1  /&gt;<br/>
+            &lt;raise-event type= event2  /&gt;<br/>
+&lt;/page&gt;</p>

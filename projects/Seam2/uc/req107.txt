@@ -1,0 +1,1 @@
+[JBSEAM-172] <page view-id= /page.xhtml  action= #{my.action} /> <p>It would be nice to have  page actions  which are called at the beginning of the render response phase.</p>

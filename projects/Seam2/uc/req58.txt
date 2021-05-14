@@ -1,0 +1,44 @@
+[JBSEAM-1114] Disable EntitySecurityListener problem in unit tests <p>When putting to orm.xml config for EntitySecurityListener<br/>
+&lt;persistence-unit-metadata&gt;<br/>
+        &lt;persistence-unit-defaults&gt;<br/>
+            &lt;entity-listeners&gt;<br/>
+                &lt;entity-listener class= org.jboss.seam.security.EntitySecurityListener /&gt;<br/>
+            &lt;/entity-listeners&gt;<br/>
+        &lt;/persistence-unit-defaults&gt;<br/>
+    &lt;/persistence-unit-metadata&gt;</p>
+
+<p>and trying to run unit tests the following exception is thrown</p>
+
+<p>java.lang.RuntimeException: java.lang.reflect.InvocationTargetException<br/>
+	at org.hibernate.ejb.event.ListenerCallback.invoke(ListenerCallback.java:33)<br/>
+	at org.hibernate.ejb.event.EntityCallbackHandler.callback(EntityCallbackHandler.java:78)<br/>
+	at org.hibernate.ejb.event.EntityCallbackHandler.postLoad(EntityCallbackHandler.java:71)<br/>
+	at org.hibernate.ejb.event.EJB3PostLoadEventListener.onPostLoad(EJB3PostLoadEventListener.java:35)<br/>
+	at org.hibernate.engine.TwoPhaseLoad.initializeEntity(TwoPhaseLoad.java:201)<br/>
+	at org.hibernate.loader.Loader.initializeEntitiesAndCollections(Loader.java:842)<br/>
+	at org.hibernate.loader.Loader.doQuery(Loader.java:717)<br/>
+	at org.hibernate.loader.Loader.doQueryAndInitializeNonLazyCollections(Loader.java:224)<br/>
+	at org.hibernate.loader.Loader.loadEntity(Loader.java:1785)<br/>
+	at org.hibernate.loader.entity.AbstractEntityLoader.load(AbstractEntityLoader.java:48)<br/>
+	at org.hibernate.loader.entity.AbstractEntityLoader.load(AbstractEntityLoader.java:42)<br/>
+	at org.hibernate.persister.entity.AbstractEntityPersister.load(AbstractEntityPersister.java:2821)<br/>
+	at org.hibernate.event.def.DefaultLoadEventListener.loadFromDatasource(DefaultLoadEventListener.jav<br/>
+a:370)<br/>
+	at org.hibernate.event.def.DefaultLoadEventListener.doLoad(DefaultLoadEventListener.java:351)<br/>
+	at org.hibernate.event.def.DefaultLoadEventListener.load(DefaultLoadEventListener.java:122)<br/>
+	at org.hibernate.event.def.DefaultLoadEventListener.proxyOrLoad(DefaultLoadEventListener.java:178)<br/>
+	at org.hibernate.event.def.DefaultLoadEventListener.onLoad(DefaultLoadEventListener.java:86)<br/>
+	at org.hibernate.impl.SessionImpl.fireLoad(SessionImpl.java:871)<br/>
+	at org.hibernate.impl.SessionImpl.get(SessionImpl.java:808)<br/>
+	at org.hibernate.impl.SessionImpl.get(SessionImpl.java:801)<br/>
+	at org.hibernate.ejb.AbstractEntityManagerImpl.find(AbstractEntityManagerImpl.java:155)<br/>
+	at pl.alternativ.med.pacjent.DeklaracjaPOZUnitTest.utworz(DeklaracjaPOZUnitTest.java:78)<br/>
+	at org.hibernate.ejb.event.ListenerCallback.invoke(ListenerCallback.java:30)<br/>
+	... 42 more<br/>
+Caused by: java.lang.IllegalStateException: No active session context<br/>
+	at org.jboss.seam.security.Identity.instance(Identity.java:108)<br/>
+	at org.jboss.seam.security.EntitySecurityListener.postLoad(EntitySecurityListener.java:24)<br/>
+	... 47 more<br/>
+... Removed 26 stack frames</p>
+
+<p>Without EntitySecurityListener config in orm.xml tests runs fine.</p>

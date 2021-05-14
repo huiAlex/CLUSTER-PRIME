@@ -1,0 +1,3 @@
+[JBSEAM-229] @Observer can observe multiple events <p>It would be useful for the @Observer annotation to specify multiple events to watch for</p>
+
+<p>e.g. @Observer( somethingChanged ,  somethingElseChanged ) </p>

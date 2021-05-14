@@ -1,0 +1,3 @@
+[JBSEAM-1200] Integrate the Groovy programmatic model into seam-gen <p>Support .groovy entities and .groovy actions in WAR(s)<br/>
+Support dynamic Groovy files in dev mode (for actions)<br/>
+Support Groovy file compilation for entities and for actions in prod mode</p>

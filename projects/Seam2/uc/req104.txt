@@ -1,0 +1,1 @@
+[JBSEAM-166] EL in Hibernate Validator messages <p>We now have EL support (templating) for all messages except Hibernate Validator. We need it there too.</p>

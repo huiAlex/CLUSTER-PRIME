@@ -1,0 +1,1 @@
+[JBSEAM-1490] jboss-el for jBPM <p>jBPM does not currently support a pluggable EL engine, so we can t plug in jboss-el.</p>
