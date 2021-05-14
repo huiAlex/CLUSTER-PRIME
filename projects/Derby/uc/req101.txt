@@ -1,0 +1,1 @@
+[DERBY-4495] Add NATURAL JOIN syntax  <p>It would be nice if Derby supported the NATURAL JOIN syntax (feature F401-01 in SQL:2003).</p> 

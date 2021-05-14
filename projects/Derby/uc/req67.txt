@@ -1,0 +1,16 @@
+[DERBY-212] Optimize some specific methods in Network Server to improve performance  <p>In reviewing the Network Server Code and profiling there were <br/>
+several areas that showed potential for providing performance <br/>
+improvement.</p>
+
+<p>Functions that need optimizing to prevent unneeded object <br/>
+creation and excessive decoding<br/>
+parsePKGNAMCSN()<br/>
+parseSQLDTA_work()<br/>
+buildDB2CursorName()</p>
+
+
+<p>In DDMWriter and DDMReader, use System Routines in <br/>
+java.util.Arrays and System.arrayCopy instead of <br/>
+writing code to do functions like copy arrays and <br/>
+pad strings.</p>
+ 

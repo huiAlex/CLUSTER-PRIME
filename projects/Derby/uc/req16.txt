@@ -1,0 +1,56 @@
+[DERBY-1643] A   revoke execute ... restrict  should fail if there are dependent objects on the execute privilege [DERBY-1611] A  view should be dropped when a privilege required by the view is revoked. [DERBY-464] Enhance Derby by adding grant/revoke support. Grant/Revoke provide finner level of privileges than currently provided by Derby that is especially useful in network configurations. [DERBY-1521] Upgrade test needs to be enhanced to test grant revoke [DERBY-1367] add  lang/grantrevoke.java to derbynetclientmats [DERBY-1579] Remove SYS.SYSREQUIREDPERM from Derby 10.2. This was added for Grant Revoke functionality [DERBY-1539] A  trigger should be dropped when a privilege required by the trigger is revoked. [DERBY-1612] A constraint should be dropped when a privilege required by the constraint is revoked.  <p>As per the functional spec attached to <a href= https://issues.apache.org/jira/browse/DERBY-1330  title= Provide runtime privilege checking for grant/revoke functionality  class= issue-link  data-issue-key= DERBY-1330 ><del>DERBY-1330</del></a>, a  revoke execute ... restrict  should fail if there are dependent objects on the execute privilege</p>
+
+<p>In order to implement this, when revoke execute is executed, a special invalidation action should be sent and dependent objects will need to catch that invalidation and throw an exception. If there are no dependents, then no exception will be thrown and revoke execute will succeed.</p>
+
+<p>I am just creating a new jira entry here so it is easier to track sub items of <a href= https://issues.apache.org/jira/browse/DERBY-1330  title= Provide runtime privilege checking for grant/revoke functionality  class= issue-link  data-issue-key= DERBY-1330 ><del>DERBY-1330</del></a>. Will link this Jira entry to <a href= https://issues.apache.org/jira/browse/DERBY-1330  title= Provide runtime privilege checking for grant/revoke functionality  class= issue-link  data-issue-key= DERBY-1330 ><del>DERBY-1330</del></a>. </p>
+
+<p>See the functional spec attached to <a href= https://issues.apache.org/jira/browse/DERBY-1330  title= Provide runtime privilege checking for grant/revoke functionality  class= issue-link  data-issue-key= DERBY-1330 ><del>DERBY-1330</del></a></p>
+
+ <p>A view tracks its privileges requirements using Derby s Dependency Manager. If any one of those required privileges are revoked, the view should be dropped automatically. </p>
+
+<p>I am just creating a new jira entry here so it is easier to track sub items of <a href= https://issues.apache.org/jira/browse/DERBY-1330  title= Provide runtime privilege checking for grant/revoke functionality  class= issue-link  data-issue-key= DERBY-1330 ><del>DERBY-1330</del></a>. Will link this Jira entry to <a href= https://issues.apache.org/jira/browse/DERBY-1330  title= Provide runtime privilege checking for grant/revoke functionality  class= issue-link  data-issue-key= DERBY-1330 ><del>DERBY-1330</del></a>. </p>
+
+<p>See the functional spec attached to <a href= https://issues.apache.org/jira/browse/DERBY-1330  title= Provide runtime privilege checking for grant/revoke functionality  class= issue-link  data-issue-key= DERBY-1330 ><del>DERBY-1330</del></a></p> <p>Derby currently provides a very simple permissions scheme, which is quite suitable for an embedded database system. End users of embedded Derby do not see Derby directly; they talk to a application that embeds Derby. So Derby left most of the access control work to the application. Under this scheme, Derby limits access on a per database or per system basis. A user can be granted full, read-only, or no access. </p>
+
+<p>This is less suitable in a general purpose SQL server. When end users or diverse applications can issue SQL commands directly against the database, Derby must provide more precise mechanisms to limit who can do what with the database.</p>
+
+<p>I propose to enhance Derby by implementing a subset of grant/revoke capabilities as specified by the SQL standard. I envision this work to involve the following tasks, at least:</p>
+
+<p>1) Develop a specification of what capabilities I would like to add to Derby.<br/>
+2) Provide a high level implementation scheme.<br/>
+3) Pursue a staged development plan, with support for DDL added to Derby first.<br/>
+4) Add support for runtime checking of these privileges.<br/>
+5) Address migration and upgrade issues from previous releases and from old scheme to newer database.</p>
+
+<p>Since I think this is a large task, I would like to invite any interested people to work with me on this large and important enhancement to Derby.</p> <p>Grant Revoke is one of the features targeted for 10.2 Release. The upgrade test should be modified to test this feature with various upgrade scenarios to make sure everything works fine.</p> 
+<p>I noticed running  lang./grantrevoke.java with client fails with :<br/>
+&gt; Unexpected exception<br/>
+&gt; 08004: Connection authentication failure occurred.  Reason: userid or password invalid.<br/>
+&gt; java.sql.SQLException: Connection authentication failure occurred.  Reason: userid or password invalid.<br/>
+&gt; Caused by: org.apache.derby.client.am.SqlException: Connection authentication failure occurred.  Reason: userid or password invalid.<br/>
+&gt;       ... 8 more<br/>
+&gt; FAILED. 1 error<br/>
+Test Failed.</p>
+<ul>
+	<li>
+	<ul>
+		<li>
+		<ul>
+			<li>End:   grantRevoke jdk1.4.2_07 DerbyNetClient 2006-06-01 12:17:25 ***</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+
+<p>Perhaps just a test configuration problem of some sort, but  It would be good to have client testing for  grant revoke.</p>
+ <p>With the Grant Revoke functionality. Derby engine needs to keep track of view/constraint/trigger s dependencies on various privileges. SYS.SYSREQUIREDPERM table was added for this purpose. But these depdencies can be mantained using the existing Dependency Manager. I have done quite a bit of work using Dependency Manager for Grant Revoke and do not see a need for SYS.SYSREQUIREDPERM. Before 10.2 release, we should drop SYS.SYSREQUIREDPERM from the Derby code and update the Grant/Revoke functional spec accordingly.</p> <p>A trigger tracks its privileges requirements using Derby s Dependency Manager. If any one of those required privileges are revoked, the trigger should be dropped automatically. </p>
+
+<p>I am just creating a new jira entry here so it is easier to track sub items of <a href= https://issues.apache.org/jira/browse/DERBY-1330  title= Provide runtime privilege checking for grant/revoke functionality  class= issue-link  data-issue-key= DERBY-1330 ><del>DERBY-1330</del></a>. Will link this Jira entry to <a href= https://issues.apache.org/jira/browse/DERBY-1330  title= Provide runtime privilege checking for grant/revoke functionality  class= issue-link  data-issue-key= DERBY-1330 ><del>DERBY-1330</del></a>.</p>
+
+<p>See the functional spec attached to <a href= https://issues.apache.org/jira/browse/DERBY-1330  title= Provide runtime privilege checking for grant/revoke functionality  class= issue-link  data-issue-key= DERBY-1330 ><del>DERBY-1330</del></a></p> <p>A constraint tracks its privileges requirements using Derby s Dependency Manager. If any one of those required privileges are revoked, the constraint should be dropped automatically. </p>
+
+<p>I am just creating a new jira entry here so it is easier to track sub items of <a href= https://issues.apache.org/jira/browse/DERBY-1330  title= Provide runtime privilege checking for grant/revoke functionality  class= issue-link  data-issue-key= DERBY-1330 ><del>DERBY-1330</del></a>. Will link this Jira entry to <a href= https://issues.apache.org/jira/browse/DERBY-1330  title= Provide runtime privilege checking for grant/revoke functionality  class= issue-link  data-issue-key= DERBY-1330 ><del>DERBY-1330</del></a>. </p>
+
+<p>See the functional spec attached to <a href= https://issues.apache.org/jira/browse/DERBY-1330  title= Provide runtime privilege checking for grant/revoke functionality  class= issue-link  data-issue-key= DERBY-1330 ><del>DERBY-1330</del></a></p> 

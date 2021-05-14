@@ -1,0 +1,21 @@
+[DERBY-1576] Extend the CASE expression syntax for  simple case   <p>The ISO/IEC 9075-2:1999 SQL standard describes two kinds of CASE expressions:  simple case  and  searched case .<br/>
+The current Derby version supports  searched case  but not  simple case .</p>
+
+<p>The syntax for  simple case  is:</p>
+
+<p>   CASE Expression<br/>
+      WHEN Expression THEN Expression<br/>
+    [ WHEN Expression THEN Expression ]<br/>
+      ...<br/>
+      ELSE ElseExpression<br/>
+   END</p>
+
+<p>Example:</p>
+
+<p>   VALUES<br/>
+      CASE 4<br/>
+         WHEN 1 THEN  one <br/>
+         WHEN 2 THEN  two <br/>
+         WHEN 3 THEN  three <br/>
+         ELSE  many <br/>
+      END</p> 

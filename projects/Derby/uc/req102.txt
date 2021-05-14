@@ -1,0 +1,3 @@
+[DERBY-3002] Add support for GROUP BY ROLLUP  <p>Provide an implementation of the ROLLUP form of multi-dimensional grouping according to the SQL standard.</p>
+
+<p>See <a href= http://wiki.apache.org/db-derby/OLAPRollupLists  class= external-link  rel= nofollow >http://wiki.apache.org/db-derby/OLAPRollupLists</a> for some more detailed information about this aspect of the SQL standard.</p> 

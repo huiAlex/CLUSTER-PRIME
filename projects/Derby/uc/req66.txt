@@ -1,0 +1,14 @@
+[DERBY-218] Add Relaxed Durability option  <p>Dan Debrunner posted a fix to allow for relaxed durability changes in <a href= http://article.gmane.org/gmane.comp.apache.db.derby.user/681/match=relaxed+durability  class= external-link  rel= nofollow >http://article.gmane.org/gmane.comp.apache.db.derby.user/681/match=relaxed+durability</a></p>
+
+<p>1) Need to add this option in Derby maybe as some property</p>
+
+<p>2) Also from discussions on the list, Mike suggested that </p>
+<ul class= alternate  type= square >
+	<li>that the logging system be changed to somehow<br/>
+record that the database has operated in this manner, so that if<br/>
+the database goes corrupt we don t waste effort trying to figure out<br/>
+what when wrong.  Probably need some way to mark the log records, the<br/>
+log control file and write a message to the user error log file.</li>
+</ul>
+
+ 

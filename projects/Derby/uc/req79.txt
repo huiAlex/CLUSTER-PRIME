@@ -1,0 +1,48 @@
+[DERBY-690] Add scrollable, updatable, insensitive result sets [DERBY-775] Network client: Add support for scrollable, updatable, insensitive result sets  <p>JDBC result sets are created with three properties: type, concurrency<br/>
+and holdability. The type can be one of TYPE_FORWARD_ONLY,<br/>
+TYPE_SCROLL_INSENSITIVE and TYPE_SCROLL_SENSITIVE. The concurrency can<br/>
+be one of CONCUR_READ_ONLY and CONCUR_UPDATABLE. The holdability can<br/>
+be one of HOLD_CURSORS_OVER_COMMIT and CLOSE_CURSORS_AT_COMMIT.</p>
+
+<p>JDBC allows the full cross product of these. SQL 2003 prohibits the<br/>
+combination </p>
+{TYPE_SCROLL_INSENSITIVE, CONCUR_UPDATABLE}
+<p>, but this<br/>
+combination is supported by some vendors, notably Oracle.</p>
+
+<p>Currently, Derby supports JDBC result sets in a limited<br/>
+way. Holdability is supported. Furthermore, the following is<br/>
+supported: </p>
+<ul class= alternate  type= square >
+	<li>forward-only, read-only</li>
+	<li>forward-only, updatable (update, delete, but not insert)<br/>
+	     Also, in the network driver, support for some data types<br/>
+	     conversions is missing.</li>
+	<li>scroll insensitive, read-only</li>
+</ul>
+
+
+<p>We (Fernanda and Andreas will cooperate with me on this) propose a<br/>
+plan to add support for the combination:</p>
+
+<ul class= alternate  type= square >
+	<li>scroll insensitive, updatable</li>
+</ul>
+
+
+<p>for both the embedded driver and the network client driver. <br/>
+As a part of this we would also like to add the missing insert<br/>
+operation to the </p>
+{forward-only, updatable}
+<p> result sets (JIRA-100), and<br/>
+remove the requirement for an explicit  FOR UPDATE  clause in the SQL<br/>
+query to achieve updatability if CONCUR_UPDATABLE is specified<br/>
+(JIRA-231).</p>
+
+<p>The full proposal text is uploaded as an attachment, including a proposed<br/>
+functional specification.</p>
+
+<p>This JIRA will  be used to track sub-issues for this effort. The sub-issues will be linked back to this issue.</p>
+
+
+ <p>This is a part of the <a href= https://issues.apache.org/jira/browse/DERBY-690  title= Add scrollable, updatable, insensitive result sets  class= issue-link  data-issue-key= DERBY-690 ><del>DERBY-690</del></a> effort.</p> 

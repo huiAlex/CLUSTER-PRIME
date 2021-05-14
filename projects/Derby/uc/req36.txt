@@ -1,0 +1,5 @@
+[DERBY-6773] Derby throws plain SQLIntegrityConstraintViolationException  <p>If a unique constraint is violated by an insert statement, then Derby throws an SQLIntegrityConstraintViolationException. The error message contains, in particular, the constraint name and the table name.</p>
+
+<p>To distinguish between cases with various constraints, Derby should instead throw a subclass of SQLIntegrityConstraintViolationException, with methods like getConstraintName(), and getTableName().</p>
+
+<p>See also <a href= https://hibernate.atlassian.net/browse/HHH-9516  class= external-link  rel= nofollow >https://hibernate.atlassian.net/browse/HHH-9516</a>.</p> 

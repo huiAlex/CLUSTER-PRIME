@@ -1,0 +1,1 @@
+[DERBY-104] Get rid of the Max lenght of 18 for constraint names  <p>If not unlimited than we should at least make them 80 (just to pick a abitrary number)</p> 

@@ -1,0 +1,5 @@
+[DERBY-3988] Set the Java 6 complilation path based on the Java 5 compilation path so that the JDBC4 support is always built [DERBY-4017] Removed deprecated jdk16 variable from the machinery which builds javadoc  <p>Now that we have checked in the JDBC4 stubs, it ought to be possible to build the JDBC4 support with just the Java 5 libraries and compiler. Set java16compile.classpath=$</p>
+{jdbc4stubs}
+<p>:$</p>
+{java15compile.classpath}
+<p>.</p> <p>The jdk16 variable is no longer needed for Derby compilation and has been deprecated as part of <a href= https://issues.apache.org/jira/browse/DERBY-3988  title= Set the Java 6 complilation path based on the Java 5 compilation path so that the JDBC4 support is always built  class= issue-link  data-issue-key= DERBY-3988 ><del>DERBY-3988</del></a>. We no longer need the jdk14 variable for building javadoc either.</p> 

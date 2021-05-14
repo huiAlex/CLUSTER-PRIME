@@ -1,0 +1,10 @@
+[DERBY-928] Add ability to network server to accept connections with a certain security mechanism.  <p>Currently the network server has support for the following security mechanisms<br/>
+1) USRIDONL (userid only),<br/>
+2) USRIDPWD (clear text userid and password),<br/>
+3) EUSRIDPWD (encrypted userid and password).</p>
+
+<p>Thus the #3 encrypted userid and password security mechanism is secure with respect to the userid/password sent across the wire.  Currently there is no way to setup the network server to ensure that it accepts connections coming in at a certain security mechanism.   It seems reasonable &amp; useful to have a server want to accept connections from clients with a particular security mechanism (e.g  lets say encrypted userid/password and reject usridpwd ie clear text userid and password)</p>
+
+<p>This jira will add support for this by adding a property to enable the server to be able to accept connections from clients with a certain security mechanism.<br/>
+--------------------<br/>
+I actually couldnt find if a rank was given to the security mechanisms in the drda spec.  If it were so, then maybe a property for setting the minimum security mechanism accepted by the server would be appropriate.</p> 

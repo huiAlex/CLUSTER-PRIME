@@ -1,0 +1,137 @@
+[DERBY-47] Some possible improvements to IN optimization  <p>Consider a simple case of  - <br/>
+A table tbl has 10000 rows, there is a primary key index on i1<br/>
+and the query in question is <br/>
+ select * from tbl where i1 in (-1,100000)</p>
+
+<p>derby does a table scan of the entire table even though the  IN  list has only two values and the comparison is on a field that has an index.</p>
+
+<p>Briefly looking at the code, it seems like we insert a between and use the IN list to get the start and stop values for the scan. Thus the range of the values in the  IN  list here plays an important role. </p>
+
+<p>Thus if the query was changed to select * from tbl where i1 in (-1, 1), an index scan would be chosen.</p>
+
+<p>It would be nice if we could do something clever in this case where there is clearly an index on the field and the number of values in the IN list is known. Maybe use the rowcount estimate and the IN list size to do some optimizations.  </p>
+<ul class= alternate  type= square >
+	<li>consider the length of the  IN  list to do searches on the table.  ie use the IN list values to do index key searches on the table,<br/>
+-or try to convert it to a join. Use the  IN  list values to create a temporary table and do a join. It is most likely that the optimizer will choose the table with  IN  list here as the outer table in the join and thus will do key searches on the larger table. </li>
+</ul>
+
+
+<p>-------------------------------------------------------------------<br/>
+some query plans that I logged using derby.language.logQueryPlan=true for some similar queries:</p>
+
+<p>Table has ascending values from 0 - 9999 for i1. primary key index on i1.</p>
+
+<p>GMT Thread<span class= error >&#91;UT0,5,main&#93;</span> (XID = 19941), (SESSIONID = 0), select * from scanfixed where i1 in (-1,9999,9998,9997,9996,9995,9994,9993,9992,9991,9990) ******* Project-Restrict ResultSet (2):<br/>
+Number of opens = 1<br/>
+Rows seen = 10000<br/>
+Rows filtered = 9990<br/>
+restriction = true<br/>
+projection = false<br/>
+	constructor time (milliseconds) = 0<br/>
+	open time (milliseconds) = 0<br/>
+	next time (milliseconds) = 0<br/>
+	close time (milliseconds) = 0<br/>
+	restriction time (milliseconds) = 0<br/>
+	projection time (milliseconds) = 0<br/>
+	optimizer estimated row count:          750.38<br/>
+	optimizer estimated cost:         8579.46</p>
+
+<p>Source result set:<br/>
+	Table Scan ResultSet for SCANFIXED at read committed isolation level using instantaneous share row locking chosen by the optimizer<br/>
+	Number of opens = 1<br/>
+	Rows seen = 10000<br/>
+	Rows filtered = 0<br/>
+	Fetch Size = 16<br/>
+		constructor time (milliseconds) = 0<br/>
+		open time (milliseconds) = 0<br/>
+		next time (milliseconds) = 0<br/>
+		close time (milliseconds) = 0<br/>
+		next time in milliseconds/row = 0</p>
+
+<p>	scan information: <br/>
+		Bit set of columns fetched=All<br/>
+		Number of columns fetched=9<br/>
+		Number of pages visited=417<br/>
+		Number of rows qualified=10000<br/>
+		Number of rows visited=10000<br/>
+		Scan type=heap<br/>
+		start position: <br/>
+null		stop position: <br/>
+null		qualifiers:<br/>
+Column<span class= error >&#91;0&#93;</span><span class= error >&#91;0&#93;</span> Id: 0<br/>
+Operator: &lt;=<br/>
+Ordered nulls: false<br/>
+Unknown return value: false<br/>
+Negate comparison result: false<br/>
+Column<span class= error >&#91;0&#93;</span><span class= error >&#91;1&#93;</span> Id: 0<br/>
+Operator: &lt;<br/>
+Ordered nulls: false<br/>
+Unknown return value: true<br/>
+Negate comparison result: true</p>
+
+<p>		optimizer estimated row count:          750.38<br/>
+		optimizer estimated cost:         8579.46</p>
+
+<p>---------------------------------------------------------------------------------------------------------------------------------------------------------------------------<br/>
+l<br/>
+2004-10-14 18:59:47.577 GMT Thread<span class= error >&#91;UT0,5,main&#93;</span> (XID = 19216), (SESSIONID = 0), select * from scanfixed where i1 in (9999,9998,9997,9996,9995,9994,9993,9992,9991,9990) ******* Project-Restrict ResultSet (3):<br/>
+Number of opens = 1<br/>
+Rows seen = 10<br/>
+Rows filtered = 0<br/>
+restriction = true<br/>
+projection = true<br/>
+	constructor time (milliseconds) = 0<br/>
+	open time (milliseconds) = 0<br/>
+	next time (milliseconds) = 0<br/>
+	close time (milliseconds) = 0<br/>
+	restriction time (milliseconds) = 0<br/>
+	projection time (milliseconds) = 0<br/>
+	optimizer estimated row count:            4.80<br/>
+	optimizer estimated cost:           39.53</p>
+
+<p>Source result set:<br/>
+	Index Row to Base Row ResultSet for SCANFIXED:<br/>
+	Number of opens = 1<br/>
+	Rows seen = 10<br/>
+	Columns accessed from heap = </p>
+{0, 1, 2, 3, 4, 5, 6, 7, 8}
+<p>		constructor time (milliseconds) = 0<br/>
+		open time (milliseconds) = 0<br/>
+		next time (milliseconds) = 0<br/>
+		close time (milliseconds) = 0<br/>
+		optimizer estimated row count:            4.80<br/>
+		optimizer estimated cost:           39.53</p>
+
+<p>		Index Scan ResultSet for SCANFIXED using index SCANFIXEDX at read committed isolation level using instantaneous share row locking chosen by the optimizer<br/>
+		Number of opens = 1<br/>
+		Rows seen = 10<br/>
+		Rows filtered = 0<br/>
+		Fetch Size = 16<br/>
+			constructor time (milliseconds) = 0<br/>
+			open time (milliseconds) = 0<br/>
+			next time (milliseconds) = 0<br/>
+			close time (milliseconds) = 0<br/>
+			next time in milliseconds/row = 0</p>
+
+<p>		scan information: <br/>
+			Bit set of columns fetched=All<br/>
+			Number of columns fetched=2<br/>
+			Number of deleted rows visited=0<br/>
+			Number of pages visited=2<br/>
+			Number of rows qualified=10<br/>
+			Number of rows visited=10<br/>
+			Scan type=btree<br/>
+			Tree height=2<br/>
+			start position: <br/>
+	&gt;= on first 1 column(s).<br/>
+	Ordered null semantics on the following columns: </p>
+
+<p>			stop position: <br/>
+	&gt; on first 1 column(s).<br/>
+	Ordered null semantics on the following columns: </p>
+
+<p>			qualifiers:<br/>
+None<br/>
+			optimizer estimated row count:            4.80<br/>
+			optimizer estimated cost:           39.53</p>
+ 

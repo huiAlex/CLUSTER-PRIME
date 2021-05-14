@@ -1,0 +1,1 @@
+[DERBY-1234] Verify that we raise SQLException when calling methods on closed java.sql objects <p>The next rev of the JDBC4 spec will clarify that databases should raise SQLException when an application calls methods on closed sql objects: ResultSet, Preparedstatement, CallableStatement, Connection, and Statement. We should verify that we conform.</p>

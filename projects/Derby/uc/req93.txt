@@ -1,0 +1,13 @@
+[DERBY-1876] Investigate overhead of JDBC layer and compiled activation code for simple embedded read-only, forward ResultSets [DERBY-3004] Get rid of the finalizer in EmbedResultSet  <p>For simple ResultSet usage like:<br/>
+ResultSet rs = ps.executeQuery();<br/>
+      while (rs.next()) </p>
+{
+              rs.getInt(1);
+              rs.getInt(2);
+              rs.getInt(3);
+       }
+<p>rs.close();</p>
+
+<p>it would be interesting to see how much overhead could be removed with simple changes, or possibly removed if there was a simple ResultSet implementation for forward only, read-only ResultSet, and the more complete implementation for all other ResultSet types such as updateable and/or scrollable. Has introducing updateable ResultSets, for example, degraded the performance of read-only ResultSets? Could code be changed so that a typical read-only Resultset is not affected by the code required for richer ResultSets?</p> <p>Finalizers make object allocation and garbage collection more expensive and should be avoided for object types that are frequently allocated. EmbedResultSet has a finalize() method and is frequently allocated for many types of load. The following comment was posted on <a href= https://issues.apache.org/jira/browse/DERBY-1876  title= Investigate overhead of JDBC layer and compiled activation code for simple embedded read-only, forward ResultSets  class= issue-link  data-issue-key= DERBY-1876 ><del>DERBY-1876</del></a>:</p>
+
+<p>By commenting out the finalize() method in EmbedResultSet, the time to run the test on my laptop is reduced from ~3 seconds to ~1.3 seconds (OpenSolaris, Sun Java SE 6). Since the finalizer is a no-op if the activation isn t single-use, I think we should investigate whether there are ways to avoid this cost for ResultSets that don t need the finalizer.</p> 

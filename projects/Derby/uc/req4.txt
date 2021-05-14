@@ -1,0 +1,14 @@
+[DERBY-1466] Network Server should flush the PrintWriter after console output  <p>If Network Server is started with a PrintWriter specified for console output it will not automatically flush output such as  starting the server.  This can be confusing as the console output shows no activity.</p>
+
+<p>Users currently need to specify the PrintWriter to autoflush  e.g.<br/>
+ starterWriter = new PrintWriter(new FileOutputStream(new File(SERVER_START_LOG)),true); </p>
+
+<p>derbyServer = new NetworkServerControl();<br/>
+ derbyServer.start(starterWriter); </p>
+
+
+<p>For repro see:<br/>
+<a href= http://www.nabble.com/Questions-about-Network-Server-API-Behavior-p5055814.html  class= external-link  rel= nofollow >http://www.nabble.com/Questions-about-Network-Server-API-Behavior-p5055814.html</a></p>
+
+<p>And change the following line in the program to not autoflush as follows:<br/>
+starterWriter = new PrintWriter(new FileOutputStream(new File(SERVER_START_LOG)),false); </p> 

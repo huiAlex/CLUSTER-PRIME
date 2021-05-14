@@ -1,0 +1,1 @@
+[DERBY-3063] Extend the system function mechanism to support functions with multiple arguments  <p>Extend the existing functionality for adding Java functions to SQL to support functions with multiple arguments.</p> 

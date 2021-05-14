@@ -1,0 +1,12 @@
+[DERBY-1062] Change the internal implemetation of SYSCS_INPLACE_COMPRESS_TABLE to share existing alter table <p> Change the internal implemetation of SYSCS_INPLACE_COMPRESS_TABLE to share existing alter table<br/>
+code. One suggested approach is to use the same mechanism as SYSCS_COMPRESS_TABLE. Such<br/>
+an implementation would involve:<br/>
+o change the parser for alter table to accecpt some internal only syntax for SYSCS_INPLACE_COMPRESS_TABLE<br/>
+o change the alter table constant action to get the required information for inplace compress<br/>
+o move most of the inplace compress driving code to a routine in alter table execution, following the same<br/>
+     coding pattern as existing alter table compress.</p>
+
+<p>I believe doing this will have multiple benefits:<br/>
+1) shares existing alter table code, so things like error checking, security management, ... is all done by one piece of code<br/>
+2) by sharing the code I believe the following outstanding JIRA issues will be addressed: <a href= https://issues.apache.org/jira/browse/DERBY-719  title= Calling SYSCS_INPLACE_COMPRESS_TABLE on SYS.SYSTABLES results in a lock timeout, with only a single connection active  class= issue-link  data-issue-key= DERBY-719 ><del>DERBY-719</del></a>, <a href= https://issues.apache.org/jira/browse/DERBY-720  title= Calling SYSCS_INPLACE_COMPRESS_TABLE on a synonym or a temp table results in a NullPointerException  class= issue-link  data-issue-key= DERBY-720 >DERBY-720</a> -<br/>
+3) future changes addressing ddl like grant/revoke will automatically work.</p>

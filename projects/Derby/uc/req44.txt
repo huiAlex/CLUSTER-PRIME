@@ -1,0 +1,9 @@
+[DERBY-4428] Add proper delete mechanism for in-memory databases  <p>The current mechanism for deleting in-memory databases isn t good enough, and a proper one must be added.<br/>
+It is also important to be able to delete in-memory databases, since they occupy valuable main memory that should be discarded when the database is no longer needed.</p>
+
+<p>I intend to implement the mechanism by using the JDBC connection URL:<br/>
+ jdbc:derby:memory:myDatabase;delete=true<span class= error >&#91;;user=X;password=Y&#93;</span></p>
+
+<p>The connection attempt will throw an exception in any case, either because the request failed or because it succeeded.<br/>
+Reasons for a failure can be invalid user and/or password, lacking encryption attributes, or conflicting attributes.<br/>
+For the time being, only the database owner will be allowed to delete databases (<b>note</b>: do we have a way to control/limit in-memory database creation?)</p> 

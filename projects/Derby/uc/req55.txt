@@ -1,0 +1,8 @@
+[DERBY-1704] Allow more concurrency in the lock manager  <p>I have seen indications of severe monitor contention in SinglePool<br/>
+(the current lock manager) when multiple threads access a Derby<br/>
+database concurrently. When a thread wants to lock an object, it needs<br/>
+to obtain the monitor for both SinglePool and LockSet (both of them<br/>
+are global synchronization points). This leads to poor scalability.</p>
+
+<p>We should investigate how to allow more concurrency in the lock<br/>
+manager, and either extend SinglePool or implement a new manager.</p> 

@@ -1,0 +1,5 @@
+[DERBY-4550] Using ij to copy data from one DB to an other  <p>It is possible to have open connections to several databases while running ij, but it is not currently possible to copy data from one DB to an other one.</p>
+
+<p>Not only such a feature would allow to copy data between Derby databases. But, ij being mostly DB agnostic, if will ease import/export from any JDBC compliant data source.</p>
+
+<p>See <a href= http://old.nabble.com/Using-IJ-to-copy-data-from-one-DB-to-an-other-one-td27598138.html  class= external-link  rel= nofollow >http://old.nabble.com/Using-IJ-to-copy-data-from-one-DB-to-an-other-one-td27598138.html</a></p> 

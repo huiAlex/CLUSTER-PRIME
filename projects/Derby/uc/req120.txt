@@ -1,0 +1,54 @@
+[DERBY-1156] allow the encrypting of an existing unencrypted db and allow the re-encrypting of an existing encrypted db <p>encrypted database to be re-encrypted with a new password.</p>
+
+<p>Here are some ideas for an initial implementation.</p>
+
+
+<p>The easiest way to do this is to make sure we have exclusive access to the<br/>
+data and that no log is required in the new copy of the db.  I want to avoid<br/>
+the log as it also is encrypted.  Here is my VERY high level plan:</p>
+
+<p>1) Force exclusive access by putting all the work in the low level store,<br/>
+   offline boot method.  We will do redo recovery as usual, but at the end<br/>
+   there will be an entry point to do the copy/encrypt operation.</p>
+
+<p>copy/encrypt process:</p>
+
+<p>0) The request to encrypt/re-encrypt the db will be handled with a new set<br/>
+   of url flags passed into store at boot time.  The new flags will provide<br/>
+   the same inputs as the current encrypt flags.  So at high level the<br/>
+   request will be  connect db old_encrypt_url_flags; new_encrypt_url_flags .<br/>
+   TODO - provide exact new flag syntax.</p>
+
+<p>1) Open a transaction do all logged work to do the encryption.  All logging<br/>
+   will be done with existing encryption.</p>
+
+<p>2) Copy and encrypt every db file in the database.  The target files will<br/>
+   be in the data directory.  There will be a new suffix to track the new<br/>
+   files, similar to the current process used for handling drop table in<br/>
+   a transaction consistent manner without logging the entire table to the log.<br/>
+   Entire encrypted destination file is guaranteed synced to disk before<br/>
+   transaction commits.  I don t think this part needs to be logged.<br/>
+   Files will be read from the cache using existing mechanism and written<br/>
+   directly into new encrypted files (new encrypted data does not end up in<br/>
+   the cache).</p>
+
+<p>3) Switch encrypted files for old files.  Do this under a new log operation<br/>
+   so the process can be correctly rolled back if the encrypt db operation<br/>
+   transaction fails.  Rollback will do file at a time switches, no reading<br/>
+   of encrypted data is necessary.</p>
+
+<p>4) log a  change encryption of db  log record, but do not update<br/>
+   system.properties with the change.</p>
+
+<p>5) commit transaction.</p>
+
+<p>6) update system.properties and sync changes.</p>
+
+<p>7) TODO - need someway to handle crash between steps 5 and 6.</p>
+
+<p>6) checkpoint all data, at this point guaranteed that there is no outstanding<br/>
+   transaction, so after checkpoint is done there is no need for the log.</p>
+
+<p>ISSUES:<br/>
+o there probably should be something that catches a request to encrypt to<br/>
+  whatever db was already encrypted with.</p>

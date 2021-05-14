@@ -1,0 +1,59 @@
+[DERBY-571] Virtual Table Mapping for no argument Diagnostic tables  <p>Currently four no-argument diagnostic tables exist that provide information about the running state of Derby, or its error messages.<br/>
+These tables are invoked using an awkward, non-standard syntax. As an example:</p>
+
+<p>SELECT * FROM NEW org.apache.derby.diag.LockTable() as LOCK_TABLE</p>
+
+<p>The improvement will provide an internal mapping from a regular table name in the SYSCS_DIAG schema<br/>
+to the runtime virtual table code. Thus the above example would be replaced by:</p>
+
+<p>SELECT * FROM SYSCS_DIAG.LOCK_TABLE</p>
+
+<p>These diagnostic table expressions are regular table expressions (as is the NEW VTI construct) and<br/>
+can be used wherever a normal table can.</p>
+
+<p>Any DDL, INSERT/UPDATE/DELETE, compression procedure etc. that references a diagnostic table<br/>
+will result in an exception.</p>
+
+<p>The old style syntax will remain in place for 10.2, but become deprecated.</p>
+
+<p>The tables to be implemented in this change are:</p>
+
+<p>SYSCS_DIAG.LOCK_TABLE   replaces org.apache.derby.diag.LockTable<br/>
+SYSCS_DIAG.STATEMENT_CACHE    replaces org.apache.derby.diag.StatementCache<br/>
+SYSCS_DIAG.TRANSACTION_TABLE    replaces org.apache.derby.diag.TransactionTable<br/>
+SYSCS_DIAG.ERROR_MESSAGES    replaces org.apache.derby.diag.ErrorMessages</p>
+
+<p>Adding such a table will be table driven, thus easy for others to provide additional diagnostics.</p>
+
+<p>Information about these diagnostic tables will not appear in the system catalogs or JDBC DatabaseMetaData.<br/>
+The ResultSetMetaData for the any query involving a diagnostic table will be valid.</p>
+
+<p>This is a first step in a progression towards supporing a fully application/user defined virtual table.</p>
+
+<p>These steps are not part of this jira issue, but added for information purposes.</p>
+
+<ul class= alternate  type= square >
+	<li>second step - supporting diagnostic tables with parameters, e.g.</li>
+</ul>
+
+
+<p>  SELECT * FROM SYSCS_DIAG.SPACE_TABLE( sales ,  orders );</p>
+
+<ul class= alternate  type= square >
+	<li>third step - providing a create virtual table statement (most databases support<br/>
+   some form of virtual table, or wrappers). The DDL would be non-standard but the<br/>
+   data access would be standard. <span class= error >&#91;need to check table functions in part 13 of SQL standard&#93;</span></li>
+</ul>
+
+
+<p>   E.g. syntax yet to be defined, but to give the general idea<br/>
+      CREATE VIRTUAL TABLE (TICKER VARCHAR(10), START TIMESTAMP, END TIMESTAMP)<br/>
+           LANGUAGE JAVA<br/>
+           PARAMETER STYLE JAVA<br/>
+           EXTERNAL NAME  com.acme.stocks.historyFromYahooFinance ;</p>
+
+
+
+
+
+ 

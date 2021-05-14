@@ -1,0 +1,18 @@
+[DERBY-1387] Add JMX extensions to Derby [DERBY-3424] Add an MBean that an application can register to change the state of Derby s JMX management  <p>This is a draft requirement specification for adding monitoring and management extensions to Apache Derby using JMX. The requirements document has been uploaded on JIRA as well as the Derby Wiki page at <a href= http://wiki.apache.org/db-derby/_Requirement_Specifications_for_Monitoring_%26_Management_Extensions_using_JMX  class= external-link  rel= nofollow >http://wiki.apache.org/db-derby/_Requirement_Specifications_for_Monitoring_%26_Management_Extensions_using_JMX</a></p>
+
+<p>Developers and Users are requested to please look at the document (feature list in particular) and add their own rating to features by adding a coloumn to the table.</p>
+
+<p>Comments are welcome.</p> <p>JMX in Derby was originally proposed as a mechanism to configure Derby replacing or enhancing the system properties which tend to be static in nature. Thus it is somewhat ironic that jmx is enabled with a static system property derby.system.jmx.</p>
+
+<p>I propose to add a public mbean that allows the state Derby s JMX management to be changed. This bean is not automatically registered by Derby if derby.system.jmx is false, but instead can be registered by an application. I believe this could occur at any time so that JMX could be enabled on a running application, possibly by a remote client.</p>
+
+<p>This standard Mbean (o.a.d.mbeans.Management &amp; ManagementMBean) would have these operations &amp; attribute:</p>
+
+<p>    public boolean isManagementActive();<br/>
+    public void startManagement(); <br/>
+    public void stopManagement();</p>
+
+<p>If Derby is not booted within the jvm then the operations would be no-ops.</p>
+
+<p>If derby.system.jmx is true then Derby will itself register an mbean that implements ManagementMBean to allow dynamic control of the visibility of Derby s mbeans.</p>
+ 

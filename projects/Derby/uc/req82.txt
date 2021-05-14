@@ -1,0 +1,46 @@
+[DERBY-6008] Allow ORDER BY and FETCH/OFFSET in set operands  <p>Currently, Derby doesn t allow ORDER BY nested in a set operand, e.g. in the following construct:</p>
+
+<p>(select i from t1 order by j offset 1 row)    union <br/>
+(select i from t2 order by j desc offset 2 rows)</p>
+
+<p>This is allowed by the standard, as far as I can understand, cf. this quote from section 7.12 in SQL 2011:</p>
+
+<p>&lt;query expression body&gt; ::=<br/>
+    &lt;query term&gt;</p>
+<table class= confluenceTable ><tbody>
+<tr>
+<td class= confluenceTd >   &lt;query expression body&gt; UNION [ ALL </td>
+<td class= confluenceTd > DISTINCT ]<br/>
+  [ &lt;corresponding spec&gt; ] &lt;query term&gt;</td>
+</tr>
+<tr>
+<td class= confluenceTd >   &lt;query expression body&gt; EXCEPT [ ALL </td>
+<td class= confluenceTd > DISTINCT ]<br/>
+  [ &lt;corresponding spec&gt; ] &lt;query term&gt;</td>
+</tr>
+</tbody></table>
+
+
+<p>&lt;query term&gt; ::=<br/>
+   &lt;query primary&gt;</p>
+<table class= confluenceTable ><tbody>
+<tr>
+<td class= confluenceTd >  &lt;query term&gt; INTERSECT [ ALL </td>
+<td class= confluenceTd > DISTINCT ]<br/>
+   [ &lt;corresponding spec&gt; ] &lt;query primary&gt;</td>
+</tr>
+</tbody></table>
+
+
+
+<p>&lt;query primary&gt; ::=<br/>
+   &lt;simple table&gt;</p>
+<table class= confluenceTable ><tbody>
+<tr>
+<td class= confluenceTd >  &lt;left paren&gt; &lt;query expression body&gt;<br/>
+     [ &lt;order by clause&gt; ] [ &lt;result offset clause&gt; ] [ &lt;fetch first clause&gt; ] &lt;right paren&gt;</td>
+</tr>
+</tbody></table>
+
+
+<p>I.e. the left paren chooses the second alternative in the production for &lt;query primary&gt;.</p> 

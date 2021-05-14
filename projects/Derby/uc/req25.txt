@@ -1,0 +1,11 @@
+[DERBY-3934] Improve performance of reading modified Clobs  <p>The performance of reading modified Clobs is poor, which is demonstrated by running a test program selecting a 10 MB Clob and then getting the contents using getSubString:</p>
+<ul class= alternate  type= square >
+	<li>unmodified Clob (StoreStreamClob) : ~1 300 ms</li>
+	<li>modified Clob (TemporaryClob): ~156 000 ms</li>
+</ul>
+
+
+<p>In this case, the Clob was modified by changing the first character.</p>
+
+<p>A number of subtasks will be created to handle the various issues, which will be related to both performance and code cleanup.<br/>
+For a brief overview, see <a href= http://www.nabble.com/Suggestion-for-improving-ClobUpdatableReader-and-related-code-to20308303.html  class= external-link  rel= nofollow >http://www.nabble.com/Suggestion-for-improving-ClobUpdatableReader-and-related-code-to20308303.html</a></p> 

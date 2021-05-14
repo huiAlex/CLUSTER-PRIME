@@ -1,0 +1,13 @@
+[DERBY-2207] Improve usability of Derby s client/server security by implementing ANSI Roles [DERBY-3073] SQL roles: add parser support [DERBY-3191] SQL roles: add upgrade support [DERBY-3327] SQL roles: Implement authorization stack (and SQL session context to hold it)  <p>Implementing ANSI Roles will make it easier to manage security for multi-user applications with high user turnover.</p> <p>Derby roles introduce a new system catalog (SYSROLES). When a database<br/>
+is hard upgraded, this catalog needs to be added.</p> <p>The current LanguageConnectionContext keeps the user authorization identifier for an SQL session.<br/>
+The lcc is shared context also for nested connections (opened from stored procedures).<br/>
+So far, for roles, the current role has been stored in the lcc also. However, SQL requires that<br/>
+authorization identifers be pushed on a  authorization stack  when calling a stored procedure, cf.<br/>
+SQL 2003, vol 2, section 4.34.1.1 and 4.27.3 and 10.4 GR 5h and i.<br/>
+This allows a caller to keep its current role after a call even if changed by the stored procedure.</p>
+
+<p>This issue will implement the current role name part ( cell ) of the authorization stack. </p>
+
+<p>The authorization stack will be implemented as part of the SQL session context.<br/>
+The patch will also implement the pushing of the current unqualified schema name part of<br/>
+the SQL session context, cf. 10.4 GR 5a (<a href= https://issues.apache.org/jira/browse/DERBY-1331  title= Derby&#39;s &quot;set schema&quot; behavior is not compliant with SQL 2003 Foundation spec.  class= issue-link  data-issue-key= DERBY-1331 ><del>DERBY-1331</del></a>).</p> 

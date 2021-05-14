@@ -1,0 +1,15 @@
+[DERBY-499] Expose BOOLEAN datatype to end users [DERBY-4613] Make client driver treat BOOLEAN columns the same way as the embedded driver does. [DERBY-4657] Allow functions to return BOOLEAN values [DERBY-4658] Allow explicit casts of string values to BOOLEAN [DERBY-4659] Allow routines to take arguments of BOOLEAN type [DERBY-4703] Make it possible for table functions to return BOOLEAN columns [DERBY-4716] Enable BOOLEAN typed columns  <p>Veaceslav Chicu started an email thread on 8 August 2005 titled  boolean type . He was disappointed that Derby doesn t support the ansi BOOLEAN datatype. On closer inspection, Derby does internally support this type but does not expose this support to end users.</p>
+
+<p>Derby should let users declare table columns of type BOOLEAN. This should be an indexable datatype.</p> <p>The only operation currently allowed on BOOLEAN columns is to select them from the system tables. For instance, the following query selects BOOLEAN values:</p>
+
+<p>    select systemalias from sys.sysaliases;</p>
+
+<p>There are discrepancies in how the embedded and client drivers handle these BOOLEAN columns. The embedded behavior is correct and the client behavior should conform. I will attach a spec describing what needs to be done.</p> <p>As part of our expanding support for the BOOLEAN datatype, it would be nice to allow functions to return BOOLEAN values.</p> <p>The SQL Standard allows strings to be explicitly cast to BOOLEAN values. Strings are the only type (other than BOOLEAN itself) which can be cast to BOOLEAN. As part of our expanding support for the BOOLEAN datatype, we should allow these casts.</p>
+
+<p>Casting string types to boolean is defined by part 2, section 6.12 (&lt;cast specification&gt;), general rule 20:</p>
+
+<p>a) Trim whitespace off the string</p>
+
+<p>b) Then apply the rules in section 5.3 (&lt;literal&gt;). This means that the trimmed string must be  TRUE ,  FALSE , or  UNKNOWN , regardless of case.</p>
+
+<p>c) Otherwise, raise an exception.</p> <p>We should allow routines to take BOOLEAN arguments as part of our expanding support for the BOOLEAN datatype.</p> <p>Right now a function cannot return a table with a BOOLEAN column.</p> <p>Allow tables to have boolean columns.</p> 

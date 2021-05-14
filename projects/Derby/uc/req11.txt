@@ -1,0 +1,36 @@
+[DERBY-1471] Implement layer B streaming for new methods defined in JDBC4.0 [DERBY-1417] Add new, lengthless overloads to the streaming api  <p>JDBC 4.0 introduced new methods which take parameters for object to be sent to sever without length information.</p>
+
+<p>For those methods, Layer B streaming is best way to implement sending object to server.</p>
+
+<p>This issue is representation of <a href= https://issues.apache.org/jira/browse/DERBY-1417  title= Add new, lengthless overloads to the streaming api  class= issue-link  data-issue-key= DERBY-1417 ><del>DERBY-1417</del></a> in Network Client.</p> <p>The JDBC4 Expert Group has approved a new set of overloads for the streaming methods. These overloads do not take a length argument. Here are the new overloads:</p>
+
+<p>PreparedStatement.setAsciiStream(int parameterIndex, java.io.InputStream x)<br/>
+PreparedStatement.setBinaryStream(int parameterIndex, java.io.InputStream x)<br/>
+PreparedStatement.setCharacterStream(int parameterIndex, java.io.Reader reader)<br/>
+PreparedStatement.setNCharacterStream(int parameterIndex, java.io.Reader reader)<br/>
+PreparedStatement.setBlob(int parameterIndex, java.io.InputStream inputStream)<br/>
+PreparedStatement.setClob(int parameterIndex, java.io.Reader reader)<br/>
+PreparedStatement.setNClob(int parameterIndex, java.io.Reader reader)<br/>
+CallableStatement.setAsciiStream(java.lang.String parameterName, java.io.InputStream x)<br/>
+CallableStatement.setBinaryStream(java.lang.String parameterName, java.io.InputStream x)<br/>
+CallableStatement.setCharacterStream(java.lang.String parameterName, java.io.Reader reader)<br/>
+CallableStatement.setNCharacterStream(java.lang.String parameterName, java.io.Reader reader)<br/>
+CallableStatement.setBlob(java.lang.String parameterName, java.io.InputStream inputStream)<br/>
+CallableStatement.setClob(java.lang.String parameterName, java.io.Reader reader)<br/>
+CallableStatement.setNClob(java.lang.String parameterName, java.io.Reader reader)<br/>
+ResultSet.updateAsciiStream(int columnIndex, java.io.InputStream x)<br/>
+ResultSet.updateAsciiStream(java.lang.String columnLabel, java.io.InputStream x)<br/>
+ResultSet.updateBinaryStream(int columnIndex, java.io.InputStream x)<br/>
+ResultSet.updateBinaryStream(java.lang.String columnLabel, java.io.InputStream x, int length)<br/>
+ResultSet.updateCharacterStream(int columnIndex, java.io.Reader x)<br/>
+ResultSet.updateCharacterStream(java.lang.String columnLabel, java.io.Reader x)<br/>
+ResultSet.updateNCharacterStream(int columnIndex, java.io.Reader x)<br/>
+ResultSet.updateNCharacterStream(java.lang.String columnLabel, java.io.Reader x)  <br/>
+ResultSet.updateBlob(int columnIndex, java.io.InputStream inputStream)<br/>
+ResultSet.updateBlob(java.lang.String columnLabel, java.io.InputStream inputStream)<br/>
+ResultSet.updateClob(int columnIndex, java.io.Reader reader)<br/>
+ResultSet.updateClob(java.lang.String columnLabel, java.io.Reader reader)<br/>
+ResultSet.updateNClob(int columnIndex, java.io.Reader reader)<br/>
+ResultSet.updateNClob(java.lang.String columnLabel, java.io.Reader reader)</p>
+
+<p>We should add these new overloads soon so that the build will not break when this methods turn up in a published Mustang build.</p> 

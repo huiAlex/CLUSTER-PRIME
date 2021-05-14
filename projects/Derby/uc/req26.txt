@@ -1,0 +1,6 @@
+[DERBY-2668] At the time of compilation of a comparison operation, if the collation types of the operands do not match, then we should throw a meaningful error message.  <p>In Derby 10.3, we are adding a new feature (<a href= https://issues.apache.org/jira/browse/DERBY-1478  title= Add built in language based ordering and like processing to Derby  class= issue-link  data-issue-key= DERBY-1478 ><del>DERBY-1478</del></a>) which will allow character string types to have a territory based collation (except for persistent character string type columns from system schema). When 2 character types are compared, they should have the same collation type associated with them. If not then Derby 10.3 will throw an exception. Currently, in Derby 10.3 codeline, the exception thrown is something like  ERROR 42818: Comparisons between  VARCHAR  and  CHAR  are not supported.  but this error message is misleading. The error is really for collation mismatch. We should fix following error so it indicates the real reason behind the exception.</p>
+
+<p>eg sql<br/>
+ij&gt; connect  nodb;create=true;territory=no;collation=TERRITORY_BASED ; <br/>
+ij&gt; select * from sys.systables where tablename =  T1 ; <br/>
+ERROR 42818: Comparisons between  VARCHAR  and  CHAR  are not supported. </p> 

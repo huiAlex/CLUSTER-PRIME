@@ -1,0 +1,12 @@
+[DERBY-4357] TableFunctions provide no information to limit underlying query  <p>The API specification for TableFunctions cannot provide information to the implementer of the TableFunction about the details of the query.  For example: </p>
+
+<p>(a) I defined a table function named MyFunction with columns a,b, &amp; c<br/>
+(b) I bind the table function properly using the CREATE FUNCTION SQL.</p>
+
+<p>User executes the following SQL:</p>
+
+<p>select a,b from table ( MyFunction() ) where c = 123</p>
+
+<p>Without passing the column list and/or where clause as arguments to the table function, my implementation can not know that it only needs two of the three columns, and only rows where c = 123.</p>
+
+<p>For TableFunctions that are built to integrate distant/legacy data, the cost of the query can be prohibitive.   It would be better if information regarding the columns in the select and restrictions from the where clause could be passed to the developer.</p> 

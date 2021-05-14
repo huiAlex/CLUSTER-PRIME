@@ -1,0 +1,6 @@
+[DERBY-4057] Space is not reclaimed if transaction is rolled back  <p>If I repeatedly insert into a clob table and rollback the the transaction the space is not reclaimed and the number of allocated pages continues to grow.   I will add a test case to ClobReclamationTest and reference this bug.</p>
+
+<p><a href= https://issues.apache.org/jira/browse/DERBY-4056  title= Space is not reclaimed when attempting to insert row that violates UNIQUE constraint  class= issue-link  data-issue-key= DERBY-4056 ><del>DERBY-4056</del></a> may be a special case of this bug, but I thought I would file a bug for the general issue.</p>
+
+
+ 

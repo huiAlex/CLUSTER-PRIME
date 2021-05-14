@@ -1,0 +1,12 @@
+[DERBY-2887] NULLS FIRST / LAST for ORDER BY  <p>I suggest to implement the  null ordering  option for the  ORDER BY  clause:</p>
+
+<p>According to the SQL standard, 10.10 &lt;sort specification list&gt;:</p>
+
+<p> &lt;null ordering&gt; ::=<br/>
+    NULLS FIRST</p>
+<table class= confluenceTable ><tbody>
+<tr>
+<td class= confluenceTd > NULLS LAST</td>
+</tr>
+</tbody></table>
+ 

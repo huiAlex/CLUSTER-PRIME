@@ -1,0 +1,3 @@
+[DERBY-1623] Add ANSI TRIM implementation  <p>JPA is requiring databases to support this ANSI feature esp the ability to chose the trimmed character</p>
+
+<p>TRIM([ [ LEADING | TRAILING | BOTH ] [ chars ] FROM ] str)</p> 

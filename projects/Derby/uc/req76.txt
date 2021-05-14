@@ -1,0 +1,1 @@
+[DERBY-268] Add Support for truncate table  <p>Adding support for truncate table command will aid to portability</p> 

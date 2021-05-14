@@ -1,0 +1,13 @@
+[DERBY-2674] Stop running jdbc40 tests in the old test framework [DERBY-2054] Rewrite  derbynet/SuicideOfStreaming  to a JUnit test [DERBY-5308] Investigate if largeData/LobLimits.java  can be run for client [DERBY-1889] Convert jdbcapi/lobStreams.java to Junit [DERBY-3663] Convert store/streamingColumn to JUnit [DERBY-3796] Convert derbynet/OutBufferedStream to JUnit  <p>Tests in the old jdbc40 test suite are run in the derbyall test suite even if all the tests have been converted to Junit and is run as part of the Junit All test suite.</p> <p>The test  derbynet/SuicideOfStreaming  should be rewritten to a JUnit test more in line with our newly created test system.<br/>
+It is one of the last tests still being run from the deprecated  tests/junitTests/  directory, through a wrapper class.</p> <p>When investigating <a href= https://issues.apache.org/jira/browse/DERBY-5208  title= largeDataTests run but give no result  class= issue-link  data-issue-key= DERBY-5208 ><del>DERBY-5208</del></a>, I noticed that the largeData suite does not run for client. The comment in suites/derbyNetClient.exclude says:</p>
+<ol>
+	<li>excluding TestErrorStreamTarget.java since it s not relevant for clients</li>
+	<li>excluding largedata/LobLimits.java to run with the network server because curr<br/>
+ently lobs are materialized and this test tests for 2G lobs.</li>
+	<li>see <a href= https://issues.apache.org/jira/browse/DERBY-326  title= Improve streaming of large objects for network server and client  class= issue-link  data-issue-key= DERBY-326 ><del>DERBY-326</del></a> and <a href= https://issues.apache.org/jira/browse/DERBY-550  title= BLOB : java.lang.OutOfMemoryError with network JDBC driver (org.apache.derby.jdbc.ClientDriver)  class= issue-link  data-issue-key= DERBY-550 ><del>DERBY-550</del></a> issues<br/>
+#<br/>
+largedata/LobLimits.java</li>
+</ol>
+
+
+<p>Perhaps now that these issues are fixed the test can be run in client. Perhaps it should be a separate suite as just the embedded test takes over 10 hours to run.</p> <p>Convert org.apache.derbyTesting.functionTests.tests.store.streamingColumn to a JUnit testcase.</p> 

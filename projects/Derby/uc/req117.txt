@@ -1,0 +1,1 @@
+[DERBY-1146] Verify that JDBC4 signatures satisfied <p>Add to the jdbc40 suite a test which verifies that our JDBC4 classes satisfy the expected class/interface signatures.</p>

@@ -1,0 +1,10 @@
+[DERBY-1039] Database creation should fail if specified log device path already exists <p>If a database is created with logDevice pointing to a directory<br/>
+containing old log files, one might experience errors during recovery.</p>
+
+<p>  ERROR XSDB4: Page Page(0,Container(0, 768)) is at version 2,657, the<br/>
+  log file contains change version 2,715, either there are log records<br/>
+  of this page missing, or this page did not get written out to disk<br/>
+  properly.</p>
+
+<p>To avoid this problem, database creation should fail if logDevice is<br/>
+pointing to an existing directory.</p>

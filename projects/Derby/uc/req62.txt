@@ -1,0 +1,1 @@
+[DERBY-6733] Implement an MBean for monitoring caches  <p>Add an MBean that allows users to monitor Derby s CacheFactory instances, as discussed in <a href= https://issues.apache.org/jira/browse/DERBY-5772  title= Give  users a way to monitor more Derby internals.  class= issue-link  data-issue-key= DERBY-5772 >DERBY-5772</a>.</p> 

@@ -1,0 +1,3 @@
+[DERBY-2432] Unimplemented transaction time out for XA transactions may cause that locks will not be released when client terminates outside a unit of work.  <p>The XAResource interface provides function setTransactionTimeout which is currently not supported in derby.</p>
+
+<p>When client application uses client driver to connect to derby database and the application crashes outside the unit of work of XA transaction and the transaction is not committed or rolled back yet the locks held by the transaction will not be released.</p> 
