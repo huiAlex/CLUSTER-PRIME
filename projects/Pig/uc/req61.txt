@@ -1,0 +1,16 @@
+[PIG-2547] Easier UDFs: Convenient EvalFunc super-classes <p>We ve got a few abstract extensions of EvalFunc that make life easier. If people are interested we can push said classes into Pig.</p>
+
+<p>There are 3 classes, each extending the next. Class naming is all TBD.</p>
+
+<ul>
+	<li><tt>TypedOutputEvalFunc&lt;OUT&gt;</tt> - Implements <tt>public Schema outputSchema(Schema input)</tt> based on the generic type of the subclass. Provides common helper validation functions which increment counters for good and bad Tuple data passed. Useful where the input to be worked on is a tuple of size N or greater.</li>
+	<li><tt>PrimitiveEvalFunc&lt;IN, OUT&gt;</tt> - Same as above with helper validation allowing the ability it subclass and just implement <tt>public OUT exec(IN input)</tt>, where IN and OUT are primitives. Useful when the input is a single primitive in position 0 of a tuple.</li>
+	<li><tt>FunctionWrapperEvalFunc</tt> - Wraps a Guava Function implementation (<a href= http://guava-libraries.googlecode.com/svn/trunk/javadoc/com/google/common/base/Function.html  class= external-link  rel= nofollow >http://guava-libraries.googlecode.com/svn/trunk/javadoc/com/google/common/base/Function.html</a>) and allows UDFs to be used in Pig scripts like so, where <tt>MyFunction</tt> is a class that implements <tt>Function</tt>:</li>
+</ul>
+
+
+<div class= preformatted panel  style= border-width: 1px; ><div class= preformattedContent panelContent >
+<pre>DEFINE myUdf org.apache.pig.FunctionWrapperEvalFunc( MyFunction )
+</pre>
+</div></div>
+

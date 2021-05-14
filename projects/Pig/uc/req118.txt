@@ -1,0 +1,26 @@
+[PIG-984] PERFORMANCE: Implement a map-side group operator to speed up processing of ordered data  <p>The general group by operation in Pig needs both mappers and reducers (the aggregation is done in reducers). This incurs disk writes/reads  between mappers and reducers.</p>
+
+<p>However, in the cases where the input data has the following properties</p>
+
+<p>   1. The records with the same key are grouped together (such as the data is sorted by the keys).<br/>
+   2. The records with the same key are in the same mapper input.</p>
+
+<p>the group by operation can be performed in the mappers only and thus remove the overhead of disk writes/reads.</p>
+
+<p>Alan proposed adding a hint to the group by clause like this one:</p>
+
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >
+A = load  input  using SomeLoader(...);
+B = group A by $0 using <span class= code-quote > mapside </span>;
+C = foreach B generate ...
+</pre>
+</div></div>
+
+<p>The proposed addition of using  mapside  to group will be a mapside group operator that collects all records for a given key into a buffer. When it sees a key change it will emit the key and bag for records it had buffered. It will assume that all keys for a given record are collected together and thus there is not need to buffer across keys. </p>
+
+<p>It is expected that  SomeLoader  will be implemented by data systems such as Zebra to ensure the data emitted by the loader satisfies the above properties (1) and (2).</p>
+
+<p>It will be the responsibility of the user (or the loader) to guarantee these properties (1) &amp; (2) before invoking the mapside hint for the group by clause. The Pig runtime can t check for the errors in the input data.</p>
+
+<p>For the group by clauses with mapside hint, Pig Latin will only support group by columns (including *), not group by expressions nor group all. </p>

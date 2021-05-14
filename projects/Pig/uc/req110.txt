@@ -1,0 +1,41 @@
+[PIG-741] Add LIMIT as a statement that works in nested FOREACH <p>I d like to compute the top 10 results in each group.</p>
+
+<p>The natural way to express this in Pig would be:</p>
+
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >
+A = load  ...  using PigStorage() as (
+    date: <span class= code-object >int</span>,
+    count: <span class= code-object >int</span>,
+    url: chararray
+);
+
+B = group A by ( date );
+
+C = foreach B {
+    D = order A by count desc;
+    E = limit D 10;
+    generate
+        FLATTEN(E);
+    };
+
+dump C;
+</pre>
+</div></div>
+
+<p>Yeah, I could write a UDF / PiggyBank function to take the top n results. But since LIMIT already exists as a statement, it seems like it should also work in the nested foreach context.</p>
+
+<p>Example workaround code.</p>
+
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >
+C = foreach B {
+    D = order A by count desc;
+    E = util.TOP(D, 10);
+    generate
+        FLATTEN(E);
+    };
+
+dump C;
+</pre>
+</div></div>

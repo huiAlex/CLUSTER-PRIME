@@ -1,0 +1,1 @@
+[PIG-3086] Allow A Prefix To Be Added To URIs In PigUnit Tests  <p>When running PigUnit tests that use the local file system it d be useful to re-write absolute paths in the pig script under test so you can  jail  the data the test uses to a known folder.</p>

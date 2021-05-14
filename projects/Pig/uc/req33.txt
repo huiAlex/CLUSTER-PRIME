@@ -1,0 +1,109 @@
+[PIG-1404] PigUnit - Pig script testing simplified.  <p>The goal is to provide a simple xUnit framework that enables our Pig scripts to be easily:</p>
+<ul class= alternate  type= square >
+	<li>unit tested</li>
+	<li>regression tested</li>
+	<li>quickly prototyped</li>
+</ul>
+
+
+<p>No cluster set up is required.</p>
+
+<p>For example:</p>
+
+<p>TestCase</p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >
+  @Test
+  <span class= code-keyword >public</span> void testTop3Queries() {
+    <span class= code-object >String</span>[] args = {
+        <span class= code-quote > n=3 </span>,        
+        };
+    test = <span class= code-keyword >new</span> PigTest(<span class= code-quote > top_queries.pig </span>, args);
+
+    <span class= code-object >String</span>[] input = {
+        <span class= code-quote > yahoo\t10 </span>,
+        <span class= code-quote > twitter\t7 </span>,
+        <span class= code-quote > facebook\t10 </span>,
+        <span class= code-quote > yahoo\t15 </span>,
+        <span class= code-quote > facebook\t5 </span>,
+        ....
+    };
+
+    <span class= code-object >String</span>[] output = {
+        <span class= code-quote > (yahoo,25L) </span>,
+        <span class= code-quote > (facebook,15L) </span>,
+        <span class= code-quote > (twitter,7L) </span>,
+    };
+
+    test.assertOutput(<span class= code-quote > data </span>, input, <span class= code-quote > queries_limit </span>, output);
+  }
+</pre>
+</div></div>
+
+<p>top_queries.pig</p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >
+data =
+    LOAD  $input 
+    AS (query:CHARARRAY, count:INT);
+     
+    ... 
+    
+queries_sum = 
+    FOREACH queries_group 
+    GENERATE 
+        group AS query, 
+        SUM(queries.count) AS count;
+        
+    ...
+            
+queries_limit = LIMIT queries_ordered $n;
+
+STORE queries_limit INTO  $output ;
+</pre>
+</div></div>
+
+<p>They are 3 modes:</p>
+<ul>
+	<li>LOCAL (if  pigunit.exectype.local  properties is present)</li>
+	<li>MAPREDUCE (use the cluster specified in the classpath, same as HADOOP_CONF_DIR)
+	<ul>
+		<li>automatic mini cluster (is the default and the HADOOP_CONF_DIR to have in the class path will be: ~/pigtest/conf)</li>
+		<li>pointing to an existing cluster (if  pigunit.exectype.cluster  properties is present)</li>
+	</ul>
+	</li>
+</ul>
+
+
+<p>For now, it would be nice to see how this idea could be integrated in Piggybank and if PigParser/PigServer could improve their interfaces in order to make PigUnit simple.</p>
+
+<p>Other components based on PigUnit could be built later:</p>
+<ul class= alternate  type= square >
+	<li>standalone MiniCluster</li>
+	<li>notion of workspaces for each test</li>
+	<li>standalone utility that reads test configuration and generates a test report...</li>
+</ul>
+
+
+<p>It is a first prototype, open to suggestions and can definitely take advantage of feedbacks.</p>
+
+<p>How to test, in pig_trunk:</p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >
+Apply patch
+$pig_trunk ant compile-test
+$pig_trunk ant
+$pig_trunk/contrib/piggybank/java ant test -Dtest.timeout=999999
+</pre>
+</div></div>
+
+<p>(it takes 15 min in MAPREDUCE minicluster, tests will need to be split in the future between  unit  and  integration )</p>
+
+<p>Many examples are in:</p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >
+contrib/piggybank/java/src/test/java/org/apache/pig/piggybank/test/pigunit/TestPigTest.java
+</pre>
+</div></div>
+
+<p>When used as a standalone, do not forget commons-lang-2.4.jar and the HADOOP_CONF_DIR to your cluster in your CLASSPATH.</p>

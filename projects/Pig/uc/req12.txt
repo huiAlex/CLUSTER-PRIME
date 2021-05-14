@@ -1,0 +1,25 @@
+[PIG-2651] Provide a much easier to use accumulator interface [PIG-2066] Accumulators should be able to early-terminate  <p>This introduces a new interface, IteratingAccumulatorEvalFunc (that name is NOT final...). The cool thing about this patch is that it is built purely on top of the existing Accumulator code (well, it uses <a href= https://issues.apache.org/jira/browse/PIG-2066  title= Accumulators should be able to early-terminate  class= issue-link  data-issue-key= PIG-2066 ><del>PIG-2066</del></a>, but it could easily work without it). That is to say, it s an easier way to write accumulators without having to fork the Pig codebase.</p>
+
+<p>The downside is that the only way I am able to provide such a clean interface is by using a second thread. I need to explore any potential performance implications, but given that most of the easy to use Pig stuff has performance implications, I think as long as we measure and and document them, it s worth the much more usable interface. Plus I don t think it will be too bad as one thread does the heavy lifting, while another just ferries values in between. SUM could now be written as:</p>
+
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >
+<span class= code-keyword >public</span> class SUM <span class= code-keyword >extends</span> IteratingAccumulatorEvalFunc&lt;<span class= code-object >Long</span>&gt; {
+    <span class= code-keyword >public</span> <span class= code-object >Long</span> exec(Iterator&lt;Tuple&gt; it) <span class= code-keyword >throws</span> IOException {
+        <span class= code-object >long</span> sum = 0;
+
+        <span class= code-keyword >while</span> (it.hasNext()) {
+            sum += (<span class= code-object >Long</span>)it.next().get(0);
+        }
+
+        <span class= code-keyword >return</span> sum;
+    }
+}
+</pre>
+</div></div>
+
+<p>Besides performance tests, I need to figure out how to properly test this sort of thing. I particularly welcome advice on that front.</p> <p>Accumulators are currently forced to process the whole bag; getValue() is called at the very end.</p>
+
+<p>Early termination is a handy feature to be able to use (for IsEmpty, for example).</p>
+
+<p>We can add this as a new interface extending Accumulator.</p> 

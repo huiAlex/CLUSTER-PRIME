@@ -1,0 +1,8 @@
+[PIG-3367] Add assert keyword (operator) in pig <p>Assert operator can be used for data validation. With assert you can write script as following-</p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >
+a = load  something  as (a0:<span class= code-object >int</span>, a1:<span class= code-object >int</span>);
+<span class= code-keyword >assert</span> a by a0 &gt; 0,  a cant be negative <span class= code-keyword >for</span> reasons ;
+</pre>
+</div></div>
+<p>This script will fail if assert is violated.</p>

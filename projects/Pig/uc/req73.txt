@@ -1,0 +1,15 @@
+[PIG-2994] Grunt shortcuts <p>This feature is aimed at providing shortcuts for frequently used commands like illustrate, dump, explain, describe, quit, help etc. This feature is inspired from postgres(psql) shortcuts. I tried implementing a simple shortcut for quitting the grunt shell using \q with very minimal changes. I think this feature will help save many keystrokes for users. If this feature looks useful I can submit the current patch for review and go ahead with implementing the following shortcuts</p>
+
+<p>\i &lt;alias&gt; - illustrate<br/>
+\e &lt;alias&gt; - explain<br/>
+\de &lt;alias&gt; - describe<br/>
+\du &lt;alias&gt; - dump <br/>
+\h - help</p>
+
+<p>This will also be useful to view information about tables/statistics stored in HCatalog similar to the way psql does. <br/>
+\dt &lt;alias&gt; - display table<br/>
+\dm - display metadata<br/>
+etc..</p>
+
+<p>except \t, \r and \n delimiters we should be able to use all other characters as shortcuts. <br/>
+Please let me know your thoughts.</p>

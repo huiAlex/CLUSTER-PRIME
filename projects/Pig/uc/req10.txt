@@ -1,0 +1,15 @@
+[PIG-1510] Add `deepCopy` for LogicalExpressions  <p>It would be useful to have a way to `deepCopy` an expression. `deepCopy` will create a new object so that changes made to one object will not reflect in the copy. There are 2 reasons why we don t override clone.</p>
+<ul>
+	<li>It may be better to use `deepCopy` since the copy semantics are explicit (since deepCopy may be expensive).</li>
+	<li>A second important reason for defining `deepCopy` as a separate routine is that it can be passed a plan as an argument which will be updated as the expression is copied (through plan.add and plan.connect).</li>
+</ul>
+
+
+<p>The usage would look like the following:</p>
+<div class= preformatted panel  style= border-width: 1px; ><div class= preformattedContent panelContent >
+<pre>LogicalExpressionPlan logicalPlan = new LogicalExpressionPlan();
+LogicalExpression copyExpression = origExpression.deepCopy( logicalPlan );
+</pre>
+</div></div>
+
+<p>An immediate motivation for this would be for constructing the expressions that constitute the CNF form of an expression.</p> 

@@ -1,0 +1,9 @@
+[PIG-3390] Make pig working with HBase 0.95 <p>The HBase 0.95 changed API in incompatible way. Following APIs that <tt>HBaseStorage</tt> in Pig uses are no longer available:</p>
+
+<ul>
+	<li><tt>Mutation.setWriteToWAL(Boolean)</tt></li>
+	<li><tt>Scan.write(DataOutput)</tt></li>
+</ul>
+
+
+<p>Also in addition the HBase is no longer available as one monolithic archive with entire functionality, but was broken down into smaller pieces such as <tt>hbase-client</tt>, <tt>hbase-server</tt>, ...</p>

@@ -1,0 +1,15 @@
+[PIG-1794] Javascript support for Pig embedding and UDFs in scripting languages <p>The attached patch proposes a javascript implementation for Pig embedding and UDFs in scripting languages.<br/>
+It is similar to the Jython implementation and uses Rhino provided in the JDK.<br/>
+some differences:</p>
+<ul class= alternate  type= square >
+	<li>output schema is provided by: &lt;functionName&gt;.outSchema= &lt;schema&gt;  as javascript does not have annotations or decorators but functions are first class objects</li>
+	<li>tuples are converted to objects using the input schema (the other way around using the output schema)</li>
+</ul>
+
+
+<p>The attached patch is not final yet. In particular it lacks unit tests.<br/>
+See test/org/apache/pig/test/data/tc.js for the  transitive closure  example</p>
+
+<p>See the following JIRAs for more context:<br/>
+<a href= https://issues.apache.org/jira/browse/PIG-928  class= external-link  rel= nofollow >https://issues.apache.org/jira/browse/PIG-928</a><br/>
+<a href= https://issues.apache.org/jira/browse/PIG-1479  class= external-link  rel= nofollow >https://issues.apache.org/jira/browse/PIG-1479</a></p>

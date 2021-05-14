@@ -1,0 +1,6 @@
+[PIG-3573] Provide StoreFunc and LoadFunc for Accumulo <p>Accumulo has some code to allow reading and writing from it through Pig. I ve been working on making it more robust and would like to try to get it included into Pig (to avoid the necessity to bundle additional jars).</p>
+
+<p>Some info on what currently exists <a href= http://people.apache.org/~elserj/accumulo-pig/  class= external-link  rel= nofollow >http://people.apache.org/~elserj/accumulo-pig/</a>, and the current code <a href= https://git-wip-us.apache.org/repos/asf?p=accumulo-pig.git  class= external-link  rel= nofollow >https://git-wip-us.apache.org/repos/asf?p=accumulo-pig.git</a></p>
+
+<p>1. Need to translate Maven build into Ant+Ivy<br/>
+2. Need to figure out how to support Accumulo 1.4 and 1.5 builds (differences in dependencies and APIs)</p>

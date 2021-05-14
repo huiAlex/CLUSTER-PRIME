@@ -1,0 +1,19 @@
+[PIG-1693] support project-range expression. (was: There needs to be a way in foreach to indicate  and all the rest of the fields  ) <p>A common use case we see in Pig is people have many columns in their data and they only want to operate on a few of them.  Consider for example if before storing data with ten columns, the user wants to perform a cast on one column:</p>
+
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >
+...
+Z = foreach Y generate (<span class= code-object >int</span>)firstcol, secondcol, thridcol, forthcol, fifthcol, sixthcol, seventhcol, eigthcol, ninethcol, tenthcol;
+store Z into  output ;
+</pre>
+</div></div>
+
+<p>Obviously this only gets worse as the user has more columns.  Ideally the above could be transformed to something like:</p>
+
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >
+...
+Z = foreach Y generate (<span class= code-object >int</span>)firstcol, <span class= code-quote > and all the <span class= code-keyword >rest</span> </span>;
+store Z into  output 
+</pre>
+</div></div>

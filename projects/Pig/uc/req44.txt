@@ -1,0 +1,15 @@
+[PIG-1782] Add ability to load data by column family in HBaseStorage <p>It would be nice to load all columns in the column family by using short hand syntax like:</p>
+
+<div class= preformatted panel  style= border-width: 1px; ><div class= preformattedContent panelContent >
+<pre>CpuMetrics = load  hbase://SystemMetrics  USING org.apache.pig.backend.hadoop.hbase.HBaseStorage( cpu: , -loadKey );
+</pre>
+</div></div>
+
+<p>Assuming there are columns cpu: sys.0, cpu:sys.1, cpu:user.0, cpu:user.1,  in cpu column family.</p>
+
+<p>CpuMetrics would contain something like:</p>
+
+<div class= preformatted panel  style= border-width: 1px; ><div class= preformattedContent panelContent >
+<pre>(rowKey, cpu:sys.0, cpu:sys.1, cpu:user.0, cpu:user.1)
+</pre>
+</div></div>

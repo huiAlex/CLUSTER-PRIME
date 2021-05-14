@@ -1,0 +1,7 @@
+[PIG-2660] PPNL should get notified of plan before it gets executed <p>The <tt>PigProgressNotificationListner</tt> should get notified of the plan (<tt>MROperPlan</tt>) before it gets executed. This allows listeners to inspect the plan and have an idea what to expect in the execution flow. Proposal is to add the following method to the PPNL interface, which is marked as evolving:</p>
+
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >
+<span class= code-keyword >public</span> void initialPlanNotification(MROperPlan plan);
+</pre>
+</div></div>

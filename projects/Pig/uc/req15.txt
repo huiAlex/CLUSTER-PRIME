@@ -1,0 +1,1 @@
+[PIG-2125] Make Pig work with hadoop .NEXT  <p>We need to make Pig work with hadoop .NEXT, the svn branch currently is: <a href= https://svn.apache.org/repos/asf/hadoop/common/branches/MR-279  class= external-link  rel= nofollow >https://svn.apache.org/repos/asf/hadoop/common/branches/MR-279</a></p> 

@@ -1,0 +1,12 @@
+[PIG-3090] Introduce a syntax to be able to easily refer to the previously defined relation <p>Sometimes I feel like swimming with ANTLRs. This particular feature isn t too hard to add... and supports syntax like this:</p>
+
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >
+a = load  thing  as (x:<span class= code-object >int</span>);
+b = foreach @ generate x;
+c = foreach @ generate x;
+d = foreach @ generate x;
+</pre>
+</div></div>
+
+<p>I have a patch, though I need to make sure it doesn t change anything (it shouldn t) and I need to add tests.</p>

@@ -1,0 +1,9 @@
+[PIG-1025] Should be able to set job priority through Pig Latin <p>Currently users can set the job name through Pig Latin by saying</p>
+
+<p>set job.name  my job name </p>
+
+<p>The ability to set the priority would also be nice, and the patch should be small.  The goal is to be able to say</p>
+
+<p>set job.priority  high </p>
+
+<p>and throw a JobCreationException in the JobControlCompiler if the priority is not one of the allowed string values from the o.a.h.mapred.JobPriority enum: very_low, low, normal, high, very_high.   Case insensitivity makes this a little nicer.</p>

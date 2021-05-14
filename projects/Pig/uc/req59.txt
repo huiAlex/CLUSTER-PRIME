@@ -1,0 +1,5 @@
+[PIG-2482] Integrate HCat DDL command into Pig <p>We would like to run hcat DDL command inside Pig script or Grunt. We can use a similar approach as  fs  or  sh .</p>
+
+<p>Grunt&gt; hcat create table .....</p>
+
+<p>Similar to  fs  and  sh , we don t plan to add Java API in PigServer for it.</p>

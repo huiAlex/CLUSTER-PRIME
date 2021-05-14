@@ -1,0 +1,4 @@
+[PIG-2332] JsonLoader/JsonStorage <p>A JsonLoader/JsonStorage implementation for Pig. This is based on Alan s implementation in the book (<a href= http://ofps.oreilly.com/titles/9781449302641/load_and_store_funcs.html  class= external-link  rel= nofollow >http://ofps.oreilly.com/titles/9781449302641/load_and_store_funcs.html</a>). I made some minor changes:<br/>
+1. Drop the jackson feature requires 1.01+. Since Hadoop 203+ bundles jackson 1.01, newer feature fails when running on Hadoop 203+.<br/>
+2. Using Json format for schema. This borrows Dmitry s schema implememtation in PigStorage.<br/>
+3. Some bug fixes.</p>

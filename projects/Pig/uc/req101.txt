@@ -1,0 +1,28 @@
+[PIG-4458] Support UDFs in a FOREACH Before a Merge Join <p>Right now, the MapSideMergeValidator outright rejects any foreach that has a UDF in it:</p>
+
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >
+<span class= code-keyword >private</span> <span class= code-object >boolean</span> isAcceptableForEachOp(Operator lo) <span class= code-keyword >throws</span> LogicalToPhysicalTranslatorException {
+        <span class= code-keyword >if</span> (lo <span class= code-keyword >instanceof</span> LOForEach) {
+            OperatorPlan innerPlan = ((LOForEach) lo).getInnerPlan();
+            validateMapSideMerge(innerPlan.getSinks(), innerPlan);
+            <span class= code-keyword >return</span> !containsUDFs((LOForEach) lo);
+        } <span class= code-keyword >else</span> {
+            <span class= code-keyword >return</span> <span class= code-keyword >false</span>;
+        }
+    }
+</pre>
+</div></div>
+
+
+<p>There is a TODO for this later on in that same class (inside containsUDFs):</p>
+
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >
+<span class= code-comment >// TODO (dvryaboy): in the <span class= code-keyword >future</span> we could relax <span class= code-keyword >this</span> rule by tracing what fields
+</span><span class= code-comment >// are being passed into the UDF, and only refusing <span class= code-keyword >if</span> the UDF is working on the
+</span><span class= code-comment >// join key. Transforms of other fields should be ok.</span>
+</pre>
+</div></div>
+
+<p>We should do the TODO and relax this requirement or just remove it altogether</p>

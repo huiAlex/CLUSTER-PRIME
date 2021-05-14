@@ -1,0 +1,1 @@
+[PIG-922] Logical optimizer: push up project  <p>This is a continuation work of <a href= https://issues.apache.org/jira/browse/PIG-697  class= external-link  rel= nofollow >PIG-697</a>. We need to add another rule to the logical optimizer: Push up project, ie, prune columns as early as possible.</p> 

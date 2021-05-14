@@ -1,0 +1,1 @@
+[PIG-713] Autocompletion doesn t complete aliases <p>Autocompletion only knows about keywords, but in different contexts, it would be nice if it completed aliases where an alias is expected.</p>

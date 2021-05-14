@@ -1,0 +1,7 @@
+[PIG-2525] Support pluggable PigProgressNotifcationListeners on the command line <p>It would be convenient to be able to implement <tt>PigProcessNotifcationListener</tt> and to wire it into a pig script. This jira is to support setting a listener and its constructor args on the command, perhaps like this:</p>
+
+<p><tt>noformat</tt><br/>
+pig -j MyListener -J  foo,bar,bat  -f my_script.pig<br/>
+<tt>noformat</tt></p>
+
+<p>where <tt>MyListener</tt> takes a single string in the constructor which will get passed <tt>foo,bar,bat</tt>.</p>

@@ -1,0 +1,2 @@
+[PIG-283] Allow to set arbitrary jobconf key-value pairs inside pig program <p>It would be useful to be able to set arbitrary JobConf key-value pairs inside a pig program (e.g. in front of a COGROUP statement).<br/>
+I wonder whether the simplest way to add this feature is by expanding the  set  command functionality.</p>

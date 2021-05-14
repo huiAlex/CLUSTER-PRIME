@@ -1,0 +1,3 @@
+[PIG-1085] Pass JobConf and UDF specific configuration information to UDFs <p>Users have long asked for a way to get the JobConf structure in their UDFs.  It would also be nice to have a way to pass properties between the front end and back end so that UDFs can store state during parse time and use it at runtime.</p>
+
+<p>This patch does part of what is proposed in <a href= https://issues.apache.org/jira/browse/PIG-602  title= Pass global configurations to UDF  class= issue-link  data-issue-key= PIG-602 ><del>PIG-602</del></a>, but not all of it.  It does not provide a way to give user specified configuration files to UDFs.  So I will mark 602 as depending on this bug, but it isn t a duplicate.</p>

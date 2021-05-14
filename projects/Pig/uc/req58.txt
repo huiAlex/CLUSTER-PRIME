@@ -1,0 +1,1 @@
+[PIG-2456] Pig should have a pigrc to specify default script cache <p>There should be a way to specify default statements in pig. This is helpful when multiple users are using pig in interactive mode.</p>

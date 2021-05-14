@@ -1,0 +1,1 @@
+[PIG-4408] Merge join should support replicated join as a predecessor <p>Since a replicated join doesn t trigger a reduce or change the output ordering a merge join should work after it</p>

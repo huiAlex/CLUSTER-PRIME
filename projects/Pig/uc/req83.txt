@@ -1,0 +1,1 @@
+[PIG-3247] Piggybank functions to mimic OVER clause in SQL <p>In order to test Hive I have written some UDFs to mimic the behavior of SQL s OVER clause.  I thought they would be useful to share.</p>

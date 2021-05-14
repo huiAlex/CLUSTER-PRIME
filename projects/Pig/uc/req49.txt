@@ -1,0 +1,20 @@
+[PIG-1891] Enable StoreFunc to make intelligent decision based on job success or failure <p>We are in the process of using PIG for various data processing and component integration. Here is where we feel pig storage funcs lack:</p>
+
+<p>They are not aware if the over all job has succeeded. This creates a problem for storage funcs which needs to  upload  results into another system:</p>
+
+<p>DB, FTP, another file system etc.</p>
+
+<p>I looked at the DBStorage in the piggybank (<a href= http://svn.apache.org/viewvc/pig/trunk/contrib/piggybank/java/src/main/java/org/apache/pig/piggybank/storage/DBStorage.java?view=markup  class= external-link  rel= nofollow >http://svn.apache.org/viewvc/pig/trunk/contrib/piggybank/java/src/main/java/org/apache/pig/piggybank/storage/DBStorage.java?view=markup</a>) and what I see is essentially a mechanism which for each task does the following:</p>
+
+<p>1. Creates a recordwriter (in this case open connection to db)<br/>
+2. Open transaction.<br/>
+3. Writes records into a batch<br/>
+4. Executes commit or rollback depending if the task was successful.</p>
+
+<p>While this aproach works great on a task level, it does not work at all on a job level. </p>
+
+<p>If certain tasks will succeed but over job will fail, partial records are going to get uploaded into the DB.</p>
+
+<p>Any ideas on the workaround? </p>
+
+<p>Our current workaround is fairly ugly: We created a java wrapper that launches pig jobs and then uploads to DB s once pig s job is successful. While the approach works, it s not really integrated into pig.</p>

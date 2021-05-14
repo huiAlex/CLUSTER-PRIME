@@ -1,0 +1,6 @@
+[PIG-4570] Allow AvroStorage to use a class for the schema <p>When you are managing Avro Schemas in your source code and you have the Java classes to serialize/deserialize Avro, it would be easier to do something like:</p>
+<blockquote>
+<p>store a into  tmp/myuser  using AvroStorage(null,  -schemaclass com.myco.MyUser )</p></blockquote>
+<p>Rather than passing as the first agurment, the entire Avro schema json in the pig script, or keeping a (potentially outdated) set of Avro schema files in HDFS for the -schemafile option.</p>
+
+<p>If your classpath is already aware of how to serialize/deserialize the Avro data, it would be good to leverage that with a fully qualified classname.</p>

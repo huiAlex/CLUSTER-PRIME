@@ -1,0 +1,22 @@
+[PIG-2650] Convenience mock Loader and Storer to simplify unit testing of Pig scripts <p>A test would look as follows:</p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >
+PigServer pigServer = <span class= code-keyword >new</span> PigServer(ExecType.LOCAL);
+TupleFactory tf = TupleFactory.getInstance();
+Data data = Storage.resetData(pigServer.getPigContext());
+data.set(<span class= code-quote > foo </span>, Arrays.asList(
+    tf.newTuple(<span class= code-quote > a </span>),
+    tf.newTuple(<span class= code-quote > b </span>),
+    tf.newTuple(<span class= code-quote > c </span>)
+    ));
+
+pigServer.registerQuery(<span class= code-quote > A = LOAD  foo  USING mock.Storage(); </span>);
+<span class= code-comment >// some complex script to test
+</span>pigServer.registerQuery(<span class= code-quote > STORE A INTO  bar  USING mock.Storage(); </span>);
+
+Iterator&lt;Tuple&gt; out = data.get(<span class= code-quote > bar </span>).iterator();
+assertEquals(<span class= code-quote > a </span>, out.next().get(0));
+assertEquals(<span class= code-quote > b </span>, out.next().get(0));
+assertEquals(<span class= code-quote > c </span>, out.next().get(0));
+</pre>
+</div></div>

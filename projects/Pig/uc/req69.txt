@@ -1,0 +1,3 @@
+[PIG-2857] Add a -tagPath option to PigStorage <p>We recently added a  -tagSource  option to PigStorage, which allows us to add filenames from which records come to the returned tuples.</p>
+
+<p>Often, users want the whole path, not just the source file. I propose we add a  -tagPath  option to do this.</p>

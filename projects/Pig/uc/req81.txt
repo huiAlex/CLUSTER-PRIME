@@ -1,0 +1,1 @@
+[PIG-3211] Allow default Load/Store funcs to be configurable <p>PigStorage is used by default when a Load/StoreFunc is not specified. It would be useful to make this configurable.</p>

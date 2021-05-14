@@ -1,0 +1,20 @@
+[PIG-760] Serialize schemas for PigStorage() and other storage types. <p>I m finding PigStorage() really convenient for storage and data interchange because it compresses well and imports into Excel and other analysis environments well.</p>
+
+<p>However, it is a pain when it comes to maintenance because the columns are in fixed locations and I d like to add columns in some cases.</p>
+
+<p>It would be great if load PigStorage() could read a default schema from a .schema file stored with the data and if store PigStorage() could store a .schema file with the data.</p>
+
+<p>I have tested this out and both Hadoop HDFS and Pig in -exectype local mode will ignore a file called .schema in a directory of part files.</p>
+
+<p>So, for example, if I have a chain of Pig scripts I execute such as:</p>
+
+<p>A = load  data-1  using PigStorage() as ( a: int , b: int );</p>
+
+<p>store A into  data-2  using PigStorage();</p>
+
+<p>B = load  data-2  using PigStorage();</p>
+
+<p>describe B;</p>
+
+<p>describe B should output something like </p>
+{ a: int, b: int }

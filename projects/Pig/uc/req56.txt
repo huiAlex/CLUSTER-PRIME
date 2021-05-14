@@ -1,0 +1,2 @@
+[PIG-2359] Support more efficient Tuples when schemas are known <p>Pig Tuples have significant overhead due to the fact that all the fields are Objects.<br/>
+When a Tuple only contains primitive fields (ints, longs, etc), it s possible to avoid this overhead, which would result in significant memory savings.</p>

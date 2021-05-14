@@ -1,0 +1,12 @@
+[PIG-1758] Deep cast of complex type <p>Pig does not handle deep cast from bag -&gt; bag, tuple -&gt; tuple. Eg, the following script does not produce desired result:</p>
+<div class= code panel  style= border-width: 1px; ><div class= codeContent panelContent >
+<pre class= code-java >
+a = load  1.txt  as (a0:bag{t:tuple(i0:<span class= code-object >double</span>)});
+b = foreach a generate (bag{tuple(<span class= code-object >int</span>)})a0;
+dump b;
+</pre>
+</div></div>
+
+<p>The result tuple still contain int inside tuple of bag. </p>
+
+<p><a href= https://issues.apache.org/jira/browse/PIG-613  title= Casting complex type(tuple/bag/map) does not take effect  class= issue-link  data-issue-key= PIG-613 ><del>PIG-613</del></a> fix the case we cast bytearray <del>&gt; bag/tuple, we take complex type including inner types, but bag</del>&gt;bag, tuple-&gt;tuple is still not effective.</p>

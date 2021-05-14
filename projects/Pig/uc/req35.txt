@@ -1,0 +1,5 @@
+[PIG-1429] Add Boolean Data Type to Pig <p>Pig needs a Boolean data type.  Pig-1097 is dependent on doing this.  </p>
+
+<p>I volunteer.  Is there anything beyond the work in src/org/apache/pig/data/ plus unit tests to make this work?  </p>
+
+<p>This is a candidate project for Google summer of code 2011. More information about the program can be found at <a href= http://wiki.apache.org/pig/GSoc2011  class= external-link  rel= nofollow >http://wiki.apache.org/pig/GSoc2011</a></p>

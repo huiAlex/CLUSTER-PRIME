@@ -1,0 +1,5 @@
+[PIG-2353] RANK function like in SQL  <p>Implement a function that given a (sorted) bag adds to each tuple a unique, increasing identifier without gaps, like what RANK does for SQL.</p>
+
+<p>This is a candidate project for Google summer of code 2012. More information about the program can be found at <a href= https://cwiki.apache.org/confluence/display/PIG/GSoc2012  class= external-link  rel= nofollow >https://cwiki.apache.org/confluence/display/PIG/GSoc2012</a></p>
+
+<p>Functionality implemented so far, is available at <a href= https://reviews.apache.org/r/5523/diff/#index_header  class= external-link  rel= nofollow >https://reviews.apache.org/r/5523/diff/#index_header</a></p> 
