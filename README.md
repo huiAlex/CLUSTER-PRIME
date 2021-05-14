@@ -1,8 +1,8 @@
 This is the dataset of our journal paper 
 **Propagating Frugal User Feedback Through Closeness of Code Dependencies to Improve IR-Based Traceability Recovery**.
 The overview of the dataset:
-<pre> ├─ projects  </pre>
-<pre> │  └─ project // project name </pre>
+├─ projects 
+│  └─ project // project name
 <pre> │  	├─ class  </pre>
 <pre> │  	│  └─ XXX.java // class files </pre>
 <pre> │  	├─ uc  </pre>
