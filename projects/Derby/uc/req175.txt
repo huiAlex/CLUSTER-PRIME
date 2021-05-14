@@ -1,0 +1,15 @@
+[DERBY-1938] Add support for setObject(<arg>, null) <p>Derby presently does not implement support for the method<br/>
+PreparedStatement.setObject (and similarly for CallableStatement.setObject) <br/>
+when the supplied value is null, unless a type argument (3rd arg) is also present. <br/>
+That is, in:<br/>
+    void setObject(int parameterIndex,<br/>
+                              Object x)<br/>
+                              throws SQLException<br/>
+x can not be null. </p>
+
+<p>Derby will presently throw an SQLException (client: XJ021, embedded: 22005)<br/>
+if x is null when calling this method on a preparedStatement.</p>
+
+<p>Porting some applications may be made easier if this restriction is lifted.<br/>
+See also discussion in <a href= https://issues.apache.org/jira/browse/DERBY-1904  title= COALESCE with NULL parameter problem  class= issue-link  data-issue-key= DERBY-1904 ><del>DERBY-1904</del></a>.</p>
+

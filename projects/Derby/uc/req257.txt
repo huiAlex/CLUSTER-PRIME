@@ -1,0 +1,12 @@
+[DERBY-2606] Derby should print the parameters to failed statements to the derby.log when it logs the error  <p>It would be good if when derby dumped an error to derby.log it printed the parameters for the failed statement.  Currently the default behaviour is that only the statement text will print.  Users have to set  derby.language.logStatementText=true if they want to see the parameters.  It would be useful if any errors included the parameters as well as the statement text.</p>
+
+<p>To reproduce </p>
+
+<p>put derby.stream.error.logSeverityLevel=0 in your derby.properties and run this script:</p>
+
+<p> connect  jdbc:derby:wombat;create=true ;<br/>
+create table t (i int);<br/>
+prepare p as  insert into t values<img class= emoticon  src= https://issues.apache.org/jira/images/icons/emoticons/help_16.gif  height= 16  width= 16  align= absmiddle  alt=   border= 0 /> ;</p>
+
+<p> execute p using  values(1) ;<br/>
+execute p using  values(10000000000000000000000000000000000000000000) ;</p>

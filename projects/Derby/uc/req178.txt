@@ -1,0 +1,1 @@
+[DERBY-1965] NetworkServerControlImpl never closes the socket or streams it opens in setUpSocket. <p>Every method that calls setUpSocket should have a  call to a new closeSocket() method.</p>

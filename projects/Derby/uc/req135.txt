@@ -1,0 +1,50 @@
+[DERBY-132] in place table/index compress which returns space to OS <p>Each derby table or index is stored in a separate file.  Space from<br/>
+deleted rows is eventually reclaimed within the file as is used for<br/>
+subsequent inserts into the same file.  That space is not returned to<br/>
+the OS unless the user calls the SYSCS_UTIL.SYSCS_COMPRESS_TABLE<br/>
+system procedure.  That procedure will return the unused space in<br/>
+the tables and indexes to the OS.  It gets an exclusive lock on the<br/>
+table, copies all rows in the indexes and the base table into new<br/>
+compressed files and delete the old files.  Prior to jdk 1.4 this was<br/>
+the only way to return space from a file to the OS.</p>
+
+<p>In jdk 1.4 RandomAccessFile was enhanced to allow the truncation of a<br/>
+file, which would return the space at the  end  of the file back to<br/>
+the OS.  In order to take advantage of this new feature a new<br/>
+compress feature is needed in derby.</p>
+
+<p>The assumption is that this work will be used in future work which will<br/>
+automatically schedule this job and others in background, with no<br/>
+interaction needed from the dba.  The 1st phase of this work will<br/>
+simply build a procedure that will do the work.  The 2nd phase will<br/>
+be to look into scheduling the procedure automatically as part of<br/>
+the current background post commit processing.  Longer term it would<br/>
+be best if this fit into a new background task monitor, which could<br/>
+schedule larger background tasks balanced against the other priorities<br/>
+of the system.  These tasks might include: this new online compress,<br/>
+automatic statistics gathering, more proactive deleted row reclamation, ....</p>
+
+<p>The proposed feature will reorganize base tables and indexes, moving<br/>
+empty pages to the  end .  It will release space back to the operating<br/>
+system when it has created a chunk of empty pages at the end of the<br/>
+file.  It will be designed to run in background, and will lock resources<br/>
+of the table for as short a time as possible so that it can iteratively<br/>
+process the table.</p>
+
+<p>To reclaim space in the heap, it will scan the heap in page reverse order.<br/>
+It will get a short term table lock, process all the rows on a page, and<br/>
+then commit that transaction releasing the lock.  The commit will be<br/>
+optimized like other internal transactions, and will not need to wait<br/>
+for a synchonized write.  Each row moved, will require all the index<br/>
+entries for that row to also be updated.  While doing the processing it<br/>
+will also take care of processing committed deleted rows.  When space<br/>
+is free at the end of the table it will be freed back to the operating<br/>
+system, using the RandomAccessFile.setLength() interface.</p>
+
+<p>To reclaim space in the btree, data on pages will be moved rather than<br/>
+rows.  Data from pages at the end of the file will be moved to free<br/>
+smaller numbered pages.  Again short term table locks will be required,<br/>
+and the operation will look similar to the current btree merge operations<br/>
+already implemented.  Again when a chunk of pages is free at the end of<br/>
+the file, they will be returned to the OS using the same mechanism as<br/>
+the heap.</p>

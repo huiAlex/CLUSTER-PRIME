@@ -1,0 +1,48 @@
+[DERBY-1862] Simple hash improves performance <p>We are currently developing a system where we load between 1000 and 5000 objects in one go. The user can load different chunks of objects at any time as he/she is navigating. <br/>
+The system consist of a java application which accesses derby via hibernate.<br/>
+During profiling we discovered that the org.apache.derby.iapi.util.StringUtil is the biggest bottleneck in the system.<br/>
+The method SQLEqualsIgnoreCase(String s1, String s2) is doing upperCase on both s1 and s2, all the time.<br/>
+By putting the uppcase value into a Hashtable and using the input-string as key we increates the performance with about 40%. <br/>
+Our test-users report that the system now seems to run at   double speed . </p>
+
+<p>The class calling the StringUtil.SQLEqualsIgnoreCase in this case is</p>
+
+<p>org.apache.derby.impl.jdbc.EmbedResultSet</p>
+
+<p>This class should also be checked as it seems to do a lot of looping.  <br/>
+It might be a canditate for hashing, as it is stated in the code:<br/>
+ // REVISIT: we might want to cache our own info... </p>
+
+
+
+<p>Here is a diff agains the 10.1.3.1 source for org.apache.derby.iapi.util.StringUtil</p>
+
+<p>22a23<br/>
+&gt; import java.util.Hashtable;<br/>
+319c320,326<br/>
+&lt; 			return s1.toUpperCase(Locale.ENGLISH).equals(s2.toUpperCase(Locale.ENGLISH));<br/>
+&#8212;<br/>
+&gt;       {<br/>
+&gt;          String s1Up = (String) uppercaseMap.get(s1);<br/>
+&gt;          if (s1Up == null)<br/>
+&gt;          </p>
+{
+&gt;             s1Up = s1.toUpperCase(Locale.ENGLISH);
+&gt;             uppercaseMap.put(s1,s1Up);
+&gt;          }
+<p>320a328,332<br/>
+&gt;          String s2Up = (String) uppercaseMap.get(s2);<br/>
+&gt;          if (s2Up == null)<br/>
+&gt;          </p>
+{
+&gt;             s2Up = s2.toUpperCase(Locale.ENGLISH);
+&gt;             uppercaseMap.put(s2,s2Up);
+321a334
+&gt;          return s1Up.equals(s2Up);
+322a336,339
+&gt;          //return s1.toUpperCase(Locale.ENGLISH).equals(s2.toUpperCase(Locale.ENGLISH));
+&gt;       }
+<p>&gt;    }<br/>
+&gt;    private static Hashtable uppercaseMap = new Hashtable();</p>
+
+

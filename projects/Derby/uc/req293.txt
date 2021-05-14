@@ -1,0 +1,5 @@
+[DERBY-3173] Removed cached String objects from SQLDate, SQLTime and SQLTimestamp <p>These type classes save a copy of the value when it is converted to a String (e.g. through a ResultSet.getString()). This complicates the code &amp; increases memory use for little value, in most cases the cached value will never be used. E.g. for any type of scan the String value will be discarded when moving to the next row. In most cases applications do not call getString() twice on a column.</p>
+
+<p>The code has some historical basis in the fact that these types used to be represented by a java.sql.Time/Date/Timestamp object and its conversion to String was slow. Now the conversion of all these types to a String is simple.</p>
+
+<p>In addition I think the getString() will sometimes return a non-normalized form, if the value is set by a non-standard format then the cached String is set to the non-standard format, not the standard format, I believe this is incorrect.</p>

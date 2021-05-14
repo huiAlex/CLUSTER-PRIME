@@ -1,0 +1,33 @@
+[DERBY-1527] Factor out type checks in EmbedResultSet and EmbedPreparedStatement <p>EmbedPreparedStatement and EmbedResultSet have many occurrences of</p>
+
+<p>    switch (...) </p>
+{
+        case Types.CHAR:
+        case Types.VARCHAR:
+        case Types.LONGVARCHAR:
+        case Types.CLOB:
+            break;
+        default:
+            throw dataTypeConversion(...);
+    }
+
+<p>and</p>
+
+<p>    switch (...) </p>
+{
+        case Types.BINARY:
+        case Types.VARBINARY:
+        case Types.LONGVARBINARY:
+        case Types.BLOB:
+            break;
+        default:
+            throw dataTypeConversion(...);
+    }
+
+<p>Instead of having many copies of this code, it would be good to factor<br/>
+it out into methods that can be shared. For instance, one could add<br/>
+these methods to DataTypeDescriptor:</p>
+
+<p>  public static boolean isAsciiStreamCompatible(int jdbcType)<br/>
+  public static boolean isBinaryStreamCompatible(int jdbcType)<br/>
+  public static boolean isCharacterStreamCompatible(int jdbcType)</p>

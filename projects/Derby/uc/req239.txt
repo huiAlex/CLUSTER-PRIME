@@ -1,0 +1,1 @@
+[DERBY-2493] Use unsynchronized collections in BackingStoreHashtable <p>BackingStoreHashtable uses a Vector and a Hashtable, but doesn t need the synchronization provided by these classes (I think). Replacing them with ArrayList and HashMap could improve performance for some kinds of operations.</p>

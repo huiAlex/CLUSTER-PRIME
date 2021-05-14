@@ -1,0 +1,9 @@
+[DERBY-1808] [PATCH] Inbuilt functions SIGN, SQRT, RAND, RANDOM, COSH, SINH and TANH <p>Adds the following functions:</p>
+
+<p>SIGN - 0, 1 or -1 for zero, positive or negative arguments<br/>
+SQRT - Square root<br/>
+RAND - Random number<br/>
+RANDOM - as above<br/>
+COSH - Hyperbolic Cosine<br/>
+SINH - Hyperbolic Sine<br/>
+TANH - Hyperbolic Tangent.</p>

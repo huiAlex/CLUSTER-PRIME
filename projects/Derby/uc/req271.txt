@@ -1,0 +1,21 @@
+[DERBY-2824] Improve error reporting, fix whitespace/formatting issues and replace tabs in UTF8Reader <p>I plan to do the following changes to UTF8Reader:</p>
+<ul>
+	<li>Improve the error reporting when hitting a UTF8 decoding error (currently an UTFDataFormatException with no message). This might also lead to deleting one helper method for generating an exception (the one with no message).</li>
+	<li>Improve error reporting for trying to use the reader after it has been closed (currently an IOException with no message).</li>
+	<li>Remove trailing spaces, and add a few newlines here and there.</li>
+	<li>Replace tabs in the file with spaces.</li>
+</ul>
+
+
+<p>Now, the last point can be discussed, but here are my arguments for doing it:</p>
+<ul>
+	<li>The file now has a mix of tabs and spaces (but still more tabs).</li>
+	<li>Spaces are the preferred/required method of indentation.</li>
+	<li>I want to get it fixed before the branch is cut, which makes it easier to port fixes from trunk/10.3-NEXT to 10.3. If I don t make it for 10.3, I won t do it.</li>
+	<li>I don t see it as very likely that we will back-port major fixes to this class on the 10.2 branch. If we have to, I will volunteer <img class= emoticon  src= https://issues.apache.org/jira/images/icons/emoticons/smile.gif  height= 16  width= 16  align= absmiddle  alt=   border= 0 /></li>
+	<li>Since so much else of the Clob  infrastructure  has changed recently, this seems like a good time to do the clean-up.</li>
+</ul>
+
+
+<p>Please raise your concern as soon as possible if you want to veto these changes. <br/>
+I do plan to commit them tomorrow.</p>

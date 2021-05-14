@@ -1,0 +1,1 @@
+[DERBY-2107] Move page latching out of the lock manager <p>Latching of pages could be done more efficiently locally in store than in the lock manager. See the discussion here: <a href= http://thread.gmane.org/gmane.comp.apache.db.derby.devel/33135  class= external-link  rel= nofollow >http://thread.gmane.org/gmane.comp.apache.db.derby.devel/33135</a></p>

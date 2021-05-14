@@ -1,0 +1,5 @@
+[DERBY-1530] DatabaseMetaData.getFunctionParameters() changing name to getFunctionColumns() <p>The JDBC4 expert group has made the following changes to their spec:</p>
+
+<p>DatabaseMetaData.getFunctionParameters() is changing name to getFunctionColumns()</p>
+
+<p>The DatabaseMetaData.functionParameter* constants are changing name to functionColumn*</p>

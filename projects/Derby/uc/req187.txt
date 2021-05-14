@@ -1,0 +1,21 @@
+[DERBY-2020] Change file option for syncing log file to disk from rws to rwd <p>For writing the transaction log to disk Derby uses a<br/>
+RandomAccessFile. If it is supported by the JVM, the log files are<br/>
+opened in  rws  mode making the file system take care of syncing<br/>
+writes to disk.  rws  mode will ensure that both the data and the file<br/>
+meta-data is updated for every write to the file. On some operating<br/>
+systems (e.g. Solaris) this leads to two write operation to the disk<br/>
+for every write issued by Derby. This is limiting the throughput of<br/>
+update intensive applications.  If we could change the file mode to<br/>
+ rwd  this could reduce the number of updates to the disk.</p>
+
+<p>I have run some simple tests where I have changed mode from  rws  to<br/>
+ rwd  for the Derby log file. When running a small numbers of<br/>
+concurrent client threads the throughput is almost doubled and the<br/>
+response time is almost halved. I will attach some graphs that show<br/>
+this when running a given number of concurrent  tpc-b  like clients. These<br/>
+graphs show the throughput when running with  rws  and  rwd  mode when the<br/>
+disk s write cache has been enabled and disabled.</p>
+
+<p>I am creating this Jira to have a place where we can collect<br/>
+information about issues both for and against changing the default<br/>
+mode for writing to log files.</p>

@@ -1,0 +1,5 @@
+[DERBY-1556] Add a utility JUnit test decorator that drops all SQL objects in its tearDown method. <p>Idea is to drop objects based upon input from DatabaseMetaData or Derby system catalogs where the meta data is insufficient.</p>
+
+<p>Would allow Junit tests to share databases.</p>
+
+<p>Can be incrementally developed and used, e.g. first step drop all views. Then tables etc. etc.</p>

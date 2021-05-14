@@ -1,0 +1,12 @@
+[DERBY-1638] JUnit TestConfiguration class uses engine code to determine JDBC level. <p>TestConfiguration uses the org.apache.derby.iapi.services.info.JVMInfo to determine if JDBC 4 is supported. Ideally test code should not be calling engine private api code.</p>
+
+<p>Suggest two changes:</p>
+
+<p>1) Determine JDBC level support from ability to load classes:<br/>
+   E.g. JDBC2 - java.sql.Driver<br/>
+            JDBC3 -  java.sql.Driver AND java.sql.ParameterMetaData<br/>
+            JDBC4 - java.sql.Driver AND java.sql.SQLXML<br/>
+            JSR169 - java.sql.ParameterMetaData AND NOT  java.sql.Driver </p>
+
+<p>2) Move the supportsJDBC4() method from TestConfiguraiton to JDBC, since if the VM supports JDBC4 or not is<br/>
+not an attribute of a test configuration (and add other supportsJDBCX methods).</p>

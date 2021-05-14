@@ -1,0 +1,4 @@
+[DERBY-2772] Create a procedure to empty the statement cache exposing the existing functionality. <p>Emptying the statement cache is a potentially useful diagnostic capabaility and is tested by StatementPlanCacheTest.<br/>
+However the current functionality is only useable by creating a user procedure that maps directly into Derby s code which will be disabled by <a href= https://issues.apache.org/jira/browse/DERBY-2330  title= Disallow user-defined SQL routines to resolve to entry points (methods in classes) in the org.apache.derby.* namespace  class= issue-link  data-issue-key= DERBY-2330 ><del>DERBY-2330</del></a>.</p>
+
+<p>In addition such functionality should be under the control of the database owner which will become automatic (in SQL Authorization mode) once it is a system procedure.</p>

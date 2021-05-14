@@ -1,0 +1,22 @@
+[DERBY-2447] ejbql and floattypes in org.apache.derbyTesting.functionTests.tests.lang.LangScripts intermittently fails with  expected:<[0.0 ]         > but was:<[-0.0]    <p>Seen intermittently on Linux since 2007-02-27.<br/>
+Seen on Solaris 2007-03-12.</p>
+
+<p>&lt;signature&gt;<br/>
+ejbql(org.apache.derbyTesting.functionTests.tests.lang.LangScripts)junit.framework.ComparisonFailure: Output at line 454 expected:&lt;<span class= error >&#91;0.0 &#93;</span>         &gt; but was:&lt;<span class= error >&#91;-0.0&#93;</span>         &gt;<br/>
+	at org.apache.derbyTesting.functionTests.util.CanonTestCase.compareCanon(CanonTestCase.java:100)<br/>
+	at org.apache.derbyTesting.functionTests.util.ScriptTestCase.runTest(ScriptTestCase.java:124)<br/>
+	at org.apache.derbyTesting.junit.BaseTestCase.runBare(BaseTestCase.java:80)<br/>
+	at junit.extensions.TestDecorator.basicRun(TestDecorator.java:24)<br/>
+	at junit.extensions.TestSetup$1.protect(TestSetup.java:21)<br/>
+	at junit.extensions.TestSetup.run(TestSetup.java:25)<br/>
+&lt;/signature&gt;</p>
+
+<p>&lt;signature&gt;<br/>
+floattypes(org.apache.derbyTesting.functionTests.tests.lang.LangScripts)junit.framework.ComparisonFailure: Output at line 1823 expected:&lt;<span class= error >&#91;0.0 &#93;</span>         &gt; but was:&lt;<span class= error >&#91;-0.0&#93;</span>         &gt;<br/>
+	at org.apache.derbyTesting.functionTests.util.CanonTestCase.compareCanon(CanonTestCase.java:100)<br/>
+	at org.apache.derbyTesting.functionTests.util.ScriptTestCase.runTest(ScriptTestCase.java:124)<br/>
+	at org.apache.derbyTesting.junit.BaseTestCase.runBare(BaseTestCase.java:80)<br/>
+	at junit.extensions.TestDecorator.basicRun(TestDecorator.java:24)<br/>
+	at junit.extensions.TestSetup$1.protect(TestSetup.java:21)<br/>
+	at junit.extensions.TestSetup.run(TestSetup.java:25)<br/>
+&lt;/signature&gt;</p>

@@ -1,0 +1,7 @@
+[DERBY-2330] Disallow user-defined SQL routines to resolve to entry points (methods in classes) in the org.apache.derby.* namespace <p>Disallowing routines from accessing Derby code directly stops the potential of remote code exploiting any security holes in Derby.</p>
+
+<p>Derby code can be seen as a special case since it is known that the Derby code will be on the classpath.</p>
+
+<p>Disallowing such routines makes security analysis easier and safer rather than trying to guarantee every public static method in Derby can not expose secured information.</p>
+
+<p>Routines in existing applications (in upgraded databases) that map to such Derby methods will fail at execute time.</p>

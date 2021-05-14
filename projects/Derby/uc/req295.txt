@@ -1,0 +1,54 @@
+[DERBY-3192] Cache session data in the client driver <p>The reason for doing this is to avoid a rather<br/>
+substantial performance hit observed when the client driver is used<br/>
+together with an appserver that uses connection pooling. There are two<br/>
+problems:</p>
+
+<p>1) The connection pool will compare the isolation level it has<br/>
+stored for the connection with the value returned from<br/>
+Connection.getTransactionIsolation() each and every time someone<br/>
+requests a new connection from the pool.</p>
+
+<p>2) The users of the connection pool (ab)use it to avoid having to keep<br/>
+track of their current connection. So each time a query needs to be<br/>
+executed a call to the connection pool s getConnection() method is<br/>
+made. Getting a connection from the connection pool like this also<br/>
+means that a new PreparedStatement must be prepared each time.</p>
+
+<p>The net result is that each query results in the following sequence:</p>
+
+<p>getConnection()<br/>
+getTransactionIsolation() --&gt; roundtrip + lookup in server s statement cache</p>
+
+<p>prepareStatment()         --&gt; roundtrip + lookup in server s statement cache</p>
+
+<p>executeQuery()            --&gt; roundtrip</p>
+
+<p>Arguably this is a  user error  but when suggesting this I m kindly<br/>
+informed that this works  just fine  with other datbases (such as<br/>
+PostgreSQL and ORACLE). </p>
+
+<p>The reason why it works is that these databases do statement caching<br/>
+in the driver. I ve tried to implement a very (too) simple statement<br/>
+cache in Derby s client driver and to re-enable caching of the<br/>
+isolation level (see<br/>
+<a href= https://issues.apache.org/jira/browse/DERBY-1148  class= external-link  rel= nofollow >https://issues.apache.org/jira/browse/DERBY-1148</a>). With these changes<br/>
+I observe a marked performance improvement when running with appserver<br/>
+load. </p>
+
+<p>A proper statment cache cannot be implemented without knowing what the<br/>
+current schema is. If the current schema has changed since the<br/>
+statement was prepared, it is no longer valid and must be evicted from<br/>
+the cache.</p>
+
+<p>The problem with caching both the isolation level and the current schema in<br/>
+the driver is that both can change on the server without the client<br/>
+detecting it (through SQL and XA and possibly stored procedures).</p>
+
+<p>I think this problem can be overcome if we piggy-back the information we would <br/>
+like to cache on messages going back to the client. This can be done by<br/>
+utilizing the EXCSQLSET DRDA command. According to the DRDA spec (v4, volume 3, <br/>
+page 359-360) it is possible to add one or more SQLSTT objects after SQLCARD in the reply,</p>
+
+<p>I think it would be possible to cache additional session information when this becomes relevant.  It<br/>
+would also be possible to use EXCSQLSET to batch session state changes<br/>
+going from the client to the server.</p>

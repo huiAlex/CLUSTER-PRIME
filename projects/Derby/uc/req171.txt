@@ -1,0 +1,7 @@
+[DERBY-1879] Save meta data related information for an EmbedResultSet at the plan level instead of the ResultSet level improves performance. <p>EmbedResultSet creates and holds references to information that logically is at the plan level, the same for all ResultSet s that use the same prepared plan. Holding this information at the EmbedResultSet hurts performance and memory usage as ResultSet objects are short lived.</p>
+
+<p>Saving the ResultSetMetaData object in the ResultDescription object means a single creation for the lifetime of the plan (shared across connections), rather than once per ResultSet object as needed.</p>
+
+<p>Saving the column name to position mapping added in <a href= https://issues.apache.org/jira/browse/DERBY-1862  title= Simple hash improves performance  class= issue-link  data-issue-key= DERBY-1862 ><del>DERBY-1862</del></a> in the ResultDescription has a similar benefit, the map is set up once per prepared plan, not once per executeQuery().</p>
+
+<p>With test changes (will attach patch soon), the performance of the derby1862 test in <a href= https://issues.apache.org/jira/browse/DERBY-1876  title= Investigate overhead of JDBC layer and compiled activation code for simple embedded read-only, forward ResultSets  class= issue-link  data-issue-key= DERBY-1876 ><del>DERBY-1876</del></a> improves by around 15%</p>

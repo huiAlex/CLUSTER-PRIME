@@ -1,0 +1,19 @@
+[DERBY-3195] Describe if default security manager & policy is installed or not on each of the mechanisms to start the network server. <p>The explicit mechanisms to start the network server make no mention of if they install a default security manager and policy or not.</p>
+
+<p>These are at least:</p>
+
+<p>NetworkServerControl javadoc<br/>
+   summary - start command on command line<br/>
+   main() method<br/>
+   start() method</p>
+
+<p>derby.drda.startNetworkServerProperty</p>
+
+<p>Each start mechanism should clearly state if they install or do not install the default security manager and policy.</p>
+
+<p>(Other starts commands are)</p>
+
+<p>java -jar derbynet.jar<br/>
+java -jar derbyrun.jar server start</p>
+
+<p>I didn t look to see if these document the default policy or not, not sure where they are documented.</p>

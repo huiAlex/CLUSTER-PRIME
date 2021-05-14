@@ -1,0 +1,49 @@
+[DERBY-3146] Adjust length restriction on user identifiers (authorization ids) to same as other identifiers <p>While working on roles, I notice that there is a max size of 30 on<br/>
+user ids in derby (authorization identifiers), e.g. the check being<br/>
+performed in the parser:</p>
+
+<p>private void checkAuthorizationLength( String authorization)<br/>
+:<br/>
+   checkIdentifierLengthLimit( authorization, Limits.DB2_MAX_USERID_LENGTH);<br/>
+:</p>
+
+<p>where Limits.DB2_MAX_USERID_LENGTH == 30. I have checked, and I don t<br/>
+think there are any fundamental reasons why Derby can t lift this DB2<br/>
+restriction: Then authorization identifiers would have the same max<br/>
+limit as other identifiers: 128 (Limits.MAX_IDENTIFIER_LENGTH).</p>
+
+<p>Currently, this limit of 30 is enforced for GRANT/REVOKE, i.e. for the<br/>
+grantees.</p>
+
+<p>However, in the CREATE SCHEMA statement, the clause</p>
+
+<p>         AUTHORIZATION &lt;authorization identifier&gt;</p>
+
+<p>which allows specifying a schema s owner, is <b>not</b> subject to this<br/>
+restriction. This is also reflected in the reference documentation for<br/>
+system tables:</p>
+
+<p>SYS.SYSCHEMAS:</p>
+
+<p>Column Name 	Type 	Length 	Nullability 	Contents<br/>
+-------------------------------------------------------------------<br/>
+AUTHORIZATIONID VARCHAR 128     false           the authorization<br/>
+                                                identifier of the<br/>
+                                                owner of the schema  </p>
+
+<p>SYS.SYSTABLEPERMS:</p>
+
+<p>Column Name 	Type 	Length 	Nullability 	Contents<br/>
+-------------------------------------------------------------------<br/>
+GRANTEE 	VARCHAR 30 	False 	        The authorization ID<br/>
+                                                of the user to whom<br/>
+                                                the privilege is<br/>
+                                                granted.  </p>
+
+<p>Furthermore, the limit is enforced in the authorizer code<br/>
+(AuthorizationServiceBase#authenticate). It is also reflected in the<br/>
+metadata: EmbedDatabaseMetaData#getMaxUserNameLength.</p>
+
+<p>I think it would be good to harmonize these two different limits for<br/>
+authorization identifier and change the limit to 128<br/>
+(Limits.MAX_IDENTIFIER_LENGTH).</p>

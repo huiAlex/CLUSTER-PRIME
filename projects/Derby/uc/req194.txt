@@ -1,0 +1,2 @@
+[DERBY-2096] Change the Parser.parserStatement() to return the more specific StatementNode instead of QueryTreeNode. <p>Since this is compilinga statement returning the specific node makes more sense and will lead to a little more clarity in the code.<br/>
+Some of the methods defined on QueryTreeNode such as generate() and needsSavepoint() can move down to StatementNode and thus make the code more readable ( which generate is called for a value node? ) and remove implementations of these methods that can never be called.</p>

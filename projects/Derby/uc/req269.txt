@@ -1,0 +1,6 @@
+[DERBY-2818] Rewrite ClobUpdatableReader constructors <p>When the fix for <a href= https://issues.apache.org/jira/browse/DERBY-2806  title= calling getByteLength on org.apache.derby.impl.jdbc.StoreStreamClob makes BinaryStream, fetched before this call, unusable  class= issue-link  data-issue-key= DERBY-2806 ><del>DERBY-2806</del></a> is in place, the current implementation of ClobUpdateableReader will fail.<br/>
+This patch is a preparation for the mentioned issue, and I have also removed some  internal  (package private) methods from EmbedClob and replaced it with a single one. </p>
+
+<p>Instead of writing methods that forwards calls to the underlying InternalClob, the method getInternalClob will return the internal clob itself. This seems more in place, since the method getByteLength does not belong in EmbedClob. It also comes with a warning that using the reference to the internal clob object requires the caller to take more care. Second, isWritable() does not belong to EmbedClob either, as a Clob is always writable (unless the database/connection itself is read/only). However, the internal clob representation may be read-only, in case EmbedClob must clone the content and create a writable representation.</p>
+
+<p>The fix leaves more of the handling of implementation details to the InternalClob itself.</p>

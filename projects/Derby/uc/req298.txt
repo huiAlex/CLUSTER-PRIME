@@ -1,0 +1,8 @@
+[DERBY-3213] SQLChar.trim method is unused and could be removed <p>As part of researching <a href= https://issues.apache.org/jira/browse/DERBY-2352  title= Assertion Failure with order by and group by expression  class= issue-link  data-issue-key= DERBY-2352 ><del>DERBY-2352</del></a>, I came to the conclusion that<br/>
+the trim() method in SQLChar.java is no longer used, and could be<br/>
+removed. It appears that all calls to this method have been switched<br/>
+to call ansiTrim() instead.</p>
+
+<p>Hopefully, this just requires removing the code from SQLChar.java<br/>
+and StringDataValue.java, and running all the tests to verify that<br/>
+nothing is broken.</p>

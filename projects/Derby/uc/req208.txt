@@ -1,0 +1,6 @@
+[DERBY-2213] Support running Junit tests with just embedded jar file and testing jars. <p>1) It s good to perform testing with different jvm classpaths, included those typically used, such as an embedded environment.</p>
+
+<p>2) Running tests with platofrms such as J2ME/CDC/Foundation should be supported with the only  jars that the platform supports in the class path.</p>
+
+<p>Currently running suites.All with just derby.jar hits this error:<br/>
+Failed to invoke suite():java.lang.NoClassDefFoundError: org.apache.derby.client.am.SqlException</p>

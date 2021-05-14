@@ -1,0 +1,5 @@
+[DERBY-1489] Provide ALTER TABLE DROP COLUMN functionality <p>Provide a way to drop a column from an existing table. Possible syntax would be:</p>
+
+<p>  ALTER TABLE tablename DROP COLUMN columnname CASCADE / RESTRICT;</p>
+
+<p>Feature should properly handle columns which are used in constraints, views, triggers, indexes, etc.</p>

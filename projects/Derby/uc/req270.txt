@@ -1,0 +1,10 @@
+[DERBY-2822] Add caching of store stream length in StoreStreamClob, if appropriate <p>Currently StoreStreamClob reads the whole Clob stream, including decoding it, to find the length of it. It also does this the second time the length is asked for.<br/>
+StoreStreamClob is the internal Clob representation for Clobs that are read-only. As soon as the user updates the Clob, it is transferred to a modifiable Clob representation.</p>
+
+<p>It should be determined if it is safe to cache the length (both in bytes and in characters) of the store stream to improve the performance and reduce the load on Derby for certain Clob operations.<br/>
+To do this, the locking mechanism used for Clobs must be analyzed.</p>
+
+<p>If you have obtained a Clob object, is there a lock in place that stops others from changing the content?<br/>
+For all isolation levels?<br/>
+What about scrollable result sets?<br/>
+Can the streamed content from store be changed under us, and thus invalidate a cached length?</p>

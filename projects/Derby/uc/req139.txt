@@ -1,0 +1,8 @@
+[DERBY-1473] Add cut-off and truncation logic to streaming classes in the embedded driver <p>When streaming data to Derby, the application stream will be wrapped in a Derby-specific stream to convert the data to the correct representation. At a minimum, this consists of getting the data to the on-disk format used by Derby.</p>
+
+<p>The wrapping stream can be extended to provide the following features at an earlier stage:<br/>
+ a) Data cut-off when the maximum allowed size is exceeded<br/>
+ b) Truncation of trailing blanks where allowed</p>
+
+<p>Both features can reduce the amount of data needed to be kept in memory on insertion.<br/>
+Implementing this will require additional column/data type information in the streaming class(es). The implementation must be able to handle streams for which the length is specified and also streams with unknown/unspecified length.</p>

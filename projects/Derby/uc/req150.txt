@@ -1,0 +1,23 @@
+[DERBY-1609] Add a runScript method to ij that takes a script as an InputStream and returns the output to a stream. <p>Useful for running ij SQL scripts as part of JUnit tests and for applications to use instead of the awkward way to use ij from a program today.</p>
+
+<p>  /**</p>
+<ul>
+	<li>Run a SQL script from an input stream and write</li>
+	<li>the resulting output to the provided OutputStream.</li>
+	<li></li>
+	<li>@param conn Connection to be used as the script s default connection.</li>
+	<li>@param sqlIn InputStream for the script.</li>
+	<li>@param inputEncoding Encoding of the script.</li>
+	<li>@param sqlOut OutputStream for the script s output</li>
+	<li>@param outputEncoding Output encoding to use.</li>
+	<li>@return Number of SQLExceptions thrown during the execution, -1 if not known.</li>
+	<li>@throws UnsupportedEncodingException<br/>
+   */<br/>
+  public static int runScript(<br/>
+		  Connection conn,<br/>
+		  InputStream sqlIn,<br/>
+		  String inputEncoding,<br/>
+		  PrintStream sqlOut,<br/>
+		  String outputEncoding)<br/>
+		  throws UnsupportedEncodingException</li>
+</ul>

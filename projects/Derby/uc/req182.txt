@@ -1,0 +1,1 @@
+[DERBY-1989] Convert jdbc4/TestDbMetaData.java to JUnit <p>Rewrite the test in JUnit using the utility methods added in <a href= https://issues.apache.org/jira/browse/DERBY-1976  title= Add new utility methods to BaseJDBCTestCase to make conversion of ij tests to JUnit easier.  class= issue-link  data-issue-key= DERBY-1976 ><del>DERBY-1976</del></a>.</p>

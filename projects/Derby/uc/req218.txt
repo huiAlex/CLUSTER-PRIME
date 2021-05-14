@@ -1,0 +1,30 @@
+[DERBY-231]  FOR UPDATE  required for updatable result set to work <p>To get an updatable result set, the JDBC 3.0 spec, section 14.2.4 <br/>
+ Modifying ResultSet Objects  states: </p>
+
+<p>     ResultSet objects with concurrency CONCUR_UPDATABLE can be updated<br/>
+     using ResultSet objects .</p>
+
+<p>In addition, Derby requires the SQL SELECT statement to have a  FOR<br/>
+UPDATE  clause for updates to be allowed. This may be a usability issue, as<br/>
+many examples, e.g. in  JDBC API tutorial and reference and reference <br/>
+book and the JDBC 3.0 Specification (14.2.4.1) do not include a  FOR<br/>
+UPDATE  clause in the SQL SELECT.</p>
+
+<p>Mamta Satoor says:</p>
+
+<p> Derby implements the JDBC updatable resultset by using the existing<br/>
+ updatable cursor implementation. And in order to do that, it requires<br/>
+ that the SELECT statement should include the FOR UPDATE clause. One<br/>
+ can change the Derby implementation so that it does not require FOR<br/>
+ UPDATE clause to piggyback on updatable cursor implementation. </p>
+
+<p>Dan DeBrunner says:</p>
+
+<p> Technically I wonder if this is covered by the JDBC standard, I see<br/>
+ nothing in the JDBC 3.0 that states any requirements for the SQL<br/>
+ statement for an updateable result set. I know the JDBC tutorial book<br/>
+ has some guidelines as to what will typically work, but isn t it up to<br/>
+ the database engine to define what works here?</p>
+
+<p> Having said that I think that not requiring the FOR UPDATE would be a<br/>
+ useful improvement. </p>

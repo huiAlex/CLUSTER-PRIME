@@ -1,0 +1,9 @@
+[DERBY-2720] remove dead code associated with unsupported National Char implementation <p>Derby still has some untested, unused code relating to a non-standard implementation of a Nationa Char type.  The current code can be removed.  <br/>
+I believe the interesting functionality associated with this is now provided by <a href= https://issues.apache.org/jira/browse/DERBY-1478  title= Add built in language based ordering and like processing to Derby  class= issue-link  data-issue-key= DERBY-1478 ><del>DERBY-1478</del></a> (territory based collation) .  If  Derby ever implements a<br/>
+National Char type it should do so differently than the existing code, collation should not be tied to the National Char type.    </p>
+
+<p>I believe a future National char type might have to maintain a separate type id for compatibility with jdbc interface, but actual implmentation should be<br/>
+the same code as the char types.  Collating of the the national char type should be supported in exactly same way as regular char types.</p>
+
+<p>If anyone is really intested in the national char code, it s history will always be available in svn, and a consistent version is available by looking at 10.0, 10.1,<br/>
+and 10.2 codelines.  I would propose any removal of code only take place in trunk and not be backported to a released codeline.</p>

@@ -1,0 +1,13 @@
+[DERBY-2534] Add new api  public StringDataValue getValue(RuleBasedCollator)  on StringDataValue. This method will return either the base DVDs for char datatypes or it will return collation sensitive DVD for char datatypes. <p>In Derby 10.3, the collation of char datatypes can be different depending on what kind of collation is requested by the user at the database create time through the optional JDBC url attribute COLLATION. The collation type associated with the DTD will determine which kind of DVD needs to be generated. (Note that, irrespective of what collation is used, the format id of the char datatypes remain same.) In order to support this behavior of generating the base DVD or the collation sensitive DVD for character datatypes, we need to add a new api to StringDataValue which will look as follows</p>
+
+<p>	/**</p>
+<ul>
+	<li>Gets either SQLChar/SQLVarchar/SQLLongvarchar/SQLClob(base classes) or</li>
+	<li>CollatorSQLChar/CollatorSQLVarchar/CollatorSQLLongvarch/CollatorSQLClob</li>
+	<li>(subclasses). Whether this method returns the base class or the subclass</li>
+	<li>depends on the value of the RuleBasedCollator. If RuleBasedCollator is</li>
+	<li>null, then the object returned would be baseclass otherwise it would be</li>
+	<li>subcalss.<br/>
+	 */<br/>
+	public StringDataValue getValue(RuleBasedCollator collatorForComparison);</li>
+</ul>

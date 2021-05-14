@@ -1,0 +1,10 @@
+[DERBY-2359] Code cleanups for the org.apache.derby.impl.store.access.* packages <p>When trying to learn more about the access layer, it was discovered that some code improvements could easily be made to increase the readability of the code.<br/>
+Patches attached to this issue will be cleanup patches only, and no functionality should be changed. </p>
+
+<p>Changes the will/may be made:</p>
+<ul>
+	<li>remove unused imports</li>
+	<li>remove unused methods</li>
+	<li>fix JavaDoc errors</li>
+	<li>tighter encapsulation and removal of unused variables where appropriate</li>
+</ul>

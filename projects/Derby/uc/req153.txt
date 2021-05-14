@@ -1,0 +1,15 @@
+[DERBY-1700] Remove passing of closeCleanup method to every ResultSet type since only the top ResultSet requires it. <p>A UNION node will generate byte code to call this method:</p>
+
+<p>NoPutResultSet getUnionResultSet(NoPutResultSet source1,<br/>
+NoPutResultSet source2,<br/>
+Activation activation,<br/>
+int resultSetNumber,<br/>
+double optimizerEstimatedRowCount,<br/>
+double optimizerEstimatedCost,<br/>
+GeneratedMethod closeCleanup)</p>
+
+<p>The closeCleanup method is passed in as null for all result sets in a tree except the top one. Instead of passing it on each new result set, it would be much more efficient to have a setCloseMethod() that is only called once for the top result set.  Could also look at having an closeCleanup method in the interface and call it directly, rather than through reflection.</p>
+
+<p>This applies to any node that takes a closeCleanup method.</p>
+
+<p>Split out from <a href= https://issues.apache.org/jira/browse/DERBY-766  title= Improve code generation to handle 5000 unions in a select the  union test  in largeCodeGen  class= issue-link  data-issue-key= DERBY-766 ><del>DERBY-766</del></a></p>

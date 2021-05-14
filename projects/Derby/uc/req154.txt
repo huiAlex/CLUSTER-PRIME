@@ -1,0 +1,12 @@
+[DERBY-171] Need Correlation ID in UPDATE/DELETE statements <p>You currently can t use a correlation ID in an UPDATE/DELETE statement. This makes it cumbersome to do the following:</p>
+
+<p>UPDATE EMPLOYEE_BONUS<br/>
+  SET BONUS = (SELECT SUM(BONUSES.BONUS) FROM BONUSES WHERE <br/>
+          EMPLOYEE_BONUS.EMPL_ID = BONUSES.EMPL_ID);</p>
+
+<p>The use of a correlation ID makes this easier to code.</p>
+
+<p>UPDATE EMPLOYEE E<br/>
+  SET BONUS = (SELECT SUM(B.BONUS) FROM BONUSES B WHERE B.EMPL_ID = E.EMPL_ID);</p>
+
+<p>This is particularly important if you get carried away with long SCHEMA and TABLE names!</p>

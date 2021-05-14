@@ -1,0 +1,3 @@
+[DERBY-2164] Provide the framework to run the sql engine without a store -  storeless engine  <p>Can be used of the base for other projects such as a standalone  SQL syntax checker discussed here:</p>
+
+<p><a href= http://mail-archives.apache.org/mod_mbox/db-derby-user/200612.mbox/%3c45704D0E.9030102@apache.org%3e  class= external-link  rel= nofollow >http://mail-archives.apache.org/mod_mbox/db-derby-user/200612.mbox/%3c45704D0E.9030102@apache.org%3e</a></p>

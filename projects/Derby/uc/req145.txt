@@ -1,0 +1,7 @@
+[DERBY-1555] API for configuration information in Derby s JUnit tests should through instance methods of the base classes, not static methods and static fields <p>The heavy use of static state information in the existing Derby (non-Junit) harness was a major mistake, it should not be repeated in the Junit model.<br/>
+It should be changed before too many tests are written.</p>
+
+<p>A static configuration will limit the ability for the tests to be flexible and have different instances running with different configurations,<br/>
+a instance based scheme will be more flexible.</p>
+
+<p>This change will just change the api, the current implementation of  a single static configuration will remain but be hidden within the base-classes.</p>

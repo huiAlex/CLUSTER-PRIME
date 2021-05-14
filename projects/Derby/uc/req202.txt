@@ -1,0 +1,14 @@
+[DERBY-2152] Support diagnostic vti tables that take parameters, such as SpaceTable <p>Expand the work of <a href= https://issues.apache.org/jira/browse/DERBY-571  title= Virtual Table Mapping for no argument Diagnostic tables  class= issue-link  data-issue-key= DERBY-571 ><del>DERBY-571</del></a> to support the remaining diagnostic tables that take parameters.</p>
+
+<p>Syntax would use the table constructor, like (not sure if an  AS  clause will be required:</p>
+
+<p>select * from TABLE(SYSCS_DIAG.SPACE_TABLE(?, ?))</p>
+
+<p>Diagnostic VTIs that could be handled this way are:</p>
+
+<p>ErrorLogReader(String log file name)<br/>
+SpaceTable(String tableName)<br/>
+SpaceTable(String schemaName, String tableName)<br/>
+StatementDuration(String inputFileName)</p>
+
+<p>This is the second stage mentioned in <a href= https://issues.apache.org/jira/browse/DERBY-571  title= Virtual Table Mapping for no argument Diagnostic tables  class= issue-link  data-issue-key= DERBY-571 ><del>DERBY-571</del></a></p>

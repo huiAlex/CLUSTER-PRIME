@@ -1,0 +1,2 @@
+[DERBY-2830] Rename UpdateableBlobStream to UpdatableBlobStream <p>Rename UpdateableBlobStream to UpdatableBlobStream.<br/>
+Also rename the corresponding test, and all classes affected by the rename.</p>
