@@ -1,0 +1,4 @@
+[JBSEAM-89] @DataModel improvements <ul>
+	<li>@DataModeSelection(dataModel= names )</li>
+	<li>use scope of owning component for DataModel</li>
+</ul>

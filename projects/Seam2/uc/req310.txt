@@ -1,0 +1,1 @@
+[JBSEAM-765] get/set pair for Identity.securityContext <p>This would allow use of a configurable name, and unit testability.</p>

@@ -1,0 +1,14 @@
+[JBSEAM-980] @Converter, @Validator <p>I think it s a good idea to let users avoid editing faces-config.xml when creating validators and converters.</p>
+
+<p>@Converter(id= .... )<br/>
+public class FooConverter implements Converter </p>
+{ .... }<br/>
+<br/>
+@Converter(targetClass= .... )<br/>
+public class FooConverter implements Converter { .... }
+
+<p>@Validator(id= .... )<br/>
+public class FooValidator implements Validator </p>
+{ .... }
+
+<p>We would scan for these guys at startup, and register them with JSF.</p>

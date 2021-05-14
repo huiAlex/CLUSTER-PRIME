@@ -1,0 +1,1 @@
+[JBSEAM-3460] Allow for map and set properties configured through componenets.xml to maintain there ordering <p>Add a preserve-order attribute to map and set properties that would allow the ordering to be preserved.</p>

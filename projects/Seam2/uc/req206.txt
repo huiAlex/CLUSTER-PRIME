@@ -1,0 +1,8 @@
+[JBSEAM-3233] Support inline value for cells <p>Support </p>
+
+<p>&lt;e:cell&gt;<br/>
+  #</p>
+{person.age}
+<p>&lt;/e:cell&gt;</p>
+
+<p>in addition to the value attribute</p>

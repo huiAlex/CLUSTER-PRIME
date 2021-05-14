@@ -1,0 +1,7 @@
+[JBSEAM-3869] Check for problematic component definitions at deployment <p>Seam currently allows combinations such as:</p>
+
+<p>@Stateless<br/>
+@Name( NoConversationHere )<br/>
+@Scope(ScopeType.CONVERSATION)</p>
+
+<p>Which make no sense and can cause problems.  If possible, Seam (or Web Beans!) should check for such things and WARN/ERROR on deployment.</p>

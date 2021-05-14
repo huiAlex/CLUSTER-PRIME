@@ -1,0 +1,1 @@
+[JBSEAM-954] Don t flush the SMPC at the end of the  render  txn <p>This should at least be an option. Its a performance and semantic improvement.</p>

@@ -1,0 +1,1 @@
+[JBSEAM-3987] Integrate RESTEasy with Seam Application fwk for easy CRUD <p>Similar to what RoR is offering: Allow developers to declaratively map entities for CRUD through RESTful GET/POST/DELETE/PUT requests with customizable resource URI generation strategy.</p>

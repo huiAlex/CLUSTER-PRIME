@@ -1,0 +1,1 @@
+[JBSEAM-3214] Improve Excel unit/integration tests <p>Add Excel tests that uses the Render component to work on .xhtml documents and JExcelAPI to inspect the result</p>

@@ -1,0 +1,1 @@
+[JBSEAM-476] fine-grained specification of page actions and parameters <p>We should be able to define actions and parameters for a view in a viewId.xml file. This is important for seam-gen.</p>

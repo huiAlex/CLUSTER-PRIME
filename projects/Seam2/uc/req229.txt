@@ -1,0 +1,3 @@
+[JBSEAM-385] @In(create=true) is noisy for persistence contexts <p>I hate seeing: @In(create=true) EntityManager em everywhere.</p>
+
+<p>Perhaps we need some kind of @Startup component for conversation scope?</p>

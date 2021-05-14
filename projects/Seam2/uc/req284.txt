@@ -1,0 +1,1 @@
+[JBSEAM-577] Support page parameters with no value binding, <p>Just map them into a page context variable of the same name.</p>

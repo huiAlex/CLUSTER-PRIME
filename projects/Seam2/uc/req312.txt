@@ -1,0 +1,22 @@
+[JBSEAM-773] Easy redirection to login page and back. <p>Something like this would work:</p>
+
+
+<p>&lt;page view-id= /login.xhtml  switch= disabled &gt;<br/>
+    &lt;navigation from-action= #</p>
+{identity.login}
+<p> &gt;<br/>
+        &lt;rule if= #</p>
+{identity.loggedIn}
+<p> &gt;<br/>
+            &lt;end-conversation before-redirect= true /&gt;<br/>
+            &lt;redirect view-id= #</p>
+{conversation.parentViewId}
+<p> /&gt;<br/>
+        &lt;/rule&gt;<br/>
+    &lt;/navigation&gt;<br/>
+&lt;/page&gt;</p>
+
+<p>&lt;exception class= org.jboss.seam.core.NotLoggedInException &gt;<br/>
+    &lt;begin-conversation nested= true /&gt;<br/>
+    &lt;redirect view-id= /login.xhtml /&gt;<br/>
+&lt;/exception&gt;</p>

@@ -1,0 +1,5 @@
+[JBSEAM-281] Use seam configuration api for settable things <p>these things should all be doable via components.xml or seam.properties:</p>
+
+<p>Seam.Remoting.setPollTimeout(2);   // 10 seconds<br/>
+Seam.Remoting.setPollInterval(1); // 1 second<br/>
+Seam.Remoting.setDebug(true);</p>

@@ -1,0 +1,1 @@
+[JBSEAM-2708] Implement startupDepends= componentNames  for components.xml <p>Equivalent of @Startup(depends) for components.xml. Specify several component names space-separated.</p>

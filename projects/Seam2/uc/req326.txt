@@ -1,0 +1,5 @@
+[JBSEAM-864] Extend mailSession properties to be able to set mail.smtp.socketFactory.class and mail.smtp.socketFactory.port <p>In order to be able to send mails via gmail service it is required to set:<br/>
+mail.smtp.socketFactory.class = javax.net.ssl.SSLSocketFactory<br/>
+mail.smtp.socketFactory.port = 465</p>
+
+<p>It would be good if it was possible to set additional options in the mail-session component.</p>

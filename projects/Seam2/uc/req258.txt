@@ -1,0 +1,1 @@
+[JBSEAM-431] Add jBPM configuration from jndi <p>In org.jboss.seam.core.Jbpm component  would like the ability to specify  jbpmConfiguration from jndi</p>

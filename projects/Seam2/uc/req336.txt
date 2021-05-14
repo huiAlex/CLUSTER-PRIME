@@ -1,0 +1,1 @@
+[JBSEAM-955] Parse ejb-jar.xml, lookng for session beans and orm.xml looking for entity beans. <p>If the user uses only XML, Seam makes a mistake about what kind of component it is.</p>

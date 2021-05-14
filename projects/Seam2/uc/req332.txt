@@ -1,0 +1,12 @@
+[JBSEAM-901] Enhance Conversation.endAndRedirect with a boolean parameter to specify destruction of the conversation before the redirect <p>At the moment this can be achieved by</p>
+
+<p>Extracting the parent conversation id from Manager<br/>
+Calling endBeforeRedirect()<br/>
+Doing a Redirect.execute() manually.</p>
+
+<p>Would be handy just to be able to do  Conversation.endAndRedirect( true ) </p>
+
+<p>Either that or have a method to set the destroyBeforeRedirect flag.</p>
+
+<p>Conversation.setDestroyBeforeRedirect( true );<br/>
+Conversation.endAndRedirect();</p>

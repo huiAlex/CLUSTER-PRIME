@@ -1,0 +1,10 @@
+[JBSEAM-478] ELResolver for Collection and DataModel <p>It is amazing that you can t do:</p>
+
+<p>collection.size<br/>
+datamodel.size<br/>
+datamodel.empty</p>
+
+<p>in EL.</p>
+
+
+<p>We can solve this with an ELResolver</p>

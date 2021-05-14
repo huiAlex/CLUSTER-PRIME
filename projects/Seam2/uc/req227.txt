@@ -1,0 +1,26 @@
+[JBSEAM-3762] Make it possible to select password salt without overriding IdentityStore <p>Currently, JpaIdentityStore uses the username as salt when hashing the user password. If you want to use a different property as salt, you need to override JpaIdentityStore.</p>
+
+<p>Since the salt is usually stored together with the user principal, it would be easier to select the property used as salt by annotating it, without having to override the IdentityStore component. <br/>
+Using a randomly generated salt is a generally accepted practice, so it should also be possible to generate the salt value automatically when creating the user via IdentityManager s API.</p>
+
+<p>Suggestion:<br/>
+A new annotation, UserPasswordSalt, to annotate property used as salt. Attributes:</p>
+<ul>
+	<li>generate=true|false &#8211; whether to generate random value</li>
+	<li>length=salt length in bits (used when generate=true)</li>
+</ul>
+
+
+<p>Example usage:</p>
+
+<p>class User {</p>
+
+<p>  @UserPasswordSalt(generate=true, length=64)<br/>
+  String getSalt() </p>
+{..}
+
+<p> @UserPassword(hash= sha1 <br/>
+ String getPasswordHash() </p>
+{...}
+
+<p>}</p>

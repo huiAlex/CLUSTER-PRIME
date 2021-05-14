@@ -1,0 +1,1 @@
+[JBSEAM-688] <end-conversation before-redirect= true /> <p>In both pages.xml and pageflow.</p>

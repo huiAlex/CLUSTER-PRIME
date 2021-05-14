@@ -1,0 +1,1 @@
+[JBSEAM-392] Add XML resolver from Hibernate so classpath:// prefix works <p>In a Hibernate XML mapping file you can load an XML entity declaration from the classpath. The same resolver should be used in Seam.</p>

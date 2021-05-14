@@ -1,0 +1,1 @@
+[JBSEAM-787] Allow multiple @Logger fields <p>This is important for inheritance....</p>

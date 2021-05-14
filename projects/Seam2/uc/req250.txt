@@ -1,0 +1,1 @@
+[JBSEAM-411] JPA outside EJB3 <p>Currently we assume a JNDI-bound EMF. If you are using JPA in Tomcat or J2EE, this will not be the case, so we should have a different solution.</p>

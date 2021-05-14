@@ -1,0 +1,1 @@
+[JBSEAM-62] @Startup(depends=Foo.class) <p>It s better to do this declaratively than the ugly programmatic way I am doing it now.</p>

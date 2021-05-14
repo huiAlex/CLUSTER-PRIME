@@ -1,0 +1,29 @@
+[JBSEAM-605] navigation-rules.xml to allow outcome expression <p>jPDL allows us to make navigation decisions in EL instead of the Java code. This allows a lot of loose coupling and transparency. We should also support this for stateless navigation, ie:</p>
+
+<p>&lt;page view-id= /loadCustomer.jsp &gt;<br/>
+    &lt;from-action expression= #</p>
+{customerHome.load}  outcome= #{customerHome.found} &gt;<br/>
+        &lt;from-outcome value= true &gt;<br/>
+            &lt;render view-id= /displayCustomer.jsp /&gt;<br/>
+        &lt;/from-outcome&gt;<br/>
+        &lt;from-outcome value= false &gt;<br/>
+            &lt;render view-id= /notFound.jsp /&gt;<br/>
+         &lt;/from-outcome&gt;<br/>
+    &lt;/from-action&gt;<br/>
+&lt;/page&gt;<br/>
+<br/>
+It can reduce to:<br/>
+<br/>
+&lt;page view-id= /loadCustomer.jsp &gt;<br/>
+    &lt;from-action expression= #{customerHome.load}
+<p> &gt;<br/>
+        &lt;from-outcome value= success &gt;<br/>
+            &lt;render view-id= /displayCustomer.jsp /&gt;<br/>
+        &lt;/from-outcome&gt;<br/>
+        &lt;from-outcome value= not-found &gt;<br/>
+            &lt;render view-id= /notFound.jsp /&gt;<br/>
+         &lt;/from-outcome&gt;<br/>
+    &lt;/from-action&gt;<br/>
+&lt;/page&gt;</p>
+
+<p>to emulate a normal JSF navigation rule.</p>

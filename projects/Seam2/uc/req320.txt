@@ -1,0 +1,13 @@
+[JBSEAM-818] To add a createFacesMessageFromResourceBundle method to FacesMessages <p>When developing JSF converters and validators you are noticed that both of them have a way to add a FacesMessage when throwing the Exception (ConverterException and ValidatorException respectively), the validator exception has this constructor:</p>
+
+<p>ValidatorException(javax.faces.application.FacesMessage)</p>
+
+<p>Currently there is FacesMessages.createFacesMessage(..) method which returns a FacesMessage, but that method does not work if you wanna get a message from a resource bundle key (when working with i18n apps).</p>
+
+<p>So, please add a new method which allows us to get a FacesMessage using a resource bundle key, something like:</p>
+
+<p>public static FacesMessage createFacesMessageFromResourceBundle(Severity severity, String key, Objec<br/>
+t... params)</p>
+
+
+

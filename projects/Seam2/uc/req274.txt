@@ -1,0 +1,2 @@
+[JBSEAM-493] join=true|false, pageflow= ...  for <begin-conversation> <p>&lt;begin-conversation&gt; should have the same options as @Begin<br/>
+furthermore, &lt;end-conversation&gt; should have the same options as @End</p>

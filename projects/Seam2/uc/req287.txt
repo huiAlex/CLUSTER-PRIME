@@ -1,0 +1,27 @@
+[JBSEAM-607] Refinements to pages.xml <p>The following ideas need to be followed through on:</p>
+
+<ul>
+	<li>Multiple page actions per view id</li>
+</ul>
+
+
+<p>    &lt;page view-id= ... &gt;<br/>
+        &lt;action expression= #</p>
+{foo.bar}
+<p> /&gt;<br/>
+        &lt;action expression= #</p>
+{xxx.yyy}
+<p> /&gt;<br/>
+    &lt;/page&gt;</p>
+
+<p>there is a suggestion that the first non-null outcome short-circuits the stack</p>
+
+
+<ul>
+	<li>&lt;begin-conversation/&gt;, &lt;end-conversation/&gt; for &lt;action-navigation/&gt;</li>
+</ul>
+
+
+<ul>
+	<li>&lt;http-error/&gt; for &lt;action-navigation&gt;</li>
+</ul>

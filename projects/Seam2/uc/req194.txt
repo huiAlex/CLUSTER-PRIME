@@ -1,0 +1,3 @@
+[JBSEAM-3003] maintain insertion order of parameters in UrlBuilder <p>Right now it is difficult to create UrlRewrite rules because the order of the parameters jumps around. This happens because the parameters are appended to a plain HashMap (for s:link, s:button, etc), giving no guarantee to their order. My feeling is that parameters should maintain their insertion order, which can be accomplished using a LinkedHashMap.</p>
+
+<p>At first, I thought about having the parameters sorted alphabetically. However, that takes control away from the developer to order the links how they see fit. As long as we can document the order in which Seam appends parameters, then the developer can predict the order the parameters will appear in the URL.</p>

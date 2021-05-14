@@ -1,0 +1,15 @@
+[JBSEAM-3895] org.jboss.seam.log.Logging.getLogProvider(String,boolean) should be made public <p>We would like to create our own implementation of the org.jboss.seam.log.Log interface, like it is done in the org.jboss.seam.log.LogImpl class. The goal is to enrich the log message by adding some information.</p>
+
+<p>Because the org.jboss.seam.log.Logging.getLogProvider(String,boolean) method has a default access mode, it is only callable from a class in the same package (which is the case for LogImpl).</p>
+
+<p>So the feature request is: please make the org.jboss.seam.log.Logging.getLogProvider(String,boolean) method as public.</p>
+
+<p>The workaround is to call the method by introspection:</p>
+
+<p>  Method m = Logging.class.getDeclaredMethod( getLogProvider , new Class[] </p>
+{String.class, boolean.class}
+<p>);<br/>
+  m.setAccessible(true);<br/>
+  LogProvider log = (LogProvider)m.invoke(null, new Object[] </p>
+{category, wrapped}
+<p>);</p>

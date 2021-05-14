@@ -1,0 +1,1 @@
+[JBSEAM-764] Roles based security without drools jars <p>To limit number of required jars in cases when role based security is used <span class= error >&#91;without permissions&#93;</span>, drools jars could be excluded from required dependecies.</p>

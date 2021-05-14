@@ -1,0 +1,1 @@
+[JBSEAM-985] s:graphicImage <p>JSF component that can take a byte[]/File/URL/InputStream as it s value, and display the image.  Also allows image to be manipulated (for now scaled)</p>

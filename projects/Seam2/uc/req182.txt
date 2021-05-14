@@ -1,0 +1,21 @@
+[JBSEAM-2775] package-info.java should be optional: convention over configuration  <p>Currently, package-info.java is required when referring to custom Seam components in components.xml. However, to further align Seam with the  convention over configuration  philosophy, this file can be optional by making some assumptions:</p>
+
+<p>1. In the absence of package-info.java , the XML namespace in components.xml for custom components has a well-defined mapping to a Java package</p>
+
+<p>2. This mapping can be defined as:<br/>
+  a. The XML namespace must be parsable by java.net.URI otherwise automatic mapping is aborted<br/>
+  a. Protocol (scheme), the www/ subdomain, port, query parameters, anchors (references), and userInfo are ignored, if present.<br/>
+  b. The top-level domain becomes the root Java package<br/>
+  c. Subdomains become Java packages under the root package, applied in right-to-left order as specified in the URI.<br/>
+  d. The path, as returned by URI.getPath(), is mapped to further Java packages such that each path element becomes another Java package appended in left-to-right order</p>
+
+<p>Examples:</p>
+
+<p><a href= http://www.company.com/department/product  class= external-link  rel= nofollow >http://www.company.com/department/product</a> ==&gt; com.company.department.product<br/>
+<a href= https://company.com/department/product  class= external-link  rel= nofollow >https://company.com/department/product</a> ==&gt; com.company.department.product<br/>
+<a href= ftp://www.company.org/department/product  class= external-link  rel= nofollow >ftp://www.company.org/department/product</a> ==&gt; org.company.department.product<br/>
+abc://company.org/department/product ==&gt; org.company.department.product<br/>
+company.net/foo/bar/baz ==&gt; net.company.foo.bar.baz</p>
+
+
+<p>JIRA isn t displaying my last example correctly. See <a href= http://pastebin.mozilla.org/375878  class= external-link  rel= nofollow >http://pastebin.mozilla.org/375878</a> for the last example.</p>

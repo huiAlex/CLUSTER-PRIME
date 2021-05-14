@@ -1,0 +1,4 @@
+[JBSEAM-484] Repackage built-in components <p>get rid of the list of classes in addComponents()<br/>
+move debug components to debug jar<br/>
+get rid of special casing in Scanner<br/>
+add @Name( foo , scannerIgnore=true)</p>

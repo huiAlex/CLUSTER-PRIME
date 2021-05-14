@@ -1,0 +1,5 @@
+[JBSEAM-819] Create a Seam resource servlet <p>Create a Seam resource servlet for serving non-jsf resources, such as javascript, images, css, etc.  It should replace SeamRemotingServlet and CaptchaServlet, and accept requests for something like  /seam/resource/* , and depending on the path delegate control to various resource providers, e.g:</p>
+
+<p>/seam/resource/remoting - delegate to Seam Remoting<br/>
+/seam/resource/captcha - delegate to Captcha image provider<br/>
+/seam/resource/jsfcontrol - delegate to JSF Control javascript provider (JS resources for selectDate, etc).</p>

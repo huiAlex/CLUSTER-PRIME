@@ -1,0 +1,1 @@
+[JBSEAM-736] Identity extends AbstractMutable <p>For performance, Identity should extend AbstractMutable and do dirty checking</p>
