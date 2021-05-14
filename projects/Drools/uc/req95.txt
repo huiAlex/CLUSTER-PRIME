@@ -1,0 +1,1 @@
+[JBRULES-1520] RightTuple merge for asynchronous Rete propagations. <p>merge in RightTuple branch for asynchronous rete propagations.</p>

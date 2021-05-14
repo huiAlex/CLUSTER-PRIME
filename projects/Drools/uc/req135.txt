@@ -1,0 +1,1 @@
+[JBRULES-189] Remove instance equal cross product <p>instance equal cross products should be removed.</p>

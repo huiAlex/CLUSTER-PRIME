@@ -1,0 +1,22 @@
+[DROOLS-265] Enable recursive traiting and dynamic field typing <p>Consider the following scenario: </p>
+
+<p>declare trait A <br/>
+  sub : int <br/>
+end<br/>
+declare X end</p>
+
+<p>declare trait Foo<br/>
+  fld : A<br/>
+end</p>
+
+<p>declare Bar<br/>
+@Traitable( logic = true )  // new mode<br/>
+  fld : X<br/>
+end</p>
+
+<p>If an instance b of Bar is traited with Foo, the value of its field  fld  <br/>
+should in turn be traited with A.<br/>
+Truth maintenance and transparent casting are required. <br/>
+The goal is to write rules such as:</p>
+
+<p>when Foo( fld isA A, fld.sub == 0, .... ) then ..</p>

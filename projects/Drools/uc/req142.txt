@@ -1,0 +1,5 @@
+[JBRULES-1969] Add a meta tag for facts: @propertyChangeSupport <p>Add a tag for facts with property change support:</p>
+
+<p>declare MyFact<br/>
+   @propertyChangeSupport<br/>
+end</p>

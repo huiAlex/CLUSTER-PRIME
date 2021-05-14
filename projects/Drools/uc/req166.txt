@@ -1,0 +1,1 @@
+[JBRULES-2306] Allow the user to add custom resources that verifies the rules <p>User might want to use verifier to validate rules with his own rules</p>

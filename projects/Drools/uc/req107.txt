@@ -1,0 +1,1 @@
+[JBRULES-1656] PackageBulder to support multiple namespaces <p>Using a different PackageBuilder per namespace is a pita.</p>

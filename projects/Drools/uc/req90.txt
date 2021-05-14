@@ -1,0 +1,1 @@
+[JBRULES-142] Make Parser pick up static field references for ENUMS <p>The parser should detect Class.FIELD and when assigning it to LiteralDescr set a field called  staticFieldValue  to true.</p>

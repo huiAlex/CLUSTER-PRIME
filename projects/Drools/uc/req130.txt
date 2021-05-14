@@ -1,0 +1,1 @@
+[JBRULES-1874] Create Resource Framework <p>to make it easier to work with resources, we should a number of resource classes, via a factory.</p>

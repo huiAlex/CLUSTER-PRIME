@@ -1,0 +1,1 @@
+[JBRULES-134] integration tests for logical  assertions <p>add logical assertion tests</p>

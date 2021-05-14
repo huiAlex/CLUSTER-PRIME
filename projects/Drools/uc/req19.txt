@@ -1,0 +1,1 @@
+[JBRULES-2347] Drools Pipeline integration with Camel  <p>Camel integration for drools pipelines</p> 

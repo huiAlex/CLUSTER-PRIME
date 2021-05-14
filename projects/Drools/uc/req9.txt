@@ -1,0 +1,13 @@
+[JBRULES-231] add  not contains  and  not matches  constraints [JBRULES-71] Add regex support for column constraints  <p>Person(addresses not_contains foo)<br/>
+simple extension to the contains feature for collections.</p>
+
+<p>Any other sytax ideas?</p>
+
+<p>Person(something !contains foo)<br/>
+Person(something !&lt;&lt; foo)<br/>
+Person(something &lt;&lt; foo)</p>
+
+<p>I prefer as natural as possible...</p> <p>So we can do</p>
+
+<p>Person(name matches  regex )</p>
+ 

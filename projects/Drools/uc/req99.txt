@@ -1,0 +1,1 @@
+[JBRULES-1551] Workflow human tasks <p>Support for human tasks in workflow languages</p>

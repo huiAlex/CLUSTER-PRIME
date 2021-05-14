@@ -1,0 +1,10 @@
+[JBRULES-1040] Multi-pattern accumulate support  <p><span class= error >&#91;Edson said there might be already such an issue, but I couldn&#39;t find it looking through jira.&#93;</span></p>
+
+<p>Something like this should be possible:</p>
+
+<p>  $multipleQueensHorizontal : Long()<br/>
+    from accumulate(<br/>
+        $q1 : Queen($id : id, $y : y);<br/>
+        Queen(id &gt; $id, y == $y);<br/>
+      , count($q1)<br/>
+    );</p> 

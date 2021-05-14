@@ -1,0 +1,1 @@
+[JBRULES-1008] refactor the event interfaces on working memory so both stateless and stateful sessions can support them <p>We need the AuditFileLogger to work with both stateful and stateless sessions, so the event management methods need to be refactored to a common interface.</p>

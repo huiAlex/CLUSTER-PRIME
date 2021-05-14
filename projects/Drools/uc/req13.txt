@@ -1,0 +1,1 @@
+[JBRULES-217] Add  accumulate  Conditional Element  <p>Add jess style accumulate functionality.</p> 

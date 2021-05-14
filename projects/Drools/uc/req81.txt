@@ -1,0 +1,1 @@
+[JBRULES-1285] Time Machine to allow setting of  now  effective current time in Rule <p>This is needed for testing effective dating.</p>

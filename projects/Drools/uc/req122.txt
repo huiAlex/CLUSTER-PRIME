@@ -1,0 +1,1 @@
+[JBRULES-1805] Add support to expressions on  enabled  rule attributes <p>As discussed in drools boot camp, add support to expressions in  enabled  rule attribute.</p>

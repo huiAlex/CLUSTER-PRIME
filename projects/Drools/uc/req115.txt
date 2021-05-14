@@ -1,0 +1,1 @@
+[JBRULES-1730] Add support for other data types when writing processes to XML <p>The xml format should support variables and parameters using different data types like boolean, integer, object, list, etc.</p>

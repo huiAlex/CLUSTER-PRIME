@@ -1,0 +1,1 @@
+[JBRULES-105] integration tests for assert, retract and modify <p>we need integration tests for retract, assert, modify - also make sure that drools.assertObject, drools.retractObject, drools.modifyObject all work.</p>

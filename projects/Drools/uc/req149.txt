@@ -1,0 +1,5 @@
+[JBRULES-2065] Performance benefit using StringBuilder instead of StringBuffer in org.drools.util.StringUtils <p>Any chance we can get some performance improvement by replacing all uses of StringBuffer in org.drools.util.StringUtils with StringBuilder?<br/>
+If the minimum JVM version for drools is 1.5 StringBuilder is more efficient than StringBuffer for all the current uses in this code.</p>
+
+<p>From the javadocs:<br/>
+ This class is designed for use as a drop-in replacement for StringBuffer in places where the string buffer was being used by a single thread (as is generally the case) </p>

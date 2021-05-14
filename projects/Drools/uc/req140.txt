@@ -1,0 +1,29 @@
+[JBRULES-1944] Adding crontab type functionality for repetitive rules. <p>A convinient helper function to schedule rule executions in a similar manner to the cron utility would be useful.</p>
+
+<p>My specific use case is for a long running session to periodically write out data to a persistence store (db, file, etc)</p>
+
+<p>The current code for this is as follows :<br/>
+rule  DBpoll <br/>
+duration(30s)<br/>
+when $d:String(toString== Run )<br/>
+then <br/>
+System.out.println( 30seconds elapsed );<br/>
+Database.dosomething();<br/>
+modify($d){};<br/>
+end<br/>
+--------------------------------<br/>
+session.insert(new String( Run ));<br/>
+---------------------------------</p>
+
+<p>While this method does work, it requires the external dummy object trigger. In dynamically generated rules and rules pulled in from libraries, etc (not under the current developers control) it is difficult to ensure that a suibtable trigger is available.</p>
+
+<p>Therefore a cron like function would solve this issue.</p>
+
+<p>I envision the EVERY keyword and possibly a COUNT or for loop style format</p>
+
+<p>rule  DBpoll <br/>
+EVERY(30s, 100)  &lt;-- means every 30 seconds for 100 iterations. or EVERY(30s, 10m) &lt;-- every 30 seconds for 10 mins<br/>
+then <br/>
+System.out.println( 30seconds elapsed );<br/>
+Database.dosomething();<br/>
+end</p>

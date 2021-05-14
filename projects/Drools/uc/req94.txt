@@ -1,0 +1,1 @@
+[JBRULES-1488] Serialisation TidyUps <p>review code and do some basic serialisation cleanups.</p>

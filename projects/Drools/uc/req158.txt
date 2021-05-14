@@ -1,0 +1,1 @@
+[JBRULES-2219] UrlResource needs to optionally have a cache for remote resources <p>The knowledge agent uses UrlResource - which is fine for http and https - except when network is down. Would be nice to cache the resource so that it can use a  last known good  version. </p>

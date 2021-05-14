@@ -1,0 +1,17 @@
+[JBRULES-2285] retrieving streams/entry points IDs from java api <p>Hello,</p>
+
+<p>I am trying to determine, iterate the working memory streams within my rule by doing the following:</p>
+
+<p>                              for(WorkingMemoryEntryPoint entry : session.getWorkingMemoryEntryPoints())</p>
+{
+
+                                    System.err.println( entry point stream:   + entry.toString());
+
+                              }
+
+<p>But I can find no method/way to finid the actual text name of the entry point(what is written in the rule as from entry-point  xxxx ).</p>
+
+<p>Is there a way to do this?  To list the readable names of the entry points from your session?  I would like to list those entry points in a drop down as application profiles, so if they have one selected, one entry point of rules will be inserted to and so on..</p>
+
+<p>Thanks,<br/>
+Chris</p>

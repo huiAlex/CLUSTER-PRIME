@@ -1,0 +1,7 @@
+[JBRULES-1549] Workflow Context <p>Context introduced as a new concept to easily group nodes in a certain context.<br/>
+Used as the basis for:</p>
+<ul class= alternate  type= square >
+	<li>Variable scope</li>
+	<li>Exception handling</li>
+	<li>Swimlanes</li>
+</ul>

@@ -1,0 +1,6 @@
+[JBRULES-1878] Update IDE to new API <p>Update</p>
+<ul class= alternate  type= square >
+	<li>wizards</li>
+	<li>support debugging of new session</li>
+	<li>etc.</li>
+</ul>

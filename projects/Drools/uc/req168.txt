@@ -1,0 +1,1 @@
+[JBRULES-2328] Change the way activations are notified from listener to event signaling <p>Using a listener approach does not work in combination with persistence (as process instances that are currently not loaded will not be notified).  Using a signal approach will automatically reload the necessary process instances.</p>

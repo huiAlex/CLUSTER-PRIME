@@ -1,0 +1,26 @@
+[JBRULES-1812] Add rule inheritance to Core DRL support <p>added  Extends  keyword to DRL grammar. When a rule extends another, it will pull the entire LHS from its parent, to the current rule before execution. An example:</p>
+
+<p>rule  test rule 1 <br/>
+    enabled false<br/>
+    when<br/>
+        c: Cheese( type ==  stilton  )<br/>
+    then<br/>
+		list.add( new String ( rule 1 ) );        <br/>
+end </p>
+
+<p>rule  test rule 2  extends  test rule 1 <br/>
+    enabled false<br/>
+    when<br/>
+        Cheese( price &lt;= 6.00) from c<br/>
+    then<br/>
+		list.add( new String ( rule 2 ) );       <br/>
+end </p>
+
+<p>rule  test rule 3  extends  test rule 2 <br/>
+    when<br/>
+        Cheese( price &gt; 1.00 ) from c<br/>
+    then<br/>
+		list.add( new String ( rule 3 ) );         <br/>
+end </p>
+
+<p>Test is in MiscTest.java</p>

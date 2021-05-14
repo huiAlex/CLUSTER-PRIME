@@ -1,0 +1,3 @@
+[JBRULES-1189] Auto coercion of String to date in MVEL actions <p>On the LHS for normal constraints, we coerce String -&gt; Date (via DateFactory). </p>
+
+<p>Make MVEL do the same for actions (so you can have a date literal as a string rather then all the guff you have to go through to setup a date).</p>

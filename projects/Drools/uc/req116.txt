@@ -1,0 +1,1 @@
+[JBRULES-1737] Support WorkingMemory clearing without firing events <p>We need to reset all the memories in the working memory, without doing cancellation events.</p>

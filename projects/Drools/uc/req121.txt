@@ -1,0 +1,8 @@
+[JBRULES-1803] Add support to rule Metadata <p>As discussed in the Drools boot camp, add support to rules metadata:</p>
+
+<p>rule xyz<br/>
+   @foo(bar)<br/>
+   @foo2( bar2 )<br/>
+when<br/>
+...<br/>
+end</p>

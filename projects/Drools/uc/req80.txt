@@ -1,0 +1,1 @@
+[JBRULES-1267] Allow predicates to be nested inside a field constraint <p>Allow predicates to be nested inside a field constraint</p>

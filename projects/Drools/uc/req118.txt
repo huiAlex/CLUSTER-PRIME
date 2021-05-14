@@ -1,0 +1,1 @@
+[JBRULES-1792] Start node triggers <p>Start nodes can be automatically triggered, e.g. when rules are activated or when an event is signalled.</p>

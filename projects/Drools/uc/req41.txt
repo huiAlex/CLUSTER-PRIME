@@ -1,0 +1,5 @@
+[DROOLS-595] Generate a warning when ruleflow and agenda groups are used in the same rule <p>Ruleflow and agenda groups have been unified since 6.x<br/>
+Specifying both attributes in a rule will result in one of them being<br/>
+overwritten. Specifically, RFGs are implemented using AGs, but<br/>
+the RFG name is the one that will be used in case of a conflict.<br/>
+A warning should be generated in case of potential conflicts</p>

@@ -1,0 +1,1 @@
+[JBRULES-1123] Custom Consequence Exception handlers <p>RuleBaseConfiguration should allow the user to specify a custom handler for consequence exceptions.</p>

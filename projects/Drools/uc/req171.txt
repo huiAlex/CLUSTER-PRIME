@@ -1,0 +1,1 @@
+[JBRULES-2352] Drools Grid implementation <p>Drools Grid implementation for lightweight and distributed environments. Version 2. </p>

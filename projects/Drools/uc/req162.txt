@@ -1,0 +1,1 @@
+[JBRULES-2261] JDBC result sets to rule generation via templates - from Bill Tarr <p>Nice new feature from Bill Tarr to generate rules from a JDBC result set - very simple to use. </p>

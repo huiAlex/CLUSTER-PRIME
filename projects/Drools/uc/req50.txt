@@ -1,0 +1,10 @@
+[DROOLS-99] TypeDeclarations for Java classes used in Patterns are created in the wrong package <p>when a rule uses a java class in a pattern:</p>
+
+<p>package my.test;<br/>
+import org.drools.Cheese;<br/>
+rule R when Cheese() then end</p>
+
+<p>a TypeDeclaration for that class (e.g.Cheese) is created, but is assigned<br/>
+to the rule package ( my.test ) rather than to the natural class package<br/>
+( org.drools ). This prevents an efficient later lookup of the typeDeclaration<br/>
+using the class name as a key.</p>

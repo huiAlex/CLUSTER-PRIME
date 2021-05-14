@@ -1,0 +1,3 @@
+[JBRULES-1873] Add support for time units parsing, fix temporal operators and document them <p>Temporal operators must be fixed and documented.</p>
+
+<p>Also, add support to time units parsing.</p>

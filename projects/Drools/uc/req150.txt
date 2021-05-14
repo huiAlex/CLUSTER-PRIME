@@ -1,0 +1,1 @@
+[JBRULES-2107] Support StateNode for Finite State Machines <p>Support for StateNode for Finite State Machines</p>

@@ -1,0 +1,1 @@
+[JBRULES-1548] ePDL: XML-based process definition language <p>Enhanced XML-based process definition language.</p>

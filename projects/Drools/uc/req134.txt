@@ -1,0 +1,1 @@
+[JBRULES-1882] Make Drools Flow nodes configurable <p>Allow configuration of which node types can be used in the graphical editor.</p>

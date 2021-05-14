@@ -1,0 +1,1 @@
+[JBRULES-2444] Named Consequences <p>Allow for multiple named consequences, which can be used for  branch  conditional elements.</p>

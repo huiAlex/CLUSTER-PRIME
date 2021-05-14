@@ -1,0 +1,1 @@
+[DROOLS-1497] Implement RuleEventListener <p>Implement a programmatic RuleEventListener with the lifecycle described in <a href= https://developer.jboss.org/wiki/RuleExecutionSemantics  class= external-link  rel= nofollow >https://developer.jboss.org/wiki/RuleExecutionSemantics</a></p>

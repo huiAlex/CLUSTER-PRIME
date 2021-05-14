@@ -1,0 +1,2 @@
+[JBRULES-1197] Extends actions support to include other dialects <p>Actions in ruleflow now only support MVEL.<br/>
+It should also support other dialects like Java.</p>

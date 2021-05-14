@@ -1,0 +1,1 @@
+[JBRULES-1913] Extend history log <p>The history log should not only log information about the execution of process instances but also allow the logging of all node instance information in the database.</p>

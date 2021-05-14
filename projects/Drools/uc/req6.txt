@@ -1,0 +1,1 @@
+[JBRULES-328] FactTemplates  <p>We should allow clips style templates for Columns</p> 

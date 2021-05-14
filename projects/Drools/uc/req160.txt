@@ -1,0 +1,1 @@
+[JBRULES-225] Make it easier to deal with QueryResults for handling the results of querries <p>QueryResult should wrap the returned list and  the used working memory and provide a conveinience API to working with the result list.</p>
